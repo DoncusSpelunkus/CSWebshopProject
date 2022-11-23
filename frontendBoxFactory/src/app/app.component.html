@@ -1,0 +1,26 @@
+<div style="margin: 100px">
+  <h1 style="text-align: center">mewga kewl bux factory</h1>
+  <div style="text-align: center">
+  <mat-form-field>Insert Length
+    <input type="number" matInput [(ngModel)]="boxLength">
+  </mat-form-field>
+  <mat-form-field>Insert Width
+    <input type="number" matInput [(ngModel)]="boxWidth">
+  </mat-form-field>
+  <mat-form-field>Insert Height
+    <input type="number" matInput [(ngModel)]="boxHeight">
+  </mat-form-field>
+  <button mat-raised-button (click)="createBox()">Create</button>
+  </div>
+  <div>
+  <mat-card style="margin: 20px;text-align: center" *ngFor="let b of boxes">
+    <mat-card-title>Box nr. {{b.manFacId}}</mat-card-title>
+    <mat-card-subtitle>Length: {{b.length}}</mat-card-subtitle>
+    <mat-card-subtitle>Width: {{b.width}}</mat-card-subtitle>
+    <mat-card-subtitle>Height: {{b.height}}</mat-card-subtitle>
+    <mat-card-actions>
+      <button mat-button (click)="deleteBox(b.manFacId)">Delete</button>
+    </mat-card-actions>
+  </mat-card>
+  </div>
+</div>
