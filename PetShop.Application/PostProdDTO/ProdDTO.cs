@@ -1,0 +1,9 @@
+﻿namespace Factory.Application.PostProdDTO
+{
+    public class ProdDTO
+    {
+        public double Length { get; set; }
+        public double Width { get; set; }
+        public double Height { get; set; }
+    }
+}

@@ -1,14 +1,14 @@
 using System.Net.Mime;
 using AutoMapper;
-using Factory.Application.PostBoxDTO;
-using Factory.Core;
+using Factory.Application.PostProdDTO;
+using Factory.Domain;
 using Factory.Infastructure;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var config = new MapperConfiguration(conf => { conf.CreateMap<BoxDTO, Box>(); });
+var config = new MapperConfiguration(conf => { conf.CreateMap<ProdDTO, Product>(); });
 
 var mapper = config.CreateMapper();
 
@@ -18,8 +18,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<BoxDbContext>(options => options.UseSqlite("Data source=db.db"));
-builder.Services.AddScoped<BoxRepo>();
+builder.Services.AddDbContext<ShopDbContext>(options => options.UseSqlite("Data source=db.db"));
+builder.Services.AddScoped<ShopRepo>();
 builder.Services.AddValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
 
 Factory.Application.DependencyResolver.DependencyResolverService.RegisterApplicationLayer(builder.Services);

@@ -1,29 +1,29 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using AutoMapper;
-using Factory.Core;
 using Factory.Application.Interfaces;
-using Factory.Application.PostBoxDTO;
+using Factory.Application.PostProdDTO;
 using Factory.Application.Validators;
+using Factory.Domain;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Factory_of_the_Boxes.Controllers
+namespace PetShopApi.Controllers
 {
     [ApiController]
     [Route("[Controller]")]
-    public class BoxController : ControllerBase
+    public class ShopController : ControllerBase
     {
-        private BoxValidator _boxValidator;
+        private ProdValidator _boxValidator;
         private IMapper _mapper;
-        private IBoxService _boxService;
-        public BoxController(IBoxService service, IMapper mapper)
+        private IShopService _boxService;
+        public ShopController(IShopService service, IMapper mapper)
         {
             _boxService = service;
-            _boxValidator = new BoxValidator();
+            _boxValidator = new ProdValidator();
             _mapper = mapper;
         }
 
         [HttpGet]
-        public ActionResult<List<Box>> GetBoxes()
+        public ActionResult<List<Product>> GetBoxes()
         {
             try
             {
@@ -41,7 +41,7 @@ namespace Factory_of_the_Boxes.Controllers
         
         [HttpGet("{ManFacId}")]
         
-        public ActionResult<Box> BoxOfIDFinder(int ManFacId)
+        public ActionResult<Product> BoxOfIDFinder(int ManFacId)
         {
             try
             {
@@ -59,12 +59,12 @@ namespace Factory_of_the_Boxes.Controllers
         
         [HttpPost]
 
-        public ActionResult<Box> CreateNewBox(BoxDTO dto)
+        public ActionResult<Product> CreateNewBox(ProdDTO dto)
         {
             try
             {
                 var result = _boxService.insertBox(dto);
-                return Created("box/" + result.ManFacId, result);
+                return Created("box/" + result.ID, result);
             }
             catch (ValidationException e)
             {
@@ -79,7 +79,7 @@ namespace Factory_of_the_Boxes.Controllers
         [HttpPut]
         [Route("{ManFacId}")]
 
-        public ActionResult<Box> UpdateBox([FromRoute] int ManFacId, [FromBody] Box box)
+        public ActionResult<Product> UpdateBox([FromRoute] int ManFacId, [FromBody] Product box)
         {
             try
             {
@@ -97,7 +97,7 @@ namespace Factory_of_the_Boxes.Controllers
 
         [HttpDelete("{ManFacId}")]
 
-        public ActionResult<Box> DeleteBox(int ManFacId)
+        public ActionResult<Product> DeleteBox(int ManFacId)
         {
             try
             {

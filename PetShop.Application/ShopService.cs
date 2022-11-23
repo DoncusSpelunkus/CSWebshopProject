@@ -1,21 +1,21 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using AutoMapper;
 using Factory.Application.Interfaces;
-using Factory.Application.PostBoxDTO;
-using Factory.Core;
+using Factory.Application.PostProdDTO;
+using Factory.Domain;
 using FluentValidation;
 using ValidationException = FluentValidation.ValidationException;
 
 namespace Factory.Application;
 
-    public class BoxService : IBoxService
+    public class ShopService : IShopService
     {
-        private IBoxRepo _boxRepository;
+        private IShopRepo _boxRepository;
         private IMapper _mapper;
-        private IValidator<BoxDTO> _validator;
-        private IValidator<Box> _boxValidator;
+        private IValidator<ProdDTO> _validator;
+        private IValidator<Product> _boxValidator;
 
-        public BoxService(IBoxRepo repository, IMapper mapper, IValidator<BoxDTO> validator)
+        public ShopService(IShopRepo repository, IMapper mapper, IValidator<ProdDTO> validator)
         {
             _boxRepository = repository;
             _mapper = mapper;
@@ -23,23 +23,23 @@ namespace Factory.Application;
         }
     
     
-        public List<Box> GetAllBoxes()
+        public List<Product> GetAllBoxes()
         {
             return _boxRepository.GetAllBoxes();
         }
         
-        public Box insertBox(BoxDTO dto)
+        public Product insertBox(ProdDTO dto)
         {
             var validation = _validator.Validate(dto);
             if (!validation.IsValid)
                 throw new ValidationException(validation.ToString());
             
-            return _boxRepository.insertBox(_mapper.Map<Box>(dto));
+            return _boxRepository.insertBox(_mapper.Map<Product>(dto));
         }
 
-        public Box BoxUpdate(int ManFacId, Box box)
+        public Product BoxUpdate(int ManFacId, Product box)
         {
-            if (ManFacId != box.ManFacId)
+            if (ManFacId != box.ID)
                 throw new ValidationException("ID in body and route are different (Update)");
             var validation = _boxValidator.Validate(box);
             if (!validation.IsValid)
@@ -47,14 +47,14 @@ namespace Factory.Application;
             return _boxRepository.BoxUpdate(box);
         }
 
-        public Box BoxDelete(int ManFacId)
+        public Product BoxDelete(int ManFacId)
         {
             if (ManFacId == null)
                 throw new ValidationException("ID is invalid");
             return _boxRepository.BoxDelete(ManFacId);
         }
 
-        public Box BoxOfIDFinder(int ManFacId)
+        public Product BoxOfIDFinder(int ManFacId)
         {
             if (ManFacId <= 0)
                 throw new ValidationException("ID is invalid");
