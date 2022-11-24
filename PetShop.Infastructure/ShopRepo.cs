@@ -19,19 +19,19 @@ namespace Factory.Infastructure
 
         public List<Product> GetAllProducts()
         {
-            return _shopDbContext.BoxTable.ToList();
+            return _shopDbContext.ProductTable.ToList();
         }
 
         public Product CreateProduct(Product product)
         {
-            _shopDbContext.BoxTable.Add(product);
+            _shopDbContext.ProductTable.Add(product);
             _shopDbContext.SaveChanges();
             return product;
         }
 
         public Product UpdateProduct(Product product)
         {
-            _shopDbContext.BoxTable.Update(product);
+            _shopDbContext.ProductTable.Update(product);
             _shopDbContext.SaveChanges();
             return product;
         }
@@ -39,7 +39,7 @@ namespace Factory.Infastructure
         public Product DeleteProduct(int productID)
         {
             Product product = GetProductByID(productID);
-            _shopDbContext.BoxTable.Remove(product);
+            _shopDbContext.ProductTable.Remove(product);
             _shopDbContext.SaveChanges();
             return product;
         }
@@ -47,10 +47,10 @@ namespace Factory.Infastructure
 
         public Product GetProductByID(int productId)
         {
-            return _shopDbContext.BoxTable.FirstOrDefault(p => p.ID == productId);
+            return _shopDbContext.ProductTable.FirstOrDefault(p => p.ID == productId);
         }
 
-        public void CreateDB()
+        public void RebuildDB()
         {
             _shopDbContext.Database.EnsureDeleted();
             _shopDbContext.Database.EnsureCreated();

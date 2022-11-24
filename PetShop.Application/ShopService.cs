@@ -60,4 +60,9 @@ namespace Factory.Application;
                 throw new ValidationException("ID is invalid");
             return _productRepository.GetProductByID(productId);
         }
+        
+        public void RebuildDB()
+        {
+            _productRepository.RebuildDB();
+        }
     }
