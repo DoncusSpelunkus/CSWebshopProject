@@ -1,15 +1,22 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpService} from "../services/http.service";
 
+// @ts-ignore
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit{
-  boxLength: number = 0;
-  boxWidth: number = 0;
-  boxHeight: number = 0;
+  name: string = '';
+  price: number = 0;
+  description: string = '';
+  imageUrl: string = '';
+  rating: number = 0;
+  specs: { [n: number]: string; } | undefined;
+  mainCategory: number = 0;
+  subCategory: number = 0;
+  brand: number = 0;
   product: any;
 
   constructor(private http: HttpService) {
@@ -17,22 +24,29 @@ export class AppComponent implements OnInit{
   }
 
   async ngOnInit() {
-    const boxes = await this.http.GetBoxes();
+    const product = await this.http.GetProduct();
     this.product = product;
   }
 
-  async createBox(){
+  async CreateProduct(){
     let dto = {
-      length: this.boxLength,
-      width: this.boxWidth,
-      height: this.boxHeight,
+      name: this.name,
+      price: this.price,
+      description: this.description,
+      imageUrl: this.imageUrl,
+      rating: this.rating,
+      specs: this.specs,
+      mainCategory: this.mainCategory,
+      subCategory: this.subCategory,
+      brand: this.brand,
+
     }
-    const result = await this.http.createBox(dto);
+    const result = await this.http.CreateProduct(dto);
     this.product.push(result);
   }
 
-  async deleteBox(productID: any) {
-    const product = await this.http.deleteBox(productID);
+  async DeleteProductByID(productID: any) {
+    const product = await this.http.DeleteProductByID(productID);
     this.product = this.product.filter(p => p.productID != product.productID)
   }
 }
