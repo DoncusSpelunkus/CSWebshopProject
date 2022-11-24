@@ -30,7 +30,7 @@ public class UnitTest1
         Assert.Equal(expectedValue, result );
     
     }
-    
+
     // test for delete 
     [Fact]
     public void DeleteByID_ValidData()
@@ -53,4 +53,28 @@ public class UnitTest1
         var actual = orderService.DeleteProduct(Id);
         Assert.Equal(product, actual);
     }
+
+
+    [Fact]
+    public void CreateProduct_ValidData()
+    {
+
+        Mock<IShopRepo> orderRepository = new Mock<IShopRepo>();
+        Product product = new Product()
+        {
+            ID = 1, Name = "mockFood1", Price = 10, Description = "very good product1", ImageUrl = "fakeURL1",
+            Rating = 1.5, MainCategory = 0, SubCategory = 0, Brand = 0
+        };
+
+
+        orderRepository.Setup(repo => repo.CreateProduct(product)).Returns(product);
+
+        IShopRepo orderService =  orderRepository.Object;
+
+
+        var actual = orderService.CreateProduct(product);
+        Assert.Equal(product, actual);
+    }
+    
+    
 }
