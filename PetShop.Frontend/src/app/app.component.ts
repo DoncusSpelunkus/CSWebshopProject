@@ -10,7 +10,7 @@ export class AppComponent implements OnInit{
   boxLength: number = 0;
   boxWidth: number = 0;
   boxHeight: number = 0;
-  boxes: any;
+  product: any;
 
   constructor(private http: HttpService) {
 
@@ -18,7 +18,7 @@ export class AppComponent implements OnInit{
 
   async ngOnInit() {
     const boxes = await this.http.GetBoxes();
-    this.boxes = boxes;
+    this.product = product;
   }
 
   async createBox(){
@@ -28,11 +28,11 @@ export class AppComponent implements OnInit{
       height: this.boxHeight,
     }
     const result = await this.http.createBox(dto);
-    this.boxes.push(result);
+    this.product.push(result);
   }
 
-  async deleteBox(manFacId: any) {
-    const box = await this.http.deleteBox(manFacId);
-    this.boxes = this.boxes.filter(b => b.manFacId != box.manFacId)
+  async deleteBox(productID: any) {
+    const product = await this.http.deleteBox(productID);
+    this.product = this.product.filter(p => p.productID != product.productID)
   }
 }

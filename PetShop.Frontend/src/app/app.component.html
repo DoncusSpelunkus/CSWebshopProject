@@ -1,5 +1,5 @@
 <div style="margin: 100px">
-  <h1 style="text-align: center">mewga kewl bux factory</h1>
+  <h1 style="text-align: center">Pet shop</h1>
   <div style="text-align: center">
   <mat-form-field>Insert Length
     <input type="number" matInput [(ngModel)]="boxLength">
@@ -13,13 +13,13 @@
   <button mat-raised-button (click)="createBox()">Create</button>
   </div>
   <div>
-  <mat-card style="margin: 20px;text-align: center" *ngFor="let b of boxes">
-    <mat-card-title>Box nr. {{b.productID}}</mat-card-title>
-    <mat-card-subtitle>Length: {{b.length}}</mat-card-subtitle>
-    <mat-card-subtitle>Width: {{b.width}}</mat-card-subtitle>
-    <mat-card-subtitle>Height: {{b.height}}</mat-card-subtitle>
+  <mat-card style="margin: 20px;text-align: center" *ngFor="let p of product">
+    <mat-card-title>Box nr. {{p.productID}}</mat-card-title>
+    <mat-card-subtitle>Length: {{p.length}}</mat-card-subtitle>
+    <mat-card-subtitle>Width: {{p.width}}</mat-card-subtitle>
+    <mat-card-subtitle>Height: {{p.height}}</mat-card-subtitle>
     <mat-card-actions>
-      <button mat-button (click)="deleteBox(b.manFacId)">Delete</button>
+      <button mat-button (click)="deleteBox(p.productID)">Delete</button>
     </mat-card-actions>
   </mat-card>
   </div>
