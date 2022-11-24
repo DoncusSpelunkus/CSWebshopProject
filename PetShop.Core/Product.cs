@@ -12,8 +12,6 @@
         public int MainCategory { get; set; }
         public int SubCategory { get; set; }
         public int Brand { get; set; }
-        public double width { get; set; }
-        public double height { get; set; }
-        
+
     }
 }
