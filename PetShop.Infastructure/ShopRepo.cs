@@ -10,49 +10,50 @@ namespace Factory.Infastructure
 {
     public class ShopRepo : IShopRepo
     {
-        private ShopDbContext _boxDbContext;
+        private ShopDbContext _shopDbContext;
 
-        public ShopRepo(ShopDbContext boxDbContext)
+        public ShopRepo(ShopDbContext shopDbContext)
         {
-            _boxDbContext = boxDbContext;
+            _shopDbContext = shopDbContext;
         }
 
-        public List<Product> GetAllBoxes()
+        public List<Product> GetAllProducts()
         {
-            return _boxDbContext.BoxTable.ToList();
+            return _shopDbContext.BoxTable.ToList();
         }
 
-        public Product insertBox(Product box)
+        public Product CreateProduct(Product product)
         {
-            _boxDbContext.BoxTable.Add(box);
-            _boxDbContext.SaveChanges();
-            return box;
+            _shopDbContext.BoxTable.Add(product);
+            _shopDbContext.SaveChanges();
+            return product;
         }
 
-        public Product BoxUpdate(Product box)
+        public Product UpdateProduct(Product product)
         {
-            _boxDbContext.BoxTable.Update(box);
-            _boxDbContext.SaveChanges();
-            return box;
+            _shopDbContext.BoxTable.Update(product);
+            _shopDbContext.SaveChanges();
+            return product;
         }
         
-        public Product BoxDelete(int ManFacId)
+        public Product DeleteProduct(int productID)
         {
-            Product box = BoxOfIDFinder(ManFacId);
-            _boxDbContext.BoxTable.Remove(box);
-            _boxDbContext.SaveChanges();
-            return box;
+            Product product = GetProductByID(productID);
+            _shopDbContext.BoxTable.Remove(product);
+            _shopDbContext.SaveChanges();
+            return product;
         }
+        
 
-        public Product BoxOfIDFinder(int ManFacId)
+        public Product GetProductByID(int productId)
         {
-            return _boxDbContext.BoxTable.FirstOrDefault(p => p.ID == ManFacId);
+            return _shopDbContext.BoxTable.FirstOrDefault(p => p.ID == productId);
         }
 
         public void CreateDB()
         {
-            _boxDbContext.Database.EnsureDeleted();
-            _boxDbContext.Database.EnsureCreated();
+            _shopDbContext.Database.EnsureDeleted();
+            _shopDbContext.Database.EnsureCreated();
         }
     }
 }

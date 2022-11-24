@@ -9,14 +9,14 @@ namespace Factory.Application.Interfaces
 {
     public interface IShopRepo
     {
-        public List<Product> GetAllBoxes();
+        public List<Product> GetAllProducts();
 
-        public Product insertBox(Product box);
+        public Product CreateProduct(Product product);
         
-        public Product BoxUpdate(Product box);
+        public Product UpdateProduct(Product product);
 
-        public Product BoxDelete(int ManFacId);
+        public Product DeleteProduct(int productID);
 
-        public Product BoxOfIDFinder(int ManFacId);
+        public Product GetProductByID(int productID);
     }
 }

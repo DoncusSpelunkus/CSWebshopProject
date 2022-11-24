@@ -10,54 +10,54 @@ namespace Factory.Application;
 
     public class ShopService : IShopService
     {
-        private IShopRepo _boxRepository;
+        private IShopRepo _productRepository;
         private IMapper _mapper;
         private IValidator<ProdDTO> _validator;
-        private IValidator<Product> _boxValidator;
+        private IValidator<Product> _productValidator;
 
         public ShopService(IShopRepo repository, IMapper mapper, IValidator<ProdDTO> validator)
         {
-            _boxRepository = repository;
+            _productRepository = repository;
             _mapper = mapper;
             _validator = validator;
         }
     
     
-        public List<Product> GetAllBoxes()
+        public List<Product> GetAllProducts()
         {
-            return _boxRepository.GetAllBoxes();
+            return _productRepository.GetAllProducts();
         }
         
-        public Product insertBox(ProdDTO dto)
+        public Product CreateProduct(ProdDTO dto)
         {
             var validation = _validator.Validate(dto);
             if (!validation.IsValid)
                 throw new ValidationException(validation.ToString());
             
-            return _boxRepository.insertBox(_mapper.Map<Product>(dto));
+            return _productRepository.CreateProduct(_mapper.Map<Product>(dto));
         }
 
-        public Product BoxUpdate(int ManFacId, Product box)
+        public Product UpdateProduct(int productId, Product product)
         {
-            if (ManFacId != box.ID)
+            if (productId != product.ID)
                 throw new ValidationException("ID in body and route are different (Update)");
-            var validation = _boxValidator.Validate(box);
+            var validation = _productValidator.Validate(product);
             if (!validation.IsValid)
                 throw new ValidationException(validation.ToString());
-            return _boxRepository.BoxUpdate(box);
+            return _productRepository.UpdateProduct(product);
         }
 
-        public Product BoxDelete(int ManFacId)
+        public Product DeleteProduct(int productID)
         {
-            if (ManFacId == null)
+            if (productID == null)
                 throw new ValidationException("ID is invalid");
-            return _boxRepository.BoxDelete(ManFacId);
+            return _productRepository.DeleteProduct(productID);
         }
 
-        public Product BoxOfIDFinder(int ManFacId)
+        public Product GetProductByID(int productId)
         {
-            if (ManFacId <= 0)
+            if (productId <= 0)
                 throw new ValidationException("ID is invalid");
-            return _boxRepository.BoxOfIDFinder(ManFacId);
+            return _productRepository.GetProductByID(productId);
         }
     }
