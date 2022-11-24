@@ -21,6 +21,6 @@ namespace Factory.Infastructure
 
         }
 
-        public DbSet<Product> BoxTable { get; set; }
+        public DbSet<Product> ProductTable { get; set; }
     }
 }
