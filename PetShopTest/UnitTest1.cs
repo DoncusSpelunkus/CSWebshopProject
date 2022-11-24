@@ -8,7 +8,7 @@ namespace PetShopTest;
 public class UnitTest1
 {
     [Fact]
-    public void GetProductByIDTest()
+    public void GetProductByIDTest_ValidData()
     {
         Mock<IShopRepo> orderRepository = new Mock<IShopRepo>();
 
@@ -29,7 +29,6 @@ public class UnitTest1
         
     
     }
-
     // test for delete 
     [Fact]
     public void DeleteByID_ValidData()
@@ -53,6 +52,27 @@ public class UnitTest1
         Assert.Equal(product, actual);
     }
 
+    [Fact]
+    public void DeleteByID_NotValidData()
+    {
+
+        Mock<IShopRepo> orderRepository = new Mock<IShopRepo>();
+        int Id = 1;
+        Product product = new Product()
+        {
+            ID = 2, Name = "mockFood1", Price = 10, Description = "very good product1", ImageUrl = "fakeURL1",
+            Rating = 1.5, MainCategory = 0, SubCategory = 0, Brand = 0
+        };
+
+
+        orderRepository.Setup(repo => repo.DeleteProduct(Id)).Returns(product);
+
+        IShopRepo orderService =  orderRepository.Object;
+
+
+        var actual = orderService.DeleteProduct(2);
+        Assert.NotEqual(product, actual);
+    }
 
     [Fact]
     public void CreateProduct_ValidData()
