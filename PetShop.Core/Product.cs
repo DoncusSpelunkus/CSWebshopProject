@@ -1,7 +1,11 @@
-﻿namespace Factory.Domain
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Factory.Domain
 {
     public class Product
     {
+
+        [Key]
         public int ID { get; set; }
         public string Name { get; set; }
         public double Price { get; set; }

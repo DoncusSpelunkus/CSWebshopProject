@@ -125,9 +125,4 @@ namespace PetShopApi.Controllers
         
     }
     
-<<<<<<< Updated upstream
-    
-    
-=======
->>>>>>> Stashed changes
 }
