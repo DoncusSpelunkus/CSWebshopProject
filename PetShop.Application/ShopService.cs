@@ -1,12 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
-using AutoMapper;
-using Factory.Application.Interfaces;
-using Factory.Application.PostProdDTO;
-using Factory.Domain;
+﻿using AutoMapper;
 using FluentValidation;
+using PetShop.Application.Interfaces;
+using PetShop.Application.PostProdDTO;
+using PetShop.Domain;
 using ValidationException = FluentValidation.ValidationException;
 
-namespace Factory.Application;
+namespace PetShop.Application;
 
     public class ShopService : IShopService
     {

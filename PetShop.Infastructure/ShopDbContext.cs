@@ -1,7 +1,7 @@
-﻿using Factory.Domain;
+﻿using PetShop.Domain;
 using Microsoft.EntityFrameworkCore;
 
-namespace Factory.Infastructure
+namespace PetShop.Infastructure
 {
     public class ShopDbContext : DbContext
     {

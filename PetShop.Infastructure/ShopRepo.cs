@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Factory.Application.Interfaces;
-using Factory.Domain;
+﻿using PetShop.Application.Interfaces;
+using PetShop.Domain;
 
-namespace Factory.Infastructure
+namespace PetShop.Infastructure
 {
     public class ShopRepo : IShopRepo
     {

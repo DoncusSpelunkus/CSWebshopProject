@@ -1,7 +1,7 @@
-using Factory.Application.Interfaces;
+using PetShop.Application.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Factory.Infastructure.DependencyResolver;
+namespace PetShop.Infastructure.DependencyResolver;
 
 public static class DependencyResolverService
 {

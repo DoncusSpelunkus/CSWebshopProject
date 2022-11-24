@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Factory.Application.PostProdDTO;
-using Factory.Domain;
+﻿using PetShop.Application.PostProdDTO;
+using PetShop.Domain;
 
-namespace Factory.Application.Interfaces
+namespace PetShop.Application.Interfaces
 {
     public interface IShopService
     {
