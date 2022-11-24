@@ -4,6 +4,7 @@ using Factory.Application.Interfaces;
 using Factory.Application.PostProdDTO;
 using Factory.Application.Validators;
 using Factory.Domain;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace PetShopApi.Controllers
@@ -112,5 +113,19 @@ namespace PetShopApi.Controllers
                 return StatusCode(500, e.ToString());
             }
         }
+        
+        
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("RebuildDB")]
+        public void RebuildDB()
+        {
+            _shopService.RebuildDB();
+        }
+        
+        
     }
+    
+    
+    
 }

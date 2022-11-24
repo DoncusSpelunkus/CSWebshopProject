@@ -11,9 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetShop.Application", "PetS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetShop.Infastructure", "PetShop.Infastructure\PetShop.Infastructure.csproj", "{C464C560-6771-4769-9435-87628B25821E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PetShopTests", "PetShopTests", "{3F129DFF-9A75-4706-A73E-07286F6F2979}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopTests", "ShopTests\ShopTests.csproj", "{DBF07233-0BD9-4933-ACFF-C3495E03087C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetShopTest", "PetShopTest\PetShopTest.csproj", "{719A964C-2807-40F0-BD84-3340D854B3F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,10 +35,10 @@ Global
 		{C464C560-6771-4769-9435-87628B25821E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C464C560-6771-4769-9435-87628B25821E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C464C560-6771-4769-9435-87628B25821E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DBF07233-0BD9-4933-ACFF-C3495E03087C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DBF07233-0BD9-4933-ACFF-C3495E03087C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DBF07233-0BD9-4933-ACFF-C3495E03087C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DBF07233-0BD9-4933-ACFF-C3495E03087C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{719A964C-2807-40F0-BD84-3340D854B3F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{719A964C-2807-40F0-BD84-3340D854B3F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{719A964C-2807-40F0-BD84-3340D854B3F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{719A964C-2807-40F0-BD84-3340D854B3F6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -49,6 +47,5 @@ Global
 		SolutionGuid = {F425BF7A-CB83-4011-A0FA-BC60C3D38D77}
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{DBF07233-0BD9-4933-ACFF-C3495E03087C} = {3F129DFF-9A75-4706-A73E-07286F6F2979}
 	EndGlobalSection
 EndGlobal

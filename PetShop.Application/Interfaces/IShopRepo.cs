@@ -18,5 +18,7 @@ namespace Factory.Application.Interfaces
         public Product DeleteProduct(int productID);
 
         public Product GetProductByID(int productID);
+        
+        public void RebuildDB();
     }
 }
