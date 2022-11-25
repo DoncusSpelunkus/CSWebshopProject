@@ -28,18 +28,26 @@ export class HttpService {
     )
   }
 
-  async GetBoxes(){
-    const httpResponse = await customAxios.get<any>('Box');
+  async GetProduct(){
+    const httpResponse = await customAxios.get<any>('Shop');
     return httpResponse.data;
   }
 
-  async createBox(dto: { length: number; width: number; height: number }) {
-    const httpResult = await customAxios.post('box', dto);
+  async CreateProduct(dto: { name: string;
+    price: number;
+    description: string;
+    imageUrl: string;
+    rating: number;
+    specs: { [n: number]: string } | undefined;
+    mainCategory: number;
+    subCategory: number;
+    brand: number; }) {
+    const httpResult = await customAxios.post('Shop', dto);
     return httpResult.data;
   }
 
-  async deleteBox(manFacId: any) {
-    const httpResult = await customAxios.delete('box/' + manFacId);
+  async DeleteProductByID(manFacId: any) {
+    const httpResult = await customAxios.delete('Shop/' + manFacId);
     return httpResult.data;
   }
 }
