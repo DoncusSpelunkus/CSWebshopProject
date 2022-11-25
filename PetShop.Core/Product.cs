@@ -15,7 +15,7 @@
          * and an int, which is the ID.
          * 
          */
-        private List<Specs> _specsList { get; set; }
+        //private List<Specs> _specsList { get; set; }
         public int MainCategory { get; set; }
         public int SubCategory { get; set; }
         public int Brand { get; set; }
