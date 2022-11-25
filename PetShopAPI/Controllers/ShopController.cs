@@ -40,17 +40,17 @@ namespace PetShopApi.Controllers
             }
         }
         
-        [HttpGet("{ManFacId}")]
+        [HttpGet("{productID}")]
         
-        public ActionResult<Product> BoxOfIDFinder(int ManFacId)
+        public ActionResult<Product> GetProductById(int productID)
         {
             try
             {
-                return Ok(_shopService.GetProductByID(ManFacId));
+                return Ok(_shopService.GetProductByID(productID));
             }
             catch (KeyNotFoundException e)
             {
-                return NotFound("No product found at ID " + ManFacId);
+                return NotFound("No product found at ID " + productID);
             }
             catch (Exception e)
             {
@@ -59,13 +59,12 @@ namespace PetShopApi.Controllers
         }
         
         [HttpPost]
-
         public ActionResult<Product> CreateProduct(ProdDTO dto)
         {
             try
             {
                 var result = _shopService.CreateProduct(dto);
-                return Created("box/" + result.ID, result);
+                return Created("shop/" + result.ID, result);
             }
             catch (ValidationException e)
             {
@@ -78,17 +77,17 @@ namespace PetShopApi.Controllers
         }
 
         [HttpPut]
-        [Route("{ManFacId}")]
+        [Route("{productID}")]
 
-        public ActionResult<Product> UpdateProduct([FromRoute] int ManFacId, [FromBody] Product box)
+        public ActionResult<Product> UpdateProduct([FromRoute] int productID, [FromBody] Product product)
         {
             try
             {
-                return Ok(_shopService.UpdateProduct(ManFacId, box));
+                return Ok(_shopService.UpdateProduct(productID, product));
             }
             catch (KeyNotFoundException e)
             {
-                return NotFound("No box found at ID " + ManFacId);
+                return NotFound("No product found at ID " + productID);
             }
             catch (Exception e)
             {
@@ -98,15 +97,15 @@ namespace PetShopApi.Controllers
 
         [HttpDelete("{ManFacId}")]
 
-        public ActionResult<Product> DeleteProductByID(int ManFacId)
+        public ActionResult<Product> DeleteProductByID(int productID)
         {
             try
             {
-                return Ok(_shopService.DeleteProduct(ManFacId));
+                return Ok(_shopService.DeleteProduct(productID));
             }
             catch (KeyNotFoundException e)
             {
-                return NotFound("No box found at ID " + ManFacId);
+                return NotFound("No product found at ID " + productID);
             }
             catch (Exception e)
             {
@@ -125,7 +124,5 @@ namespace PetShopApi.Controllers
         
         
     }
-    
-    
     
 }
