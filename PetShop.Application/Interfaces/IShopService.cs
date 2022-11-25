@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Factory.Application.PostProdDTO;
+﻿using Factory.Application.PostProdDTO;
 using Factory.Domain;
 
 namespace Factory.Application.Interfaces

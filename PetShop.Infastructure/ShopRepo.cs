@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Factory.Application.Interfaces;
+﻿using Factory.Application.Interfaces;
 using Factory.Domain;
 
 namespace Factory.Infastructure

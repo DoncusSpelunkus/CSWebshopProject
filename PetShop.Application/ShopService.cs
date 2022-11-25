@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using AutoMapper;
+﻿using AutoMapper;
 using Factory.Application.Interfaces;
 using Factory.Application.PostProdDTO;
 using Factory.Domain;
