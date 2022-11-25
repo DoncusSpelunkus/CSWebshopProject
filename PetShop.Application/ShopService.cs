@@ -1,4 +1,3 @@
-﻿using AutoMapper;
 using FluentValidation;
 using PetShop.Application.Interfaces;
 using PetShop.Application.PostProdDTO;
