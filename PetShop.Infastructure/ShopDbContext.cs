@@ -15,10 +15,6 @@ namespace Factory.Infastructure
             modelBuilder.Entity<Product>()
                 .Property(p => p.ID)
                 .ValueGeneratedOnAdd();
-
-            modelBuilder.Entity<Product>()
-                .HasKey(c => new { ManFacId = c.ID });
-
         }
 
         public DbSet<Product> ProductTable { get; set; }
