@@ -17,7 +17,7 @@ namespace PetShop.Infastructure
                 .ValueGeneratedOnAdd();
 
             modelBuilder.Entity<Product>()
-                .HasKey(c => new { ManFacId = c.ID });
+                .HasKey(c => new { productID = c.ID });
 
         }
 

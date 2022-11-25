@@ -20,7 +20,7 @@ public class UnitTest1
         mockRepository.Setup(r=>r.GetAllProducts()).Returns(fakeRepo);
     
         
-        IShopService service = new ShopService(mockRepository.Object, null, null );
+        IShopService service = new ShopService(mockRepository.Object, null, null, null );
         
         Product expectedValue = new Product() { ID = 1, Name = "mockFood1", Price = 10, Description = "very good product1", ImageUrl = "fakeURL1", Rating = 1.5, MainCategory = 0, SubCategory = 0, Brand = 0};
         

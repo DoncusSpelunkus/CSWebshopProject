@@ -96,7 +96,7 @@ namespace PetShopApi.Controllers
             }
         }
 
-        [HttpDelete("{ManFacId}")]
+        [HttpDelete("{productID}")]
 
         public ActionResult<Product> DeleteProductByID(int productID)
         {
