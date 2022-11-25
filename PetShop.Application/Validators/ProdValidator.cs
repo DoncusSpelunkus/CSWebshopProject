@@ -1,7 +1,7 @@
-﻿using Factory.Application.PostProdDTO;
-using FluentValidation;
+﻿using FluentValidation;
+using PetShop.Application.PostProdDTO;
 
-namespace Factory.Application.Validators
+namespace PetShop.Application.Validators
 {
     public class ProdValidator : AbstractValidator<ProdDTO>
     {

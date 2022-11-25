@@ -1,11 +1,10 @@
-﻿using AutoMapper;
-using Factory.Application.Interfaces;
-using Factory.Application.PostProdDTO;
-using Factory.Domain;
 using FluentValidation;
+using PetShop.Application.Interfaces;
+using PetShop.Application.PostProdDTO;
+using PetShop.Domain;
 using ValidationException = FluentValidation.ValidationException;
 
-namespace Factory.Application;
+namespace PetShop.Application;
 
     public class ShopService : IShopService
     {
@@ -14,11 +13,12 @@ namespace Factory.Application;
         private IValidator<ProdDTO> _validator;
         private IValidator<Product> _productValidator;
 
-        public ShopService(IShopRepo repository, IMapper mapper, IValidator<ProdDTO> validator)
+        public ShopService(IShopRepo repository, IMapper mapper, IValidator<ProdDTO> validator,IValidator<Product> productValidator) 
         {
             _productRepository = repository;
             _mapper = mapper;
             _validator = validator;
+            _productValidator = productValidator;
         }
     
     
@@ -38,11 +38,14 @@ namespace Factory.Application;
 
         public Product UpdateProduct(int productId, Product product)
         {
+            
             if (productId != product.ID)
                 throw new ValidationException("ID in body and route are different (Update)");
             var validation = _productValidator.Validate(product);
             if (!validation.IsValid)
+            {
                 throw new ValidationException(validation.ToString());
+            }
             return _productRepository.UpdateProduct(product);
         }
 

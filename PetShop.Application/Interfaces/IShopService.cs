@@ -1,7 +1,7 @@
-﻿using Factory.Application.PostProdDTO;
-using Factory.Domain;
+﻿using PetShop.Application.PostProdDTO;
+using PetShop.Domain;
 
-namespace Factory.Application.Interfaces
+namespace PetShop.Application.Interfaces
 {
     public interface IShopService
     {

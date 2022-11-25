@@ -1,7 +1,7 @@
-using Factory.Domain;
 using FluentValidation;
+using PetShop.Domain;
 
-namespace Factory.Application.Validators;
+namespace PetShop.Application.Validators;
 
 public class ActualProdValidator
 {

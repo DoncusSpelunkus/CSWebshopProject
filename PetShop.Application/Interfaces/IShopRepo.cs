@@ -1,6 +1,6 @@
-﻿using Factory.Domain;
+﻿using PetShop.Domain;
 
-namespace Factory.Application.Interfaces
+namespace PetShop.Application.Interfaces
 {
     public interface IShopRepo
     {
