@@ -1,4 +1,4 @@
-﻿namespace Factory.Domain;
+﻿namespace PetShop.Domain;
 
 public class Specs
 {

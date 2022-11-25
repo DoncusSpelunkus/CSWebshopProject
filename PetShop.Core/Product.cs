@@ -1,4 +1,6 @@
-﻿namespace PetShop.Domain
+﻿using PetShop.Domain;
+
+namespace PetShop.Domain
 {
     public class Product
     {
