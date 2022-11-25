@@ -1,8 +1,8 @@
 using System.Net.Mime;
 using AutoMapper;
-using Factory.Application.PostProdDTO;
-using Factory.Domain;
-using Factory.Infastructure;
+using PetShop.Application.PostProdDTO;
+using PetShop.Domain;
+using PetShop.Infastructure;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,8 +22,8 @@ builder.Services.AddDbContext<ShopDbContext>(options => options.UseSqlite("Data 
 builder.Services.AddScoped<ShopRepo>();
 builder.Services.AddValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
 
-Factory.Application.DependencyResolver.DependencyResolverService.RegisterApplicationLayer(builder.Services);
-Factory.Infastructure.DependencyResolver.DependencyResolverService.RegisterInfrastructureLayer(builder.Services);
+PetShop.Application.DependencyResolver.DependencyResolverService.RegisterApplicationLayer(builder.Services);
+PetShop.Infastructure.DependencyResolver.DependencyResolverService.RegisterInfrastructureLayer(builder.Services);
 
 builder.Services.AddCors();
 

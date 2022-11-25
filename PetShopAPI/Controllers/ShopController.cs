@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using AutoMapper;
-using Factory.Application.Interfaces;
-using Factory.Application.PostProdDTO;
-using Factory.Application.Validators;
-using Factory.Domain;
+using PetShop.Application.Interfaces;
+using PetShop.Application.PostProdDTO;
+using PetShop.Application.Validators;
+using PetShop.Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -95,7 +95,7 @@ namespace PetShopApi.Controllers
             }
         }
 
-        [HttpDelete("{ManFacId}")]
+        [HttpDelete("{productID}")]
 
         public ActionResult<Product> DeleteProductByID(int productID)
         {

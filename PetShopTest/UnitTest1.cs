@@ -1,6 +1,6 @@
-using Factory.Application;
-using Factory.Application.Interfaces;
-using Factory.Domain;
+using PetShop.Application;
+using PetShop.Application.Interfaces;
+using PetShop.Domain;
 using Moq;
 
 namespace PetShopTest;

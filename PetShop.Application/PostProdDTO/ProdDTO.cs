@@ -1,4 +1,4 @@
-﻿namespace Factory.Application.PostProdDTO
+﻿namespace PetShop.Application.PostProdDTO
 {
     public class ProdDTO
     {
