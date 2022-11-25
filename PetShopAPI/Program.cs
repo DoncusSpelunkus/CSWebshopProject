@@ -1,4 +1,4 @@
-using System.Net.Mime;
+
 using AutoMapper;
 using PetShop.Application.PostProdDTO;
 using PetShop.Domain;
@@ -20,6 +20,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ShopDbContext>(options => options.UseSqlite("Data source=db.db"));
 builder.Services.AddScoped<ShopRepo>();
+builder.Services.AddScoped<SpecsRepo>();
 builder.Services.AddValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
 
 PetShop.Application.DependencyResolver.DependencyResolverService.RegisterApplicationLayer(builder.Services);
