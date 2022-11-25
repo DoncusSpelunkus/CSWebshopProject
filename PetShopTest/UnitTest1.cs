@@ -11,13 +11,13 @@ public class UnitTest1
     public void GetProductByIDTest_ValidData()
     {
         Mock<IShopRepo> orderRepository = new Mock<IShopRepo>();
-
+        int id = 1;
         Product expected = new Product()
         {
-            ID = 1, Name = "mockFood1", Price = 10, Description = "very good product1", ImageUrl = "fakeURL1",
+            ID = id, Name = "mockFood1", Price = 10, Description = "very good product1", ImageUrl = "fakeURL1",
             Rating = 1.5, MainCategory = 0, SubCategory = 0, Brand = 0
         };
-        orderRepository.Setup(repo => repo.GetProductByID(1)).Returns(expected);
+        orderRepository.Setup(repo => repo.GetProductByID(id)).Returns(expected);
         
         Product actual = new Product()
         {
