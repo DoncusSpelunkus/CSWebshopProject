@@ -59,7 +59,6 @@ namespace PetShopApi.Controllers
         }
         
         [HttpPost]
-
         public ActionResult<Product> CreateProduct(ProdDTO dto)
         {
             try
@@ -125,7 +124,5 @@ namespace PetShopApi.Controllers
         
         
     }
-    
-    
     
 }

@@ -1,38 +1,67 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpService} from "../services/http.service";
+import {appValuePair} from "./valuePair";
 
+// @ts-ignore
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit{
-  boxLength: number = 0;
-  boxWidth: number = 0;
-  boxHeight: number = 0;
-  boxes: any;
+  name: string = '';
+  price: number = 0;
+  description: string = '';
+  imageUrl: string = '';
+  rating: number = 0;
+  specs: { [n: number]: string; } | undefined;
+  mainCategory: number = 0;
+  subCategory: number = 0;
+  brand: number = 0;
+  product: any;
+  sname: number;
+  sdesc: string;
+  specList: Array<appValuePair> = [];
+
 
   constructor(private http: HttpService) {
-
+    let sname = 0;
+    this.sname = sname;
+    let sdesc = ``;
+    this.sdesc = sdesc;
   }
 
   async ngOnInit() {
-    const boxes = await this.http.GetBoxes();
-    this.boxes = boxes;
+    const product = await this.http.GetProduct();
+    this.product = product;
+
   }
 
-  async createBox(){
+  async CreateProduct(){
     let dto = {
-      length: this.boxLength,
-      width: this.boxWidth,
-      height: this.boxHeight,
+      name: this.name,
+      price: this.price,
+      description: this.description,
+      imageUrl: this.imageUrl,
+      rating: this.rating,
+      specs: this.specs,
+      mainCategory: this.mainCategory,
+      subCategory: this.subCategory,
+      brand: this.brand,
+      specList: this.specList,
     }
-    const result = await this.http.createBox(dto);
-    this.boxes.push(result);
+    const result = await this.http.CreateProduct(dto);
+    this.product.push(result);
+    this.specList = [];
   }
 
-  async deleteBox(manFacId: any) {
-    const box = await this.http.deleteBox(manFacId);
-    this.boxes = this.boxes.filter(b => b.manFacId != box.manFacId)
+  async DeleteProductByID(productID: any) {
+    const product = await this.http.DeleteProductByID(productID);
+    this.product = this.product.filter(p => p.productID != product.productID)
+  }
+
+  async AttachSpecs(spec: number, name: string){
+    let valuePair = new appValuePair(spec,name);
+    this.specList.push(valuePair)
   }
 }

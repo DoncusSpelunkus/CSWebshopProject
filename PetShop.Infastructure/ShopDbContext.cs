@@ -16,9 +16,6 @@ namespace PetShop.Infastructure
                 .Property(p => p.ID)
                 .ValueGeneratedOnAdd();
 
-            modelBuilder.Entity<Product>()
-                .HasKey(c => new { productID = c.ID });
-
         }
 
         public DbSet<Product> ProductTable { get; set; }
