@@ -2,5 +2,5 @@
 
 public class SpecDTO
 {
-    
+    public string SpecName { get; set; }
 }
