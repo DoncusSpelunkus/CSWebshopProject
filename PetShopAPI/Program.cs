@@ -8,7 +8,11 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var config = new MapperConfiguration(conf => { conf.CreateMap<ProdDTO, Product>(); });
+var config = new MapperConfiguration(conf =>
+{
+    conf.CreateMap<ProdDTO, Product>();
+    conf.CreateMap<SpecDTO, Specs>();
+});
 
 var mapper = config.CreateMapper();
 
