@@ -16,12 +16,12 @@ export class HttpService {
     customAxios.interceptors.response.use(
       response => {
       if(response.status == 201) {
-        this.matSnackbar.open("Great success")
+        this.matSnackbar.open("Great success", "x", {duration: 500})
       }
       return response;
     }, rejected => {
       if(rejected.response.status>=400 && rejected.response.status <= 500) {
-        matSnackbar.open(rejected.response.data);
+        matSnackbar.open(rejected.response.data, "x", {duration: 500});
       }
         catchError(rejected);
     }

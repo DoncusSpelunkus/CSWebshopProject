@@ -56,9 +56,9 @@ export class AppComponent implements OnInit{
     this.specList = [];
   }
 
-  async DeleteProductByID(productID: any) {
-    const product = await this.http.DeleteProductByID(productID);
-    this.product = this.product.filter(p => p.productID != product.productID)
+  async DeleteProductByID(id: any) {
+    const product = await this.http.DeleteProductByID(id);
+    this.product = this.product.filter(p => p.id != product.id)
   }
 
   async AttachSpecs(spec: number, name: string){
