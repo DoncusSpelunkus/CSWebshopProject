@@ -19,16 +19,17 @@ import {MatSidenavModule} from "@angular/material/sidenav";
 import { ProductCreationComponent } from './product-creation/product-creation.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { DeleteButtonComponent } from './delete-button/delete-button.component';
-import { CreateButtonComponent } from './create-button/create-button.component';
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
+    ProductCreationComponent,
     HeaderComponent,
     ProductCreationComponent,
     ProductListComponent,
     DeleteButtonComponent,
-    CreateButtonComponent
   ],
   imports: [
     BrowserModule,

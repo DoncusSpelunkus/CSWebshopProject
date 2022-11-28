@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {appValuePair} from "../valuePair";
+import {appValuePair} from "../../Entities/valuePair";
 import {HttpService} from "../../services/http.service";
 
 @Component({

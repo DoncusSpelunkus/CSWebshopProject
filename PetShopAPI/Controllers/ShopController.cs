@@ -61,6 +61,7 @@ namespace PetShopApi.Controllers
         [HttpPost]
         public ActionResult<Product> CreateProduct(ProdDTO dto)
         {
+            Console.WriteLine("hit");
             try
             {
                 var result = _shopService.CreateProduct(dto);

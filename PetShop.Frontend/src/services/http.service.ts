@@ -33,15 +33,18 @@ export class HttpService {
     return httpResponse.data;
   }
 
-  async CreateProduct(dto: { name: string;
-    price: number;
-    description: string;
-    imageUrl: string;
-    rating: number;
-    specs: { [n: number]: string } | undefined;
-    mainCategory: number;
-    subCategory: number;
-    brand: number; }) {
+  async CreateProduct(dtoi){
+    let dto = {
+      name: dtoi.name,
+      price: dtoi.price,
+      description: dtoi.description,
+      imageUrl: dtoi.imageUrl,
+      rating: dtoi.rating,
+      mainCategory: dtoi.mainCategory,
+      subCategory: dtoi.subCategory,
+      brand: dtoi.brand
+    }
+    console.log(dtoi.stringify)
     const httpResult = await customAxios.post('Shop', dto);
     return httpResult.data;
   }

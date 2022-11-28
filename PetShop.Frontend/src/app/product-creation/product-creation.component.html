@@ -1,31 +1,29 @@
 <div style="text-align: center">
   <mat-form-field>Name:
-    <input type="string" matInput [(ngModel)]="name">
+    <input type="string" matInput [(ngModel)]="dtoi.name">
   </mat-form-field>
   <mat-form-field>Price:
-    <input type="number" matInput [(ngModel)]="price">
+    <input type="number" matInput [(ngModel)]="dtoi.price">
   </mat-form-field>
   <mat-form-field>Description:
-    <input type="string" matInput [(ngModel)]="description">
+    <input type="string" matInput [(ngModel)]="dtoi.description">
   </mat-form-field>
   <mat-form-field>Image URL:
-    <input type="string" matInput [(ngModel)]="imageUrl">
+    <input type="string" matInput [(ngModel)]="dtoi.imageUrl">
   </mat-form-field>
   <mat-form-field>Rating:
-    <input type="number" matInput [(ngModel)]="rating">
-  </mat-form-field>
-  <mat-form-field>Specifications:
-    <input type="string" matInput [(ngModel)]="specs">
+    <input type="number" matInput [(ngModel)]="dtoi.rating">
   </mat-form-field>
   <mat-form-field>Main Category:
-    <input type="number" matInput [(ngModel)]="mainCategory">
+    <input type="number" matInput [(ngModel)]="dtoi.mainCategory">
   </mat-form-field>
   <mat-form-field>Sub Category:
-    <input type="number" matInput [(ngModel)]="subCategory">
+    <input type="number" matInput [(ngModel)]="dtoi.subCategory">
   </mat-form-field>
   <mat-form-field>Brand:
-    <input type="number" matInput [(ngModel)]="brand">
+    <input type="number" matInput [(ngModel)]="dtoi.brand">
   </mat-form-field>
+  <button mat-raised-button (click)="CreateProduct()">Create</button>
   <!--<div>
     <mat-select (selectionChange)="ChangeDrop($event)" placeholder="Language">
       <mat-option *ngFor="let specName of specNames" [value]="specName">

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import {appValuePair} from "../valuePair";
+import {Component, OnInit} from '@angular/core';
 import {HttpService} from "../../services/http.service";
+import {dto} from "../../Entities/dto";
 
 @Component({
   selector: 'app-product-creation',
@@ -8,27 +8,16 @@ import {HttpService} from "../../services/http.service";
   styleUrls: ['./product-creation.component.scss']
 })
 export class ProductCreationComponent implements OnInit{
-  name: string = '';
-  price: number = 0;
-  description: string = '';
-  imageUrl: string = '';
-  rating: number = 0;
-  specs: { [n: number]: string; } | undefined;
-  mainCategory: number = 0;
-  subCategory: number = 0;
-  brand: number = 0;
   product: any;
   sname: number;
   sdesc: string;
-  specNames: any;
-  specList: Array<appValuePair> = [];
+  dtoi: any;
 
 
   constructor(private http: HttpService) {
-    let sname = 0;
-    this.sname = sname;
-    let sdesc = ``;
-    this.sdesc = sdesc;
+    this.sname = 0;
+    this.sdesc = ``;
+    this.dtoi = dto;
   }
 
   async ngOnInit() {
@@ -36,4 +25,10 @@ export class ProductCreationComponent implements OnInit{
     this.product = product;
   }
 
+  async CreateProduct(){
+    console.log(this.dtoi.imageUrl)
+    const result = await this.http.CreateProduct(this.dtoi);
+    this.product.push(result);
+    this.dtoi.specList = [];
+  }
 }
