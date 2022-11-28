@@ -48,10 +48,4 @@ public class SpecsRepo : ISpecRepo
 
        
     }
-
-    public void RebuildDB()
-    {
-        _specsDbContext.Database.EnsureDeleted();
-        _specsDbContext.Database.EnsureCreated();
-    }
 }

@@ -10,7 +10,7 @@ using PetShop.Application.Validators;
 namespace PetShopApi.Controllers
 {
     [ApiController]
-    [Route("[SpecsController]")]
+    [Route("specs/[Controller]")]
     public class SpecsController : ControllerBase
     {
         private SpecValidator _specsValidator;
@@ -112,16 +112,6 @@ namespace PetShopApi.Controllers
                 return StatusCode(500, e.ToString());
             }
         }
-        
-        
-        [AllowAnonymous]
-        [HttpGet]
-        [Route("RebuildDB")]
-        public void RebuildDB()
-        {
-            _specService.RebuildDB();
-        }
-        
         
     }
     

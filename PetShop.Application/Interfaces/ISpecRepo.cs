@@ -9,6 +9,5 @@ public interface ISpecRepo
     public Specs UpdateSpecs(Specs specs);
     public Specs DeleteSpecsById(int Id);
     public Specs GetSpecsByID(int specsId);
-    public void RebuildDB();
 
 }

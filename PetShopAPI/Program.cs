@@ -5,6 +5,8 @@ using PetShop.Domain;
 using PetShop.Infastructure;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
+using PetShop.Application;
+using PetShop.Application.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,8 +25,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ShopDbContext>(options => options.UseSqlite("Data source=db.db"));
-builder.Services.AddScoped<ShopRepo>();
-builder.Services.AddScoped<SpecsRepo>();
+builder.Services.AddDbContext<SpecsDbContext>(options => options.UseSqlite("Data source=db.db"));
+builder.Services.AddScoped<IShopService , ShopService>();
+builder.Services.AddScoped<ISpecService , SpecService>();
+builder.Services.AddScoped<IShopRepo, ShopRepo>();
+builder.Services.AddScoped<ISpecRepo , SpecsRepo>();
 builder.Services.AddValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
 
 PetShop.Application.DependencyResolver.DependencyResolverService.RegisterApplicationLayer(builder.Services);

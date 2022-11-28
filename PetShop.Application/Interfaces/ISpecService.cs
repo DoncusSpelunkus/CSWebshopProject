@@ -14,6 +14,4 @@ public interface ISpecService
     public Specs DeleteSpecsById(int SpecID);
 
     public Specs GetSpecByID(int SpecID);
-        
-    public void RebuildDB();
 }
