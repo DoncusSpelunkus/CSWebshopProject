@@ -18,5 +18,7 @@ public class SpecsDbContext : DbContext
     }
 
     public DbSet<Specs> SpecsTable { get; set; }
+    
+    
 
 }

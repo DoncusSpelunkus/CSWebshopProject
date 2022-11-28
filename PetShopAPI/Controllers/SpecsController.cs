@@ -5,6 +5,7 @@ using PetShop.Application.PostProdDTO;
 using PetShop.Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using PetShop.Application.Validators;
 
 namespace PetShopApi.Controllers
 {
