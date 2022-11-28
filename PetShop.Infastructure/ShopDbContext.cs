@@ -15,9 +15,13 @@ namespace PetShop.Infastructure
             modelBuilder.Entity<Product>()
                 .Property(p => p.ID)
                 .ValueGeneratedOnAdd();
+            modelBuilder.Entity<Specs>()
+                .Property(s => s.ID)
+                .ValueGeneratedOnAdd();
 
         }
 
         public DbSet<Product> ProductTable { get; set; }
+        public DbSet<Specs> SpecsTable { get; set; }
     }
 }

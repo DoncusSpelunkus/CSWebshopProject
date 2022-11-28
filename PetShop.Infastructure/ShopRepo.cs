@@ -6,12 +6,10 @@ namespace PetShop.Infastructure
     public class ShopRepo : IShopRepo
     {
         private ShopDbContext _shopDbContext;
-        private SpecsDbContext _specsDbContext;
 
-        public ShopRepo(ShopDbContext shopDbContext, SpecsDbContext specsDbContext)
+        public ShopRepo(ShopDbContext shopDbContext)
         {
             _shopDbContext = shopDbContext;
-            _specsDbContext = specsDbContext;
         }
 
         public List<Product> GetAllProducts()
@@ -50,9 +48,8 @@ namespace PetShop.Infastructure
         public void RebuildDB()
         {
             _shopDbContext.Database.EnsureDeleted();
-            _specsDbContext.Database.EnsureDeleted();
             _shopDbContext.Database.EnsureCreated();
-            _specsDbContext.Database.EnsureCreated();
+            
 
         }
     }

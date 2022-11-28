@@ -25,7 +25,6 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ShopDbContext>(options => options.UseSqlite("Data source=db.db"));
-builder.Services.AddDbContext<SpecsDbContext>(options => options.UseSqlite("Data source=db.db"));
 builder.Services.AddScoped<IShopService , ShopService>();
 builder.Services.AddScoped<ISpecService , SpecService>();
 builder.Services.AddScoped<IShopRepo, ShopRepo>();

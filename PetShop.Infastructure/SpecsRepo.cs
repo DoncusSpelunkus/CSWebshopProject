@@ -6,9 +6,9 @@ namespace PetShop.Infastructure;
 public class SpecsRepo : ISpecRepo
 
 {
-    private SpecsDbContext _specsDbContext;
+    private ShopDbContext _specsDbContext;
 
-    public SpecsRepo(SpecsDbContext specsDbContext)
+    public SpecsRepo(ShopDbContext specsDbContext)
     {
         _specsDbContext = specsDbContext;
     }
