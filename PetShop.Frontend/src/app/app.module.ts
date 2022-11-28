@@ -13,6 +13,7 @@ import {MatTooltipModule} from "@angular/material/tooltip";
 import {Overlay} from "@angular/cdk/overlay";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatTableModule} from "@angular/material/table";
+import {MatSelectModule} from "@angular/material/select";
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import {MatTableModule} from "@angular/material/table";
     MatCardModule,
     MatListModule,
     MatTooltipModule,
-    MatTableModule
+    MatTableModule,
+    MatSelectModule
   ],
   providers: [MatSnackBar, Overlay],
   bootstrap: [AppComponent]
