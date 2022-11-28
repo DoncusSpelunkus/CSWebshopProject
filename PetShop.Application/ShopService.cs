@@ -60,7 +60,37 @@ namespace Factory.Application;
                 throw new ValidationException("ID is invalid");
             return _productRepository.GetProductByID(productId);
         }
+
+        public List<MainCategory> GetAllMainCategories()
+        {
+            return _productRepository.GetAllMainCategories();
+        }
+
+        public MainCategory CreateMainCategory(MainCategory mainCategory)
+        {
+            return _productRepository.CreateMainCategory(mainCategory);
+        }
+
+        public MainCategory UpdateMainCategory(MainCategory mainCategory)
+        {
+            return _productRepository.UpdateMainCategory(mainCategory);
+        }
         
+        public List<SubCategory> GetAllSubCategories()
+        {
+            return _productRepository.GetAllSubCategories();
+        }
+
+        public SubCategory CreateSubCategory(SubCategory subCategory)
+        {
+            return _productRepository.CreateSubCategory(subCategory);
+        }
+
+        public MainCategory UpdateSubCategory(SubCategory subCategory)
+        {
+            return _productRepository.UpdateSubCategory(subCategory);
+        }
+
         public void RebuildDB()
         {
             _productRepository.RebuildDB();

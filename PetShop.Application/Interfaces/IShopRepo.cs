@@ -18,7 +18,20 @@ namespace Factory.Application.Interfaces
         public Product DeleteProduct(int productID);
 
         public Product GetProductByID(int productID);
+
+        public List<MainCategory> GetAllMainCategories();
+
+        public MainCategory CreateMainCategory(MainCategory mainCategory);
         
+        public MainCategory UpdateMainCategory(MainCategory mainCategory);
+
+        public List<SubCategory> GetAllSubCategories();
+
+        public SubCategory CreateSubCategory(SubCategory subCategory);
+
+        public SubCategory UpdateSubCategory(SubCategory subCategory);
+
+
         public void RebuildDB();
     }
 }

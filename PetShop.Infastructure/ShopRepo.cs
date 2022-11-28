@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Schema;
 using Factory.Application.Interfaces;
 using Factory.Domain;
 
@@ -48,6 +49,44 @@ namespace Factory.Infastructure
         public Product GetProductByID(int productId)
         {
             return _shopDbContext.ProductTable.FirstOrDefault(p => p.ID == productId);
+        }
+
+        public List<MainCategory> GetAllMainCategories()
+        {
+            return _shopDbContext.MainCategoryTable.ToList();
+        }
+        
+        public MainCategory CreateMainCategory(MainCategory mainCategory)
+        {
+            _shopDbContext.MainCategoryTable.Add(mainCategory);
+            _shopDbContext.SaveChanges();
+            return mainCategory;
+        }
+
+        public MainCategory UpdateMainCategory(MainCategory mainCategory)
+        {
+            _shopDbContext.MainCategoryTable.Update(mainCategory);
+            _shopDbContext.SaveChanges();
+            return mainCategory;
+        }
+        
+        public List<SubCategory> GetAllSubCategories()
+        {
+            return _shopDbContext.SubCategoryTable.ToList();
+        }
+
+        public SubCategory CreateSubCategory(SubCategory subCategory)
+        {
+            _shopDbContext.MainCategoryTable.Add(subCategory);
+            _shopDbContext.SaveChanges();
+            return subCategory;
+        }
+        
+        public SubCategory UpdateSubCategory(SubCategory subCategory)
+        {
+            _shopDbContext.MainCategoryTable.Update(subCategory);
+            _shopDbContext.SaveChanges();
+            return subCategory;
         }
 
         public void RebuildDB()
