@@ -15,11 +15,20 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatTableModule} from "@angular/material/table";
 import {MatSelectModule} from "@angular/material/select";
 import { HeaderComponent } from './header/header.component';
+import {MatSidenavModule} from "@angular/material/sidenav";
+import { ProductCreationComponent } from './product-creation/product-creation.component';
+import { ProductListComponent } from './product-list/product-list.component';
+import { DeleteButtonComponent } from './delete-button/delete-button.component';
+import { CreateButtonComponent } from './create-button/create-button.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
+    ProductCreationComponent,
+    ProductListComponent,
+    DeleteButtonComponent,
+    CreateButtonComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +41,8 @@ import { HeaderComponent } from './header/header.component';
     MatListModule,
     MatTooltipModule,
     MatTableModule,
-    MatSelectModule
+    MatSelectModule,
+    MatSidenavModule
   ],
   providers: [MatSnackBar, Overlay],
   bootstrap: [AppComponent]
