@@ -4,7 +4,7 @@ using PetShop.Domain;
 
 namespace PetShopTest;
 
-public class SpecsUnitTest
+public class   SpecsUnitTest
 {
     [Fact]
     public void getAllProducts_validData()
@@ -111,6 +111,7 @@ public class SpecsUnitTest
         Assert.Equivalent(Expected,actual);
     }
 
+    [Fact]
     public void DeleteByID_ValidData()
     {
         int id = 1;
@@ -126,7 +127,30 @@ public class SpecsUnitTest
 
         var actual = repo.DeleteSpecsById(id);
         
+        Assert.Equal(expected,actual);
+        
 
+
+    }
+
+    [Fact]
+    public void deletById_InvalidData()
+    {
+        int id = 1;
+
+        Mock<ISpecRepo> specRepo = new Mock<ISpecRepo>();
+        Specs expected = new Specs()
+        {
+            ID = id, SpecName = "iphone"
+        };
+
+        specRepo.Setup(s => s.DeleteSpecsById(id)).Returns(expected);
+
+        ISpecRepo service = specRepo.Object;
+
+        var actualSpecs = service.DeleteSpecsById(2);
+        
+        Assert.NotEqual(expected, actualSpecs);
 
     }
 }
