@@ -24,7 +24,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<ShopDbContext>(options => options.UseSqlite("Data source=db.db"));
+builder.Services.AddDbContext<DBContext>(options => options.UseSqlite("Data source=db.db"));
 builder.Services.AddScoped<IShopService , ShopService>();
 builder.Services.AddScoped<ISpecService , SpecService>();
 builder.Services.AddScoped<IShopRepo, ShopRepo>();

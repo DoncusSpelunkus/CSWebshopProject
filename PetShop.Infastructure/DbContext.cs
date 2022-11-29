@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace PetShop.Infastructure
 {
-    public class ShopDbContext : DbContext
+    public class DBContext : DbContext
     {
-        public ShopDbContext(DbContextOptions<ShopDbContext> opts) : base(opts)
+        public DBContext(DbContextOptions<DBContext> opts) : base(opts)
         {
 
         }
