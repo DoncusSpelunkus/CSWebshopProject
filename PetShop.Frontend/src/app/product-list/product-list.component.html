@@ -1,11 +1,5 @@
 <mat-card style="margin: 20px;text-align: center" *ngFor="let p of product">
-  <mat-card-title>Product nr. {{p.id}}</mat-card-title>
-  <mat-card-subtitle>Name: {{p.name}}</mat-card-subtitle>
+  <mat-card-title>Name: {{p.name}}</mat-card-title>
+  <img mat-card-image src="{{p.imageUrl}}" alt="Image error">
   <mat-card-subtitle>Price: {{p.price}}</mat-card-subtitle>
-  <mat-card-subtitle>Description: {{p.description}}</mat-card-subtitle>
-  <mat-card-subtitle>Image Url: {{p.imageUrl}}</mat-card-subtitle>
-  <mat-card-subtitle>Rating: {{p.rating}}</mat-card-subtitle>
-  <mat-card-subtitle>Main Category: {{p.mainCategory}}</mat-card-subtitle>
-  <mat-card-subtitle>Sub Category: {{p.subCategory}}</mat-card-subtitle>
-  <mat-card-subtitle>Brand: {{p.brand}}</mat-card-subtitle>
 </mat-card>

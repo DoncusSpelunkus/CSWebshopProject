@@ -35,7 +35,7 @@ export class HttpService {
 
   async CreateProduct(dtoi){
     let dto = {
-      name: dtoi.name,
+      name: dtoi.pname,
       price: dtoi.price,
       description: dtoi.description,
       imageUrl: dtoi.imageUrl,
@@ -49,8 +49,8 @@ export class HttpService {
     return httpResult.data;
   }
 
-  async DeleteProductByID(manFacId: any) {
-    const httpResult = await customAxios.delete('Shop/' + manFacId);
+  async DeleteProductByID(id: any) {
+    const httpResult = await customAxios.delete('Shop/' + id);
     return httpResult.data;
   }
 }

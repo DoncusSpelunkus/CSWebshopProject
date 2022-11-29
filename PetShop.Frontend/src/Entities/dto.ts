@@ -1,7 +1,7 @@
 import {appValuePair} from "./valuePair";
 
 export class dto {
-  name: string = '';
+  pname: string = '';
   price: number = 0;
   description: string = '';
   imageUrl: string = '';
@@ -13,7 +13,7 @@ export class dto {
   specList: Array<appValuePair> = [];
 
   constructor(name, price, description, imageUrl, rating, mainCategory, subCategory, brand, specList) {
-      this.name = name;
+      this.pname = name;
       this.price = price;
       this.description = description;
       this.imageUrl = imageUrl;

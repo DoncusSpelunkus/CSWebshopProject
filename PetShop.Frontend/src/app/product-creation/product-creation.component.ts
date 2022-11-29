@@ -16,7 +16,7 @@ export class ProductCreationComponent implements OnInit{
 
   constructor(private http: HttpService) {
     this.sname = 0;
-    this.sdesc = ``;
+    this.sdesc = '';
     this.dtoi = dto;
   }
 
