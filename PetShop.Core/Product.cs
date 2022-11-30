@@ -18,7 +18,7 @@ namespace PetShop.Domain
          *The specslist holds a list of names of the specs.
          * 
          */
-        private List<Specs> _specsList { get; set; }
+        //private List<Specs> _specsList { get; set; }
         public int MainCategory { get; set; }
         public int SubCategory { get; set; }
         public int Brand { get; set; }

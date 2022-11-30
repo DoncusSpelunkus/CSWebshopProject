@@ -1,5 +1,6 @@
 using PetShop.Application.Interfaces;
 using PetShop.Domain;
+
 using Moq;
 
 namespace PetShopTest;
@@ -93,6 +94,32 @@ public class UnitTest1
         var actual = orderService.CreateProduct(product);
         Assert.Equal(product, actual);
     }
+    
+    [Fact]
+    public void CreateProduct_NotValidData()
+    {
+
+        Mock<IShopRepo> orderRepository = new Mock<IShopRepo>();
+        Product product = new Product()
+        {
+            ID = 1, Name = "mockFood1", Price = 10, Description = "very good product1", ImageUrl = "fakeURL1",
+            Rating = 1.5, MainCategory = 0, SubCategory = 0, Brand = 0
+        };
+        Product actual = new Product()
+        {
+            ID = 2, Name = "mock", Price = 10, Description = "very not good product1", ImageUrl = "nice",
+            Rating = 1.5, MainCategory = 0, SubCategory = 0, Brand = 0
+        };
+        
+
+        orderRepository.Setup(repo => repo.CreateProduct(product)).Returns(product);
+
+     
+        
+        Assert.NotEqual(product, actual);
+    }
+    
+    
     
     
 }
