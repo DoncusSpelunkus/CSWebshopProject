@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace PetShop.Infastructure
 {
-    public class ShopDbContext : DbContext
+    public class DBContext : DbContext
     {
-        public ShopDbContext(DbContextOptions<ShopDbContext> opts) : base(opts)
+        public DBContext(DbContextOptions<DBContext> opts) : base(opts)
         {
 
         }
@@ -15,9 +15,13 @@ namespace PetShop.Infastructure
             modelBuilder.Entity<Product>()
                 .Property(p => p.ID)
                 .ValueGeneratedOnAdd();
+            modelBuilder.Entity<Specs>()
+                .Property(s => s.ID)
+                .ValueGeneratedOnAdd();
 
         }
 
         public DbSet<Product> ProductTable { get; set; }
+        public DbSet<Specs> SpecsTable { get; set; }
     }
 }
