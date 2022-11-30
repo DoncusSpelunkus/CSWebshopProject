@@ -44,7 +44,6 @@ export class HttpService {
       subCategory: dtoi.subCategory,
       brand: dtoi.brand
     }
-    console.log(dtoi.stringify)
     const httpResult = await customAxios.post('Shop', dto);
     return httpResult.data;
   }

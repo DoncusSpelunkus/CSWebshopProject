@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpService} from "../services/http.service";
-import {appValuePair} from "../Entities/valuePair";
-import {MatSelectChange} from "@angular/material/select";
+import {appRoutingModule} from "./app.router";
 
 // @ts-ignore
 @Component({
@@ -13,18 +12,10 @@ export class AppComponent implements OnInit{
 
 
   constructor(private http: HttpService) {
+    appRoutingModule
   }
 
   async ngOnInit() {
   }
 
-
-  async DeleteProductByID(id: any) {
-  }
-
-  async AttachSpecs(spec: number, name: string){
-  }
-
-  async ChangeDrop($event: MatSelectChange){
-  }
 }

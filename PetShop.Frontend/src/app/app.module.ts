@@ -19,6 +19,9 @@ import {MatSidenavModule} from "@angular/material/sidenav";
 import { ProductCreationComponent } from './product-creation/product-creation.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { DeleteButtonComponent } from './delete-button/delete-button.component';
+import { HomeComponent } from './home/home.component';
+import { appRoutingModule } from './app.router';
+import { AdminComponent } from './admin/admin.component'
 
 
 
@@ -30,10 +33,13 @@ import { DeleteButtonComponent } from './delete-button/delete-button.component';
     ProductCreationComponent,
     ProductListComponent,
     DeleteButtonComponent,
+    HomeComponent,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    appRoutingModule,
     MatFormFieldModule,
     MatInputModule,
     FormsModule,

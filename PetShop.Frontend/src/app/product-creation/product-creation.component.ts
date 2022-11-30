@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpService} from "../../services/http.service";
 import {dto} from "../../Entities/dto";
+import { appRoutingModule } from "../app.router";
 
 @Component({
   selector: 'app-product-creation',
@@ -12,12 +13,14 @@ export class ProductCreationComponent implements OnInit{
   sname: number;
   sdesc: string;
   dtoi: any;
+  productDeleteId: number;
 
 
   constructor(private http: HttpService) {
     this.sname = 0;
     this.sdesc = '';
     this.dtoi = dto;
+    this.productDeleteId = 0;
   }
 
   async ngOnInit() {
@@ -26,9 +29,13 @@ export class ProductCreationComponent implements OnInit{
   }
 
   async CreateProduct(){
-    console.log(this.dtoi.imageUrl)
     const result = await this.http.CreateProduct(this.dtoi);
     this.product.push(result);
     this.dtoi.specList = [];
+  }
+
+  async DeleteProduct(id){
+    const result = await this.http.DeleteProductByID(id)
+    this.product.push(result);
   }
 }
