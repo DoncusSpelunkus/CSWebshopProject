@@ -15,6 +15,7 @@ export class ProductCreationComponent implements OnInit{
   sname: number;
   sdesc: string;
   dtoi: any;
+  currentProduct: any;
   productDeleteId: number;
   private productEditSub: Subscription;
 
@@ -24,11 +25,10 @@ export class ProductCreationComponent implements OnInit{
     this.sdesc = '';
     this.dtoi = dto;
     this.productDeleteId = 0;
-    this.productEditSub = this.Service.getProductListUpdateRequest().subscribe //Subscribes to get check for
+    this.productEditSub = this.Service.getProductEdit().subscribe //Subscribes to get check for
       (message => {
-        if (message === true){
-          this.UpdateList()
-        }
+          this.currentProduct = this.product.find(message)
+        console.log(this.currentProduct)
       });
   }
 

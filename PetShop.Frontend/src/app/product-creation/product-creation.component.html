@@ -1,27 +1,27 @@
-<div *ngIf="router.url ==='/admin'" style="text-align: center">
+<div *ngIf="router.url ==='/edit'" style="text-align: center">
   <mat-form-field>Name:
-    <input type="string" matInput [(ngModel)]="dtoi.pname">
+    <input type="string" matInput [(ngModel)]="currentProduct.pname">
   </mat-form-field>
   <mat-form-field>Price:
-    <input type="number" matInput [(ngModel)]="dtoi.price">
+    <input type="number" matInput [(ngModel)]="currentProduct.price">
   </mat-form-field>
   <mat-form-field>Description:
-    <input type="string" matInput [(ngModel)]="dtoi.description">
+    <input type="string" matInput [(ngModel)]="currentProduct.description">
   </mat-form-field>
   <mat-form-field>Image URL:
-    <input type="string" matInput [(ngModel)]="dtoi.imageUrl">
+    <input type="string" matInput [(ngModel)]="currentProduct.imageUrl">
   </mat-form-field>
   <mat-form-field>Rating:
-    <input type="number" matInput [(ngModel)]="dtoi.rating">
+    <input type="number" matInput [(ngModel)]="currentProduct.rating">
   </mat-form-field>
   <mat-form-field>Main Category:
-    <input type="number" matInput [(ngModel)]="dtoi.mainCategory">
+    <input type="number" matInput [(ngModel)]="currentProduct.mainCategory">
   </mat-form-field>
   <mat-form-field>Sub Category:
-    <input type="number" matInput [(ngModel)]="dtoi.subCategory">
+    <input type="number" matInput [(ngModel)]="currentProduct.subCategory">
   </mat-form-field>
   <mat-form-field>Brand:
-    <input type="number" matInput [(ngModel)]="dtoi.brand">
+    <input type="number" matInput [(ngModel)]="currentProduct.brand">
   </mat-form-field>
   <button mat-raised-button (click)="CreateProduct()">Create</button>
   <!--<div>

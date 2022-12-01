@@ -36,6 +36,7 @@ export class ProductListComponent implements OnInit{
   }
 
   async EditMode(id){
+    this.Service.requestProductEdit(id)
 
   }
 
