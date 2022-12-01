@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpService} from "../../services/http.service";
 import {dto} from "../../Entities/dto";
-import { appRoutingModule } from "../app.router";
+import {CommService} from "../../services/CommService";
+import {Router} from "@angular/router";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-product-creation',
@@ -14,13 +16,20 @@ export class ProductCreationComponent implements OnInit{
   sdesc: string;
   dtoi: any;
   productDeleteId: number;
+  private productEditSub: Subscription;
 
 
-  constructor(private http: HttpService) {
+  constructor(private http: HttpService, private Service: CommService, public router: Router) {
     this.sname = 0;
     this.sdesc = '';
     this.dtoi = dto;
     this.productDeleteId = 0;
+    this.productEditSub = this.Service.getProductListUpdateRequest().subscribe //Subscribes to get check for
+      (message => {
+        if (message === true){
+          this.UpdateList()
+        }
+      });
   }
 
   async ngOnInit() {
@@ -32,10 +41,16 @@ export class ProductCreationComponent implements OnInit{
     const result = await this.http.CreateProduct(this.dtoi);
     this.product.push(result);
     this.dtoi.specList = [];
+    this.UpdateList();
   }
+
 
   async DeleteProduct(id){
     const result = await this.http.DeleteProductByID(id)
     this.product.push(result);
+  }
+
+  async UpdateList(): Promise<void> {
+    this.Service.requestProductListUpdate(true);
   }
 }

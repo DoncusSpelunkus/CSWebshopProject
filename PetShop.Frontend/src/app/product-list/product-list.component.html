@@ -1,9 +1,7 @@
 <mat-card style="margin: 20px;text-align: center" *ngFor="let p of product">
   <mat-card-title>Name: {{p.name}}</mat-card-title>
-  <mat-card  *ngIf="router.url === '/admin'">Edit product</mat-card>
-  <mat-card  *ngIf="router.url === '/admin'">THIS IS ADMIN</mat-card>
-  <mat-card  *ngIf="router.url === '/admin'">THIS IS ADMIN</mat-card>
-  <mat-card  *ngIf="router.url === '/admin'">THIS IS ADMIN</mat-card>
+  <button mat-button *ngIf="router.url ==='/admin'" (click)="EditMode(p.id)">Select this product to edit</button>
+  <mat-card  *ngIf="router.url === '/admin'">Product ID: {{p.id}}</mat-card>
   <img mat-card-image src="{{p.imageUrl}}" alt="Image error">
   <mat-card-subtitle>Price: {{p.price}}</mat-card-subtitle>
 </mat-card>

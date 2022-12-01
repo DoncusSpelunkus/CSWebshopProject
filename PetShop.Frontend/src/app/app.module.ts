@@ -18,10 +18,10 @@ import { HeaderComponent } from './header/header.component';
 import {MatSidenavModule} from "@angular/material/sidenav";
 import { ProductCreationComponent } from './product-creation/product-creation.component';
 import { ProductListComponent } from './product-list/product-list.component';
-import { DeleteButtonComponent } from './delete-button/delete-button.component';
 import { HomeComponent } from './home/home.component';
 import { appRoutingModule } from './app.router';
-import { AdminComponent } from './admin/admin.component'
+import { AdminComponent } from './admin/admin.component';
+import { EditComponent } from './edit/edit.component'
 
 
 
@@ -32,9 +32,9 @@ import { AdminComponent } from './admin/admin.component'
     HeaderComponent,
     ProductCreationComponent,
     ProductListComponent,
-    DeleteButtonComponent,
     HomeComponent,
     AdminComponent,
+    EditComponent,
   ],
   imports: [
     BrowserModule,
