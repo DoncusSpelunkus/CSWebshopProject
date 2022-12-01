@@ -27,6 +27,8 @@ namespace Factory.Application.Interfaces
 
         public MainCategory GetMainCategoryByID(int mainCatId);
         
+        public MainCategory DeleteMainCategoryByID(int mainCatId);
+        
         public List<SubCategory> GetAllSubCategories();
 
         public SubCategory CreateSubCategory(SubCategory subCategory);
@@ -34,6 +36,8 @@ namespace Factory.Application.Interfaces
         public SubCategory UpdateSubCategory(SubCategory subCategory);
 
         public SubCategory GetSubCategoryByID(int subCatId);
+        
+        public SubCategory DeleteSubCategoryByID(int subCatId);
 
 
         public void RebuildDB();

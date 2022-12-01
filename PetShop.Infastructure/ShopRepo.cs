@@ -40,7 +40,7 @@ namespace Factory.Infastructure
         
         public Product DeleteProduct(int productID)
         {
-            Product product = GetProductByID(productID);
+            var product = GetProductByID(productID);
             _shopDbContext.ProductTable.Remove(product);
             _shopDbContext.SaveChanges();
             return product;
@@ -74,7 +74,15 @@ namespace Factory.Infastructure
         {
             return _shopDbContext.MainCategoryTable.FirstOrDefault(c => c.RefID == mainCatId);
         }
-        
+
+        public MainCategory DeleteMainCategoryByID(int mainCatId)
+        {
+            MainCategory mainCategory = GetMainCategoryByID(mainCatId);
+            _shopDbContext.MainCategoryTable.Remove(mainCategory);
+            _shopDbContext.SaveChanges();
+            return mainCategory;
+        }
+
         public List<SubCategory> GetAllSubCategories()
         {
             return _shopDbContext.SubCategoryTable.ToList();
@@ -97,6 +105,14 @@ namespace Factory.Infastructure
         public SubCategory GetSubCategoryByID(int subCatId)
         {
             return _shopDbContext.SubCategoryTable.FirstOrDefault(c => c.RefID == subCatId);
+        }
+
+        public SubCategory DeleteSubCategoryByID(int subCatId)
+        {
+            SubCategory subCategory = GetSubCategoryByID(subCatId);
+            _shopDbContext.MainCategoryTable.Remove(subCategory);
+            _shopDbContext.SaveChanges();
+            return subCategory;
         }
 
         public void RebuildDB()

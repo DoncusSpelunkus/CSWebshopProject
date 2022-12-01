@@ -83,6 +83,13 @@ namespace Factory.Application;
             return _productRepository.GetMainCategoryByID(mainCatId);
         }
 
+        public MainCategory DeleteMainCategoryByID(int mainCatId)
+        {
+            if (mainCatId == null)
+                throw new ValidationException("ID is invalid");
+            return _productRepository.DeleteMainCategoryByID(mainCatId);
+        }
+
         public List<SubCategory> GetAllSubCategories()
         {
             return _productRepository.GetAllSubCategories();
@@ -104,9 +111,14 @@ namespace Factory.Application;
                 throw new ValidationException("ID is invalid");
             return _productRepository.GetSubCategoryByID(subCatId);
         }
-
-
-
+        
+        public SubCategory DeleteSubCategoryByID(int subCatId)
+        {
+            if (subCatId == null)
+                throw new ValidationException("ID is invalid");
+            return _productRepository.DeleteSubCategoryByID(subCatId);
+        }
+        
         public void RebuildDB()
         {
             _productRepository.RebuildDB();
