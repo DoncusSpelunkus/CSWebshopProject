@@ -27,9 +27,10 @@ namespace Factory.Infastructure
             modelBuilder.Entity<Product>()
                 .HasKey(c => new { ManFacId = c.ID });
             modelBuilder.Entity<MainCategory>()
-                .HasKey(c => c.RefID);
+                .HasKey(c => new { ManFacId = c.RefID });
             modelBuilder.Entity<SubCategory>()
-                .HasKey(c=>c.RefID);
+                .HasKey(c => new { ManFacId = c.RefID });
+            
             //Making foreign keys for the categories. The product stores a single category but the categories store multiple products
             modelBuilder.Entity<Product>()
                 .HasOne<MainCategory>(p => p.MainCategoryObj)
@@ -39,6 +40,8 @@ namespace Factory.Infastructure
                 .HasOne<SubCategory>(p => p.SubCategoryObj)
                 .WithMany(c =>c.ProdList)
                 .HasForeignKey(p=> p.SubCategoryObj);
+            modelBuilder.Entity<Product>()
+                .Ignore(p => p.MainCategoryObj);
         }
 
         public DbSet<Product> ProductTable { get; set; }

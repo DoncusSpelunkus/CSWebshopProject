@@ -25,11 +25,15 @@ namespace Factory.Application.Interfaces
         
         public MainCategory UpdateMainCategory(MainCategory mainCategory);
 
+        public MainCategory GetMainCategoryByID(int mainCatId);
+        
         public List<SubCategory> GetAllSubCategories();
 
         public SubCategory CreateSubCategory(SubCategory subCategory);
 
         public SubCategory UpdateSubCategory(SubCategory subCategory);
+
+        public SubCategory GetSubCategoryByID(int subCatId);
 
 
         public void RebuildDB();

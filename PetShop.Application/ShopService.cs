@@ -75,7 +75,14 @@ namespace Factory.Application;
         {
             return _productRepository.UpdateMainCategory(mainCategory);
         }
-        
+
+        public MainCategory GetMainCategoryByID(int mainCatId)
+        {
+            if (mainCatId <= 0)
+                throw new ValidationException("ID is invalid");
+            return _productRepository.GetMainCategoryByID(mainCatId);
+        }
+
         public List<SubCategory> GetAllSubCategories()
         {
             return _productRepository.GetAllSubCategories();
@@ -86,10 +93,19 @@ namespace Factory.Application;
             return _productRepository.CreateSubCategory(subCategory);
         }
 
-        public MainCategory UpdateSubCategory(SubCategory subCategory)
+        public SubCategory UpdateSubCategory(SubCategory subCategory)
         {
             return _productRepository.UpdateSubCategory(subCategory);
         }
+
+        public SubCategory GetSubCategoryByID(int subCatId)
+        {
+            if (subCatId <= 0)
+                throw new ValidationException("ID is invalid");
+            return _productRepository.GetSubCategoryByID(subCatId);
+        }
+
+
 
         public void RebuildDB()
         {

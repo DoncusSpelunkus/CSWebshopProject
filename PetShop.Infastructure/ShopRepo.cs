@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Xml.Schema;
 using Factory.Application.Interfaces;
 using Factory.Domain;
+using Microsoft.EntityFrameworkCore;
 
 namespace Factory.Infastructure
 {
@@ -53,7 +54,7 @@ namespace Factory.Infastructure
 
         public List<MainCategory> GetAllMainCategories()
         {
-            return _shopDbContext.MainCategoryTable.ToList();
+            return _shopDbContext.MainCategoryTable.Include(c=> c.ProdList).ToList();
         }
         
         public MainCategory CreateMainCategory(MainCategory mainCategory)
@@ -68,6 +69,10 @@ namespace Factory.Infastructure
             _shopDbContext.MainCategoryTable.Update(mainCategory);
             _shopDbContext.SaveChanges();
             return mainCategory;
+        }
+        public MainCategory GetMainCategoryByID(int mainCatId)
+        {
+            return _shopDbContext.MainCategoryTable.FirstOrDefault(c => c.RefID == mainCatId);
         }
         
         public List<SubCategory> GetAllSubCategories()
@@ -87,6 +92,11 @@ namespace Factory.Infastructure
             _shopDbContext.MainCategoryTable.Update(subCategory);
             _shopDbContext.SaveChanges();
             return subCategory;
+        }
+        
+        public SubCategory GetSubCategoryByID(int subCatId)
+        {
+            return _shopDbContext.SubCategoryTable.FirstOrDefault(c => c.RefID == subCatId);
         }
 
         public void RebuildDB()
