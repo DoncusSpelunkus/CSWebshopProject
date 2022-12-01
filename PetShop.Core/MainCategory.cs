@@ -1,4 +1,6 @@
-﻿namespace Factory.Domain;
+﻿using PetShop.Domain;
+
+namespace Factory.Domain;
 
 public class MainCategory
 {

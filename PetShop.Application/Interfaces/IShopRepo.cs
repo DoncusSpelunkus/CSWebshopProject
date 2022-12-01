@@ -1,4 +1,5 @@
-﻿using PetShop.Domain;
+﻿using Factory.Domain;
+using PetShop.Domain;
 
 namespace PetShop.Application.Interfaces
 {
