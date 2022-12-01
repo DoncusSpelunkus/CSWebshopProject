@@ -5,50 +5,52 @@ namespace PetShop.Infastructure
 {
     public class ShopRepo : IShopRepo
     {
-        private ShopDbContext _shopDbContext;
+        private DBContext _dbContext;
 
-        public ShopRepo(ShopDbContext shopDbContext)
+        public ShopRepo(DBContext dbContext)
         {
-            _shopDbContext = shopDbContext;
+            _dbContext = dbContext;
         }
 
         public List<Product> GetAllProducts()
         {
-            return _shopDbContext.ProductTable.ToList();
+            return _dbContext.ProductTable.ToList();
         }
 
         public Product CreateProduct(Product product)
         {
-            _shopDbContext.ProductTable.Add(product);
-            _shopDbContext.SaveChanges();
+            _dbContext.ProductTable.Add(product);
+            _dbContext.SaveChanges();
             return product;
         }
 
         public Product UpdateProduct(Product product)
         {
-            _shopDbContext.ProductTable.Update(product);
-            _shopDbContext.SaveChanges();
+            _dbContext.ProductTable.Update(product);
+            _dbContext.SaveChanges();
             return product;
         }
         
         public Product DeleteProduct(int productID)
         {
             Product product = GetProductByID(productID);
-            _shopDbContext.ProductTable.Remove(product);
-            _shopDbContext.SaveChanges();
+            _dbContext.ProductTable.Remove(product);
+            _dbContext.SaveChanges();
             return product;
         }
         
 
         public Product GetProductByID(int productId)
         {
-            return _shopDbContext.ProductTable.FirstOrDefault(p => p.ID == productId);
+            return _dbContext.ProductTable.FirstOrDefault(p => p.ID == productId);
         }
 
         public void RebuildDB()
         {
-            _shopDbContext.Database.EnsureDeleted();
-            _shopDbContext.Database.EnsureCreated();
+            _dbContext.Database.EnsureDeleted();
+            _dbContext.Database.EnsureCreated();
+            
+
         }
     }
 }
