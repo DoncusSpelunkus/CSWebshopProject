@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpService} from "../services/http.service";
 import {appValuePair} from "./valuePair";
+import {MatSelectChange} from "@angular/material/select";
 
 // @ts-ignore
 @Component({
@@ -21,6 +22,7 @@ export class AppComponent implements OnInit{
   product: any;
   sname: number;
   sdesc: string;
+  specNames: any;
   specList: Array<appValuePair> = [];
 
 
@@ -34,7 +36,6 @@ export class AppComponent implements OnInit{
   async ngOnInit() {
     const product = await this.http.GetProduct();
     this.product = product;
-
   }
 
   async CreateProduct(){
@@ -63,5 +64,9 @@ export class AppComponent implements OnInit{
   async AttachSpecs(spec: number, name: string){
     let valuePair = new appValuePair(spec,name);
     this.specList.push(valuePair)
+  }
+
+  async ChangeDrop($event: MatSelectChange){
+
   }
 }

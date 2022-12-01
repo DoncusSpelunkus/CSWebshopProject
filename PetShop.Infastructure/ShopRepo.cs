@@ -1,124 +1,129 @@
-﻿using System;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Schema;
-using Factory.Application.Interfaces;
+using PetShop.Application.Interfaces;
 using Factory.Domain;
 using Microsoft.EntityFrameworkCore;
+ using PetShop.Application.Interfaces;
+using PetShop.Domain;
 
-namespace Factory.Infastructure
+namespace PetShop.Infastructure
 {
     public class ShopRepo : IShopRepo
     {
-        private ShopDbContext _shopDbContext;
+        private DBContext _dbContext;
 
-        public ShopRepo(ShopDbContext shopDbContext)
+        public ShopRepo(DBContext dbContext)
         {
-            _shopDbContext = shopDbContext;
+            _dbContext = dbContext;
         }
 
         public List<Product> GetAllProducts()
         {
-            return _shopDbContext.ProductTable.ToList();
+            return _dbContext.ProductTable.ToList();
         }
 
         public Product CreateProduct(Product product)
         {
-            _shopDbContext.ProductTable.Add(product);
-            _shopDbContext.SaveChanges();
+            _dbContext.ProductTable.Add(product);
+            _dbContext.SaveChanges();
             return product;
         }
 
         public Product UpdateProduct(Product product)
         {
-            _shopDbContext.ProductTable.Update(product);
-            _shopDbContext.SaveChanges();
+            _dbContext.ProductTable.Update(product);
+            _dbContext.SaveChanges();
             return product;
         }
         
         public Product DeleteProduct(int productID)
         {
-            var product = GetProductByID(productID);
-            _shopDbContext.ProductTable.Remove(product);
-            _shopDbContext.SaveChanges();
+            Product product = GetProductByID(productID);
+            _dbContext.ProductTable.Remove(product);
+            _dbContext.SaveChanges();
             return product;
         }
         
 
         public Product GetProductByID(int productId)
         {
-            return _shopDbContext.ProductTable.FirstOrDefault(p => p.ID == productId);
+            return _dbContext.ProductTable.FirstOrDefault(p => p.ID == productId);
         }
 
         public List<MainCategory> GetAllMainCategories()
         {
-            return _shopDbContext.MainCategoryTable.Include(c=> c.ProdList).ToList();
+            return _dbContext.MainCategoryTable.Include(c=> c.ProdList).ToList();
         }
         
         public MainCategory CreateMainCategory(MainCategory mainCategory)
         {
-            _shopDbContext.MainCategoryTable.Add(mainCategory);
-            _shopDbContext.SaveChanges();
+            _dbContext.MainCategoryTable.Add(mainCategory);
+            _dbContext.SaveChanges();
             return mainCategory;
         }
 
         public MainCategory UpdateMainCategory(MainCategory mainCategory)
         {
-            _shopDbContext.MainCategoryTable.Update(mainCategory);
-            _shopDbContext.SaveChanges();
+            _dbContext.MainCategoryTable.Update(mainCategory);
+            _dbContext.SaveChanges();
             return mainCategory;
         }
         public MainCategory GetMainCategoryByID(int mainCatId)
         {
-            return _shopDbContext.MainCategoryTable.FirstOrDefault(c => c.RefID == mainCatId);
+            return _dbContext.MainCategoryTable.FirstOrDefault(c => c.RefID == mainCatId);
         }
 
         public MainCategory DeleteMainCategoryByID(int mainCatId)
         {
             MainCategory mainCategory = GetMainCategoryByID(mainCatId);
-            _shopDbContext.MainCategoryTable.Remove(mainCategory);
-            _shopDbContext.SaveChanges();
+            _dbContext.MainCategoryTable.Remove(mainCategory);
+            _dbContext.SaveChanges();
             return mainCategory;
         }
 
         public List<SubCategory> GetAllSubCategories()
         {
-            return _shopDbContext.SubCategoryTable.ToList();
+            return _dbContext.SubCategoryTable.ToList();
         }
 
         public SubCategory CreateSubCategory(SubCategory subCategory)
         {
-            _shopDbContext.MainCategoryTable.Add(subCategory);
-            _shopDbContext.SaveChanges();
+            _dbContext.MainCategoryTable.Add(subCategory);
+            _dbContext.SaveChanges();
             return subCategory;
         }
         
         public SubCategory UpdateSubCategory(SubCategory subCategory)
         {
-            _shopDbContext.MainCategoryTable.Update(subCategory);
-            _shopDbContext.SaveChanges();
+            _dbContext.MainCategoryTable.Update(subCategory);
+            _dbContext.SaveChanges();
             return subCategory;
         }
         
         public SubCategory GetSubCategoryByID(int subCatId)
         {
-            return _shopDbContext.SubCategoryTable.FirstOrDefault(c => c.RefID == subCatId);
+            return _dbContext.SubCategoryTable.FirstOrDefault(c => c.RefID == subCatId);
         }
 
         public SubCategory DeleteSubCategoryByID(int subCatId)
         {
             SubCategory subCategory = GetSubCategoryByID(subCatId);
-            _shopDbContext.MainCategoryTable.Remove(subCategory);
-            _shopDbContext.SaveChanges();
+            _dbContext.MainCategoryTable.Remove(subCategory);
+            _dbContext.SaveChanges();
             return subCategory;
         }
 
         public void RebuildDB()
         {
-            _shopDbContext.Database.EnsureDeleted();
-            _shopDbContext.Database.EnsureCreated();
+            _dbContext.Database.EnsureDeleted();
+            _dbContext.Database.EnsureCreated();
+            
+
         }
     }
 }

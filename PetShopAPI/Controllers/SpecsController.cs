@@ -2,37 +2,37 @@
 using AutoMapper;
 using PetShop.Application.Interfaces;
 using PetShop.Application.PostProdDTO;
-using PetShop.Application.Validators;
 using PetShop.Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using PetShop.Application.Validators;
 
 namespace PetShopApi.Controllers
 {
     [ApiController]
-    [Route("[Controller]")]
-    public class ShopController : ControllerBase
-    { 
-        private ProdValidator _productValidator;
+    [Route("specs/[Controller]")]
+    public class SpecsController : ControllerBase
+    {
+        private SpecValidator _specsValidator;
         private IMapper _mapper;
-        private IShopService _shopService;
-        public ShopController(IShopService service, IMapper mapper)
+        private ISpecService _specService;
+        public SpecsController(ISpecService service, IMapper mapper)
         {
-            _shopService = service;
-            _productValidator = new ProdValidator();
+            _specService = service;
+            _specsValidator = new SpecValidator();
             _mapper = mapper;
         }
 
         [HttpGet]
-        public ActionResult<List<Product>> GetProduct()
+        public ActionResult<List<Specs>> GetAllSpecs()
         {
             try
             {
-                return Ok(_shopService.GetAllProducts());
+                return Ok(_specService.GetAllSpecs());
             }
             catch (KeyNotFoundException e)
             {
-                return NotFound("No product found");
+                return NotFound("No specification found");
             }
             catch (Exception e)
             {
@@ -40,17 +40,17 @@ namespace PetShopApi.Controllers
             }
         }
         
-        [HttpGet("{productID}")]
+        [HttpGet("{specID}")]
         
-        public ActionResult<Product> GetProductById(int productID)
+        public ActionResult<Specs> GetSpecById(int specID)
         {
             try
             {
-                return Ok(_shopService.GetProductByID(productID));
+                return Ok(_specService.GetSpecByID(specID));
             }
             catch (KeyNotFoundException e)
             {
-                return NotFound("No product found at ID " + productID);
+                return NotFound("No specification found at ID " + specID);
             }
             catch (Exception e)
             {
@@ -59,12 +59,12 @@ namespace PetShopApi.Controllers
         }
         
         [HttpPost]
-        public ActionResult<Product> CreateProduct(ProdDTO dto)
+        public ActionResult<Specs> CreateSpecs(SpecDTO dto)
         {
             try
             {
-                var result = _shopService.CreateProduct(dto);
-                return Created("shop/" + result.ID, result);
+                var result = _specService.CreateSpecs(dto);
+                return Created("Spec/" + result.ID, result);
             }
             catch (ValidationException e)
             {
@@ -77,17 +77,17 @@ namespace PetShopApi.Controllers
         }
 
         [HttpPut]
-        [Route("{productID}")]
+        [Route("{specID}")]
 
-        public ActionResult<Product> UpdateProduct([FromRoute] int productID, [FromBody] Product product)
+        public ActionResult<Specs> UpdateSpecs([FromRoute] int specID, [FromBody] Specs specs)
         {
             try
             {
-                return Ok(_shopService.UpdateProduct(productID, product));
+                return Ok(_specService.UpdateSpecs(specID, specs));
             }
             catch (KeyNotFoundException e)
             {
-                return NotFound("No product found at ID " + productID);
+                return NotFound("No Specification found at ID " + specID);
             }
             catch (Exception e)
             {
@@ -95,33 +95,23 @@ namespace PetShopApi.Controllers
             }
         }
 
-        [HttpDelete("{productID}")]
+        [HttpDelete("{specID}")]
 
-        public ActionResult<Product> DeleteProductByID(int productID)
+        public ActionResult<Specs> DeleteSpecsById(int specID)
         {
             try
             {
-                return Ok(_shopService.DeleteProduct(productID));
+                return Ok(_specService.DeleteSpecsById(specID));
             }
             catch (KeyNotFoundException e)
             {
-                return NotFound("No product found at ID " + productID);
+                return NotFound("No specification found at ID " + specID);
             }
             catch (Exception e)
             {
                 return StatusCode(500, e.ToString());
             }
         }
-        
-        
-        [AllowAnonymous]
-        [HttpGet]
-        [Route("RebuildDB")]
-        public void RebuildDB()
-        {
-            _shopService.RebuildDB();
-        }
-        
         
     }
     
