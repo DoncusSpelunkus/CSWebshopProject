@@ -23,11 +23,11 @@
   <mat-form-field>Brand:
     <input type="number" matInput [(ngModel)]="product.brand">
   </mat-form-field>
-  <button mat-raised-button (click)="CreateProduct()">Create</button>
+  <button mat-raised-button (click)="createProduct()">Create</button>
   <div style="text-align: center">
     <mat-form-field>Product ID:
       <input type="number" matInput [(ngModel)]="productDeleteId">
     </mat-form-field>
-    <button mat-button (click)="DeleteProduct(productDeleteId)">Delete product</button>
+    <button mat-button (click)="deleteProduct(productDeleteId)">Delete product</button>
   </div>
 </div>
