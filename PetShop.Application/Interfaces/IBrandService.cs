@@ -1,6 +1,6 @@
 ﻿namespace PetShop.Application.Interfaces;
 
-public interface IBrandRepo
+public interface IBrandService
 {
     
 }
