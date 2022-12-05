@@ -14,6 +14,7 @@ namespace PetShop.Infastructure
 
         public List<Product> GetAllProducts()
         {
+            
             return _dbContext.ProductTable.ToList();
         }
 
@@ -27,6 +28,12 @@ namespace PetShop.Infastructure
 
         public Product UpdateProduct(Product product)
         {
+            foreach (var productSpecsDescription in product.SpecsDescriptions)
+            {
+                _dbContext.SpecsDescriptionsTable.Update(productSpecsDescription);
+            }
+                
+           
             _dbContext.ProductTable.Update(product);
             _dbContext.SaveChanges();
             return product;
@@ -35,6 +42,10 @@ namespace PetShop.Infastructure
         public Product DeleteProduct(int productID)
         {
             Product product = GetProductByID(productID);
+            foreach (var productSpecsDescription in product.SpecsDescriptions)
+            {
+                _dbContext.SpecsDescriptionsTable.Remove(productSpecsDescription);
+            }
             _dbContext.ProductTable.Remove(product);
             _dbContext.SaveChanges();
             return product;

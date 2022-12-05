@@ -30,27 +30,29 @@ namespace PetShop.Infastructure
                 .HasOne(sd => sd.Product)
                 .WithMany(p => p.SpecsDescriptions)
                 .HasForeignKey(sd => sd.ProductId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.ClientCascade);
             // one specs has many specsDescription, and one specsDescription has one specs
             modelBuilder.Entity<SpecsDescription>()
                 .HasOne(sd => sd.Specs)
                 .WithMany(s => s.SpecsDescriptions)
                 .HasForeignKey(sd => sd.SpecsId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.ClientCascade);
             
             /*
              * a product has many specsDescription and a specsDescription has one product
              */
             modelBuilder.Entity<Product>()
                 .HasMany(p => p.SpecsDescriptions)
-                .WithOne(sd => sd.Product);
+                .WithOne(sd => sd.Product).OnDelete(DeleteBehavior.ClientCascade);
             /*
             * a specs has many specsDescription and a specsDescription has one specs
             */
             modelBuilder.Entity<Specs>()
                 .HasMany(s => s.SpecsDescriptions)
-                .WithOne(sd => sd.Specs);
-            
+                .WithOne(sd => sd.Specs).OnDelete(DeleteBehavior.ClientCascade);
+
+
+
 
 
 
