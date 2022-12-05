@@ -12,7 +12,7 @@ namespace PetShopApi.Controllers
     [ApiController]
     [Route("[Controller]")]
     public class ShopController : ControllerBase
-    {
+    { 
         private ProdValidator _productValidator;
         private IMapper _mapper;
         private IShopService _shopService;
@@ -61,6 +61,7 @@ namespace PetShopApi.Controllers
         [HttpPost]
         public ActionResult<Product> CreateProduct(ProdDTO dto)
         {
+            Console.WriteLine("hit");
             try
             {
                 var result = _shopService.CreateProduct(dto);

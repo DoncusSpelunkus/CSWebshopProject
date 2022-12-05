@@ -16,12 +16,12 @@ export class HttpService {
     customAxios.interceptors.response.use(
       response => {
       if(response.status == 201) {
-        this.matSnackbar.open("Great success")
+        this.matSnackbar.open("Great success", "x", {duration: 500})
       }
       return response;
     }, rejected => {
       if(rejected.response.status>=400 && rejected.response.status <= 500) {
-        matSnackbar.open(rejected.response.data);
+        matSnackbar.open(rejected.response.data, "x", {duration: 500});
       }
         catchError(rejected);
     }
@@ -33,21 +33,23 @@ export class HttpService {
     return httpResponse.data;
   }
 
-  async CreateProduct(dto: { name: string;
-    price: number;
-    description: string;
-    imageUrl: string;
-    rating: number;
-    specs: { [n: number]: string } | undefined;
-    mainCategory: number;
-    subCategory: number;
-    brand: number; }) {
+  async CreateProduct(dtoi){
+    let dto = {
+      name: dtoi.pname,
+      price: dtoi.price,
+      description: dtoi.description,
+      imageUrl: dtoi.imageUrl,
+      rating: dtoi.rating,
+      mainCategory: dtoi.mainCategory,
+      subCategory: dtoi.subCategory,
+      brand: dtoi.brand
+    }
     const httpResult = await customAxios.post('Shop', dto);
     return httpResult.data;
   }
 
-  async DeleteProductByID(manFacId: any) {
-    const httpResult = await customAxios.delete('Shop/' + manFacId);
+  async DeleteProductByID(id: any) {
+    const httpResult = await customAxios.delete('Shop/' + id);
     return httpResult.data;
   }
 }
