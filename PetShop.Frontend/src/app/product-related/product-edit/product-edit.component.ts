@@ -9,7 +9,7 @@ import { Router } from "@angular/router";
   templateUrl: './product-edit.component.html',
   styleUrls: ['./product-edit.component.scss']
 })
-export class ProductEditComponent implements OnInit {
+export class ProductEditComponent implements OnInit { // This component tend to the editing of products
   product: any;
 
   constructor(private Aroute: ActivatedRoute, private http: ProductService, public route: Router) {

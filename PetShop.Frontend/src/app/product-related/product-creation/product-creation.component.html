@@ -24,6 +24,19 @@
   <mat-form-field>Brand:
     <input type="number" matInput [(ngModel)]="product.brand">
   </mat-form-field>
+  <hr>
+  <h3>Add specifications</h3>
+  <mat-form-field>Specification type:
+    <mat-select [(ngModel)]="selected" name="Specification">
+      <mat-option *ngFor="let specifications of specNames" [value]="specifications.id">
+        {{specifications.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>Specification description:
+    <input type="string" matInput [(ngModel)]="sdesc">
+  </mat-form-field>
+  <button mat-raised-button (click)="addTooSpecList(selected, sdesc)">Create</button>
   <button mat-raised-button (click)="createProduct()">Create</button>
   <hr>
   <div style="text-align: center">

@@ -10,7 +10,7 @@ using PetShop.Application.Validators;
 namespace PetShopApi.Controllers
 {
     [ApiController]
-    [Route("specs/[Controller]")]
+    [Route("[Controller]")]
     public class SpecsController : ControllerBase
     {
         private SpecValidator _specsValidator;

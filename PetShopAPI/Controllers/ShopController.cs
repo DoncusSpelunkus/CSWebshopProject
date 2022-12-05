@@ -11,12 +11,12 @@ namespace PetShopApi.Controllers
 {
     [ApiController]
     [Route("[Controller]")]
-    public class ShopController : ControllerBase
+    public class ProductController : ControllerBase
     { 
         private ProdValidator _productValidator;
         private IMapper _mapper;
         private IShopService _shopService;
-        public ShopController(IShopService service, IMapper mapper)
+        public ProductController(IShopService service, IMapper mapper)
         {
             _shopService = service;
             _productValidator = new ProdValidator();

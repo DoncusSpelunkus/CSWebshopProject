@@ -8,5 +8,5 @@ export class Product {
   mainCategory: number = 0;
   subCategory: number = 0;
   brand: number = 0;
-  specNames: any;
+  specList: any[] = [];
 }

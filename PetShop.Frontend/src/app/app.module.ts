@@ -25,6 +25,8 @@ import { ProductEditComponent } from './product-related/product-edit/product-edi
 import { AgGridModule } from "ag-grid-angular";
 import { CategoryCreationComponent } from './category-related/category-creation/category-creation.component';
 import {MatTabsModule} from "@angular/material/tabs";
+import { CategoryEditComponent } from './category-related/category-edit/category-edit.component';
+import { CategoryListComponent } from './category-related/category-list/category-list.component';
 
 
 
@@ -39,6 +41,8 @@ import {MatTabsModule} from "@angular/material/tabs";
     AdminComponent,
     ProductEditComponent,
     CategoryCreationComponent,
+    CategoryEditComponent,
+    CategoryListComponent,
 
   ],
   imports: [

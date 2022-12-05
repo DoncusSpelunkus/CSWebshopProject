@@ -13,7 +13,7 @@ export const customAxios = axios.create({
   providedIn: 'root'
 })
 export class ProductService {
-  apiUrl = 'https://localhost:7143/shop';
+  apiUrl = 'https://localhost:7143/Product';
 
   constructor(private matSnackbar: MatSnackBar, private http: HttpClient) {
     customAxios.interceptors.response.use(
