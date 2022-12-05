@@ -43,6 +43,8 @@ namespace PetShop.Infastructure
                 .HasForeignKey(p => p.SubCategoryObj);
             modelBuilder.Entity<Product>()
                 .Ignore(p => p.MainCategoryObj);
+            modelBuilder.Entity<Product>()
+                .Ignore(p => p.SubCategoryObj);
             modelBuilder.Entity<Specs>()
                 .Property(s => s.ID)
                 .ValueGeneratedOnAdd();
