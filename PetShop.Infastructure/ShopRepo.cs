@@ -144,14 +144,14 @@ namespace PetShop.Infastructure
 
         public SubCategory CreateSubCategory(SubCategory subCategory)
         {
-            _dbContext.MainCategoryTable.Add(subCategory);
+            _dbContext.SubCategoryTable.Add(subCategory);
             _dbContext.SaveChanges();
             return subCategory;
         }
         
         public SubCategory UpdateSubCategory(SubCategory subCategory)
         {
-            _dbContext.MainCategoryTable.Update(subCategory);
+            _dbContext.SubCategoryTable.Update(subCategory);
             _dbContext.SaveChanges();
             return subCategory;
         }
@@ -164,7 +164,7 @@ namespace PetShop.Infastructure
         public SubCategory DeleteSubCategoryByID(int subCatId)
         {
             SubCategory subCategory = GetSubCategoryByID(subCatId);
-            _dbContext.MainCategoryTable.Remove(subCategory);
+            _dbContext.SubCategoryTable.Remove(subCategory);
             _dbContext.SaveChanges();
             return subCategory;
         }
