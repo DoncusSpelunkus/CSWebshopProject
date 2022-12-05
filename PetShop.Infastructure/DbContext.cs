@@ -18,6 +18,22 @@ namespace PetShop.Infastructure
             modelBuilder.Entity<Specs>()
                 .Property(s => s.ID)
                 .ValueGeneratedOnAdd();
+            modelBuilder.Entity<SpecsDescription>()
+                .Property(sd => sd.ID)
+                .ValueGeneratedOnAdd();
+
+
+            modelBuilder.Entity<SpecsDescription>()
+                .HasOne(sd => sd.Product)
+                .WithMany(p => p.SpecsDescriptions)
+                .HasForeignKey(sd => sd.ProductId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<SpecsDescription>()
+                .HasOne(sd => sd.Specs)
+                .WithMany(s => s.SpecsDescriptions)
+                .HasForeignKey(sd => sd.SpecsId)
+                .OnDelete(DeleteBehavior.Cascade);
 
         }
 

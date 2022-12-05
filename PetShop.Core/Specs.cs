@@ -7,6 +7,8 @@ public class Specs
     [Key]
     public int ID { get; set; }
     [MaxLength(256)]
-    public string SpecName { get; set; }    
+    public string SpecName { get; set; }
+
+    public List<SpecsDescription>? SpecsDescriptions { get; set; }
 
 }
