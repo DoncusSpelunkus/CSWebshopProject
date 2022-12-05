@@ -362,3 +362,11 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 PetShopAPI/db.db
+PetShopAPI/db.db-shm
+PetShopAPI/db.db-wal
+PetShopAPI/db.db-wal
+PetShopAPI/db.db-shm
+PetShopAPI/db.db
+PetShopAPI/db.db-wal
+PetShopAPI/db.db-shm
+PetShopAPI/db.db

@@ -1,0 +1,94 @@
+<div *ngIf="router.url ==='/edit'" style="text-align: center">
+  <mat-form-field>Name:
+    <input type="string" matInput [(ngModel)]="currentProduct.pname">
+  </mat-form-field>
+  <mat-form-field>Price:
+    <input type="number" matInput [(ngModel)]="currentProduct.price">
+  </mat-form-field>
+  <mat-form-field>Description:
+    <input type="string" matInput [(ngModel)]="currentProduct.description">
+  </mat-form-field>
+  <mat-form-field>Image URL:
+    <input type="string" matInput [(ngModel)]="currentProduct.imageUrl">
+  </mat-form-field>
+  <mat-form-field>Rating:
+    <input type="number" matInput [(ngModel)]="currentProduct.rating">
+  </mat-form-field>
+  <mat-form-field>Main Category:
+    <input type="number" matInput [(ngModel)]="currentProduct.mainCategory">
+  </mat-form-field>
+  <mat-form-field>Sub Category:
+    <input type="number" matInput [(ngModel)]="currentProduct.subCategory">
+  </mat-form-field>
+  <mat-form-field>Brand:
+    <input type="number" matInput [(ngModel)]="currentProduct.brand">
+  </mat-form-field>
+  <button mat-raised-button (click)="CreateProduct()">Create</button>
+  <!--<div>
+    <mat-select (selectionChange)="ChangeDrop($event)" placeholder="Language">
+      <mat-option *ngFor="let specName of specNames" [value]="specName">
+        {{specName.}}
+      </mat-option>
+    </mat-select>
+    <mat-form-field>Specification description:
+      <input type="string" matInput [(ngModel)]="sdesc">
+    </mat-form-field>
+    <mat-card-actions>
+    <button mat-button (click)="AttachSpecs(s, sdesc)">AddSpec</button>
+  </mat-card-actions>
+  </div>-->
+  <div style="text-align: center">
+    <mat-form-field>Product ID:
+      <input type="number" matInput [(ngModel)]="productDeleteId">
+    </mat-form-field>
+    <button mat-button (click)="DeleteProduct(productDeleteId)">Delete product</button>
+  </div>
+</div>
+
+<div style="text-align: center">
+  <mat-form-field>Name:
+    <input type="string" matInput [(ngModel)]="dtoi.pname">
+  </mat-form-field>
+  <mat-form-field>Price:
+    <input type="number" matInput [(ngModel)]="dtoi.price">
+  </mat-form-field>
+  <mat-form-field>Description:
+    <input type="string" matInput [(ngModel)]="dtoi.description">
+  </mat-form-field>
+  <mat-form-field>Image URL:
+    <input type="string" matInput [(ngModel)]="dtoi.imageUrl">
+  </mat-form-field>
+  <mat-form-field>Rating:
+    <input type="number" matInput [(ngModel)]="dtoi.rating">
+  </mat-form-field>
+  <mat-form-field>Main Category:
+    <input type="number" matInput [(ngModel)]="dtoi.mainCategory">
+  </mat-form-field>
+  <mat-form-field>Sub Category:
+    <input type="number" matInput [(ngModel)]="dtoi.subCategory">
+  </mat-form-field>
+  <mat-form-field>Brand:
+    <input type="number" matInput [(ngModel)]="dtoi.brand">
+  </mat-form-field>
+  <button mat-raised-button (click)="CreateProduct()">Create</button>
+  <!--<div>
+    <mat-select (selectionChange)="ChangeDrop($event)" placeholder="Language">
+      <mat-option *ngFor="let specName of specNames" [value]="specName">
+        {{specName.}}
+      </mat-option>
+    </mat-select>
+    <mat-form-field>Specification description:
+      <input type="string" matInput [(ngModel)]="sdesc">
+    </mat-form-field>
+    <mat-card-actions>
+    <button mat-button (click)="AttachSpecs(s, sdesc)">AddSpec</button>
+  </mat-card-actions>
+  </div>-->
+  <div style="text-align: center">
+    <mat-form-field>Product ID:
+      <input type="number" matInput [(ngModel)]="productDeleteId">
+    </mat-form-field>
+    <button mat-button (click)="DeleteProduct(productDeleteId)">Delete product</button>
+  </div>
+</div>
+

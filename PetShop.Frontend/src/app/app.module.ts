@@ -14,14 +14,32 @@ import {Overlay} from "@angular/cdk/overlay";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatTableModule} from "@angular/material/table";
 import {MatSelectModule} from "@angular/material/select";
+import { HeaderComponent } from './header/header.component';
+import {MatSidenavModule} from "@angular/material/sidenav";
+import { ProductCreationComponent } from './product-creation/product-creation.component';
+import { ProductListComponent } from './product-list/product-list.component';
+import { HomeComponent } from './home/home.component';
+import { appRoutingModule } from './app.router';
+import { AdminComponent } from './admin/admin.component';
+import { EditComponent } from './edit/edit.component'
+
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ProductCreationComponent,
+    HeaderComponent,
+    ProductCreationComponent,
+    ProductListComponent,
+    HomeComponent,
+    AdminComponent,
+    EditComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    appRoutingModule,
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
@@ -30,7 +48,8 @@ import {MatSelectModule} from "@angular/material/select";
     MatListModule,
     MatTooltipModule,
     MatTableModule,
-    MatSelectModule
+    MatSelectModule,
+    MatSidenavModule
   ],
   providers: [MatSnackBar, Overlay],
   bootstrap: [AppComponent]

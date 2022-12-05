@@ -14,6 +14,7 @@ namespace PetShop.Domain
         public string Description { get; set; }
         public string ImageUrl { get; set; }
         public double Rating { get; set; }
+
         //public List<KeyValuePair<string,string>> Specs{ get; set; }
         public MainCategory MainCategoryObj { get; set; }
         public SubCategory SubCategoryObj { get; set; }
@@ -23,7 +24,11 @@ namespace PetShop.Domain
          * 
          */
         //private List<Specs> _specsList { get; set; }
+        public List<SpecsDescription> SpecsDescriptions { get; set; }
+        public int MainCategory { get; set; }
+        public int SubCategory { get; set; }
         public int Brand { get; set; }
+        
 
     }
 }
