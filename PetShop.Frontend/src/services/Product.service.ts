@@ -66,9 +66,8 @@ export class ProductService {
     return this.http.put<Product>(this.apiUrl+'/'+product.id, dto)
   }
 
-  async DeleteProductByID(id: any) {
-    const httpResult = await customAxios.delete('Shop/' + id);
-    return httpResult.data;
+  DeleteProductByID(id: any): Observable<Product> {
+    return this.http.delete<Product>(this.apiUrl+'/' + id)
   }
 
   GetProductByID(id: number): Observable<Product> {

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ProductService} from "../../services/Product.service";
 import {Router} from "@angular/router";
-import {Subscription} from "rxjs";
+import { CommService } from "../../services/Commservice";
 import {Product} from "../../Entities/Product";
 
 @Component({
@@ -16,7 +16,7 @@ export class ProductCreationComponent implements OnInit{
   productDeleteId: number;
 
 
-  constructor(private http: ProductService, public router: Router) {
+  constructor(private http: ProductService, public router: Router, private commService: CommService) {
     this.sname = 0;
     this.sdesc = '';
     this.product = Product;
@@ -26,16 +26,24 @@ export class ProductCreationComponent implements OnInit{
   async ngOnInit() {
   }
 
-  CreateProduct(){
+  createProduct(){
     this.http.addProduct(this.product)
       .subscribe(() => {
-        this.router.navigateByUrl('/products');
+        this.router.navigateByUrl('/admin');
       });
+    this.updateList();
   }
 
 
-  async DeleteProduct(id){
-    const result = await this.http.DeleteProductByID(id)
-    this.product.push(result);
+  deleteProduct(id){
+    this.http.DeleteProductByID(id)
+      .subscribe(() => {
+        this.router.navigateByUrl('/admin');
+      });
+    this.updateList();
+  }
+
+  updateList(){
+    this.commService.sendUpdate(true)
   }
 }
