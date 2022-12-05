@@ -1,4 +1,3 @@
-using Factory.Domain;
 using FluentValidation;
 using PetShop.Domain;
 
@@ -16,8 +15,8 @@ public class ActualProdValidator
             RuleFor(p => p.Description).NotEmpty();
             RuleFor(p => p.ImageUrl).NotEmpty();
             RuleFor(p => p.Rating).GreaterThan(0);
-            RuleFor(p => p.MainCategoryObj).NotEmpty();
-            RuleFor(p => p.SubCategoryObj).NotEmpty();
+            RuleFor(p => p.MainCategory).NotEmpty();
+            RuleFor(p => p.SubCategory).NotEmpty();
             RuleFor(p => p.Brand).NotEmpty();
         }
     }

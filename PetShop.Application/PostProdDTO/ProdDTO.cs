@@ -1,7 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using PetShop.Domain;
-
-namespace PetShop.Application.PostProdDTO
+﻿namespace PetShop.Application.PostProdDTO
 {
     public class ProdDTO
     {
@@ -10,11 +7,9 @@ namespace PetShop.Application.PostProdDTO
         public string Description { get; set; }
         public string ImageUrl { get; set; }
         public double Rating { get; set; }
-        
-        public List<SpecDescDTO> SpecsDescriptions { get; set; }
+        //public List<KeyValuePair<string,string>> Specs{ get; set; }
         public int MainCategory { get; set; }
-        public int SubCategory { get; set; }        
+        public int SubCategory { get; set; }
         public int Brand { get; set; }
-
     }
 }

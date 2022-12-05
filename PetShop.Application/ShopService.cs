@@ -1,5 +1,3 @@
-using AutoMapper;
-using Factory.Domain;
 using FluentValidation;
 using PetShop.Application.Interfaces;
 using PetShop.Application.PostProdDTO;
@@ -63,64 +61,6 @@ namespace PetShop.Application;
             if (productId <= 0)
                 throw new ValidationException("ID is invalid");
             return _productRepository.GetProductByID(productId);
-        }
-
-        public List<MainCategory> GetAllMainCategories()
-        {
-            return _productRepository.GetAllMainCategories();
-        }
-
-        public MainCategory CreateMainCategory(MainCategory mainCategory)
-        {
-            return _productRepository.CreateMainCategory(mainCategory);
-        }
-
-        public MainCategory UpdateMainCategory(MainCategory mainCategory)
-        {
-            return _productRepository.UpdateMainCategory(mainCategory);
-        }
-
-        public MainCategory GetMainCategoryByID(int mainCatId)
-        {
-            if (mainCatId <= 0)
-                throw new ValidationException("ID is invalid");
-            return _productRepository.GetMainCategoryByID(mainCatId);
-        }
-
-        public MainCategory DeleteMainCategoryByID(int mainCatId)
-        {
-            if (mainCatId == null)
-                throw new ValidationException("ID is invalid");
-            return _productRepository.DeleteMainCategoryByID(mainCatId);
-        }
-
-        public List<SubCategory> GetAllSubCategories()
-        {
-            return _productRepository.GetAllSubCategories();
-        }
-
-        public SubCategory CreateSubCategory(SubCategory subCategory)
-        {
-            return _productRepository.CreateSubCategory(subCategory);
-        }
-
-        public SubCategory UpdateSubCategory(SubCategory subCategory)
-        {
-            return _productRepository.UpdateSubCategory(subCategory);
-        }
-
-        public SubCategory GetSubCategoryByID(int subCatId)
-        {
-            if (subCatId <= 0)
-                throw new ValidationException("ID is invalid");
-            return _productRepository.GetSubCategoryByID(subCatId);
-        }
-        
-        public SubCategory DeleteSubCategoryByID(int subCatId)
-        {
-            if (subCatId == null)
-                throw new ValidationException("ID is invalid");
-            return _productRepository.DeleteSubCategoryByID(subCatId);
         }
         
         public void RebuildDB()

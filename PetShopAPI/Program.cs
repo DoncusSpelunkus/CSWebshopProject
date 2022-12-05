@@ -1,21 +1,14 @@
-
+using System.Net.Mime;
 using AutoMapper;
 using PetShop.Application.PostProdDTO;
 using PetShop.Domain;
 using PetShop.Infastructure;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
-using PetShop.Application;
-using PetShop.Application.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var config = new MapperConfiguration(conf =>
-{
-    conf.CreateMap<ProdDTO, Product>();
-    conf.CreateMap<SpecDTO, Specs>();
-    conf.CreateMap<SpecDescDTO, SpecsDescription>();
-});
+var config = new MapperConfiguration(conf => { conf.CreateMap<ProdDTO, Product>(); });
 
 var mapper = config.CreateMapper();
 
@@ -25,11 +18,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<DBContext>(options => options.UseSqlite("Data source=db.db"));
-builder.Services.AddScoped<IShopService , ShopService>();
-builder.Services.AddScoped<ISpecService , SpecService>();
-builder.Services.AddScoped<IShopRepo, ShopRepo>();
-builder.Services.AddScoped<ISpecRepo , SpecsRepo>();
+builder.Services.AddDbContext<ShopDbContext>(options => options.UseSqlite("Data source=db.db"));
+builder.Services.AddScoped<ShopRepo>();
 builder.Services.AddValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
 
 PetShop.Application.DependencyResolver.DependencyResolverService.RegisterApplicationLayer(builder.Services);
