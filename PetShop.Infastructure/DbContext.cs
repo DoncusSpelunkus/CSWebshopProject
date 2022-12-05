@@ -51,13 +51,13 @@ namespace PetShop.Infastructure
                 .HasMany(s => s.SpecsDescriptions)
                 .WithOne(sd => sd.Specs).OnDelete(DeleteBehavior.ClientCascade);
 
+            //Dont auto include 
+            modelBuilder.Entity<SpecsDescription>()
+                .Ignore(sd => sd.Product);
+            modelBuilder.Entity<SpecsDescription>()
+                .Ignore(sd => sd.Specs);
 
-
-
-
-
-
-
+            
 
         }
         public DbSet<SpecsDescription> SpecsDescriptionsTable { get; set; }

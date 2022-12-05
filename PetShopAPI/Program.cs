@@ -14,6 +14,7 @@ var config = new MapperConfiguration(conf =>
 {
     conf.CreateMap<ProdDTO, Product>();
     conf.CreateMap<SpecDTO, Specs>();
+    conf.CreateMap<SpecDescDTO, SpecsDescription>();
 });
 
 var mapper = config.CreateMapper();
