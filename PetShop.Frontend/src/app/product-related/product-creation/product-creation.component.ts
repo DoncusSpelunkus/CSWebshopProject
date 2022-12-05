@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {ProductService} from "../../services/Product.service";
+import {ProductService} from "../../../services/Product.service";
 import {Router} from "@angular/router";
-import { CommService } from "../../services/Commservice";
-import {Product} from "../../Entities/Product";
+import { CommService } from "../../../services/Commservice";
+import {Product} from "../../../Entities/Product";
 
 @Component({
   selector: 'app-product-creation',

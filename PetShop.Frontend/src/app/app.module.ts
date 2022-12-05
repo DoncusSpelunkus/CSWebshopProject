@@ -14,15 +14,17 @@ import {Overlay} from "@angular/cdk/overlay";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatTableModule} from "@angular/material/table";
 import {MatSelectModule} from "@angular/material/select";
-import { HeaderComponent } from './header/header.component';
+import { HeaderComponent } from './Navigation-tools/header/header.component';
 import {MatSidenavModule} from "@angular/material/sidenav";
-import { ProductCreationComponent } from './product-creation/product-creation.component';
-import { ProductListComponent } from './product-list/product-list.component';
-import { HomeComponent } from './home/home.component';
+import { ProductCreationComponent } from './product-related/product-creation/product-creation.component';
+import { ProductListComponent } from './product-related/product-list/product-list.component';
+import { HomeComponent } from './Pages/home/home.component';
 import { appRoutingModule } from './app.router';
-import { AdminComponent } from './admin/admin.component';
-import { EditComponent } from './edit/edit.component'
+import { AdminComponent } from './Pages/admin/admin.component';
+import { ProductEditComponent } from './product-related/product-edit/product-edit.component'
 import { AgGridModule } from "ag-grid-angular";
+import { CategoryCreationComponent } from './category-related/category-creation/category-creation.component';
+import {MatTabsModule} from "@angular/material/tabs";
 
 
 
@@ -35,7 +37,8 @@ import { AgGridModule } from "ag-grid-angular";
     ProductListComponent,
     HomeComponent,
     AdminComponent,
-    EditComponent,
+    ProductEditComponent,
+    CategoryCreationComponent,
 
   ],
   imports: [
@@ -53,7 +56,8 @@ import { AgGridModule } from "ag-grid-angular";
     MatSelectModule,
     MatSidenavModule,
     HttpClientModule,
-    AgGridModule
+    AgGridModule,
+    MatTabsModule
   ],
   providers: [MatSnackBar, Overlay],
   bootstrap: [AppComponent]

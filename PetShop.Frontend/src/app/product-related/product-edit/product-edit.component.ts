@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router'
-import { ProductService } from "../../services/Product.service";
-import { Product } from "../../Entities/Product";
+import { ProductService } from "../../../services/Product.service";
+import { Product } from "../../../Entities/Product";
 import { Router } from "@angular/router";
 
 @Component({
-  selector: 'app-edit',
-  templateUrl: './edit.component.html',
-  styleUrls: ['./edit.component.scss']
+  selector: 'app-product-edit',
+  templateUrl: './product-edit.component.html',
+  styleUrls: ['./product-edit.component.scss']
 })
-export class EditComponent implements OnInit {
+export class ProductEditComponent implements OnInit {
   product: any;
 
   constructor(private Aroute: ActivatedRoute, private http: ProductService, public route: Router) {

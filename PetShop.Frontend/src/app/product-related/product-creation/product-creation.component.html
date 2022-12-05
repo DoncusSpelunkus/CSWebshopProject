@@ -1,4 +1,5 @@
 <div style="text-align: center">
+  <h2>Creation</h2>
   <mat-form-field>Name:
     <input type="string" matInput [(ngModel)]="product.pname">
   </mat-form-field>
@@ -24,7 +25,9 @@
     <input type="number" matInput [(ngModel)]="product.brand">
   </mat-form-field>
   <button mat-raised-button (click)="createProduct()">Create</button>
+  <hr>
   <div style="text-align: center">
+    <h2>Deletion by id</h2>
     <mat-form-field>Product ID:
       <input type="number" matInput [(ngModel)]="productDeleteId">
     </mat-form-field>
