@@ -19,6 +19,7 @@ namespace PetShop.Infastructure
 
         public Product CreateProduct(Product product)
         {
+            foreach (var productSpecsDescription in product.SpecsDescriptions) _dbContext.SpecsDescriptionsTable.Add(productSpecsDescription);
             _dbContext.ProductTable.Add(product);
             _dbContext.SaveChanges();
             return product;
