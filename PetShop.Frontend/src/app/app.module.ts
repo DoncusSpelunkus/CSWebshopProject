@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import {HttpClientModule} from "@angular/common/http";
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatFormFieldModule} from "@angular/material/form-field";
@@ -22,6 +22,7 @@ import { HomeComponent } from './home/home.component';
 import { appRoutingModule } from './app.router';
 import { AdminComponent } from './admin/admin.component';
 import { EditComponent } from './edit/edit.component'
+import { AgGridModule } from "ag-grid-angular";
 
 
 
@@ -35,6 +36,7 @@ import { EditComponent } from './edit/edit.component'
     HomeComponent,
     AdminComponent,
     EditComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -49,7 +51,9 @@ import { EditComponent } from './edit/edit.component'
     MatTooltipModule,
     MatTableModule,
     MatSelectModule,
-    MatSidenavModule
+    MatSidenavModule,
+    HttpClientModule,
+    AgGridModule
   ],
   providers: [MatSnackBar, Overlay],
   bootstrap: [AppComponent]

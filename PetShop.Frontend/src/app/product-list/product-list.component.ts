@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {appValuePair} from "../../Entities/valuePair";
-import {HttpService} from "../../services/http.service";
+import {ProductService} from "../../services/Product.service";
 import { Router } from '@angular/router'
-import {CommService} from "../../services/CommService";
-import {Subscription} from "rxjs";
+import {Observable, Subscription} from "rxjs";
+import {Product} from "../../Entities/Product";
 
 @Component({
   selector: 'app-product-list',
@@ -11,32 +10,26 @@ import {Subscription} from "rxjs";
   styleUrls: ['./product-list.component.scss']
 })
 export class ProductListComponent implements OnInit{
-  product: any;
-  messageReceived: any;
-  private productListSub: Subscription;
+  productList: Product[] = [];
 
-  constructor(private http: HttpService, public router: Router, private Service: CommService) {
-    this.productListSub = this.Service.getProductListUpdateRequest().subscribe //Subscribes to get check for
-    (message => {
-      if (message === true){
-        this.UpdateList()
-      }
-    });
+
+
+
+  constructor(private http: ProductService, public router: Router) {
+
   }
+
 
   async ngOnInit() {
-    const product = await this.http.GetProduct();
-    this.product = product;
+    this.http.getProductStatus().subscribe(products => this.productList = products)
   }
 
-  async UpdateList(){
-    const product = await this.http.GetProduct();
-    this.product = product;
-    this.messageReceived = false;
+  UpdateList(): void{
+    //this.http.getProductStatus().subscribe(update => {this.productList = update})
   }
 
   async EditMode(id){
-    this.Service.requestProductEdit(id)
+
 
   }
 

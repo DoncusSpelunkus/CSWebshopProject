@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {HttpService} from "../services/http.service";
+import {ProductService} from "../services/Product.service";
 import {appRoutingModule} from "./app.router";
 
 // @ts-ignore
@@ -11,7 +11,7 @@ import {appRoutingModule} from "./app.router";
 export class AppComponent implements OnInit{
 
 
-  constructor(private http: HttpService) {
+  constructor(private http: ProductService) {
     appRoutingModule
   }
 

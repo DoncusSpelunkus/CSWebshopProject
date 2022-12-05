@@ -7,7 +7,7 @@ import { EditComponent } from "./edit/edit.component";
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'admin', component: AdminComponent},
-  { path: 'edit', component: EditComponent},
+  { path: 'edit/:id', component: EditComponent},
 
   // otherwise redirect to home
   { path: '**', redirectTo: '' }
