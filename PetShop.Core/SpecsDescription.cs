@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PetShop.Domain;
-
+// for pull
 public class SpecsDescription
 {
     public Product Product { get; set; }
