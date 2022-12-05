@@ -14,11 +14,30 @@ namespace PetShop.Infastructure
 
         public List<Product> GetAllProducts()
         {
-            return _dbContext.ProductTable.ToList();
+            var specsList = _dbContext.SpecsDescriptionsTable.ToList();
+            var producttablelist= _dbContext.ProductTable.ToList();
+            var listofSpecDesc = new List<SpecsDescription>();
+            foreach (var product in producttablelist)
+            {
+                foreach (var specDesc in specsList)
+                {
+                    
+                    if (product.ID == specDesc.ProductId)
+                    {
+                        listofSpecDesc.Add(specDesc);
+                    }
+                    
+                }
+
+                product.SpecsDescriptions = listofSpecDesc;
+            }
+
+            return producttablelist;
         }
 
         public Product CreateProduct(Product product)
         {
+            foreach (var productSpecsDescription in product.SpecsDescriptions) _dbContext.SpecsDescriptionsTable.Add(productSpecsDescription);
             _dbContext.ProductTable.Add(product);
             _dbContext.SaveChanges();
             return product;
@@ -26,6 +45,16 @@ namespace PetShop.Infastructure
 
         public Product UpdateProduct(Product product)
         {
+            var listofProductspecs = new List<SpecsDescription>();
+            foreach (var specs in listofProductspecs)
+            {
+                if (specs.ProductId == product.ID)
+                {
+                    _dbContext.SpecsDescriptionsTable.Remove(specs);
+                }
+            }
+            
+            foreach (var productSpecsDescription in product.SpecsDescriptions) _dbContext.SpecsDescriptionsTable.Add(productSpecsDescription);
             _dbContext.ProductTable.Update(product);
             _dbContext.SaveChanges();
             return product;
@@ -34,6 +63,14 @@ namespace PetShop.Infastructure
         public Product DeleteProduct(int productID)
         {
             Product product = GetProductByID(productID);
+            foreach (var productSpecsDescription in product.SpecsDescriptions)
+            {
+                if (product.ID == productSpecsDescription.ProductId)
+                {
+                    _dbContext.SpecsDescriptionsTable.Remove(productSpecsDescription);
+                }
+              
+            }
             _dbContext.ProductTable.Remove(product);
             _dbContext.SaveChanges();
             return product;
@@ -42,7 +79,21 @@ namespace PetShop.Infastructure
 
         public Product GetProductByID(int productId)
         {
-            return _dbContext.ProductTable.FirstOrDefault(p => p.ID == productId);
+            Product product = new Product();
+            var ListofProductsSpecsDescriptions = new List<SpecsDescription>();
+            var SpecsDiscription = _dbContext.SpecsDescriptionsTable.ToList();
+            foreach (var specs in SpecsDiscription)
+            {
+                if (productId == specs.ProductId) 
+                {
+                 ListofProductsSpecsDescriptions.Add(specs);   
+                }
+                
+            }
+            
+            product =  _dbContext.ProductTable.FirstOrDefault(p => p.ID == productId);
+            product.SpecsDescriptions = ListofProductsSpecsDescriptions;
+            return product;
         }
 
         public void RebuildDB()
