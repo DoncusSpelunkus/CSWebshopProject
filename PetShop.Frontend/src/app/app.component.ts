@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {HttpService} from "../services/http.service";
-import {appValuePair} from "./valuePair";
+
+import {ProductService} from "../services/Product.service";
+import {appRoutingModule} from "./app.router";
 
 // @ts-ignore
 @Component({
@@ -24,11 +25,9 @@ export class AppComponent implements OnInit{
   specList: Array<appValuePair> = [];
 
 
-  constructor(private http: HttpService) {
-    let sname = 0;
-    this.sname = sname;
-    let sdesc = ``;
-    this.sdesc = sdesc;
+
+  constructor(private http: ProductService) {
+    appRoutingModule
   }
 
   async ngOnInit() {

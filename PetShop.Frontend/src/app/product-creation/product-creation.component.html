@@ -1,0 +1,33 @@
+<div style="text-align: center">
+  <mat-form-field>Name:
+    <input type="string" matInput [(ngModel)]="product.pname">
+  </mat-form-field>
+  <mat-form-field>Price:
+    <input type="number" matInput [(ngModel)]="product.price">
+  </mat-form-field>
+  <mat-form-field>Description:
+    <input type="string" matInput [(ngModel)]="product.description">
+  </mat-form-field>
+  <mat-form-field>Image URL:
+    <input type="string" matInput [(ngModel)]="product.imageUrl">
+  </mat-form-field>
+  <mat-form-field>Rating:
+    <input type="number" matInput [(ngModel)]="product.rating">
+  </mat-form-field>
+  <mat-form-field>Main Category:
+    <input type="number" matInput [(ngModel)]="product.mainCategory">
+  </mat-form-field>
+  <mat-form-field>Sub Category:
+    <input type="number" matInput [(ngModel)]="product.subCategory">
+  </mat-form-field>
+  <mat-form-field>Brand:
+    <input type="number" matInput [(ngModel)]="product.brand">
+  </mat-form-field>
+  <button mat-raised-button (click)="createProduct()">Create</button>
+  <div style="text-align: center">
+    <mat-form-field>Product ID:
+      <input type="number" matInput [(ngModel)]="productDeleteId">
+    </mat-form-field>
+    <button mat-button (click)="deleteProduct(productDeleteId)">Delete product</button>
+  </div>
+</div>
