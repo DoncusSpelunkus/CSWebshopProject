@@ -9,7 +9,7 @@ namespace PetShop.Application.Interfaces
         
         public Product CreateProduct(ProdDTO dto);
 
-        public Product UpdateProduct(int productID, Product product);
+        public Product UpdateProduct(int productID, ProdDTO dto);
         
         public Product DeleteProduct(int productID);
 

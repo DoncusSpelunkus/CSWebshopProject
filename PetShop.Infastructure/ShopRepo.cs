@@ -1,4 +1,5 @@
-﻿using PetShop.Application.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using PetShop.Application.Interfaces;
 using PetShop.Domain;
 
 namespace PetShop.Infastructure
@@ -16,9 +17,10 @@ namespace PetShop.Infastructure
         {
             var specsList = _dbContext.SpecsDescriptionsTable.ToList();
             var producttablelist= _dbContext.ProductTable.ToList();
-            var listofSpecDesc = new List<SpecsDescription>();
+            
             foreach (var product in producttablelist)
             {
+                var listofSpecDesc = new List<SpecsDescription>();
                 foreach (var specDesc in specsList)
                 {
                     
@@ -28,7 +30,6 @@ namespace PetShop.Infastructure
                     }
                     
                 }
-
                 product.SpecsDescriptions = listofSpecDesc;
             }
 
@@ -45,16 +46,17 @@ namespace PetShop.Infastructure
 
         public Product UpdateProduct(Product product)
         {
-            var listofProductspecs = new List<SpecsDescription>();
+            var listofProductspecs = _dbContext.SpecsDescriptionsTable.AsNoTracking().ToList();
             foreach (var specs in listofProductspecs)
             {
-                if (specs.ProductId == product.ID)
+                if (specs.ProductId.Equals(product.ID) )
                 {
                     _dbContext.SpecsDescriptionsTable.Remove(specs);
                 }
             }
             
             foreach (var productSpecsDescription in product.SpecsDescriptions) _dbContext.SpecsDescriptionsTable.Add(productSpecsDescription);
+            product.SpecsDescriptions.Clear();
             _dbContext.ProductTable.Update(product);
             _dbContext.SaveChanges();
             return product;
