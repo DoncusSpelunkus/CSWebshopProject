@@ -41,6 +41,7 @@ namespace PetShop.Infastructure
                 .HasOne<SubCategory>(p => p.SubCategoryObj)
                 .WithMany(c => c.ProdList)
                 .HasForeignKey(p => p.SubCategoryObjId);
+
             modelBuilder.Entity<Specs>()
                 .Property(s => s.ID)
                 .ValueGeneratedOnAdd();
