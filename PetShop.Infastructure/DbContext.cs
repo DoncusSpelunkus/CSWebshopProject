@@ -52,8 +52,8 @@ namespace PetShop.Infastructure
 
             modelBuilder.Entity<SpecsDescription>()
                 .HasKey(sd => new { sd.ProductId, sd.SpecsId });
-            
-            
+
+
 
             // specsDescription has one product, one product has many specsDecription.
             modelBuilder.Entity<SpecsDescription>()

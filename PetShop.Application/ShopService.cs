@@ -38,16 +38,16 @@ namespace PetShop.Application;
             return _productRepository.CreateProduct(_mapper.Map<Product>(dto));
         }
 
-        public Product UpdateProduct(int productId, Product product)
+        public Product UpdateProduct(int productId, ProdDTO dto)
         {
-            
-            if (productId != product.ID)
-                throw new ValidationException("ID in body and route are different (Update)");
-            var validation = _productValidator.Validate(product);
+            var validation = _validator.Validate(dto);
             if (!validation.IsValid)
             {
                 throw new ValidationException(validation.ToString());
             }
+            Product product = new Product();
+            product = (_mapper.Map<Product>(dto));
+            product.ID = productId;
             return _productRepository.UpdateProduct(product);
         }
 
