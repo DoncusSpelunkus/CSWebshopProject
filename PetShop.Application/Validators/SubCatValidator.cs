@@ -1,17 +1,13 @@
-﻿using System.Data;
-using FluentValidation;
+﻿using FluentValidation;
 using PetShop.Application.PostProdDTO;
 
-namespace PetShop.Application.Validators;
-
-public class SubCategoryValidator
+namespace PetShop.Application.Validators
 {
-    public class SubCatValidator : AbstractValidator<MainCatDTO>
+    public class SubCatValidator : AbstractValidator<SubCatDTO>
     {
         public SubCatValidator()
         {
-            RuleFor(c => c.Name).NotEmpty();
-            RuleFor(c => c.ProdList);
+            RuleFor(p => p.Name).NotEmpty();
         }
     }
 }
