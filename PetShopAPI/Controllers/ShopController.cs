@@ -80,11 +80,11 @@ namespace PetShopApi.Controllers
         [HttpPut]
         [Route("{productID}")]
 
-        public ActionResult<Product> UpdateProduct([FromRoute] int productID, [FromBody] Product product)
+        public ActionResult<Product> UpdateProduct([FromRoute] int productID, [FromBody] ProdDTO dto)
         {
             try
             {
-                return Ok(_shopService.UpdateProduct(productID, product));
+                return Ok(_shopService.UpdateProduct(productID, dto));
             }
             catch (KeyNotFoundException e)
             {
