@@ -36,19 +36,22 @@ namespace PetShop.Infastructure
             modelBuilder.Entity<Product>()
                 .HasOne<MainCategory>(p => p.MainCategoryObj)
                 .WithMany(c => c.ProdList)
-                .HasForeignKey(p => p.MainCategoryObj);
+                .HasForeignKey(p => p.MainCategoryObjId);
             modelBuilder.Entity<Product>()
                 .HasOne<SubCategory>(p => p.SubCategoryObj)
                 .WithMany(c => c.ProdList)
-                .HasForeignKey(p => p.SubCategoryObj);
-            modelBuilder.Entity<Product>()
-                .Ignore(p => p.MainCategoryObj);
-            modelBuilder.Entity<Product>()
-                .Ignore(p => p.SubCategoryObj);
+                .HasForeignKey(p => p.SubCategoryObjId);
             modelBuilder.Entity<Specs>()
                 .Property(s => s.ID)
                 .ValueGeneratedOnAdd();
-
+            modelBuilder.Entity<MainCategory>()
+                .HasMany<Product>(mc => mc.ProdList)
+                .WithOne(p => p.MainCategoryObj)
+                .HasForeignKey(p => p.MainCategoryObjId);
+            modelBuilder.Entity<SubCategory>()
+                .HasMany<Product>(sc => sc.ProdList)
+                .WithOne(p => p.SubCategoryObj)
+                .HasForeignKey(p => p.SubCategoryObjId);
 
             modelBuilder.Entity<SpecsDescription>()
                 .HasKey(sd => new { sd.ProductId, sd.SpecsId });
@@ -86,7 +89,10 @@ namespace PetShop.Infastructure
                 .Ignore(sd => sd.Product);
             modelBuilder.Entity<SpecsDescription>()
                 .Ignore(sd => sd.Specs);
-
+            modelBuilder.Entity<Product>()
+                .Ignore(p => p.MainCategoryObj);
+            modelBuilder.Entity<Product>()
+                .Ignore(p => p.SubCategoryObj);
             
 
         }
