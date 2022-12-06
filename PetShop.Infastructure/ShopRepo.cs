@@ -40,7 +40,12 @@ namespace PetShop.Infastructure
 
         public Product CreateProduct(Product product)
         {
-            foreach (var productSpecsDescription in product.SpecsDescriptions) _dbContext.SpecsDescriptionsTable.Add(productSpecsDescription);
+
+            foreach (var productSpecsDescription in product.SpecsDescriptions)
+            {
+                productSpecsDescription.ProductId = product.ID;
+                _dbContext.SpecsDescriptionsTable.Add(productSpecsDescription);
+            }
             _dbContext.ProductTable.Add(product);
             _dbContext.SaveChanges();
             return product;
@@ -56,8 +61,12 @@ namespace PetShop.Infastructure
                     _dbContext.SpecsDescriptionsTable.Remove(specs);
                 }
             }
-            
-            foreach (var productSpecsDescription in product.SpecsDescriptions) _dbContext.SpecsDescriptionsTable.Add(productSpecsDescription);
+
+            foreach (var productSpecsDescription in product.SpecsDescriptions)
+            {
+                productSpecsDescription.ProductId = product.ID;
+                _dbContext.SpecsDescriptionsTable.Add(productSpecsDescription);
+            }
             product.SpecsDescriptions.Clear();
             _dbContext.ProductTable.Update(product);
             _dbContext.SaveChanges();
