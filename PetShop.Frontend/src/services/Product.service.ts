@@ -43,11 +43,12 @@ export class ProductService {
       description: product.description,
       imageUrl: product.imageUrl,
       rating: product.rating,
+      specsDescriptions: product.specList,
       mainCategory: product.mainCategory,
       subCategory: product.subCategory,
       brand: product.brand,
-      SpecsDescriptions: product.specList
     }
+    console.log(dto)
     return this.http.post<Product>(this.apiUrl, dto);
   }
 
@@ -63,7 +64,6 @@ export class ProductService {
       subCategory: product.subCategory,
       brand: product.brand
     }
-    console.log(this.apiUrl+'/'+product.id, Product)
     return this.http.put<Product>(this.apiUrl+'/'+product.id, dto)
   }
 
