@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Reflection;
 using Factory.Domain;
 
 namespace PetShop.Domain
@@ -21,7 +22,7 @@ namespace PetShop.Domain
         public int MainCategoryObjId { get; set; }
         public SubCategory SubCategoryObj { get; set; }
         public int SubCategoryObjId { get; set; }
-        
+
         /*
          *The specslist holds a list of names of the specs.
          * 
