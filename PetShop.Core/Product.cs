@@ -29,8 +29,10 @@ namespace PetShop.Domain
          */
         //private List<Specs> _specsList { get; set; }
         public List<SpecsDescription> SpecsDescriptions { get; set; }
-        public int Brand { get; set; }
+        public Brand Brand { get; set; }
         
+        public int BrandID { get; set; }
+
 
     }
 }
