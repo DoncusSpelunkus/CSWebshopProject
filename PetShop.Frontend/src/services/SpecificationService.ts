@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import axios from "axios";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {HttpClient} from "@angular/common/http";
-import {catchError, Observable} from "rxjs";
+import {Observable} from "rxjs";
 import {Specification} from "../Entities/specification";
 
 

@@ -12,8 +12,8 @@ import { SpecificationService } from "../../../services/SpecificationService";
   styleUrls: ['./product-creation.component.scss']
 })
 export class ProductCreationComponent implements OnInit{
-  product: any;
-  specList: { spec: number, desc: string }[] = [];
+  newProduct: any;
+  specList: { SpecsId: number, Description: string }[] = [];
   specNames: Specification[] = [];
   sname: number;
   sdesc: string;
@@ -23,9 +23,9 @@ export class ProductCreationComponent implements OnInit{
 
   constructor(private productService: ProductService, public router: Router,
               private commService: CommService, private specifcationService: SpecificationService){
+    this.newProduct = new Product;
     this.sname = 0;
     this.sdesc = '';
-    this.product = Product;
     this.productDeleteId = 0;
   }
 
@@ -34,18 +34,18 @@ export class ProductCreationComponent implements OnInit{
   }
 
   createProduct(){
-    this.productService.addProduct(this.product)
+    this.productService.addProduct(this.newProduct)
       .subscribe(() => {
-        this.router.navigateByUrl('/admin');
+        this.router.navigateByUrl('/home');
       });
-    this.updateList();
+    console.log(this.newProduct)
   }
 
 
   deleteProduct(id){
     this.productService.DeleteProductByID(id)
       .subscribe(() => {
-        this.router.navigateByUrl('/admin');
+        this.router.navigateByUrl('/home');
       });
     this.updateList();
   }
@@ -55,7 +55,12 @@ export class ProductCreationComponent implements OnInit{
   }
 
   addTooSpecList(spec: number, desc: string){
-    this.specList.push({spec: spec, desc: desc})
-    this.product.specList = this.specList;
+    this.specList.push({SpecsId: spec, Description: desc})
+    console.log(spec)
+    this.newProduct.specList = this.specList;
+  }
+
+  consoleLog(){
+    console.log(this.newProduct)
   }
 }

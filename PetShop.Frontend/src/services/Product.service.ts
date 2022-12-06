@@ -38,14 +38,15 @@ export class ProductService {
 
   addProduct(product: Product): Observable<Product>{
     let dto = {
-      name: product.name,
+      name: product.pname,
       price: product.price,
       description: product.description,
       imageUrl: product.imageUrl,
       rating: product.rating,
       mainCategory: product.mainCategory,
       subCategory: product.subCategory,
-      brand: product.brand
+      brand: product.brand,
+      SpecsDescriptions: product.specList
     }
     return this.http.post<Product>(this.apiUrl, dto);
   }
@@ -53,7 +54,7 @@ export class ProductService {
   UpdateProduct(product: Product): Observable<Product>{
     let dto = {
       id: product.id,
-      name: product.name,
+      name: product.pname,
       price: product.price,
       description: product.description,
       imageUrl: product.imageUrl,

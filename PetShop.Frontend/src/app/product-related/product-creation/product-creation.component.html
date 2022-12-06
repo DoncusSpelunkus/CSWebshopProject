@@ -1,29 +1,31 @@
 <div style="text-align: center">
   <h2>Creation</h2>
   <mat-form-field>Name:
-    <input type="string" matInput [(ngModel)]="product.pname">
+    <input type="string" matInput [(ngModel)]="newProduct.pname">
   </mat-form-field>
   <mat-form-field>Price:
-    <input type="number" matInput [(ngModel)]="product.price">
+    <input type="number" matInput [(ngModel)]="newProduct.price">
   </mat-form-field>
   <mat-form-field>Description:
-    <input type="string" matInput [(ngModel)]="product.description">
+    <input type="string" matInput [(ngModel)]="newProduct.description">
   </mat-form-field>
   <mat-form-field>Image URL:
-    <input type="string" matInput [(ngModel)]="product.imageUrl">
+    <input type="string" matInput [(ngModel)]="newProduct.imageUrl">
   </mat-form-field>
   <mat-form-field>Rating:
-    <input type="number" matInput [(ngModel)]="product.rating">
+    <input type="number" matInput [(ngModel)]="newProduct.rating">
   </mat-form-field>
   <mat-form-field>Main Category:
-    <input type="number" matInput [(ngModel)]="product.mainCategory">
+    <input type="number" matInput [(ngModel)]="newProduct.mainCategory">
   </mat-form-field>
   <mat-form-field>Sub Category:
-    <input type="number" matInput [(ngModel)]="product.subCategory">
+    <input type="number" matInput [(ngModel)]="newProduct.subCategory">
   </mat-form-field>
   <mat-form-field>Brand:
-    <input type="number" matInput [(ngModel)]="product.brand">
+    <input type="number" matInput [(ngModel)]="newProduct.brand">
   </mat-form-field>
+  <hr>
+  <button mat-raised-button (click)="consoleLog()">console</button>
   <hr>
   <h3>Add specifications</h3>
   <mat-form-field>Specification type:
@@ -36,8 +38,9 @@
   <mat-form-field>Specification description:
     <input type="string" matInput [(ngModel)]="sdesc">
   </mat-form-field>
-  <button mat-raised-button (click)="addTooSpecList(selected, sdesc)">Create</button>
-  <button mat-raised-button (click)="createProduct()">Create</button>
+  <button mat-raised-button (click)="addTooSpecList(selected, sdesc)">Add to product</button>
+  <hr>
+  <button mat-raised-button (click)="createProduct()">Create product</button>
   <hr>
   <div style="text-align: center">
     <h2>Deletion by id</h2>
