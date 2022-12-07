@@ -1,10 +1,11 @@
-import { Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { ProductService} from "../../../services/Product.service";
 import { Router} from "@angular/router";
 import { CommService } from "../../../services/Commservice";
 import { Product } from "../../../Entities/Product";
 import { Specification } from "../../../Entities/specification";
 import { SpecificationService } from "../../../services/SpecificationService";
+import {CurrentSpecs} from "../../../Entities/CurrentSpecs";
 
 @Component({
   selector: 'app-product-creation',
@@ -13,13 +14,15 @@ import { SpecificationService } from "../../../services/SpecificationService";
 })
 export class ProductCreationComponent implements OnInit{
   newProduct: any;
-  specList: { SpecsId: number, Description: string }[] = [];
+  specList: CurrentSpecs[] = [];
   specNames: Specification[] = [];
+  specDesc: {specsId: number, description: string}[] = [];
   sname: number;
   sdesc: string;
   productDeleteId: number;
   selected: number = 0;
 
+  @ViewChild('child') child;
 
   constructor(private productService: ProductService, public router: Router,
               private commService: CommService, private specifcationService: SpecificationService){
@@ -38,7 +41,6 @@ export class ProductCreationComponent implements OnInit{
       .subscribe(() => {
         this.router.navigateByUrl('/home');
       });
-    console.log(this.newProduct)
   }
 
 
@@ -54,10 +56,19 @@ export class ProductCreationComponent implements OnInit{
     this.commService.sendUpdate(true)
   }
 
+  onDelete(event: number): void{ // Delete the spec with the id from the mat-card selected in the child component
+    this.specList.splice(this.specList.findIndex(a => a.specsId === event) , 1)
+    this.child.updateNow(this.specList);
+  }
+
   addTooSpecList(spec: number, desc: string){
-    this.specList.push({SpecsId: spec, Description: desc})
-    console.log(spec)
-    this.newProduct.specList = this.specList;
+    let newSpec = new CurrentSpecs();
+    newSpec.specsId = spec;
+    newSpec.description = desc;
+    this.specDesc.push({specsId: spec, description: desc}) // attachs value on an Array that mirrors the requested field in the post method
+    this.newProduct.specsDescriptions = this.specDesc;
+    this.specList.push(newSpec)
+    this.child.updateNow(this.specList);
   }
 
   consoleLog(){

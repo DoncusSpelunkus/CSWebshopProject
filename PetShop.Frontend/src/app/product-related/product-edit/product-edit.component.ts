@@ -15,7 +15,6 @@ import {find} from "rxjs";
 })
 export class ProductEditComponent implements OnInit { // This component tend to the editing of products
   product: any;
-  specList: Specification[] = [];
   newSpecList: CurrentSpecs[] = [];
   specNames: Specification[] = [];
   spec: any;
@@ -42,15 +41,15 @@ export class ProductEditComponent implements OnInit { // This component tend to 
   }
 
   updateProduct(){
+    this.product.specList = this.newSpecList;
     this.http.UpdateProduct(this.product)
       .subscribe(() => {
         this.route.navigateByUrl('/products');
       });
   }
 
-  onDelete(event: number): void{
+  onDelete(event: number): void{ // Delete the spec with the id from the mat-card selected in the child component
     this.newSpecList.splice(this.newSpecList.findIndex(a => a.specsId === event) , 1)
-    console.log(this.newSpecList);
     this.child.updateNow(this.newSpecList);
   }
 

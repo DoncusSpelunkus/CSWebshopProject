@@ -39,6 +39,8 @@
     <input type="string" matInput [(ngModel)]="sdesc">
   </mat-form-field>
   <button mat-raised-button (click)="addTooSpecList(selected, sdesc)">Add to product</button>
+  <h3>List of current specs</h3>
+  <app-current-spec-list (delete)="onDelete($event)" #child></app-current-spec-list>
   <hr>
   <button mat-raised-button (click)="createProduct()">Create product</button>
   <hr>

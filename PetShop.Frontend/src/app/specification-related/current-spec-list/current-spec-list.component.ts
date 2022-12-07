@@ -25,7 +25,6 @@ export class CurrentSpecListComponent implements OnInit {
 
   deleteSpec(id: number){
     this.delete.emit(id)
-    console.log(id)
   }
 
 

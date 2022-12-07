@@ -48,6 +48,7 @@ export class ProductService {
       subCategory: product.subCategory,
       brand: product.brand,
     }
+    console.log(product.specsDescriptions)
     console.log(dto)
     return this.http.post<Product>(this.apiUrl, dto);
   }
