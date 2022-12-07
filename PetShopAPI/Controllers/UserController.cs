@@ -77,7 +77,7 @@ public class UserController : ControllerBase
             {
                 try
                 {
-                    return Ok(_userService.UpdateUser(userID, userDto:));
+                    return Ok(_userService.UpdateUser(userID, userDto));
                 }
                 catch (KeyNotFoundException e)
                 {
