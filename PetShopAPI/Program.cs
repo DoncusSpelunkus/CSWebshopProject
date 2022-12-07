@@ -18,6 +18,7 @@ var config = new MapperConfiguration(conf =>
     conf.CreateMap<MainCatDTO, MainCategory>();
     conf.CreateMap<SubCatDTO, SubCategory>();
     conf.CreateMap<SpecDescDTO, SpecsDescription>();
+    conf.CreateMap<BrandDto, Brand>();
 });
 
 var mapper = config.CreateMapper();
@@ -32,9 +33,12 @@ builder.Services.AddDbContext<DBContext>(options => options.UseSqlite("Data sour
 builder.Services.AddScoped<IShopService , ShopService>();
 builder.Services.AddScoped<ISpecService , SpecService>();
 builder.Services.AddScoped<ICatService , CatService>();
+builder.Services.AddScoped<IBrandService , BrandService>();
+builder.Services.AddScoped<ICatRepo, CatRepo>();
 builder.Services.AddScoped<IShopRepo, ShopRepo>();
 builder.Services.AddScoped<ISpecRepo , SpecsRepo>();
-builder.Services.AddScoped<ICatService , CatService>();
+builder.Services.AddScoped<IBrandRepo, BrandRepo>();
+
 builder.Services.AddValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
 
 PetShop.Application.DependencyResolver.DependencyResolverService.RegisterApplicationLayer(builder.Services);
