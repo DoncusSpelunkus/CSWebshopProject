@@ -7,7 +7,7 @@ public interface IBrandService
 {
     public List<Brand> GetAllBrands();
         
-    public Brand CreateBrand(ProdDTO dto);
+    public Brand CreateBrand(BrandDto dto);
 
     public Brand UpdateBrand(int brandID, Brand brand);
         

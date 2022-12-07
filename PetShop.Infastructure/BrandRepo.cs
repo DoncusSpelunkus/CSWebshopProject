@@ -1,32 +1,46 @@
 ﻿using Factory.Domain;
+using Microsoft.EntityFrameworkCore;
 using PetShop.Application.Interfaces;
 
 namespace PetShop.Infastructure;
 
 public class BrandRepo : IBrandRepo
 {
+    private DBContext _dbContext;
+
+    public BrandRepo(DBContext dbContext)
+    {
+        _dbContext = dbContext;
+    }
     public List<Brand> GetAllBrands()
     {
-        throw new NotImplementedException();
+        return _dbContext.BrandTable.Include(c=> c.ProdList).ToList();
     }
 
     public Brand CreateBrand(Brand brand)
     {
-        throw new NotImplementedException();
+        _dbContext.BrandTable.Add(brand);
+        _dbContext.SaveChanges();
+        return brand;
     }
 
     public Brand UpdateBrand(Brand brand)
     {
-        throw new NotImplementedException();
+        _dbContext.BrandTable.Update(brand);
+        _dbContext.SaveChanges();
+        return brand;
     }
 
     public Brand DeleteBrand(int brandID)
     {
-        throw new NotImplementedException();
+        Brand brand = GetBrandByID(brandID);
+        _dbContext.BrandTable.Remove(brand);
+        _dbContext.SaveChanges();
+        return brand;
     }
 
     public Brand GetBrandByID(int brandID)
     {
-        throw new NotImplementedException();
+        return _dbContext.BrandTable.FirstOrDefault(b => b.Id == brandID);
     }
 }
