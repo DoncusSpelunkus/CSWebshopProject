@@ -34,7 +34,7 @@ public class UserRepo : IUserRepo
         _dbcontext.SaveChanges();
         return user;
     }
-
+   // method used for creating user in the database
     public User UpdateUser(User user)
     {
        
@@ -48,6 +48,22 @@ public class UserRepo : IUserRepo
         var user = _dbcontext.Usertable.FirstOrDefault(u => u.Id == id);
         _dbcontext.Usertable.Remove(user);
         _dbcontext.SaveChanges();
+        return user;
+    }
+    
+    // method used for verifying user login
+    public User VerifyUser(string username, string password)
+    {
+        var user = _dbcontext.Usertable.FirstOrDefault(u => u.Name == username);
+        if (user == null)
+        {
+            throw new Exception("User not found");
+        }
+        if (!_passwordHashing.HashPassword(password).Equals(user.PasswordHash))
+        {
+            throw new Exception("Wrong password");
+        }
+        
         return user;
     }
 }

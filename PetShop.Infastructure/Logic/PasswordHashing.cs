@@ -12,9 +12,10 @@ public class PasswordHashing
         SHA256 hash = SHA256.Create();
         // converts the userpassword to an aray of bytes
         var passwordbBytes = Encoding.Default.GetBytes(password);
+        // hashes the password
         var hashedPassword = hash.ComputeHash(passwordbBytes);
-
-       return Convert.ToHexString(hashedPassword);
+     // converts the hashed password to a string  and returns it
+        return Convert.ToHexString(hashedPassword);
        
     }
 }
