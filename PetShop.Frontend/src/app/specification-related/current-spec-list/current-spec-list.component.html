@@ -1,0 +1,6 @@
+<h3>Specifications for this product</h3>
+<mat-card *ngFor="let s of specList">
+  <mat-card>Name: {{s.specName}}</mat-card>
+  <mat-card>Desc: {{s.description}}</mat-card>
+  <button mat-raised-button (click)="deleteSpec(s.specsId)">Delete this spec</button>
+</mat-card>

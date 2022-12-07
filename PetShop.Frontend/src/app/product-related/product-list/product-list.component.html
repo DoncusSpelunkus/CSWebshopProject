@@ -1,6 +1,6 @@
 <mat-card style="margin: 20px;text-align: center" *ngFor="let p of productList" >
-  <mat-card-title>Name: {{p.pname}}</mat-card-title>
-  <button routerLink="/edit/{{p.id}}"> Edit Product </button>
+  <mat-card-title>Name: {{p.name}}</mat-card-title>
+  <button routerLink="/product-edit/{{p.id}}"> Edit Product </button>
   <mat-card  *ngIf="router.url === '/admin'">Product ID: {{p.id}}</mat-card>
   <img mat-card-image src="{{p.imageUrl}}" alt="Image error">
   <mat-card-subtitle>Price: {{p.price}}</mat-card-subtitle>

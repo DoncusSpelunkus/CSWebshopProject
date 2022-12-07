@@ -1,6 +1,6 @@
 export class Product {
   id: number = 0;
-  pname: string = '';
+  name: string = '';
   price: number = 0;
   description: string = '';
   imageUrl: string = '';
@@ -8,5 +8,5 @@ export class Product {
   mainCategory: number = 0;
   subCategory: number = 0;
   brand: number = 0;
-  specList: any[] = [];
+  specsDescriptions: any[] = [];
 }

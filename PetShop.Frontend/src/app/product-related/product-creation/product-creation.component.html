@@ -1,7 +1,7 @@
 <div style="text-align: center">
   <h2>Creation</h2>
   <mat-form-field>Name:
-    <input type="string" matInput [(ngModel)]="newProduct.pname">
+    <input type="string" matInput [(ngModel)]="newProduct.name">
   </mat-form-field>
   <mat-form-field>Price:
     <input type="number" matInput [(ngModel)]="newProduct.price">
@@ -28,10 +28,10 @@
   <button mat-raised-button (click)="consoleLog()">console</button>
   <hr>
   <h3>Add specifications</h3>
-  <mat-form-field>Specification type:
+  <mat-form-field appearance="fill">Specification type:
     <mat-select [(ngModel)]="selected" name="Specification">
-      <mat-option *ngFor="let specifications of specNames" [value]="specifications.id">
-        {{specifications.name}}
+      <mat-option *ngFor="let specifications of specNames" [value]="specifications.id" >
+        {{specifications.specName}}
       </mat-option>
     </mat-select>
   </mat-form-field>

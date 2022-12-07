@@ -21,15 +21,16 @@ export class SpecificationService {
 
   addSpecification(specification: Specification): Observable<Specification>{
     let dto = {
-      name: specification.name,
+      specName: specification.specName,
     }
+    console.log(dto)
     return this.http.post<Specification>(this.apiUrl, dto);
   }
 
   updateSpecification(specification: Specification): Observable<Specification>{
     let dto = {
       id: specification.id,
-      name: specification.name,
+      specName: specification.specName,
     }
     return this.http.put<Specification>(this.apiUrl+'/'+specification.id, dto)
   }

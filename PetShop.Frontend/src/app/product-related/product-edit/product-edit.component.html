@@ -1,6 +1,6 @@
 <div style="text-align: center">
   <mat-form-field>Name:
-    <input type="string" matInput [(ngModel)]="product.pname">
+    <input type="string" matInput [(ngModel)]="product.name">
   </mat-form-field>
   <mat-form-field>Price:
     <input type="number" matInput [(ngModel)]="product.price">
@@ -21,8 +21,9 @@
     <input type="number" matInput [(ngModel)]="product.subCategory">
   </mat-form-field>
   <mat-form-field>Brand:
-    <input type="number" matInput [(ngModel)]="product.brand">
+    <input type="number" matInput [(ngModel)]="product. brand">
   </mat-form-field>
-  <button mat-raised-button (click)="updateProduct()">Update this product</button>
+  <button mat-raised-button (click)="updateProduct()">Finish update of this product</button>
+  <app-current-spec-list (delete)="onDelete($event)" #child></app-current-spec-list>
 </div>
 

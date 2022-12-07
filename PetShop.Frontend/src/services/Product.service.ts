@@ -38,12 +38,12 @@ export class ProductService {
 
   addProduct(product: Product): Observable<Product>{
     let dto = {
-      name: product.pname,
+      name: product.name,
       price: product.price,
       description: product.description,
       imageUrl: product.imageUrl,
       rating: product.rating,
-      specsDescriptions: product.specList,
+      specsDescriptions: product.specsDescriptions,
       mainCategory: product.mainCategory,
       subCategory: product.subCategory,
       brand: product.brand,
@@ -55,7 +55,7 @@ export class ProductService {
   UpdateProduct(product: Product): Observable<Product>{
     let dto = {
       id: product.id,
-      name: product.pname,
+      name: product.name,
       price: product.price,
       description: product.description,
       imageUrl: product.imageUrl,
