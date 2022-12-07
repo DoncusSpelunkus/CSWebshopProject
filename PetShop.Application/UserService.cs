@@ -37,16 +37,17 @@ public class UserService : IUserService
 
     }
 
-    public User UpdateUser(Guid userID, User user)
+    public User UpdateUser(Guid userID, UserDTO userDto)
     {
-        if (userID != user.Id) throw new ValidationException("ID in body and route are different (Update)");
-
-        var validation = _Uservalidator.Validate(user);
+        var validation = _UserDTOValidator.Validate(userDto);
         if (!validation.IsValid)
         {
             throw new ValidationException(validation.ToString());
         }
 
+        User user = new User();
+        user = _mapper.Map<User>(userDto);
+        user.Id = userID;
         return _UserRepository.UpdateUser(user);
     }
     
@@ -63,7 +64,6 @@ public class UserService : IUserService
     {
         if (userId == null) throw new ValidationException("Id is invalid (Get)");
         return _UserRepository.GetUserByID(userId);
-
     }
     
 }

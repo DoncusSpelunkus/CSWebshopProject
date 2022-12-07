@@ -53,11 +53,11 @@ public class UserController : ControllerBase
             }
             
             [HttpPost]
-            public ActionResult<User> CreateUser(UserDTO dto)
+            public ActionResult<User> CreateUser(UserDTO userDto)
             {
                 try
                 {
-                    var result = _userService.CreateUsers(dto);
+                    var result = _userService.CreateUsers(userDto);
                     return Created("User/" + result.Id , result);
                 }
                 catch (ValidationException e)
@@ -73,11 +73,11 @@ public class UserController : ControllerBase
             [HttpPut]
             [Route("{userId}")]
     
-            public ActionResult<User> UpdateUser([FromRoute] Guid userID, [FromBody] User user)
+            public ActionResult<User> UpdateUser([FromRoute] Guid userID, [FromBody] UserDTO userDto)
             {
                 try
                 {
-                    return Ok(_userService.UpdateUser(userID, user));
+                    return Ok(_userService.UpdateUser(userID, userDto:));
                 }
                 catch (KeyNotFoundException e)
                 {
