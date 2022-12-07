@@ -1,10 +1,12 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 using PetShop.Domain;
 
 namespace Factory.Domain;
 
-public class MainCategory : ICategory
+public class MainCategory
 {
+    [Key]
     public int RefID { get; set; }
     public string Name { get; set; }
     [AllowNull]

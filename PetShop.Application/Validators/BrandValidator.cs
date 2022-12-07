@@ -3,9 +3,9 @@ using PetShop.Application.PostProdDTO;
 
 namespace PetShop.Application.Validators
 {
-    public class SubCatValidator : AbstractValidator<SubCatDTO>
+    public class BrandValidator : AbstractValidator<SubCatDTO>
     {
-        public SubCatValidator()
+        public BrandValidator()
         {
             RuleFor(p => p.Name).NotEmpty();
         }

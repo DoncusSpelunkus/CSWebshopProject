@@ -102,6 +102,7 @@ namespace PetShop.Infastructure
         public DbSet<MainCategory> MainCategoryTable { get; set; }
         public DbSet<SubCategory> SubCategoryTable { get; set; }
         public DbSet<Specs> SpecsTable { get; set; }
+        public DbSet<Brand> BrandTable { get; set; }
     }
 
 }
