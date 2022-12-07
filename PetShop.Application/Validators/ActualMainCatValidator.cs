@@ -10,7 +10,6 @@ public class ActualMainCatValidator
         public MainCatValidator()
         {
             RuleFor(c => c.Name).NotEmpty();
-            RuleFor(c => c.ProdList);
         }
     }
 }
