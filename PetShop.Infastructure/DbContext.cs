@@ -22,8 +22,13 @@ namespace PetShop.Infastructure
             modelBuilder.Entity<SubCategory>()
                 .Property(f => f.RefID)
                 .ValueGeneratedOnAdd();
-            modelBuilder.Entity<User>().Property(id => id.Id).
-                ValueGeneratedOnAdd();
+            modelBuilder.Entity<User>()
+                .Property(id => id.Id)
+                .ValueGeneratedOnAdd();
+            modelBuilder.Entity<Specs>()
+                .Property(s => s.ID)
+                .ValueGeneratedOnAdd();
+
 
             //Setting keys
             modelBuilder.Entity<Product>()
@@ -43,9 +48,8 @@ namespace PetShop.Infastructure
                 .WithMany(c => c.ProdList)
                 .HasForeignKey(p => p.SubCategoryObjId);
 
-            modelBuilder.Entity<Specs>()
-                .Property(s => s.ID)
-                .ValueGeneratedOnAdd();
+            
+               
             modelBuilder.Entity<MainCategory>()
                 .HasMany<Product>(mc => mc.ProdList)
                 .WithOne(p => p.MainCategoryObj)
@@ -95,6 +99,8 @@ namespace PetShop.Infastructure
                 .Ignore(p => p.MainCategoryObj);
             modelBuilder.Entity<Product>()
                 .Ignore(p => p.SubCategoryObj);
+            modelBuilder.Entity<Specs>()
+                .Ignore(s => s.SpecsDescriptions);
             
 
         }
