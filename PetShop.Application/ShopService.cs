@@ -1,5 +1,4 @@
 using AutoMapper;
-using Factory.Domain;
 using FluentValidation;
 using PetShop.Application.Interfaces;
 using PetShop.Application.PostProdDTO;

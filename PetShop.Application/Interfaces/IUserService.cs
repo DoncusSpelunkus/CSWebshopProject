@@ -1,17 +1,17 @@
-﻿using Factory.Domain;
+﻿using PetShop.Domain;
 using PetShop.Application.PostProdDTO;
 
 namespace PetShop.Application.Interfaces;
 
-public class IUserService
+public interface IUserService
 {
-    public List<User> GetAllSpecs();
+    public List<User> GetAllUsers();
         
-    public User CreateSpecs(UserDTO userDto);
+    public User CreateUsers(UserDTO userDto);
 
-    public User UpdateSpecs(int userID, User user);
+    public User UpdateUser(Guid userID, User user);
         
-    public User DeleteSpecsById(int userID);
+    public User DeleteUserById(Guid userID);
 
-    public User GetSpecByID(int userId);
+    public User GetUserByID(Guid userId);
 }

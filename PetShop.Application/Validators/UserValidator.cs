@@ -1,6 +1,14 @@
-﻿namespace PetShop.Application.Validators;
+﻿using System.Data;
+using System.Reflection.Metadata;
+using FluentValidation;
+using PetShop.Application.PostProdDTO;
 
-public class UserValidator
+namespace PetShop.Application.Validators;
+
+public class UserValidator : AbstractValidator<UserDTO>
 {
-    
+    public UserValidator()
+    {
+        RuleFor(u => u.Name).NotEmpty();
+    }
 }

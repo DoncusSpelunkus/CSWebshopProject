@@ -1,5 +1,4 @@
-﻿using Factory.Domain;
-using PetShop.Domain;
+﻿using PetShop.Domain;
 using Microsoft.EntityFrameworkCore;
 
 namespace PetShop.Infastructure

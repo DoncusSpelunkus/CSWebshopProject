@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.CodeAnalysis;
 using PetShop.Domain;
 
-namespace Factory.Domain;
+namespace PetShop.Domain;
 
 public class SubCategory
 {

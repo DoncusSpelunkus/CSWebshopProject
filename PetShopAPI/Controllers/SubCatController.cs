@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Factory.Domain;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using PetShop.Application;

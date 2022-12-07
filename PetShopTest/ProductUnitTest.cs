@@ -1,4 +1,3 @@
-using Factory.Domain;
 using PetShop.Application.Interfaces;
 using PetShop.Domain;
 

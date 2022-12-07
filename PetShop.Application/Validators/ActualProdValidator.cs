@@ -1,4 +1,3 @@
-using Factory.Domain;
 using FluentValidation;
 using PetShop.Domain;
 

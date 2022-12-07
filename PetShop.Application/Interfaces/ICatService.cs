@@ -1,4 +1,4 @@
-﻿using Factory.Domain;
+﻿using PetShop.Domain;
 using PetShop.Application.PostProdDTO;
 
 namespace PetShop.Application.Interfaces;

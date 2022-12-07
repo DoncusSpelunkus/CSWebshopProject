@@ -1,0 +1,112 @@
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Mvc;
+using PetShop.Application.Interfaces;
+using PetShop.Application.PostProdDTO;
+using PetShop.Domain;
+
+namespace PetShopApi.Controllers;
+[ApiController]
+[Route("[Controller]")]
+public class UserController : ControllerBase
+{
+
+    private IUserService _userService;
+
+    public UserController(IUserService service)
+    {
+        _userService = service;
+    }
+
+    [HttpGet]
+    public ActionResult<List<User>> GetAllUsers()
+    {
+        try
+        {
+            return Ok(_userService.GetAllUsers());
+        }
+        catch (KeyNotFoundException e)
+        {
+            return NotFound("No User found");
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, e.ToString());
+        }
+    }
+    
+     [HttpGet("{userID}")]
+            
+            public ActionResult<User> GetUserById(Guid userID)
+            {
+                try
+                {
+                    return Ok(_userService.GetUserByID(userID));
+                }
+                catch (KeyNotFoundException e)
+                {
+                    return NotFound("No User found at ID " + userID);
+                }
+                catch (Exception e)
+                {
+                    return StatusCode(500, e.ToString());
+                }
+            }
+            
+            [HttpPost]
+            public ActionResult<User> CreateUser(UserDTO dto)
+            {
+                try
+                {
+                    var result = _userService.CreateUsers(dto);
+                    return Created("User/" + result.Id , result);
+                }
+                catch (ValidationException e)
+                {
+                    return BadRequest(e.Message);
+                }
+                catch (Exception e)
+                {
+                    return StatusCode(500, e.Message);
+                }
+            }
+    
+            [HttpPut]
+            [Route("{userId}")]
+    
+            public ActionResult<User> UpdateUser([FromRoute] Guid userID, [FromBody] User user)
+            {
+                try
+                {
+                    return Ok(_userService.UpdateUser(userID, user));
+                }
+                catch (KeyNotFoundException e)
+                {
+                    return NotFound("No User found at ID " + userID);
+                }
+                catch (Exception e)
+                {
+                    return StatusCode(500, e.Message);
+                }
+            }
+
+            [HttpDelete("{userID}")]
+    
+            public ActionResult<User> DeleteUserById(Guid userID)
+            {
+                try
+                {
+                    return Ok(_userService.DeleteUserById(userID));
+                }
+                catch (KeyNotFoundException e)
+                {
+                    return NotFound("No specification found at ID " + userID);
+                }
+                catch (Exception e)
+                {
+                    return StatusCode(500, e.ToString());
+                }
+            }
+
+
+
+}

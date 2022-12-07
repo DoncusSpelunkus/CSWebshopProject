@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Reflection;
-using Factory.Domain;
+using PetShop.Domain;
 
 namespace PetShop.Domain
 {

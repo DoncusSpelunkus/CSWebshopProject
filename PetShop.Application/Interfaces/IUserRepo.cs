@@ -1,12 +1,13 @@
-﻿using Factory.Domain;
+﻿using PetShop.Domain;
 
 namespace PetShop.Application.Interfaces;
 
-public class IUserRepo
+public interface IUserRepo
 {
-    public User GetUser(string username);
-    public User GetUser(string username, string password);
-    public void InsertUser(User user);
-    public void UpdateUser(User user);
-    public void DeleteUser(User user);
+    
+    public List<User> GetAllUser();
+    public User GetUserByID(Guid id);
+    public User CreateUser(User user);
+    public User UpdateUser(User user);
+    public User DeleteUser(Guid id);
 }

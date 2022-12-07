@@ -36,17 +36,14 @@ public class SpecService : ISpecService
             return _productRepository.CreateSpecs(_mapper.Map<Specs>(dto));
         }
 
-        public Specs UpdateSpecs(int specId, Specs specs)
+        public Specs UpdateSpecs(int specId, SpecDTO dto)
         {
-            
-            if (specId != specs.ID)
-                throw new ValidationException("ID in body and route are different (Update)");
-            var validation = _productValidator.Validate(specs);
+            var validation = _validator.Validate(dto);
             if (!validation.IsValid)
             {
                 throw new ValidationException(validation.ToString());
             }
-            return _productRepository.UpdateSpecs(specs);
+            return _productRepository.UpdateSpecs(_mapper.Map<Specs>(dto));
         }
 
         public Specs DeleteSpecsById(int specId)

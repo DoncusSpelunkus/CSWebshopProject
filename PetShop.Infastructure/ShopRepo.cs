@@ -1,5 +1,4 @@
 using PetShop.Application.Interfaces;
-using Factory.Domain;
 using Microsoft.EntityFrameworkCore;
 
 using PetShop.Domain;

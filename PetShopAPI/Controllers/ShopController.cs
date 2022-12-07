@@ -13,14 +13,12 @@ namespace PetShopApi.Controllers
     [Route("[Controller]")]
     public class ShopController : ControllerBase
     { 
-        private ProdValidator _productValidator;
-        private IMapper _mapper;
+      
         private IShopService _shopService;
-        public ShopController(IShopService service, IMapper mapper)
+        public ShopController(IShopService service)
         {
             _shopService = service;
-            _productValidator = new ProdValidator();
-            _mapper = mapper;
+           
         }
 
         [HttpGet]

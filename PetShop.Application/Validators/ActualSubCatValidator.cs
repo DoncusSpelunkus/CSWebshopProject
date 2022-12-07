@@ -1,4 +1,4 @@
-﻿using Factory.Domain;
+﻿using PetShop.Domain;
 using FluentValidation;
 
 namespace PetShop.Application.Validators;

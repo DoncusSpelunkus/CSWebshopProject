@@ -1,6 +1,6 @@
 ﻿using PetShop.Domain;
 
-namespace Factory.Domain;
+namespace PetShop.Domain;
 
 public class Brand
 {
