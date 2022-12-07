@@ -1,14 +1,18 @@
-﻿using PetShop.Application.Interfaces;
+﻿using System.Security.Cryptography;
+using System.Text;
+using PetShop.Application.Interfaces;
 using PetShop.Domain;
+using PetShop.Infastructure.Logic;
 
 namespace PetShop.Infastructure;
 
 public class UserRepo : IUserRepo
 {
     private DBContext _dbcontext;
-    
-    public UserRepo(DBContext dbcontext)
+    private PasswordHashing _passwordHashing;
+    public UserRepo(DBContext dbcontext, PasswordHashing passwordHashing)
     {
+        _passwordHashing = passwordHashing;
         _dbcontext = dbcontext;
     }
 
@@ -24,7 +28,8 @@ public class UserRepo : IUserRepo
     }
 
     public User CreateUser(User user)
-    {
+    {   
+        _passwordHashing.HashPassword(user.PasswordHash);
         _dbcontext.Usertable.Add(user);
         _dbcontext.SaveChanges();
         return user;
@@ -32,6 +37,7 @@ public class UserRepo : IUserRepo
 
     public User UpdateUser(User user)
     {
+       
         _dbcontext.Usertable.Update(user);
         _dbcontext.SaveChanges();
         return user;
