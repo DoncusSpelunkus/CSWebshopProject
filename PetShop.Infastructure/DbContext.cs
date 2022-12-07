@@ -13,7 +13,7 @@ namespace PetShop.Infastructure
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //Auto increment
+            //Auto increment id for entities
             modelBuilder.Entity<Product>()
                 .Property(p => p.ID)
                 .ValueGeneratedOnAdd();
@@ -23,6 +23,8 @@ namespace PetShop.Infastructure
             modelBuilder.Entity<SubCategory>()
                 .Property(f => f.RefID)
                 .ValueGeneratedOnAdd();
+            modelBuilder.Entity<User>().Property(id => id.Id).
+                ValueGeneratedOnAdd();
 
             //Setting keys
             modelBuilder.Entity<Product>()
@@ -103,6 +105,7 @@ namespace PetShop.Infastructure
         public DbSet<SubCategory> SubCategoryTable { get; set; }
         public DbSet<Specs> SpecsTable { get; set; }
         public DbSet<Brand> BrandTable { get; set; }
+        public DbSet<User> Usertable { get; set; }
     }
 
 }
