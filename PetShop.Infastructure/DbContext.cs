@@ -7,7 +7,7 @@ namespace PetShop.Infastructure
     {
         public DBContext(DbContextOptions<DBContext> opts) : base(opts)
         {
-
+            
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -101,8 +101,6 @@ namespace PetShop.Infastructure
                 .Ignore(p => p.SubCategoryObj);
             modelBuilder.Entity<Specs>()
                 .Ignore(s => s.SpecsDescriptions);
-            
-
         }
         public DbSet<SpecsDescription> SpecsDescriptionsTable { get; set; }
         public DbSet<Product> ProductTable { get; set; }
