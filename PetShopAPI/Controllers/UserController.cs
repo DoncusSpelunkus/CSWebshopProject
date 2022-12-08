@@ -59,15 +59,15 @@ public class UserController : ControllerBase
             
             [HttpPost]
             [Route("login")]
-            public async Task<ActionResult<string>> Login(UserLoginDTO request)
+            public ActionResult<User> UserLogin(UserLoginDTO userLoginDto)
             {
                 try
                 {
-                    return Ok(_userService.GetUserByID(userID));
+                    return Ok(_userService.UserLogin(userLoginDto));
                 }
                 catch (KeyNotFoundException e)
                 {
-                    return NotFound("No User found at ID " + userID);
+                    return NotFound("No user found");
                 }
                 catch (Exception e)
                 {

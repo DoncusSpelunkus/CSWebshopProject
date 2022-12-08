@@ -56,9 +56,9 @@ public class UserRepo : IUserRepo
         _dbcontext.SaveChanges();
         return user;
     }
-    
- 
 
-
-
+    public User GetUserByName(string currentUserName)
+    {
+        return _dbcontext.Usertable.FirstOrDefault(u => u.Name == currentUserName);
+    }
 }

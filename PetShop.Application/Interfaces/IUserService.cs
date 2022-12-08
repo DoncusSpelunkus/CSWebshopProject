@@ -14,4 +14,5 @@ public interface IUserService
     public User DeleteUserById(Guid userID);
 
     public User GetUserByID(Guid userId);
+    public User UserLogin(UserLoginDTO userLoginDto);
 }

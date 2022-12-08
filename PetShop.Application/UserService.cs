@@ -12,18 +12,16 @@ public class UserService : IUserService
 {
     private IUserRepo _UserRepository;
     private IMapper _mapper;
-    private IValidator<User> _Uservalidator;
+    private IValidator<UserLoginDTO> _UserLoginvalidator;
     private IValidator<UserDTO> _UserDTOValidator;
-    private PasswordHasing _passwordHasing;
 
-    public UserService(IUserRepo repository, IMapper mapper, IValidator<User> uservalidator,
-        IValidator<UserDTO> UserDtoValidator, PasswordHasing passwordHasing)
+    public UserService(IUserRepo repository, IMapper mapper, IValidator<UserDTO> UserDtoValidator, IValidator<UserLoginDTO> UserLoginvalidator)
     {
         _UserRepository = repository;
         _mapper = mapper;
-        _Uservalidator = uservalidator;
         _UserDTOValidator = UserDtoValidator;
-        _passwordHasing = passwordHasing;
+       
+        _UserLoginvalidator = UserLoginvalidator;
     }
 
     public List<User> GetAllUsers()
@@ -40,7 +38,7 @@ public class UserService : IUserService
         }
         var currentUser = _mapper.Map<User>(userDto);
         byte [] passwordHash, passwordSalt;
-        _passwordHasing.GenerateHash(userDto.password, out passwordHash, out passwordSalt);
+        GenerateHash(userDto.password, out passwordHash, out passwordSalt);
         currentUser.HashPassword = passwordHash;
         currentUser.SaltPassword = passwordSalt;
         
@@ -77,7 +75,45 @@ public class UserService : IUserService
         return _UserRepository.GetUserByID(userId);
     }
 
+    public User UserLogin(UserLoginDTO userLoginDto)
+    {
+        var validation = _UserLoginvalidator.Validate(userLoginDto);
+        if (!validation.IsValid)
+        {
+            throw new ValidationException(validation.ToString());
+        }
+        //var currentUser = _mapper.Map<User>(userLoginDto);
+        var user = _UserRepository.GetUserByName(userLoginDto.UserName);
+        if (user == null) throw new ValidationException("User not found");
+        if (!ValidateHash(userLoginDto.Password, user.HashPassword, user.SaltPassword))
+        {
+            throw new ValidationException("Password is incorrect");
+        }
+        return user;
+    }
     
+    public void GenerateHash(string Password, out byte[] PasswordHash, out byte[] PasswordSalt)
+    {
+        using (var hmac = new System.Security.Cryptography.HMACSHA512())
+        {
+            PasswordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(Password));
+            PasswordSalt = hmac.Key;
 
+        }
+    }
     
+    public Boolean ValidateHash(string password, byte[] passwordhash, byte[] passwordsalt)
+    {
+        using (var hash = new System.Security.Cryptography.HMACSHA512(passwordsalt))
+        {
+            var newPassHash = hash.ComputeHash(Encoding.UTF8.GetBytes(password));
+            for (int i = 0; i < newPassHash.Length; i++)
+                if (newPassHash[i] != passwordhash[i])
+                    return false;
+        }
+
+        return true;
+
+
+    }
 }

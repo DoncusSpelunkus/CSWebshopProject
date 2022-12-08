@@ -10,4 +10,5 @@ public interface IUserRepo
     public User CreateUser(User user);
     public User UpdateUser(User user);
     public User DeleteUser(Guid id);
+    public User GetUserByName(string currentUserName);
 }
