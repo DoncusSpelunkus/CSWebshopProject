@@ -103,17 +103,20 @@ public class UserController : ControllerBase
             [Route("{userID}")]
             public ActionResult<User> UpdateUser([FromRoute] Guid userID, [FromBody] UserDTO userDto, string currentPassword)
             {
-                byte[] passwordHash;
+               
                 var acutalUser = _userService.GetUserByID(userID);
-                _userService.CompareHashValueHash(currentPassword, out passwordHash,acutalUser.SaltPassword);
-              
-                if (acutalUser.HashPassword != passwordHash)
-                {
-                    return BadRequest("Wrong password");
-                }
                 try
                 {
-                    return Ok(_userService.UpdateUser(userID, userDto));
+                    if(!_userService.ValidateHash(currentPassword, acutalUser.HashPassword, acutalUser.SaltPassword))
+                    {
+                        return BadRequest("Wrong password.");
+                    }
+                    else
+                    {
+                        return Ok(_userService.UpdateUser(userID, userDto));
+                    }
+                    
+                    
                 }
                 catch (KeyNotFoundException e)
                 {
