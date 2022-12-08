@@ -81,7 +81,7 @@ public class UserController : ControllerBase
                
 
                 var refreshToken = GenerateRefreshToken();
-                SetRefreshToken(refreshToken);
+                SetRefreshToken(refreshToken, currentUser);
 
                 return Ok(token);
             }
@@ -159,14 +159,13 @@ public class UserController : ControllerBase
 
                 string token = CreateToken(currentUser);
                 var newRefreshToken = GenerateRefreshToken();
-                SetRefreshToken(newRefreshToken);
+                SetRefreshToken(newRefreshToken, currentUser);
 
                 return Ok(token);
             }
             
-            private void SetRefreshToken(RefreshToken newRefreshToken)
-            {   
-                var currentUser = _userService.GetUserByToken(newRefreshToken.Token);
+            private void SetRefreshToken(RefreshToken newRefreshToken, User currentUser)
+            {
                 var cookieOptions = new CookieOptions
                 {
                     HttpOnly = true,
