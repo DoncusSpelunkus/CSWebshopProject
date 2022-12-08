@@ -12,9 +12,6 @@ namespace PetShop.Application.Validators
             RuleFor(p => p.Description).NotEmpty();
             RuleFor(p => p.ImageUrl).NotEmpty();
             RuleFor(p => p.Rating).GreaterThan(0);
-            RuleFor(p => p.MainCategory).NotEmpty();
-            RuleFor(p => p.SubCategory).NotEmpty();
-            RuleFor(p => p.Brand).NotEmpty();
         }
     }
 }

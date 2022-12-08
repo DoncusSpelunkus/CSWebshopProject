@@ -18,10 +18,9 @@ namespace PetShop.Domain
 
         //public List<KeyValuePair<string,string>> Specs{ get; set; }
         public MainCategory MainCategoryObj { get; set; }
-
-        public int MainCategoryObjId { get; set; }
+        public int MainCategoryID { get; set; }
         public SubCategory SubCategoryObj { get; set; }
-        public int SubCategoryObjId { get; set; }
+        public int SubCategoryID { get; set; }
 
         /*
          *The specslist holds a list of names of the specs.

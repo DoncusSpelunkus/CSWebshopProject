@@ -67,7 +67,7 @@ namespace PetShopApi.Controllers
             try
             {
                 var result = _catService.CreateSubCategory(dto);
-                return Created("shop/" + result.RefID, result);
+                return Created("shop/" + result.SubCategoryID, result);
             }
             catch (ValidationException e)
             {

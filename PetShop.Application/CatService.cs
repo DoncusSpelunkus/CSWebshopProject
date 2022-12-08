@@ -30,7 +30,7 @@ public class CatService: ICatService
 
     public MainCategory UpdateMainCategory(int mainCatRefID, MainCategory mainCategory)
     {
-        if (mainCatRefID != mainCategory.RefID)
+        if (mainCatRefID != mainCategory.MainCategoryID)
             throw new ValidationException("ID in body and route are different (Update)");
         var validation = _mainCatValidator.Validate(mainCategory);
         if (!validation.IsValid)
@@ -70,7 +70,7 @@ public class CatService: ICatService
 
     public SubCategory UpdateSubCategory(int subCatRefID,SubCategory subCategory)
     {
-        if (subCatRefID != subCategory.RefID)
+        if (subCatRefID != subCategory.SubCategoryID)
             throw new ValidationException("ID in body and route are different (Update)");
         var validation = _subCatValidator.Validate(subCategory);
         if (!validation.IsValid)

@@ -14,32 +14,34 @@ public class CatRepo: ICatRepo
         _dbContext = dbContext;
     }
     
-    public MainCategory CreateMainCategory(MainCategory mainCategory)
+    public MainCategory? CreateMainCategory(MainCategory? mainCategory)
     {
         _dbContext.MainCategoryTable.Add(mainCategory);
         _dbContext.SaveChanges();
         return mainCategory;
     }
 
-    public List<MainCategory> GetAllMainCategories()
+    public List<MainCategory?> GetAllMainCategories()
     {
-        return _dbContext.MainCategoryTable.Include(c=> c.ProdList).ToList();
+        return _dbContext.MainCategoryTable.ToList();
     }
     
-    public MainCategory UpdateMainCategory(MainCategory mainCategory)
+    public MainCategory? UpdateMainCategory(MainCategory? mainCategory)
     {
         _dbContext.MainCategoryTable.Update(mainCategory);
         _dbContext.SaveChanges();
         return mainCategory;
     }
-    public MainCategory GetMainCategoryByID(int mainCatId)
+    public MainCategory? GetMainCategoryByID(int mainCatId)
     {
-        return _dbContext.MainCategoryTable.FirstOrDefault(c => c.RefID == mainCatId);
+        return _dbContext.MainCategoryTable
+            .Include(c=> c.ProdList)
+            .FirstOrDefault(c => c.MainCategoryID == mainCatId);
     }
 
-    public MainCategory DeleteMainCategoryByID(int mainCatId)
+    public MainCategory? DeleteMainCategoryByID(int mainCatId)
     {
-        MainCategory mainCategory = GetMainCategoryByID(mainCatId);
+        MainCategory? mainCategory = GetMainCategoryByID(mainCatId);
         _dbContext.MainCategoryTable.Remove(mainCategory);
         _dbContext.SaveChanges();
         return mainCategory;
@@ -66,7 +68,7 @@ public class CatRepo: ICatRepo
     
     public SubCategory GetSubCategoryByID(int subCatId)
     {
-        return _dbContext.SubCategoryTable.FirstOrDefault(c => c.RefID == subCatId);
+        return _dbContext.SubCategoryTable.FirstOrDefault(c => c.SubCategoryID == subCatId);
     }
 
     public SubCategory DeleteSubCategoryByID(int subCatId)

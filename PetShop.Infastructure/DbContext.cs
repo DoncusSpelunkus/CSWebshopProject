@@ -18,41 +18,45 @@ namespace PetShop.Infastructure
                 .Property(p => p.ID)
                 .ValueGeneratedOnAdd();
             modelBuilder.Entity<MainCategory>()
-                .Property(f => f.RefID)
+                .Property(f => f.MainCategoryID)
                 .ValueGeneratedOnAdd();
             modelBuilder.Entity<SubCategory>()
-                .Property(f => f.RefID)
+                .Property(f => f.SubCategoryID)
                 .ValueGeneratedOnAdd();
 
             //Setting keys
             modelBuilder.Entity<Product>()
                 .HasKey(c => new { ManFacId = c.ID });
             modelBuilder.Entity<MainCategory>()
-                .HasKey(c => new { ManFacId = c.RefID });
+                .HasKey(c => new { ManFacId = c.MainCategoryID });
             modelBuilder.Entity<SubCategory>()
-                .HasKey(c => new { ManFacId = c.RefID });
-
-            //Making foreign keys for the categories. The product stores a single category but the categories store multiple products
-            modelBuilder.Entity<Product>()
+                .HasKey(c => new { ManFacId = c.SubCategoryID });
+        
+            //Making foreign keys for the categories.
+            //The product stores a single category but the categories store multiple products
+            
+            /*modelBuilder.Entity<Product>()
                 .HasOne<MainCategory>(p => p.MainCategoryObj)
                 .WithMany(c => c.ProdList)
-                .HasForeignKey(p => p.MainCategoryObjId);
+                .HasForeignKey(p => p.MainCategoryID);
             modelBuilder.Entity<Product>()
                 .HasOne<SubCategory>(p => p.SubCategoryObj)
                 .WithMany(c => c.ProdList)
-                .HasForeignKey(p => p.SubCategoryObjId);
-
-            modelBuilder.Entity<Specs>()
-                .Property(s => s.ID)
-                .ValueGeneratedOnAdd();
+                .HasForeignKey(p => p.SubCategoryID);*/
+            
             modelBuilder.Entity<MainCategory>()
                 .HasMany<Product>(mc => mc.ProdList)
                 .WithOne(p => p.MainCategoryObj)
-                .HasForeignKey(p => p.MainCategoryObjId);
+                .HasForeignKey(p => p.MainCategoryID);
+
             modelBuilder.Entity<SubCategory>()
                 .HasMany<Product>(sc => sc.ProdList)
                 .WithOne(p => p.SubCategoryObj)
-                .HasForeignKey(p => p.SubCategoryObjId);
+                .HasForeignKey(p => p.SubCategoryID);
+            
+            modelBuilder.Entity<Specs>()
+                .Property(s => s.ID)
+                .ValueGeneratedOnAdd();
 
             modelBuilder.Entity<SpecsDescription>()
                 .HasKey(sd => new { sd.ProductId, sd.SpecsId });
@@ -94,7 +98,13 @@ namespace PetShop.Infastructure
                 .Ignore(p => p.MainCategoryObj);
             modelBuilder.Entity<Product>()
                 .Ignore(p => p.SubCategoryObj);
-            
+            modelBuilder.Entity<MainCategory>()
+                .Ignore(c => c.ProdList);
+            modelBuilder.Entity<SubCategory>()
+                .Ignore(c => c.ProdList);
+            modelBuilder.Entity<Brand>()
+                .Ignore(c => c.ProdList);
+
 
         }
         public DbSet<SpecsDescription> SpecsDescriptionsTable { get; set; }

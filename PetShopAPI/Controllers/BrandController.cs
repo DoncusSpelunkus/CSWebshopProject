@@ -24,7 +24,7 @@ namespace PetShopApi.Controllers{
         }
 
         [HttpGet]
-        [Route("GetAllMainCategories")]
+        [Route("GetAllBrands")]
         public ActionResult<List<Brand>> GetAllBrands()
         {
             try
