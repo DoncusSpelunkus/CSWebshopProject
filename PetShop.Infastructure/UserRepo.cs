@@ -43,7 +43,7 @@ public class UserRepo : IUserRepo
     }
    // method used for creating user in the database
     public User UpdateUser(User user)
-    {
+    {   
         _dbcontext.Usertable.Update(user);
         _dbcontext.SaveChanges();
         return user;
@@ -63,9 +63,4 @@ public class UserRepo : IUserRepo
         return _dbcontext.Usertable.FirstOrDefault(u => u.Name == currentUserName);
     }
     
-    public User GetUserByToken(string token)
-    {
-        
-        return _dbcontext.Usertable.FirstOrDefault(u => u.RefreshToken == token);
-    }
 }

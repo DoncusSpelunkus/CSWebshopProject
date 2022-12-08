@@ -51,7 +51,7 @@ public class UserService : IUserService
     }
 
     public User UpdateUser(Guid userID, UserDTO userDto)
-    {
+    {   
         var validation = _UserDTOValidator.Validate(userDto);
         if (!validation.IsValid)
         {
@@ -68,7 +68,7 @@ public class UserService : IUserService
 
         return _UserRepository.UpdateUser(user);
     }
-
+    
 
 
     public User DeleteUserById(Guid userID)
@@ -83,26 +83,6 @@ public class UserService : IUserService
         if (userId == null) throw new ValidationException("Id is invalid (Get)");
         return _UserRepository.GetUserByID(userId);
     }
-
-    public User UserLogin(UserLoginDTO userLoginDto)
-    {
-        var validation = _UserLoginvalidator.Validate(userLoginDto);
-        if (!validation.IsValid)
-        {
-            throw new ValidationException(validation.ToString());
-        }
-
-        //var currentUser = _mapper.Map<User>(userLoginDto);
-        var user = _UserRepository.GetUserByName(userLoginDto.UserName);
-        if (user == null) throw new ValidationException("User not found");
-        if (!ValidateHash(userLoginDto.Password, user.HashPassword, user.SaltPassword))
-        {
-            throw new ValidationException("Password is incorrect");
-        }
-
-        return user;
-    }
-
     public void GenerateHash(string Password, out byte[] PasswordHash, out byte[] PasswordSalt)
     {
         using (var hmac = new System.Security.Cryptography.HMACSHA512())
@@ -112,6 +92,15 @@ public class UserService : IUserService
 
         }
     }
+
+    public void CompareHashValueHash(string Password, out byte[] PasswordHash, byte[] PasswordSalt)
+    {
+        using (var hmac = new System.Security.Cryptography.HMACSHA512())
+        {
+            PasswordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(Password));
+        }
+    }
+    
 
     public Boolean ValidateHash(string password, byte[] passwordhash, byte[] passwordsalt)
     {

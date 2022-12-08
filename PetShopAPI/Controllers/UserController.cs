@@ -66,12 +66,12 @@ public class UserController : ControllerBase
                 var currentUser = _userService.GetUserByName(userLogin.UserName);
                 if (currentUser.Name != userLogin.UserName)
                 {
-                    return BadRequest("User not found.");
+                    return BadRequest("Wrong password or username.");
                 }
 
                 if (!_userService.ValidateHash(userLogin.Password, currentUser.HashPassword, currentUser.SaltPassword))
                 {
-                    return BadRequest("Wrong password.");
+                    return BadRequest("Wrong password or username.");
                 }
                
                 string token = CreateToken(currentUser);
@@ -101,8 +101,16 @@ public class UserController : ControllerBase
     
             [HttpPut]
             [Route("{userID}")]
-            public ActionResult<User> UpdateUser([FromRoute] Guid userID, [FromBody] UserDTO userDto)
+            public ActionResult<User> UpdateUser([FromRoute] Guid userID, [FromBody] UserDTO userDto, string currentPassword)
             {
+                byte[] passwordHash;
+                var acutalUser = _userService.GetUserByID(userID);
+                _userService.CompareHashValueHash(currentPassword, out passwordHash,acutalUser.SaltPassword);
+              
+                if (acutalUser.HashPassword != passwordHash)
+                {
+                    return BadRequest("Wrong password");
+                }
                 try
                 {
                     return Ok(_userService.UpdateUser(userID, userDto));
