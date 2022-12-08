@@ -115,9 +115,15 @@ public class UserService : IUserService
 
         return true;
     }
-    
+
+    public User GetUserByToken(string token)
+    {
+        return _UserRepository.GetUserByToken(token);
+    }
+
     public User GetUserByName(string userName)
     {
+        Console.WriteLine(userName +"STUFFFFFFFFFFFFFFFFFFFFF");
         return _UserRepository.GetUserByName(userName);
     }
    

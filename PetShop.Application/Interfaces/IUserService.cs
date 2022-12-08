@@ -17,4 +17,5 @@ public interface IUserService
     public User UserLogin(UserLoginDTO userLoginDto);
     public User GetUserByName(string userName);
     public Boolean ValidateHash(string password, byte[] passwordhash, byte[] passwordsalt);
+    public User GetUserByToken(string token);
 }

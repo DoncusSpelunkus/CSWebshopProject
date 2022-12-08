@@ -64,6 +64,7 @@ public class UserController : ControllerBase
             [HttpPost("login")]
             public async Task<ActionResult<string>> Login(UserLoginDTO userLogin)
             {   
+                Console.Write(userLogin.UserName+"ssssssssssssssssssssssfesfsfsefsfsef");
                 var currentUser = _userService.GetUserByName(userLogin.UserName);
                 if (currentUser.Name != userLogin.UserName)
                 {
@@ -74,8 +75,9 @@ public class UserController : ControllerBase
                 {
                     return BadRequest("Wrong password.");
                 }
-
+                Console.Write("here is the userssssssssssssssssssssssssssssssssssss"+ currentUser);
                 string token = CreateToken(currentUser);
+               
 
                 var refreshToken = GenerateRefreshToken();
                 SetRefreshToken(refreshToken);
@@ -144,17 +146,17 @@ public class UserController : ControllerBase
             public async Task<ActionResult<string>> RefreshToken()
             {
                 var refreshToken = Request.Cookies["refreshToken"];
-                var currentUser = _userService.GetUserByName();
-                if (!user.RefreshToken.Equals(refreshToken))
+                var currentUser = _userService.GetUserByToken(refreshToken);
+                if (!currentUser.RefreshToken.Equals(refreshToken))
                 {
                     return Unauthorized("Invalid Refresh Token.");
                 }
-                else if(user.TokenExpires < DateTime.Now)
+                else if(currentUser.TokenExpires < DateTime.Now)
                 {
                     return Unauthorized("Token expired.");
                 }
 
-                string token = CreateToken(user);
+                string token = CreateToken(currentUser);
                 var newRefreshToken = GenerateRefreshToken();
                 SetRefreshToken(newRefreshToken);
 
@@ -162,7 +164,8 @@ public class UserController : ControllerBase
             }
             
             public void SetRefreshToken(RefreshToken newRefreshToken)
-            {
+            {   
+                var currentUser = _userService.GetUserByToken(newRefreshToken.Token);
                 var cookieOptions = new CookieOptions
                 {
                     HttpOnly = true,
@@ -171,9 +174,9 @@ public class UserController : ControllerBase
                 Response.Cookies.Append("refreshToken", newRefreshToken.Token, cookieOptions);
                 Response.Cookies.Append("refreshToken", newRefreshToken.Token, cookieOptions);
 
-                user.RefreshToken = newRefreshToken.Token;
-                user.TokenCreated = newRefreshToken.Created;
-                user.TokenExpires = newRefreshToken.Expires;
+                currentUser.RefreshToken = newRefreshToken.Token;
+                currentUser.TokenCreated = newRefreshToken.Created;
+                currentUser.TokenExpires = newRefreshToken.Expires;
             }
             public string CreateToken(User user)
             {

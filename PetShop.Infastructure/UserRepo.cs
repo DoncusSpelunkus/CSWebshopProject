@@ -61,4 +61,9 @@ public class UserRepo : IUserRepo
     {
         return _dbcontext.Usertable.FirstOrDefault(u => u.Name == currentUserName);
     }
+    
+    public User GetUserByToken(string token)
+    {
+        return _dbcontext.Usertable.FirstOrDefault(u => u.RefreshToken == token);
+    }
 }
