@@ -64,7 +64,7 @@ public class UserController : ControllerBase
             [HttpPost("login")]
             public async Task<ActionResult<string>> Login(UserLoginDTO userLogin)
             {   
-                Console.Write(userLogin.UserName+"ssssssssssssssssssssssfesfsfsefsfsef");
+                
                 var currentUser = _userService.GetUserByName(userLogin.UserName);
                 if (currentUser.Name != userLogin.UserName)
                 {
@@ -75,7 +75,7 @@ public class UserController : ControllerBase
                 {
                     return BadRequest("Wrong password.");
                 }
-                Console.Write("here is the userssssssssssssssssssssssssssssssssssss"+ currentUser);
+               
                 string token = CreateToken(currentUser);
                
 
@@ -163,7 +163,7 @@ public class UserController : ControllerBase
                 return Ok(token);
             }
             
-            public void SetRefreshToken(RefreshToken newRefreshToken)
+            private void SetRefreshToken(RefreshToken newRefreshToken)
             {   
                 var currentUser = _userService.GetUserByToken(newRefreshToken.Token);
                 var cookieOptions = new CookieOptions
@@ -172,13 +172,12 @@ public class UserController : ControllerBase
                     Expires = newRefreshToken.Expires
                 };
                 Response.Cookies.Append("refreshToken", newRefreshToken.Token, cookieOptions);
-                Response.Cookies.Append("refreshToken", newRefreshToken.Token, cookieOptions);
-
+                
                 currentUser.RefreshToken = newRefreshToken.Token;
                 currentUser.TokenCreated = newRefreshToken.Created;
                 currentUser.TokenExpires = newRefreshToken.Expires;
             }
-            public string CreateToken(User user)
+            private string CreateToken(User user)
             {
                 List<Claim> claims = new List<Claim>
                 {
@@ -205,7 +204,7 @@ public class UserController : ControllerBase
                 return jwt;
             }
     
-            public RefreshToken GenerateRefreshToken()
+            private RefreshToken GenerateRefreshToken()
             {
                 var refreshToken = new RefreshToken
                 {

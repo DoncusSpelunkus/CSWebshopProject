@@ -128,7 +128,7 @@ public class UserService : IUserService
 
     public User GetUserByName(string userName)
     {
-        Console.WriteLine(userName + "STUFFFFFFFFFFFFFFFFFFFFF");
+        
         return _UserRepository.GetUserByName(userName);
     }
 
