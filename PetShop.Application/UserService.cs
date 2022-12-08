@@ -1,8 +1,11 @@
-﻿using System.Text;
+﻿using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 using AutoMapper;
 using FluentValidation;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using PetShop.Application.Interfaces;
-using PetShop.Application.Logic;
 using PetShop.Application.PostProdDTO;
 using PetShop.Domain;
 
@@ -14,14 +17,15 @@ public class UserService : IUserService
     private IMapper _mapper;
     private IValidator<UserLoginDTO> _UserLoginvalidator;
     private IValidator<UserDTO> _UserDTOValidator;
+    private readonly IConfiguration _configuration;
 
-    public UserService(IUserRepo repository, IMapper mapper, IValidator<UserDTO> UserDtoValidator, IValidator<UserLoginDTO> UserLoginvalidator)
+    public UserService(IUserRepo repository, IMapper mapper, IValidator<UserDTO> UserDtoValidator, IValidator<UserLoginDTO> UserLoginvalidator, IConfiguration config)
     {
         _UserRepository = repository;
         _mapper = mapper;
         _UserDTOValidator = UserDtoValidator;
-       
         _UserLoginvalidator = UserLoginvalidator;
+        _configuration = config;
     }
 
     public List<User> GetAllUsers()
@@ -114,5 +118,28 @@ public class UserService : IUserService
 
         return true;
     }
+    private string CreateToken(User user)
+    {
+        List<Claim> claims = new List<Claim>
+        {
+            new Claim(ClaimTypes.Name, user.Name),
+            new Claim(ClaimTypes.Role, "Admin")
+        };
+
+        var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(
+            _configuration.GetSection("AppSettings:Token").Value));
+
+        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
+
+        var token = new JwtSecurityToken(
+            claims: claims,
+            expires: DateTime.Now.AddDays(1),
+            signingCredentials: creds);
+
+        var jwt = new JwtSecurityTokenHandler().WriteToken(token);
+
+        return jwt;
+    }
+    
     
 }
