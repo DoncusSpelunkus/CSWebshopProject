@@ -112,7 +112,7 @@ public class UserController : ControllerBase
                     }
                     else
                     {
-                        return Ok(_userService.UpdateUser(userID, userDto));
+                        return Ok(_userService.UpdateUser(actualUser, userDto));
                     }
                     
                     
