@@ -16,6 +16,7 @@ public class UserController : ControllerBase
 
     private IUserService _userService;
     private readonly IConfiguration _configuration;
+    
     public UserController(IUserService service, IConfiguration configuration)
     {   _configuration = configuration;
         _userService = service;
@@ -180,9 +181,9 @@ public class UserController : ControllerBase
             private string CreateToken(User user)
             {
                 List<Claim> claims = new List<Claim>
-                {
+                {   // not allowed to use the api stuff for creating product if its just a basic user.
                     new Claim(ClaimTypes.Name, user.Name),
-                    new Claim(ClaimTypes.Role, "Admin")
+                    new Claim(ClaimTypes.Role, "User")
                 };
                 
                 if (String.IsNullOrEmpty(user.Name))

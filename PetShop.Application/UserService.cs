@@ -1,6 +1,7 @@
 ﻿using System.Text;
 using AutoMapper;
 using FluentValidation;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using PetShop.Application.Interfaces;
 using PetShop.Application.PostProdDTO;
@@ -14,16 +15,16 @@ public class UserService : IUserService
     private IMapper _mapper;
     private IValidator<UserLoginDTO> _UserLoginvalidator;
     private IValidator<UserDTO> _UserDTOValidator;
-
+    private readonly IHttpContextAccessor _httpContextAccessor;
 
     public UserService(IUserRepo repository, IMapper mapper, IValidator<UserDTO> UserDtoValidator,
-        IValidator<UserLoginDTO> UserLoginvalidator)
+        IValidator<UserLoginDTO> UserLoginvalidator, IHttpContextAccessor httpContextAccessor)
     {
         _UserRepository = repository;
         _mapper = mapper;
         _UserDTOValidator = UserDtoValidator;
         _UserLoginvalidator = UserLoginvalidator;
-
+        _httpContextAccessor = httpContextAccessor;
     }
 
     public List<User> GetAllUsers()
