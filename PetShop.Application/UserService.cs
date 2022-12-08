@@ -59,11 +59,9 @@ public class UserService : IUserService
         GenerateHash(userDto.password, out passwordHash, out passwordSalt);
         user.HashPassword = passwordHash;
         user.SaltPassword = passwordSalt;
-<<<<<<< Updated upstream
         user.Id = userID;
-=======
+
         
->>>>>>> Stashed changes
         return _UserRepository.UpdateUser(user);
     }
     
