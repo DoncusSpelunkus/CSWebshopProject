@@ -5,7 +5,7 @@ public class User
     public Guid Id { get; set; }
     public string Name { get; set; }
     public string Email { get; set; }
-    public string PasswordHash { get; set; }
-    public string passwordSalt { get; set; }
+    public byte[] HashPassword { get; set; }
+    public byte[] SaltPassword { get; set; }
     public int type { get; set; }
 }

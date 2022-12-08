@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Text;
+using AutoMapper;
 using FluentValidation;
 using PetShop.Application.Interfaces;
 using PetShop.Application.PostProdDTO;
@@ -65,5 +66,26 @@ public class UserService : IUserService
         if (userId == null) throw new ValidationException("Id is invalid (Get)");
         return _UserRepository.GetUserByID(userId);
     }
+    
+    public void GenerateHash(string Password, out byte[] PasswordHash, out byte[] PasswordSalt)
+    {
+        using (var hmac = new System.Security.Cryptography.HMACSHA512())
+        {
+            PasswordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(Password));
+            PasswordSalt = hmac.Key;
+            
+        }
+    }
+    private Boolean ValidateHash(string password, byte[] passwordhash, byte[] passwordsalt)
+    {
+        using(var hash=new System.Security.Cryptography.HMACSHA512(passwordsalt))
+        {
+            var newPassHash = hash.ComputeHash(Encoding.UTF8.GetBytes( password));
+            for (int i = 0; i < newPassHash.Length; i++)
+                if (newPassHash[i] != passwordhash[i])
+                    return false;
+        }
+        return true;
+
     
 }
