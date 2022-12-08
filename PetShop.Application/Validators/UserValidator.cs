@@ -10,5 +10,6 @@ public class UserValidator : AbstractValidator<UserDTO>
     public UserValidator()
     {
         RuleFor(u => u.Name).NotEmpty();
+        RuleFor(u => u.Email).NotEmpty().EmailAddress();
     }
 }

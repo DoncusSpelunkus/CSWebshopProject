@@ -57,10 +57,15 @@ public class UserService : IUserService
         {
             throw new ValidationException(validation.ToString());
         }
-
+       
+        byte[] passwordHash, passwordSalt;
         User user = new User();
-        user = _mapper.Map<User>(userDto);
         user.Id = userID;
+        user = _mapper.Map<User>(userDto);
+        GenerateHash(userDto.password, out passwordHash, out passwordSalt);
+        user.HashPassword = passwordHash;
+        user.SaltPassword = passwordSalt;
+
         return _UserRepository.UpdateUser(user);
     }
 
@@ -120,11 +125,6 @@ public class UserService : IUserService
 
         
         return true;
-    }
-
-    public User GetUserByToken(string token)
-    {
-        return _UserRepository.GetUserByToken(token);
     }
 
     public User GetUserByName(string userName)

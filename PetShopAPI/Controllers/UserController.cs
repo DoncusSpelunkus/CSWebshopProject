@@ -23,9 +23,6 @@ public class UserController : ControllerBase
         
     }
     
-    
-    
-    
     [HttpGet]
     public ActionResult<List<User>> GetAllUsers()
     {
@@ -78,11 +75,7 @@ public class UserController : ControllerBase
                 }
                
                 string token = CreateToken(currentUser);
-               
-
-                var refreshToken = GenerateRefreshToken();
-                SetRefreshToken(refreshToken, currentUser);
-
+                
                 return Ok(token);
             }
             
@@ -107,8 +100,7 @@ public class UserController : ControllerBase
             }
     
             [HttpPut]
-            [Route("{userId}")]
-    
+            [Route("{userID}")]
             public ActionResult<User> UpdateUser([FromRoute] Guid userID, [FromBody] UserDTO userDto)
             {
                 try
@@ -142,49 +134,22 @@ public class UserController : ControllerBase
                     return StatusCode(500, e.ToString());
                 }
             }
-            
-            [HttpPost("refresh-token")]
-            public async Task<ActionResult<string>> RefreshToken()
-            {
-                var refreshToken = Request.Cookies["refreshToken"];
-                var currentUser = _userService.GetUserByToken(refreshToken);
-                if (!currentUser.RefreshToken.Equals(refreshToken))
-                {
-                    return Unauthorized("Invalid Refresh Token.");
-                }
-                else if(currentUser.TokenExpires < DateTime.Now)
-                {
-                    return Unauthorized("Token expired.");
-                }
-
-                string token = CreateToken(currentUser);
-                var newRefreshToken = GenerateRefreshToken();
-                SetRefreshToken(newRefreshToken, currentUser);
-
-                return Ok(token);
-            }
-            
-            private void SetRefreshToken(RefreshToken newRefreshToken, User currentUser)
-            {
-                var cookieOptions = new CookieOptions
-                {
-                    HttpOnly = true,
-                    Expires = newRefreshToken.Expires
-                };
-                Response.Cookies.Append("refreshToken", newRefreshToken.Token, cookieOptions);
-                
-                currentUser.RefreshToken = newRefreshToken.Token;
-                currentUser.TokenCreated = newRefreshToken.Created;
-                currentUser.TokenExpires = newRefreshToken.Expires;
-            }
+    
             private string CreateToken(User user)
             {
-                List<Claim> claims = new List<Claim>
-                {   // not allowed to use the api stuff for creating product if its just a basic user.
-                    new Claim(ClaimTypes.Name, user.Name),
-                    new Claim(ClaimTypes.Role, "User")
-                };
-                
+                List<Claim> claims = new List<Claim>();
+
+                if (user.type == 2){// not allowed to use the api stuff for creating product if its just a basic user.
+                    claims.Add(new Claim(ClaimTypes.Name, user.Name));
+                   claims.Add(new Claim(ClaimTypes.Role, "Admin"));
+                    
+                }
+                else if (user.type== 1)
+                {
+                    claims.Add(new Claim(ClaimTypes.Name, user.Name));
+                    claims.Add(new Claim(ClaimTypes.Role, "User"));
+                }
+                // creting token for admin, 2 = admin
                 if (String.IsNullOrEmpty(user.Name))
                     throw new ArgumentNullException(nameof(user.Name));
                 
@@ -196,25 +161,11 @@ public class UserController : ControllerBase
 
                 var token = new JwtSecurityToken(
                     claims: claims,
-                    expires: DateTime.Now.AddDays(1),
+                    expires: DateTime.Now.AddDays(7),
                     signingCredentials: creds);
 
                 var jwt = new JwtSecurityTokenHandler().WriteToken(token);
 
                 return jwt;
             }
-    
-            private RefreshToken GenerateRefreshToken()
-            {
-                var refreshToken = new RefreshToken
-                {
-                    Token = Convert.ToBase64String(RandomNumberGenerator.GetBytes(64)),
-                    Expires = DateTime.Now.AddDays(7),
-                    Created = DateTime.Now
-                };
-
-                return refreshToken;
-            }   
-
-
 }
