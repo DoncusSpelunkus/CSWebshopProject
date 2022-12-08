@@ -17,9 +17,5 @@ public interface IUserService
  
     public User GetUserByName(string userName);
     public Boolean ValidateHash(string password, byte[] passwordhash, byte[] passwordsalt);
-    public void GenerateHash(string Password, out byte[] PasswordHash, out byte[] PasswordSalt);
-
-    public void CompareHashValueHash(string Password, out byte[] PasswordHash, byte[] PasswordSalt);
-
-
+    
 }

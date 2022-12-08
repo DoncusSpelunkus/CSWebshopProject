@@ -3,7 +3,11 @@
 namespace PetShop.Domain;
 
 public class User
+<<<<<<< Updated upstream
 {
+=======
+{   
+>>>>>>> Stashed changes
     [Key]
     public Guid Id { get; set; }
     public string Name { get; set; }
