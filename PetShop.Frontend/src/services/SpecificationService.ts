@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
-import {Specification} from "../Entities/specification";
+import {catchError, Observable} from "rxjs";
+import {SpecTemplates} from "../Entities/SpecTemplates";
+import axios from "axios";
 
-
+export const customAxios = axios.create({
+  baseURL: 'https://localhost:7143/Specs'
+})
 
 @Injectable({
   providedIn: 'root'
@@ -13,34 +16,48 @@ export class SpecificationService {
   apiUrl = 'https://localhost:7143/Specs';
 
   constructor(private matSnackbar: MatSnackBar, private http: HttpClient) {
+    customAxios.interceptors.response.use(
+      response => {
+        if(response.status == 201) {
+          this.matSnackbar.open("Great success", "x", {duration: 500})
+        }
+        return response;
+      }, rejected => {
+        if(rejected.response.status>=400 && rejected.response.status <= 500) {
+          matSnackbar.open(rejected.response.data, "x", {duration: 500});
+        }
+        catchError(rejected);
+      }
+    )
   }
 
-  getSpecifications(): Observable<[Specification]>{
-    return this.http.get<[Specification]>(this.apiUrl)
+  async getSpecifications(){
+    let httpResponse = await customAxios.get<SpecTemplates[]>('')
+    return httpResponse.data;
   }
 
-  addSpecification(specification: Specification): Observable<Specification>{
+  async postSpecification(spec: any){
     let dto = {
-      specName: specification.specName,
+      specName: spec.specName,
     }
-    console.log(dto)
-    return this.http.post<Specification>(this.apiUrl, dto);
+    return await customAxios.post<SpecTemplates>('', dto)
   }
 
-  updateSpecification(specification: Specification): Observable<Specification>{
+  async putSpecification(specification: SpecTemplates){
     let dto = {
       id: specification.id,
       specName: specification.specName,
     }
-    return this.http.put<Specification>(this.apiUrl+'/'+specification.id, dto)
+    return await customAxios.put<SpecTemplates>('/'+specification.id, dto)
   }
 
-  deleteSpecificationById(id: any): Observable<Specification> {
-    return this.http.delete<Specification>(this.apiUrl+'/' + id)
+  async deleteSpecificationById(id: any) {
+    let httpResponse = await customAxios.get<SpecTemplates>('/'+id)
+    return httpResponse.data;
   }
 
-  getSpecificationByID(id: number): Observable<Specification> {
-    return this.http.get<Specification>(this.apiUrl+'/' + id)
+  async getSpecificationByID(id: number) {
+    return customAxios.get('/' + id)
   }
 
 }

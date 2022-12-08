@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {SpecificationService} from "../../../services/SpecificationService";
-import {Specification} from "../../../Entities/specification";
+import {SpecTemplates} from "../../../Entities/SpecTemplates";
+import {AdminState} from "../../../states/AdminState";
 
 @Component({
   selector: 'app-specification-list',
@@ -8,14 +9,15 @@ import {Specification} from "../../../Entities/specification";
   styleUrls: ['./specification-list.component.scss']
 })
 export class SpecificationListComponent implements OnInit {
-  specificationList: Specification[] = [];
+  specificationList: SpecTemplates[] = [];
 
-  constructor(private specificationService: SpecificationService) {
+  constructor(private adminState: AdminState) {
 
   }
 s
-  ngOnInit(): void {
-    this.specificationService.getSpecifications().subscribe(products => this.specificationList = products)
+  async ngOnInit() {
+    let specs = await this.adminState.getSpecifications();
+    this.specificationList = specs;
   }
 
 }

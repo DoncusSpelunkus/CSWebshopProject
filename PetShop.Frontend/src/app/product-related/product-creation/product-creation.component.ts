@@ -1,11 +1,9 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import { ProductService} from "../../../services/Product.service";
 import { Router} from "@angular/router";
-import { CommService } from "../../../services/Commservice";
 import { Product } from "../../../Entities/Product";
-import { Specification } from "../../../Entities/specification";
-import { SpecificationService } from "../../../services/SpecificationService";
+import { SpecTemplates } from "../../../Entities/SpecTemplates";
 import {CurrentSpecs} from "../../../Entities/CurrentSpecs";
+import {AdminState} from "../../../states/AdminState";
 
 @Component({
   selector: 'app-product-creation',
@@ -15,7 +13,7 @@ import {CurrentSpecs} from "../../../Entities/CurrentSpecs";
 export class ProductCreationComponent implements OnInit{
   newProduct: any;
   specList: CurrentSpecs[] = [];
-  specNames: Specification[] = [];
+  specNames: SpecTemplates[] = [];
   specDesc: {specsId: number, description: string}[] = [];
   sname: number;
   sdesc: string;
@@ -24,8 +22,7 @@ export class ProductCreationComponent implements OnInit{
 
   @ViewChild('child') child;
 
-  constructor(private productService: ProductService, public router: Router,
-              private commService: CommService, private specifcationService: SpecificationService){
+  constructor(public router: Router, private adminState: AdminState){
     this.newProduct = new Product;
     this.sname = 0;
     this.sdesc = '';
@@ -33,27 +30,20 @@ export class ProductCreationComponent implements OnInit{
   }
 
   async ngOnInit() {
-    this.specifcationService.getSpecifications().subscribe(specifications => this.specNames = specifications)
+    this.specNames = await this.adminState.getSpecifications();
   }
 
-  createProduct(){
-    this.productService.addProduct(this.newProduct)
-      .subscribe(() => {
-        this.router.navigateByUrl('/home');
-      });
+  async postProduct() {
+    await this.adminState.postProduct(this.newProduct)
   }
 
 
   deleteProduct(id){
-    this.productService.DeleteProductByID(id)
-      .subscribe(() => {
-        this.router.navigateByUrl('/home');
-      });
-    this.updateList();
+    this.adminState.deleteProductById(id).then(r => this.updateList());
   }
 
   updateList(){
-    this.commService.sendUpdate(true)
+
   }
 
   onDelete(event: number): void{ // Delete the spec with the id from the mat-card selected in the child component

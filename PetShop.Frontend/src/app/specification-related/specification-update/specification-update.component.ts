@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {SpecificationService} from "../../../services/SpecificationService";
-import {Specification} from "../../../Entities/specification";
+import {SpecTemplates} from "../../../Entities/SpecTemplates";
+import {AdminState} from "../../../states/AdminState";
 
 @Component({
   selector: 'app-specification-update',
@@ -12,20 +12,17 @@ export class SpecificationUpdateComponent implements OnInit {
 
 specification: any;
 
-  constructor(private Aroute: ActivatedRoute, private specificationService: SpecificationService, public route: Router) {
-    this.specification = Specification;
+  constructor(private Aroute: ActivatedRoute, private adminState: AdminState, public route: Router) {
+    this.specification = SpecTemplates;
   }
 
   ngOnInit(): void {
     const id = Number(this.Aroute.snapshot.paramMap.get('id'))
-    this.specificationService.getSpecificationByID(id).subscribe(specReceived => {this.specification = specReceived})
+    this.specification = this.adminState.getSpecificationById(id);
   }
 
   updateSpec(){
-    this.specificationService.updateSpecification(this.specification)
-      .subscribe(() =>{
-        this.route.navigateByUrl('/admin')
-      });
+    this.adminState.putSpecification(this.specification);
   }
 
 }

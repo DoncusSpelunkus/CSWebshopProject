@@ -28,21 +28,21 @@
   <button mat-raised-button (click)="consoleLog()">console</button>
   <hr>
   <h3>Add specifications</h3>
-  <mat-form-field appearance="fill">Specification type:
+  <mat-form-field appearance="fill">SpecTemplates type:
     <mat-select [(ngModel)]="selected" name="Specification">
       <mat-option *ngFor="let specifications of specNames" [value]="specifications.id" >
         {{specifications.specName}}
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <mat-form-field>Specification description:
+  <mat-form-field>SpecTemplates description:
     <input type="string" matInput [(ngModel)]="sdesc">
   </mat-form-field>
   <button mat-raised-button (click)="addTooSpecList(selected, sdesc)">Add to product</button>
   <h3>List of current specs</h3>
   <app-current-spec-list (delete)="onDelete($event)" #child></app-current-spec-list>
   <hr>
-  <button mat-raised-button (click)="createProduct()">Create product</button>
+  <button mat-raised-button (click)="postProduct()">Create product</button>
   <hr>
   <div style="text-align: center">
     <h2>Deletion by id</h2>

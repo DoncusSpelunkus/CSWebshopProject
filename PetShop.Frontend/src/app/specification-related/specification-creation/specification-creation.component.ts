@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Specification} from "../../../Entities/specification";
-import {SpecificationService} from "../../../services/SpecificationService";
+import {SpecTemplates} from "../../../Entities/SpecTemplates";
+import {AdminState} from "../../../states/AdminState";
 
 @Component({
   selector: 'app-specification-creation',
@@ -12,20 +12,20 @@ export class SpecificationCreationComponent implements OnInit {
 specification: any;
 specificationDeletionId: number;
 
-  constructor(private specificationService: SpecificationService) {
-    this.specification = new Specification;
+  constructor(private adminState: AdminState) {
+    this.specification = new SpecTemplates;
     this.specificationDeletionId = 0;
   }
 
   ngOnInit(): void {
   }
 
-  createSpecification(){
-    this.specificationService.addSpecification(this.specification).subscribe();
+  postSpecification(){
+    this.adminState.postSpecification(this.specification);
   }
 
   deleteSpecification(){
-    this.specificationService.deleteSpecificationById(this.specificationDeletionId).subscribe()
+    this.adminState.deleteSpecificationById(this.specificationDeletionId);
   }
 
 }

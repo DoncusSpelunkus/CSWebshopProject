@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {ProductService} from "../../../services/Product.service";
 import { Router } from '@angular/router'
-import { CommService } from "../../../services/Commservice";
-import {Product} from "../../../Entities/Product";
-import {Subject, Subscription} from "rxjs";
+import {AdminState} from "../../../states/AdminState";
 
 @Component({
   selector: 'app-product-list',
@@ -11,24 +8,17 @@ import {Subject, Subscription} from "rxjs";
   styleUrls: ['./product-list.component.scss']
 })
 export class ProductListComponent implements OnInit{
-  productList: Product[] = [];
-  private updateCallSub: Subscription;
+  productList: any;
 
-  constructor(private http: ProductService, public router: Router, private commService: CommService) {
-    this.updateCallSub= this.commService.getUpdate().subscribe
-    (message => { //message contains the data sent from service
-      if(message === true){
-        this.ngOnInit();
-      }
-    });
+  constructor(private adminState: AdminState, public router: Router) {
+
   }
-
 
   async ngOnInit() {
-    this.updateList()
+    await this.getProducts();
   }
 
-  updateList(): void{
-    this.http.getProductStatus().subscribe(products => this.productList = products)
+  async getProducts(){
+    this.productList = await this.adminState.getProducts();
   }
 }

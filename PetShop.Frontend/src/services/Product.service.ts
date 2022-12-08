@@ -6,7 +6,7 @@ import {catchError, Observable} from "rxjs";
 import {Product} from "../Entities/Product";
 
 export const customAxios = axios.create({
-  baseURL: 'https://localhost:7143'
+  baseURL: 'https://localhost:7143/Product'
 })
 
 @Injectable({
@@ -31,49 +31,29 @@ export class ProductService {
     )
   }
 
-  getProductStatus(): Observable<[Product]>{
-    return this.http.get<[Product]>(this.apiUrl)
-
+  async getProducts(){ // calls and waits for a list of all products via the get http request of the api on the route /product
+    let httpResponse = await customAxios.get<Product[]>('');
+    return httpResponse.data;
   }
 
-  addProduct(product: Product): Observable<Product>{
-    let dto = {
-      name: product.name,
-      price: product.price,
-      description: product.description,
-      imageUrl: product.imageUrl,
-      rating: product.rating,
-      specsDescriptions: product.specsDescriptions,
-      mainCategory: product.mainCategory,
-      subCategory: product.subCategory,
-      brand: product.brand,
-    }
-    console.log(product.specsDescriptions)
-    console.log(dto)
-    return this.http.post<Product>(this.apiUrl, dto);
+  async postProduct(dto: any) { //
+    let httpResponse = await customAxios.post<any>('',dto)
+    console.log(dto);
+    console.log(httpResponse.data)
   }
 
-  UpdateProduct(product: Product): Observable<Product>{
-    let dto = {
-      id: product.id,
-      name: product.name,
-      price: product.price,
-      description: product.description,
-      imageUrl: product.imageUrl,
-      rating: product.rating,
-      mainCategory: product.mainCategory,
-      subCategory: product.subCategory,
-      brand: product.brand
-    }
-    return this.http.put<Product>(this.apiUrl+'/'+product.id, dto)
+  async putProduct(dto: any){
+    let httpResponse = await customAxios.put<Product>('', dto);
+    return httpResponse.data;
   }
 
-  DeleteProductByID(id: any): Observable<Product> {
-    return this.http.delete<Product>(this.apiUrl+'/' + id)
+  async deleteProductByID(id: any){
+    let httpResponse = await customAxios.delete<Product>(this.apiUrl+'/' + id)
   }
 
-  GetProductByID(id: number): Observable<Product> {
-    return this.http.get<Product>(this.apiUrl+'/' + id)
-}
+  async getProductById(id: number) {
+    let httpResponse = await customAxios.get<Product>('/'+id)
+    return httpResponse.data
+  }
 
 }
