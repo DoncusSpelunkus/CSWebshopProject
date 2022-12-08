@@ -11,12 +11,16 @@ public class UserController : ControllerBase
 {
 
     private IUserService _userService;
+    private readonly IConfiguration _configuration;
 
-    public UserController(IUserService service)
-    {
+    public UserController(IUserService service, IConfiguration configuration)
+    {   _configuration = configuration;
         _userService = service;
     }
-
+    
+    
+    
+    
     [HttpGet]
     public ActionResult<List<User>> GetAllUsers()
     {
@@ -52,7 +56,28 @@ public class UserController : ControllerBase
                 }
             }
             
+            
             [HttpPost]
+            [Route("login")]
+            public async Task<ActionResult<string>> Login(UserLoginDTO request)
+            {
+                try
+                {
+                    return Ok(_userService.GetUserByID(userID));
+                }
+                catch (KeyNotFoundException e)
+                {
+                    return NotFound("No User found at ID " + userID);
+                }
+                catch (Exception e)
+                {
+                    return StatusCode(500, e.ToString());
+                }
+            }
+            
+            
+            [HttpPost]
+            [Route("register")]
             public ActionResult<User> CreateUser(UserDTO userDto)
             {
                 try

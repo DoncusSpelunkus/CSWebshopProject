@@ -1,5 +1,7 @@
 ﻿
+using System.Text;
 using PetShop.Application.Interfaces;
+using PetShop.Application.PostProdDTO;
 using PetShop.Domain;
 
 
@@ -27,7 +29,14 @@ public class UserRepo : IUserRepo
     }
 
     public User CreateUser(User user)
-    {
+    {   if(_dbcontext.Usertable.Any(u => u.Name.Equals(user.Name)))
+        {
+            throw new Exception("User already exists");
+        }
+        if (_dbcontext.Usertable.Any(u => u.Email.Equals(user.Email)))
+        {
+            throw new Exception("Email already exists");
+        }
         _dbcontext.Usertable.Add(user);
         _dbcontext.SaveChanges();
         return user;
@@ -48,7 +57,8 @@ public class UserRepo : IUserRepo
         return user;
     }
     
-   
-    
-   
+ 
+
+
+
 }

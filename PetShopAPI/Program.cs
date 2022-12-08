@@ -19,6 +19,7 @@ var config = new MapperConfiguration(conf =>
     conf.CreateMap<SpecDescDTO, SpecsDescription>();
     conf.CreateMap<BrandDto, Brand>();
     conf.CreateMap<UserDTO, User>();
+    conf.CreateMap<UserLoginDTO, User>();
 });
 
 var mapper = config.CreateMapper();
@@ -40,6 +41,7 @@ builder.Services.AddScoped<IShopRepo, ShopRepo>();
 builder.Services.AddScoped<ISpecRepo , SpecsRepo>();
 builder.Services.AddScoped<IBrandRepo, BrandRepo>();
 builder.Services.AddScoped<IUserRepo, UserRepo>();
+
 
 builder.Services.AddValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
 
