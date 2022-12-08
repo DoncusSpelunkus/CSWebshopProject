@@ -14,15 +14,16 @@ public class UserService : IUserService
     private IMapper _mapper;
     private IValidator<UserLoginDTO> _UserLoginvalidator;
     private IValidator<UserDTO> _UserDTOValidator;
-    
 
-    public UserService(IUserRepo repository, IMapper mapper, IValidator<UserDTO> UserDtoValidator, IValidator<UserLoginDTO> UserLoginvalidator)
+
+    public UserService(IUserRepo repository, IMapper mapper, IValidator<UserDTO> UserDtoValidator,
+        IValidator<UserLoginDTO> UserLoginvalidator)
     {
         _UserRepository = repository;
         _mapper = mapper;
         _UserDTOValidator = UserDtoValidator;
         _UserLoginvalidator = UserLoginvalidator;
-       
+
     }
 
     public List<User> GetAllUsers()
@@ -37,12 +38,13 @@ public class UserService : IUserService
         {
             throw new ValidationException(validation.ToString());
         }
+
         var currentUser = _mapper.Map<User>(userDto);
-        byte [] passwordHash, passwordSalt;
+        byte[] passwordHash, passwordSalt;
         GenerateHash(userDto.password, out passwordHash, out passwordSalt);
         currentUser.HashPassword = passwordHash;
         currentUser.SaltPassword = passwordSalt;
-        
+
         return _UserRepository.CreateUser(currentUser);
 
     }
@@ -83,6 +85,7 @@ public class UserService : IUserService
         {
             throw new ValidationException(validation.ToString());
         }
+
         //var currentUser = _mapper.Map<User>(userLoginDto);
         var user = _UserRepository.GetUserByName(userLoginDto.UserName);
         if (user == null) throw new ValidationException("User not found");
@@ -90,9 +93,10 @@ public class UserService : IUserService
         {
             throw new ValidationException("Password is incorrect");
         }
+
         return user;
     }
-    
+
     public void GenerateHash(string Password, out byte[] PasswordHash, out byte[] PasswordSalt)
     {
         using (var hmac = new System.Security.Cryptography.HMACSHA512())
@@ -102,7 +106,7 @@ public class UserService : IUserService
 
         }
     }
-    
+
     public Boolean ValidateHash(string password, byte[] passwordhash, byte[] passwordsalt)
     {
         using (var hash = new System.Security.Cryptography.HMACSHA512(passwordsalt))
@@ -113,6 +117,7 @@ public class UserService : IUserService
                     return false;
         }
 
+        
         return true;
     }
 
@@ -123,14 +128,14 @@ public class UserService : IUserService
 
     public User GetUserByName(string userName)
     {
-        Console.WriteLine(userName +"STUFFFFFFFFFFFFFFFFFFFFF");
+        Console.WriteLine(userName + "STUFFFFFFFFFFFFFFFFFFFFF");
         return _UserRepository.GetUserByName(userName);
     }
-   
-    
-   
-    
-    
-    
-    
+
+
+
+
+
+
+
 }

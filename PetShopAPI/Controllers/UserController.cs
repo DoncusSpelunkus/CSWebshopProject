@@ -185,7 +185,11 @@ public class UserController : ControllerBase
                     new Claim(ClaimTypes.Name, user.Name),
                     new Claim(ClaimTypes.Role, "Admin")
                 };
-
+                
+                if (String.IsNullOrEmpty(user.Name))
+                    throw new ArgumentNullException(nameof(user.Name));
+                
+                
                 var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(
                     _configuration.GetSection("AppSettings:Token").Value));
 

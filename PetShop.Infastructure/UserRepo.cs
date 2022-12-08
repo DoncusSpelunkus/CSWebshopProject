@@ -58,12 +58,17 @@ public class UserRepo : IUserRepo
     }
 
     public User GetUserByName(string currentUserName)
-    {
-        return _dbcontext.Usertable.FirstOrDefault(u => u.Name == currentUserName);
+    {   Console.WriteLine(currentUserName+" is the current userSTSSEFSERTSE%#¤%#¤ASD¤");
+        var user = new User();
+        user = _dbcontext.Usertable.FirstOrDefault(u => u.Name.Equals(currentUserName));
+        Console.WriteLine(user.Name+"userthatwas created for the mees fo tth shit");
+        return user;
+        //return _dbcontext.Usertable.FirstOrDefault(u => u.Name == currentUserName);
     }
     
     public User GetUserByToken(string token)
     {
+        
         return _dbcontext.Usertable.FirstOrDefault(u => u.RefreshToken == token);
     }
 }
