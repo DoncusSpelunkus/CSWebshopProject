@@ -43,8 +43,7 @@ public class SpecService : ISpecService
             {
                 throw new ValidationException(validation.ToString());
             }
-            Specs specs = new Specs();
-            specs = _mapper.Map<Specs>(dto);
+            var specs = _mapper.Map<Specs>(dto);
             specs.ID = specId;
             return _specRepository.UpdateSpecs(specs);
 

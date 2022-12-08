@@ -90,7 +90,7 @@ namespace PetShop.Infastructure
                 .HasMany(s => s.SpecsDescriptions)
                 .WithOne(sd => sd.Specs).OnDelete(DeleteBehavior.ClientCascade);
 
-            //Dont auto include 
+            //Dont auto include  
             modelBuilder.Entity<SpecsDescription>()
                 .Ignore(sd => sd.Product);
             modelBuilder.Entity<SpecsDescription>()
@@ -108,7 +108,7 @@ namespace PetShop.Infastructure
         public DbSet<SubCategory> SubCategoryTable { get; set; }
         public DbSet<Specs> SpecsTable { get; set; }
         public DbSet<Brand> BrandTable { get; set; }
-        public DbSet<User> Usertable { get; set; }
+        public DbSet<User> UserTable { get; set; }
     }
 
 }

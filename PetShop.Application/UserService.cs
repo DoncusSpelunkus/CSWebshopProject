@@ -59,13 +59,11 @@ public class UserService : IUserService
         }
        
         byte[] passwordHash, passwordSalt;
-        User user = new User();
-        user.Id = userID;
-        user = _mapper.Map<User>(userDto);
+        var user = _mapper.Map<User>(userDto);
         GenerateHash(userDto.password, out passwordHash, out passwordSalt);
         user.HashPassword = passwordHash;
         user.SaltPassword = passwordSalt;
-
+        user.Id = userID;
         return _UserRepository.UpdateUser(user);
     }
     

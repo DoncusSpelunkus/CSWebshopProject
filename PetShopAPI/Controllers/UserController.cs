@@ -104,10 +104,10 @@ public class UserController : ControllerBase
             public ActionResult<User> UpdateUser([FromRoute] Guid userID, [FromBody] UserDTO userDto, string currentPassword)
             {
                
-                var acutalUser = _userService.GetUserByID(userID);
+                var actualUser = _userService.GetUserByID(userID);
                 try
                 {
-                    if(!_userService.ValidateHash(currentPassword, acutalUser.HashPassword, acutalUser.SaltPassword))
+                    if(!_userService.ValidateHash(currentPassword, actualUser.HashPassword, actualUser.SaltPassword))
                     {
                         return BadRequest("Wrong password.");
                     }

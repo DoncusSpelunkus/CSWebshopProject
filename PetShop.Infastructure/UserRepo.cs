@@ -20,39 +20,40 @@ public class UserRepo : IUserRepo
 
     public List<User> GetAllUser()
     {
-        return _dbcontext.Usertable.ToList();
+        return _dbcontext.UserTable.ToList();
     }
 
     public User GetUserByID(Guid id)
     {
-        return _dbcontext.Usertable.FirstOrDefault(u => u.Id == id);
+        return _dbcontext.UserTable.FirstOrDefault(u => u.Id == id);
     }
 
     public User CreateUser(User user)
-    {   if(_dbcontext.Usertable.Any(u => u.Name.Equals(user.Name)))
+    {   if(_dbcontext.UserTable.Any(u => u.Name.Equals(user.Name)))
         {
             throw new Exception("User already exists");
         }
-        if (_dbcontext.Usertable.Any(u => u.Email.Equals(user.Email)))
+        if (_dbcontext.UserTable.Any(u => u.Email.Equals(user.Email)))
         {
             throw new Exception("Email already exists");
         }
-        _dbcontext.Usertable.Add(user);
+        _dbcontext.UserTable.Add(user);
         _dbcontext.SaveChanges();
         return user;
     }
    // method used for creating user in the database
     public User UpdateUser(User user)
-    {   
-        _dbcontext.Usertable.Update(user);
+    {
+        
+        _dbcontext.UserTable.Update(user);
         _dbcontext.SaveChanges();
         return user;
     }
 
     public User DeleteUser(Guid id)
     {
-        var user = _dbcontext.Usertable.FirstOrDefault(u => u.Id == id);
-        _dbcontext.Usertable.Remove(user);
+        var user = _dbcontext.UserTable.FirstOrDefault(u => u.Id == id);
+        _dbcontext.UserTable.Remove(user);
         _dbcontext.SaveChanges();
         return user;
     }
@@ -60,7 +61,7 @@ public class UserRepo : IUserRepo
     public User GetUserByName(string currentUserName)
     {   
       
-        return _dbcontext.Usertable.FirstOrDefault(u => u.Name == currentUserName);
+        return _dbcontext.UserTable.FirstOrDefault(u => u.Name == currentUserName);
     }
     
 }
