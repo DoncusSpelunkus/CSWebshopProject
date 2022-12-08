@@ -1,5 +1,9 @@
-﻿using FluentValidation;
+﻿using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Security.Cryptography;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using PetShop.Application.Interfaces;
 using PetShop.Application.PostProdDTO;
 using PetShop.Domain;
@@ -12,10 +16,10 @@ public class UserController : ControllerBase
 
     private IUserService _userService;
     private readonly IConfiguration _configuration;
-
     public UserController(IUserService service, IConfiguration configuration)
     {   _configuration = configuration;
         _userService = service;
+        
     }
     
     
@@ -57,22 +61,25 @@ public class UserController : ControllerBase
             }
             
             
-            [HttpPost]
-            [Route("login")]
-            public ActionResult<User> UserLogin(UserLoginDTO userLoginDto)
+            [HttpPost("login")]
+            public async Task<ActionResult<string>> Login(UserLoginDTO userLogin)
             {
-                try
+                if (user.Username != userLogin.UserName)
                 {
-                    return Ok(_userService.UserLogin(userLoginDto));
+                    return BadRequest("User not found.");
                 }
-                catch (KeyNotFoundException e)
+
+                if (!VerifyPasswordHash(request.Password, user.PasswordHash, user.PasswordSalt))
                 {
-                    return NotFound("No user found");
+                    return BadRequest("Wrong password.");
                 }
-                catch (Exception e)
-                {
-                    return StatusCode(500, e.ToString());
-                }
+
+                string token = CreateToken(user);
+
+                var refreshToken = GenerateRefreshToken();
+                SetRefreshToken(refreshToken);
+
+                return Ok(token);
             }
             
             
@@ -131,7 +138,76 @@ public class UserController : ControllerBase
                     return StatusCode(500, e.ToString());
                 }
             }
+            
+            [HttpPost("refresh-token")]
+            public async Task<ActionResult<string>> RefreshToken()
+            {
+                var refreshToken = Request.Cookies["refreshToken"];
+                var currentUser = _userService.GetUserByName()
+                if (!user.RefreshToken.Equals(refreshToken))
+                {
+                    return Unauthorized("Invalid Refresh Token.");
+                }
+                else if(user.TokenExpires < DateTime.Now)
+                {
+                    return Unauthorized("Token expired.");
+                }
 
+                string token = CreateToken(user);
+                var newRefreshToken = GenerateRefreshToken();
+                SetRefreshToken(newRefreshToken);
+
+                return Ok(token);
+            }
+            
+            public void SetRefreshToken(RefreshToken newRefreshToken)
+            {
+                var cookieOptions = new CookieOptions
+                {
+                    HttpOnly = true,
+                    Expires = newRefreshToken.Expires
+                };
+                Response.Cookies.Append("refreshToken", newRefreshToken.Token, cookieOptions);
+                Response.Cookies.Append("refreshToken", newRefreshToken.Token, cookieOptions);
+
+                user.RefreshToken = newRefreshToken.Token;
+                user.TokenCreated = newRefreshToken.Created;
+                user.TokenExpires = newRefreshToken.Expires;
+            }
+            public string CreateToken(User user)
+            {
+                List<Claim> claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name, user.Name),
+                    new Claim(ClaimTypes.Role, "Admin")
+                };
+
+                var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(
+                    _configuration.GetSection("AppSettings:Token").Value));
+
+                var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
+
+                var token = new JwtSecurityToken(
+                    claims: claims,
+                    expires: DateTime.Now.AddDays(1),
+                    signingCredentials: creds);
+
+                var jwt = new JwtSecurityTokenHandler().WriteToken(token);
+
+                return jwt;
+            }
+    
+            public RefreshToken GenerateRefreshToken()
+            {
+                var refreshToken = new RefreshToken
+                {
+                    Token = Convert.ToBase64String(RandomNumberGenerator.GetBytes(64)),
+                    Expires = DateTime.Now.AddDays(7),
+                    Created = DateTime.Now
+                };
+
+                return refreshToken;
+            }   
 
 
 }

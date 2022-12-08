@@ -8,8 +8,8 @@ public class User
     public byte[] HashPassword { get; set; }
     public byte[] SaltPassword { get; set; }
     public int type { get; set; }
-    
-    public DateTime TokenCreated { get; set; }
+    public string RefreshToken { get; set; } = string.Empty;
+    public DateTime TokenCreated{ get; set; }
     public DateTime TokenExpires { get; set; }
 
 }

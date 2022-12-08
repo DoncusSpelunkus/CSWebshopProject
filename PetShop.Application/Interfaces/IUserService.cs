@@ -15,4 +15,5 @@ public interface IUserService
 
     public User GetUserByID(Guid userId);
     public User UserLogin(UserLoginDTO userLoginDto);
+    public User GetUserByName(string userName);
 }
