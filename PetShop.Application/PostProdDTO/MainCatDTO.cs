@@ -6,7 +6,5 @@ namespace PetShop.Application.PostProdDTO;
 public class MainCatDTO
 {
     public string Name { get; set; }
-    [AllowNull] 
-    public List<Product> ProdList { get; set; }
-    
+
 }

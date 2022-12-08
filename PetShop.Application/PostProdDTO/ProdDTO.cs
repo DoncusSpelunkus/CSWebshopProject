@@ -13,16 +13,14 @@ namespace PetShop.Application.PostProdDTO
         public string ImageUrl { get; set; }
         public double Rating { get; set; }
         
-        public List<SpecDescDTO> SpecsDescriptions { get; set; }
-        [AllowNull]
-        public MainCategory MainCategoryObj { get; set; }
+       // public List<SpecDescDTO> SpecsDescriptions { get; set; }
         [AllowNull]
         public int MainCategoryID { get; set; }
-        [AllowNull]
-        public SubCategory SubCategoryObj { get; set; }
-        [AllowNull]
+        [AllowNull] 
         public int SubCategoryID { get; set; }
+        [AllowNull] 
         public int Brand { get; set; }
+        
 
     }
 }
