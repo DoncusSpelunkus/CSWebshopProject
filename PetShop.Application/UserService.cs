@@ -46,22 +46,28 @@ public class UserService : IUserService
 
     }
 
-    public User UpdateUser(Guid userID, UserDTO userDto)
+    public User UpdateUser(User user, UserDTO userDto)
     {   
+        // Validate the UserDTO object
         var validation = _UserDTOValidator.Validate(userDto);
         if (!validation.IsValid)
         {
             throw new ValidationException(validation.ToString());
         }
-       
-        byte[] passwordHash, passwordSalt;
-        var user = _mapper.Map<User>(userDto);
-        GenerateHash(userDto.password, out passwordHash, out passwordSalt);
-        user.HashPassword = passwordHash;
-        user.SaltPassword = passwordSalt;
-        user.Id = userID;
 
-        
+        // Update the existing User object with the data from the UserDTO object
+        _mapper.Map(userDto, user);
+
+        // Generate a new password hash and salt, if the password was changed
+        if (userDto.password != null)
+        {
+            byte[] passwordHash, passwordSalt;
+            GenerateHash(userDto.password, out passwordHash, out passwordSalt);
+            user.HashPassword = passwordHash;
+            user.SaltPassword = passwordSalt;
+        }
+
+        // Save the updated User object to the database
         return _UserRepository.UpdateUser(user);
     }
     
