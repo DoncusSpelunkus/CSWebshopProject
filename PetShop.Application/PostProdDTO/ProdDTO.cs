@@ -12,9 +12,9 @@ namespace PetShop.Application.PostProdDTO
         public double Rating { get; set; }
         
         public List<SpecDescDTO> SpecsDescriptions { get; set; }
-        public int MainCategory { get; set; }
-        public int SubCategory { get; set; }        
-        public int Brand { get; set; }
+        public int MainCategoryObjId { get; set; }
+        public int SubCategoryObjId { get; set; }        
+        public int BrandID { get; set; }
 
     }
 }
