@@ -144,7 +144,7 @@ public class UserController : ControllerBase
                     return StatusCode(500, e.ToString());
                 }
             }
-    
+            
             private string CreateToken(User user)
             {
                 List<Claim> claims = new List<Claim>();

@@ -2,7 +2,6 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using PetShop.Application.Interfaces;
 using PetShop.Application.PostProdDTO;
 using PetShop.Domain;
@@ -22,7 +21,7 @@ public class RatingController : ControllerBase
     }
     
     
-    [HttpPost("{userID}")]
+    [HttpPost("{userID} {productID}")]
     [Route("postReview")]
     [Authorize]
     public async Task<ActionResult<Rating>> CreateRating(ratingDTO ratingDto)
