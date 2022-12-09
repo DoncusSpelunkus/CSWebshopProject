@@ -14,7 +14,7 @@ public class CatRepo: ICatRepo
         _dbContext = dbContext;
     }
     
-    public MainCategory? CreateMainCategory(MainCategory? mainCategory)
+    public MainCategory CreateMainCategory(MainCategory mainCategory)
     {
         _dbContext.MainCategoryTable.Add(mainCategory);
         _dbContext.SaveChanges();

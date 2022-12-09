@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using Factory.Domain;
 
@@ -17,8 +18,10 @@ namespace PetShop.Domain
         public double Rating { get; set; }
 
         //public List<KeyValuePair<string,string>> Specs{ get; set; }
+        [AllowNull]
         public MainCategory MainCategoryObj { get; set; }
         public int MainCategoryID { get; set; }
+        [AllowNull]
         public SubCategory SubCategoryObj { get; set; }
         public int SubCategoryID { get; set; }
 

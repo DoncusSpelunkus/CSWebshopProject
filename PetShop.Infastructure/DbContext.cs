@@ -48,12 +48,11 @@ namespace PetShop.Infastructure
                 .HasMany<Product>(mc => mc.ProdList)
                 .WithOne(p => p.MainCategoryObj)
                 .HasForeignKey(p => p.MainCategoryID);
-
             modelBuilder.Entity<SubCategory>()
                 .HasMany<Product>(sc => sc.ProdList)
                 .WithOne(p => p.SubCategoryObj)
                 .HasForeignKey(p => p.SubCategoryID);
-            
+
             modelBuilder.Entity<Specs>()
                 .Property(s => s.ID)
                 .ValueGeneratedOnAdd();
