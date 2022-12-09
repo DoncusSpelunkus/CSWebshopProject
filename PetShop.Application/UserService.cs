@@ -2,7 +2,6 @@
 using AutoMapper;
 using FluentValidation;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Configuration;
 using PetShop.Application.Interfaces;
 using PetShop.Application.PostProdDTO;
 using PetShop.Domain;
@@ -19,7 +18,6 @@ public class UserService : IUserService
         _UserRepository = repository;
         _mapper = mapper;
         _UserDTOValidator = UserDtoValidator;
-       
         _httpContextAccessor = httpContextAccessor;
     }
 
