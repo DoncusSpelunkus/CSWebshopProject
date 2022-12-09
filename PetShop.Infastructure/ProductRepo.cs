@@ -115,5 +115,29 @@ namespace PetShop.Infastructure
             
 
         }
+        public void AddRating(int ratingValue, int productId, Guid userId)
+        {
+            var rating = new Rating
+            {
+                RatingValue = ratingValue,
+                ProductId = productId,
+                UserId = userId
+            };
+
+            _dbContext.RatingsTable.Add(rating);
+            _dbContext.SaveChanges();
+        }
+
+        public void UpdateRating(int ratingValue, int productId, Guid userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetRating(int productId, Guid userId)
+        {
+            throw new NotImplementedException();
+        }
+        
+        
     }
 }

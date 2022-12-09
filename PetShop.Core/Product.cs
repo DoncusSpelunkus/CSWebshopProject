@@ -20,9 +20,20 @@ namespace PetShop.Domain
         public int SubCategoryObjId { get; set; }
         public List<SpecsDescription> SpecsDescriptions { get; set; }
         public Brand? Brand { get; set; }
-        
+        public List<Rating> Ratings { get; set; }
+       
         public int BrandID { get; set; }
 
 
+    }
+    public class Rating
+    {  
+        public int RatingValue { get; set; } // The rating value, from 1 to 5
+        public int ProductId { get; set; } // The ID of the product being rated
+        public Guid UserId { get; set; } // The ID of the user who posted the rating
+
+        // Navigation properties
+        public  Product Product { get; set; }
+        public  User User { get; set; }
     }
 }

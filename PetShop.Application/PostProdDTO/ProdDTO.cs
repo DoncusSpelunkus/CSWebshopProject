@@ -17,4 +17,9 @@ namespace PetShop.Application.PostProdDTO
         public int BrandID { get; set; }
 
     }
+    
+    public class ratingDTO
+    {
+        public int Rating { get; set; }
+    }
 }

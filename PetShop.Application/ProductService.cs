@@ -7,21 +7,23 @@ using ValidationException = FluentValidation.ValidationException;
 
 namespace PetShop.Application;
 
-    public class ShopService : IShopService
+    public class ProductService : IProductService
     {
         private IShopRepo _productRepository;
         private IMapper _mapper;
         private IValidator<ProdDTO> _validator;
+        private readonly IUserRepo _userRepo;
         private IValidator<Product> _productValidator;
 
-        public ShopService(IShopRepo repository, IMapper mapper, IValidator<ProdDTO> validator,IValidator<Product> productValidator) 
+        public ProductService(IShopRepo repository, IMapper mapper, IValidator<ProdDTO> validator,IValidator<Product> productValidator,  IUserRepo userRepo)
         {
             _productRepository = repository;
             _mapper = mapper;
             _validator = validator;
+            _userRepo = userRepo;
             _productValidator = productValidator;
-        }
-    
+        } 
+       
     
         public List<Product> GetAllProducts()
         {
@@ -68,5 +70,28 @@ namespace PetShop.Application;
         public void RebuildDB()
         {
             _productRepository.RebuildDB();
+        }
+
+        public void AddRating(int ratingValue, int productId, Guid userId)
+        {
+            // Validate the rating to ensure it is within the acceptable range.
+            if (ratingValue < 1 || ratingValue > 5)
+            {
+                throw new ArgumentException("Rating must be between 1 and 5.");
+            }
+
+            // Retrieve the product and user from the database.
+            var product = _productRepository.GetProductByID(productId);
+            var user = _userRepo.GetUserByID(userId);
+            var ratingVlaue = _mapper.Map<Rating>(ratingValue);
+            // Create a new Rating object and set its properties.
+            var rating = new Rating
+            {
+               RatingValue = ratingValue,
+               
+            };
+
+            // Add the rating to the database.
+           // _productRepository.AddRating(rating);
         }
     }

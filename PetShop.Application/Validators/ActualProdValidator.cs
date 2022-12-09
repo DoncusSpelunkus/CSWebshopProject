@@ -20,4 +20,14 @@ public class ActualProdValidator
             RuleFor(p => p.Brand).NotEmpty();
         }
     }
+    public class RatingValidator: AbstractValidator<Rating>
+    {
+        public RatingValidator()
+        {
+            RuleFor(r => r.RatingValue).GreaterThan(0);
+            RuleFor(r => r.RatingValue).LessThan(6);
+            RuleFor(r => r.RatingValue).NotEmpty();
+            
+        }
+    }
 }

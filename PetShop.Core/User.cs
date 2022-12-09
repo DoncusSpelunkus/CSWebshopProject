@@ -16,5 +16,6 @@ public class User
     public string RefreshToken { get; set; } = string.Empty;
     public DateTime TokenCreated{ get; set; }
     public DateTime TokenExpires { get; set; }
-
+    public List<Rating> Ratings { get; set; }
+    
 }
