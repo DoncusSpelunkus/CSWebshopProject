@@ -6,7 +6,10 @@ import {SpecTemplates} from "../Entities/SpecTemplates";
 import axios from "axios";
 
 export const customAxios = axios.create({
-  baseURL: 'https://localhost:7143/Specs'
+  baseURL: 'https://localhost:7143/Specs',
+  headers: {
+    Authorization: `Bearer ${localStorage.getItem('auth')}`
+  }
 })
 
 @Injectable({

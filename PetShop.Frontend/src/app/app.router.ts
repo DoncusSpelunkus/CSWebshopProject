@@ -6,12 +6,14 @@ import { ProductEditComponent } from "./product-related/product-edit/product-edi
 import {
   SpecificationUpdateComponent
 } from "./specification-related/specification-update/specification-update.component";
+import {LoginComponent} from "./Pages/login/login.component";
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'admin', component: AdminComponent},
   { path: 'product-edit/:id', component: ProductEditComponent},
   { path: 'specification-update/:id', component: SpecificationUpdateComponent},
+  { path: 'login', component: LoginComponent},
 
   // otherwise redirect to home
   { path: '**', redirectTo: '' }

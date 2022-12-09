@@ -6,7 +6,10 @@ import {catchError, Observable} from "rxjs";
 import {Product} from "../Entities/Product";
 
 export const customAxios = axios.create({
-  baseURL: 'https://localhost:7143/Product'
+  baseURL: 'https://localhost:7143/Product',
+  headers: {
+    Authorization: `Bearer ${localStorage.getItem('auth')}`
+  }
 })
 
 @Injectable({
