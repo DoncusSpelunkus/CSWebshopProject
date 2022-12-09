@@ -24,21 +24,24 @@ public class RatingController : ControllerBase
     [HttpPost("{userID} {productID}")]
     [Route("postReview")]
     [Authorize]
-    public async Task<ActionResult<Rating>> CreateRating(ratingDTO ratingDto)
-    {   bool hasClaim = User.HasClaim(ClaimTypes.Role, "User");
-        
+    public async Task<ActionResult<Rating>> CreateRating(ratingDTO ratingDto, [FromRoute] int productid, [FromRoute] string userId)
+    {   
+        // checking if the token holds a user
+        bool hasClaim = User.HasClaim(ClaimTypes.Role, "User");
         
         // Ensure the user is authenticated
         if (!User.Identity.IsAuthenticated)
         {
             return Unauthorized();
         }
-        var userEmail = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
+
+        int productidToadd = productid;
+        string userIdToadd = userId;
         var rating = _mapper.Map<Rating>(ratingDto);
         if (hasClaim.Equals(true))
         {
             // Add the rating to the database
-            var result =  _productService.AddRating(rating);
+            var result =  _productService.AddRating(rating, productidToadd, userIdToadd);
             return Ok(result);
         }
         else

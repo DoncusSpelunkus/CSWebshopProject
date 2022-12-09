@@ -10,7 +10,7 @@ public class Usertest
     
     
     
-    [Fact]
+    /*[Fact]
     public void DeleteUserById_ValidInput_ReturnsUser()
     {
         // Arrange
@@ -28,5 +28,5 @@ public class Usertest
         // Assert
         Assert.Equal(user, result);
         userRepositoryMock.Verify(x => x.DeleteUser(userID), Times.Once);
-    }
+    }*/
 }

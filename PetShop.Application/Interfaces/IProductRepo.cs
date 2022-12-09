@@ -16,7 +16,7 @@ namespace PetShop.Application.Interfaces
         
         public void RebuildDB();
         
-        public Rating AddRating(Rating rating);
+        public Rating AddRating(Rating rating, int productid, string userid);
         public Rating UpdateRating(int ratingValue, int productId, Guid userId);
         public int GetRating(int productId, Guid userId);
         public int GetProductID(int productId);

@@ -116,7 +116,7 @@ namespace PetShop.Infastructure
             
 
         }
-        public Rating AddRating(Rating rating)
+        public Rating AddRating(Rating rating, int productid, string userid)
         {
             _dbContext.RatingsTable.Add(rating);
             _dbContext.SaveChanges();
