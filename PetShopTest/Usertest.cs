@@ -1,26 +1,27 @@
-﻿using Moq;
+﻿using AutoMapper;
+using FluentValidation;
+using Moq;
 using PetShop.Application.Interfaces;
+using PetShop.Application.PostProdDTO;
 using PetShop.Domain;
 
 namespace PetShopTest;
 
 public class Usertest
 {
-    
-    
-    
-    
-    /*[Fact]
+    [Fact]
     public void DeleteUserById_ValidInput_ReturnsUser()
     {
         // Arrange
+        Mock<IMapper> mapper = new Mock<IMapper>();
+        Mock<IValidator<UserDTO>> validator = new Mock<IValidator<UserDTO>>();
         Mock<IUserRepo> userRepositoryMock = new Mock<IUserRepo>();
         var userID = Guid.NewGuid();
         var user = new User { Id = userID, Name = "John Doe" };
         userRepositoryMock.Setup(x => x.DeleteUser(userID)).Returns(user);
        
         
-        IUserService userService = new UserService(userRepositoryMock.Object);
+        IUserService userService = new UserService(userRepositoryMock.Object, mapper.Object, validator.Object);
 
         // Act
         var result = userService.DeleteUserById(userID);
@@ -28,5 +29,5 @@ public class Usertest
         // Assert
         Assert.Equal(user, result);
         userRepositoryMock.Verify(x => x.DeleteUser(userID), Times.Once);
-    }*/
+    }
 }

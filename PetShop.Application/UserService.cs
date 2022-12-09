@@ -11,14 +11,14 @@ public class UserService : IUserService
     private readonly IUserRepo _UserRepository;
     private readonly IMapper _mapper;
     private IValidator<UserDTO> _UserDTOValidator;
-    private readonly IHttpContextAccessor _httpContextAccessor;
+   
 
-    public UserService(IUserRepo repository, IMapper mapper, IValidator<UserDTO> UserDtoValidator, IHttpContextAccessor httpContextAccessor)
+    public UserService(IUserRepo repository, IMapper mapper, IValidator<UserDTO> UserDtoValidator)
     {
         _UserRepository = repository;
         _mapper = mapper;
         _UserDTOValidator = UserDtoValidator;
-        _httpContextAccessor = httpContextAccessor;
+        
     }
 
     public List<User> GetAllUsers()
