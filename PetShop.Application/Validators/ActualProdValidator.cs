@@ -14,7 +14,6 @@ public class ActualProdValidator
             RuleFor(p => p.Price).GreaterThan(0);
             RuleFor(p => p.Description).NotEmpty();
             RuleFor(p => p.ImageUrl).NotEmpty();
-            RuleFor(p => p.Rating).GreaterThan(0);
             RuleFor(p => p.MainCategoryObj).NotEmpty();
             RuleFor(p => p.SubCategoryObj).NotEmpty();
             RuleFor(p => p.Brand).NotEmpty();

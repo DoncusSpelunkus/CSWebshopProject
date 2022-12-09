@@ -16,7 +16,7 @@ namespace PetShop.Application.Interfaces
         public Product GetProductByID(int productID);
         
         public void RebuildDB();
-        public Rating AddRating(Rating rating, int productid, string userid);
+        public Rating AddRating(Rating rating);
     }
 }
 

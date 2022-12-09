@@ -21,8 +21,8 @@ public class RatingController : ControllerBase
     }
     
     
-    [HttpPost("{userID} {productID}")]
-    [Route("postReview")]
+    [HttpPost]
+    [Route("postRewiev, {userID}, {productID}")]
     [Authorize]
     public async Task<ActionResult<Rating>> CreateRating(ratingDTO ratingDto, [FromRoute] int productid, [FromRoute] string userId)
     {   
@@ -34,14 +34,14 @@ public class RatingController : ControllerBase
         {
             return Unauthorized();
         }
-
-        int productidToadd = productid;
-        string userIdToadd = userId;
+        
         var rating = _mapper.Map<Rating>(ratingDto);
+        rating.ProductId = productid;
+        rating.UserId = new Guid(userId);
         if (hasClaim.Equals(true))
         {
             // Add the rating to the database
-            var result =  _productService.AddRating(rating, productidToadd, userIdToadd);
+            var result =  _productService.AddRating(rating);
             return Ok(result);
         }
         else

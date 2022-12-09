@@ -9,18 +9,17 @@ namespace PetShop.Application.PostProdDTO
         public double Price { get; set; }
         public string Description { get; set; }
         public string ImageUrl { get; set; }
-        public double Rating { get; set; }
-        
+
         public List<SpecDescDTO> SpecsDescriptions { get; set; }
         public int MainCategoryObjId { get; set; }
         public int SubCategoryObjId { get; set; }        
         public int BrandID { get; set; }
+        
 
     }
     
     public class ratingDTO
     {
         public int Rating { get; set; }
-        public int UserID { get; set; }
     }
 }

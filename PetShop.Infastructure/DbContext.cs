@@ -53,6 +53,8 @@ namespace PetShop.Infastructure
                 .HasOne<SubCategory>(p => p.SubCategoryObj)
                 .WithMany(c => c.ProdList)
                 .HasForeignKey(p => p.SubCategoryObjId);
+           
+            
             // a rating has a single product but a product has multiple ratings
             modelBuilder.Entity<Rating>()
                 .HasOne(r => r.Product)
@@ -82,13 +84,7 @@ namespace PetShop.Infastructure
             modelBuilder.Entity<SubCategory>()
                 .HasMany<Product>(sc => sc.ProdList)
                 .WithOne(p => p.SubCategoryObj)
-                .HasForeignKey(p => p.SubCategoryObjId)
-                ;
-
-          
-
-
-
+                .HasForeignKey(p => p.SubCategoryObjId);
             // specsDescription has one product, one product has many specsDecription.
             modelBuilder.Entity<SpecsDescription>()
                 .HasOne(sd => sd.Product)
@@ -126,6 +122,10 @@ namespace PetShop.Infastructure
                 .Ignore(p => p.SubCategoryObj);
             modelBuilder.Entity<Specs>()
                 .Ignore(s => s.SpecsDescriptions);
+            modelBuilder.Entity<Product>()
+                .Ignore(p => p.Ratings);
+            modelBuilder.Entity<User>()
+                .Ignore(u => u.Ratings);
         }
         public DbSet<SpecsDescription> SpecsDescriptionsTable { get; set; }
         public DbSet<Product> ProductTable { get; set; }
