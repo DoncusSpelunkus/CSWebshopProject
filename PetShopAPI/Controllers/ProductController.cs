@@ -120,8 +120,17 @@ namespace PetShopApi.Controllers
         {
             _productService.RebuildDB();
         }
+
+       
+        
+        
+        
+        
+        
         
         
     }
+    
+    
     
 }

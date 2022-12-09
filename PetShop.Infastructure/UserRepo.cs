@@ -63,5 +63,10 @@ public class UserRepo : IUserRepo
       
         return _dbcontext.UserTable.FirstOrDefault(u => u.Name == currentUserName);
     }
-    
+
+    public string GetUserID(string userId)
+    {   
+        User? id = _dbcontext.UserTable.FirstOrDefault(u => u.Id.ToString().Equals(userId));
+        return id.ToString();
+    }
 }

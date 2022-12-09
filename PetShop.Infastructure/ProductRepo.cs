@@ -8,6 +8,7 @@ namespace PetShop.Infastructure
     public class ShopRepo : IShopRepo
     {
         private DBContext _dbContext;
+        private IShopRepo _shopRepoImplementation;
 
         public ShopRepo(DBContext dbContext)
         {
@@ -115,20 +116,16 @@ namespace PetShop.Infastructure
             
 
         }
-        public void AddRating(int ratingValue, int productId, Guid userId)
+        public Rating AddRating(Rating rating)
         {
-            var rating = new Rating
-            {
-                RatingValue = ratingValue,
-                ProductId = productId,
-                UserId = userId
-            };
-
             _dbContext.RatingsTable.Add(rating);
             _dbContext.SaveChanges();
+            return rating;
         }
+       
 
-        public void UpdateRating(int ratingValue, int productId, Guid userId)
+        
+        public Rating UpdateRating(int ratingValue, int productId, Guid userId)
         {
             throw new NotImplementedException();
         }
@@ -137,7 +134,10 @@ namespace PetShop.Infastructure
         {
             throw new NotImplementedException();
         }
-        
-        
+
+        public int GetProductID(int productId)
+        {
+            return _shopRepoImplementation.GetProductID(productId);
+        }
     }
 }
