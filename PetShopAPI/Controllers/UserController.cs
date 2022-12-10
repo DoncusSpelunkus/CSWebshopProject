@@ -1,8 +1,6 @@
-﻿using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using FluentValidation;
+﻿using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
+using PetShop.Application;
 using PetShop.Application.Interfaces;
 using PetShop.Application.PostProdDTO;
 using PetShop.Domain;
@@ -14,12 +12,14 @@ public class UserController : ControllerBase
 {
 
     private IUserService _userService;
-    private readonly IConfiguration _configuration;
+    private readonly Authentication _authentication;
+    private readonly Logic _logic;
     
-    public UserController(IUserService service, IConfiguration configuration)
-    {   _configuration = configuration;
+    public UserController(IUserService service, Logic logic, Authentication authentication)
+    {  
         _userService = service;
-        
+        _logic = logic;
+        _authentication = authentication;
     }
     
     [HttpGet]
@@ -68,12 +68,12 @@ public class UserController : ControllerBase
                     return BadRequest("Wrong password or username.");
                 }
 
-                if (!_userService.ValidateHash(userLogin.Password, currentUser.HashPassword, currentUser.SaltPassword))
+                if (_logic.ValidateHash(userLogin.Password, currentUser.HashPassword, currentUser.SaltPassword))
                 {
                     return BadRequest("Wrong password or username.");
                 }
                
-                string token = CreateToken(currentUser);
+                string token = _authentication.CreateToken(currentUser);
                 
                 return Ok(token);
             }
@@ -106,7 +106,7 @@ public class UserController : ControllerBase
                 var actualUser = _userService.GetUserByID(userID);
                 try
                 {
-                    if(!_userService.ValidateHash(currentPassword, actualUser.HashPassword, actualUser.SaltPassword))
+                    if(_logic.ValidateHash(currentPassword, actualUser.HashPassword, actualUser.SaltPassword))
                     {
                         return BadRequest("Wrong password.");
                     }
@@ -128,7 +128,6 @@ public class UserController : ControllerBase
             }
 
             [HttpDelete("{userID}")]
-    
             public ActionResult<User> DeleteUserById(Guid userID)
             {
                 try
@@ -145,37 +144,5 @@ public class UserController : ControllerBase
                 }
             }
             
-            private string CreateToken(User user)
-            {
-                List<Claim> claims = new List<Claim>();
-
-                if (user.type == 2){// not allowed to use the api stuff for creating product if its just a basic user.
-                    claims.Add(new Claim(ClaimTypes.Name, user.Name));
-                   claims.Add(new Claim(ClaimTypes.Role, "Admin"));
-                    
-                }
-                else if (user.type== 1)
-                {
-                    claims.Add(new Claim(ClaimTypes.Name, user.Name));
-                    claims.Add(new Claim(ClaimTypes.Role, "User"));
-                }
-                // creting token for admin, 2 = admin
-                if (String.IsNullOrEmpty(user.Name))
-                    throw new ArgumentNullException(nameof(user.Name));
-                
-                
-                var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(
-                    _configuration.GetSection("AppSettings:Token").Value));
-
-                var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
-
-                var token = new JwtSecurityToken(
-                    claims: claims,
-                    expires: DateTime.Now.AddDays(7),
-                    signingCredentials: creds);
-
-                var jwt = new JwtSecurityTokenHandler().WriteToken(token);
-
-                return jwt;
-            }
+            
 }
