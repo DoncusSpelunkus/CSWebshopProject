@@ -16,14 +16,13 @@ public class UnitTest1
         {
 
             ID = 1, Name = "mockFood1", Price = 10, Description = "very good product1", ImageUrl = "fakeURL1",
-            Rating = 1.5, MainCategoryObj = new MainCategory(), SubCategoryObj = new SubCategory(), Brand = new Brand()
+             MainCategoryObj = new MainCategory(), SubCategoryObj = new SubCategory(), Brand = new Brand()
         };
         orderRepository.Setup(repo => repo.GetProductByID(id)).Returns(expected);
         
         Product actual = new Product()
         {
-            ID = 1, Name = "mockFood1", Price = 10, Description = "very good product1", ImageUrl = "fakeURL1",
-            Rating = 1.5, MainCategoryObj = new MainCategory(), SubCategoryObj = new SubCategory(), Brand = new Brand()
+            ID = 1, Name = "mockFood1", Price = 10, Description = "very good product1", ImageUrl = "fakeURL1", MainCategoryObj = new MainCategory(), SubCategoryObj = new SubCategory(), Brand = new Brand()
         };
         // Assert
         Assert.Equivalent(expected,actual);
@@ -40,7 +39,7 @@ public class UnitTest1
         Product product = new Product()
         {
             ID = 1, Name = "mockFood1", Price = 10, Description = "very good product1", ImageUrl = "fakeURL1",
-            Rating = 1.5, MainCategoryObj = new MainCategory(), SubCategoryObj = new SubCategory(), Brand = new Brand()
+             MainCategoryObj = new MainCategory(), SubCategoryObj = new SubCategory(), Brand = new Brand()
         };
 
 
@@ -62,7 +61,7 @@ public class UnitTest1
         Product product = new Product()
         {
             ID = 2, Name = "mockFood1", Price = 10, Description = "very good product1", ImageUrl = "fakeURL1",
-            Rating = 1.5, MainCategoryObj = new MainCategory(), SubCategoryObj = new SubCategory(), Brand = new Brand()
+             MainCategoryObj = new MainCategory(), SubCategoryObj = new SubCategory(), Brand = new Brand()
         };
 
 
@@ -83,7 +82,7 @@ public class UnitTest1
         Product product = new Product()
         {
             ID = 1, Name = "mockFood1", Price = 10, Description = "very good product1", ImageUrl = "fakeURL1",
-            Rating = 1.5, MainCategoryObj = new MainCategory(), SubCategoryObj = new SubCategory(), Brand = new Brand()
+            MainCategoryObj = new MainCategory(), SubCategoryObj = new SubCategory(), Brand = new Brand()
         };
 
 
@@ -104,12 +103,12 @@ public class UnitTest1
         Product product = new Product()
         {
             ID = 1, Name = "mockFood1", Price = 10, Description = "very good product1", ImageUrl = "fakeURL1",
-            Rating = 1.5,MainCategoryObj = new MainCategory(), SubCategoryObj = new SubCategory(), Brand = new Brand()
+            MainCategoryObj = new MainCategory(), SubCategoryObj = new SubCategory(), Brand = new Brand()
         };
         Product actual = new Product()
         {
             ID = 2, Name = "mock", Price = 10, Description = "very not good product1", ImageUrl = "nice",
-            Rating = 1.5,  MainCategoryObj = new MainCategory(), SubCategoryObj = new SubCategory(), Brand = new Brand()
+              MainCategoryObj = new MainCategory(), SubCategoryObj = new SubCategory(), Brand = new Brand()
         };
         
 

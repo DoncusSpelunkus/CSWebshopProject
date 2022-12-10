@@ -16,6 +16,6 @@ public interface IUserService
     public User GetUserByID(Guid userId);
  
     public User GetUserByName(string userName);
-    public Boolean ValidateHash(string password, byte[] passwordhash, byte[] passwordsalt);
+    
     
 }

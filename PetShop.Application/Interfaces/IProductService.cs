@@ -3,7 +3,7 @@ using PetShop.Domain;
 
 namespace PetShop.Application.Interfaces
 {
-    public interface IShopService
+    public interface IProductService
     {
         public List<Product> GetAllProducts();
         
@@ -16,6 +16,7 @@ namespace PetShop.Application.Interfaces
         public Product GetProductByID(int productID);
         
         public void RebuildDB();
+        public Rating AddRating(Rating rating);
     }
 }
 

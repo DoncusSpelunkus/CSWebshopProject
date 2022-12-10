@@ -22,6 +22,7 @@ var cookieOptions = new Microsoft.AspNetCore.Http.CookieOptions()
 var config = new MapperConfiguration(conf =>
 {
     conf.CreateMap<ProdDTO, Product>();
+    conf.CreateMap<ratingDTO, Rating>();
     conf.CreateMap<SpecDTO, Specs>();
     conf.CreateMap<MainCatDTO, MainCategory>();
     conf.CreateMap<SubCatDTO, SubCategory>();
@@ -71,7 +72,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     });
 
 builder.Services.AddDbContext<DBContext>(options => options.UseSqlite("Data source=db.db"));
-builder.Services.AddScoped<IShopService , ShopService>();
+builder.Services.AddScoped<IProductService , ProductService>();
 builder.Services.AddScoped<ISpecService , SpecService>();
 builder.Services.AddScoped<ICatService , CatService>();
 builder.Services.AddScoped<IBrandService , BrandService>();
@@ -81,6 +82,9 @@ builder.Services.AddScoped<IShopRepo, ShopRepo>();
 builder.Services.AddScoped<ISpecRepo , SpecsRepo>();
 builder.Services.AddScoped<IBrandRepo, BrandRepo>();
 builder.Services.AddScoped<IUserRepo, UserRepo>();
+builder.Services.AddScoped<Logic>();
+builder.Services.AddScoped<Authentication>();
+
 
 
 builder.Services.AddValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
@@ -104,6 +108,7 @@ if (app.Environment.IsDevelopment())
     });
     
 }
+
 
 app.UseHttpsRedirection();
 
