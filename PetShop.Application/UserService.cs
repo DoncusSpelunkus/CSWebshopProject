@@ -41,7 +41,6 @@ public class UserService : IUserService
         _logic.GenerateHash(userDto.password, out passwordHash, out passwordSalt);
         currentUser.HashPassword = passwordHash;
         currentUser.SaltPassword = passwordSalt;
-
         return _UserRepository.CreateUser(currentUser);
 
     }

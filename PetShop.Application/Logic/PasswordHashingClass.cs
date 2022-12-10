@@ -3,8 +3,10 @@
 namespace PetShop.Application;
 
 public class Logic
-{
-    public void GenerateHash(string Password, out byte[] PasswordHash, out byte[] PasswordSalt)
+{   
+    
+    // need to be virtual for mocking and testing
+    public virtual void GenerateHash(string Password, out byte[] PasswordHash, out byte[] PasswordSalt)
     {
         using (var hmac = new System.Security.Cryptography.HMACSHA512())
         {
