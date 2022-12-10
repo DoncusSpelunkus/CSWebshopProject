@@ -108,14 +108,6 @@ namespace PetShop.Infastructure
             product.SpecsDescriptions = ListofProductsSpecsDescriptions;
             return product;
         }
-        
-        public void RebuildDB()
-        {
-            _dbContext.Database.EnsureDeleted();
-            _dbContext.Database.EnsureCreated();
-            
-
-        }
         public Rating AddRating(Rating rating)
         {
             _dbContext.RatingsTable.Add(rating);
@@ -127,17 +119,55 @@ namespace PetShop.Infastructure
         
         public Rating UpdateRating(int ratingValue, int productId, Guid userId)
         {
-            throw new NotImplementedException();
-        }
+            // Find the rating in the ratings table
+            var rating = _dbContext.RatingsTable.FirstOrDefault(r => r.ProductId == productId && r.UserId == userId);
 
-        public int GetRating(int productId, Guid userId)
-        {
-            throw new NotImplementedException();
+            // Update the rating value
+            rating.RatingValue = ratingValue;
+
+            // Save the updated rating to the database
+            _dbContext.RatingsTable.Update(rating);
+            _dbContext.SaveChanges();
+            return rating;
+        }
+        // method to get all ratings for a product by getting all ratings for a product and then averaging them
+        public int GetTheAverageRatingForProduct(int productId)
+        {   
+            // get all the ratings for the specific product
+            List<int> ratings = GetAllRatingsForProduct(productId);
+
+            int sum = 0;
+
+            foreach (var rating in ratings)
+            {
+                sum += rating;
+            }
+
+            int average = sum / ratings.Count;
+
+            return average;
+        }
+        
+        // gets all ratings for a product
+        public  List<int>  GetAllRatingsForProduct(int productid)
+        {   
+            // gets all ratings for a product with in the ratingstable where product id is equal to the productid, to list
+            return _dbContext.RatingsTable.Where(r => r.ProductId == productid).Select(r => r.RatingValue).ToList();
         }
 
         public int GetProductID(int productId)
         {
             return _shopRepoImplementation.GetProductID(productId);
+        }
+        
+        
+        
+        public void RebuildDB()
+        {
+            _dbContext.Database.EnsureDeleted();
+            _dbContext.Database.EnsureCreated();
+            
+
         }
     }
 }

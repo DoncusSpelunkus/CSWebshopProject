@@ -46,7 +46,7 @@ public class RatingController : ControllerBase
         }
         else
         {
-            return Unauthorized("You need to log into to post a review");
+            return Unauthorized("You need to login to post a review");
         }
     }
     
