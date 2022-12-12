@@ -1,54 +1,57 @@
 <div style="text-align: center">
   <h2>Creation</h2>
-  <mat-form-field>Name:
+  <mat-form-field appearance="outline">Name:
     <input type="string" matInput [(ngModel)]="newProduct.name">
   </mat-form-field>
-  <mat-form-field>Price:
+  <mat-form-field appearance="outline">Price:
     <input type="number" matInput [(ngModel)]="newProduct.price">
   </mat-form-field>
-  <mat-form-field>Description:
+  <mat-form-field appearance="outline">Description:
     <input type="string" matInput [(ngModel)]="newProduct.description">
   </mat-form-field>
-  <mat-form-field>Image URL:
+  <mat-form-field appearance="outline">Image URL:
     <input type="string" matInput [(ngModel)]="newProduct.imageUrl">
   </mat-form-field>
-  <mat-form-field>Rating:
+  <br>
+  <mat-form-field appearance="outline">Rating:
     <input type="number" matInput [(ngModel)]="newProduct.rating">
   </mat-form-field>
-  <mat-form-field>Main Category:
+  <mat-form-field appearance="outline">Main Category:
     <input type="number" matInput [(ngModel)]="newProduct.mainCategory">
   </mat-form-field>
-  <mat-form-field>Sub Category:
+  <mat-form-field appearance="outline">Sub Category:
     <input type="number" matInput [(ngModel)]="newProduct.subCategory">
   </mat-form-field>
-  <mat-form-field>Brand:
+  <mat-form-field appearance="outline">Brand:
     <input type="number" matInput [(ngModel)]="newProduct.brand">
   </mat-form-field>
   <hr>
   <button mat-raised-button (click)="consoleLog()">console</button>
   <hr>
-  <h3>Add specifications</h3>
-  <mat-form-field appearance="fill">SpecTemplates type:
+  <h2>Add specifications</h2>
+  <mat-form-field appearance="outline">Specification type:
     <mat-select [(ngModel)]="selected" name="Specification">
       <mat-option *ngFor="let specifications of specNames" [value]="specifications.id" >
         {{specifications.specName}}
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <mat-form-field>SpecTemplates description:
+  <mat-form-field appearance="outline">Specification description:
     <input type="string" matInput [(ngModel)]="sdesc">
   </mat-form-field>
+  <br>
   <button mat-raised-button (click)="addTooSpecList(selected, sdesc)">Add to product</button>
-  <h3>List of current specs</h3>
+  <h2>List of current specs</h2>
   <app-current-spec-list (delete)="onDelete($event)" #child></app-current-spec-list>
   <hr>
   <button mat-raised-button (click)="postProduct()">Create product</button>
   <hr>
   <div style="text-align: center">
     <h2>Deletion by id</h2>
-    <mat-form-field>Product ID:
+    <mat-form-field appearance="outline">Product ID:
       <input type="number" matInput [(ngModel)]="productDeleteId">
     </mat-form-field>
-    <button mat-button (click)="deleteProduct(productDeleteId)">Delete product</button>
+    <br>
+    <button mat-raised-button (click)="deleteProduct(productDeleteId)">Delete product</button>
   </div>
 </div>

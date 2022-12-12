@@ -1,15 +1,14 @@
 <div>
   <app-header></app-header>
-  <mat-tab-group>
+  <mat-tab-group mat-stretch-tabs>
     <mat-tab label="Products">
-      <h2>Create and delete products</h2>
+      <h1>Create and delete products</h1>
       <app-product-creation></app-product-creation>
        <hr>
-      <h2>Product list</h2>
       <app-product-list></app-product-list>
     </mat-tab>
     <mat-tab label="Specifications">
-      <h2>Create and delete specifications</h2>
+      <h1>Create and delete specifications</h1>
       <app-specification-creation></app-specification-creation>
       <hr>
       <app-specification-list></app-specification-list>

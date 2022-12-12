@@ -2,17 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e433f57f-6238-46d2-97e8-786875e4a194" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../PetShop.Frontend/src/Entities/dto.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../PetShop.Frontend/src/Entities/dto.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PetShop.Frontend/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../PetShop.Frontend/src/app/app.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PetShop.Frontend/src/app/product-creation/product-creation.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../PetShop.Frontend/src/app/product-creation/product-creation.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PetShop.Frontend/src/app/product-creation/product-creation.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../PetShop.Frontend/src/app/product-creation/product-creation.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PetShop.Frontend/src/app/product-list/product-list.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../PetShop.Frontend/src/app/product-list/product-list.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PetShop.Frontend/src/app/product-list/product-list.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../PetShop.Frontend/src/app/product-list/product-list.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PetShop.Frontend/src/services/http.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../PetShop.Frontend/src/services/http.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PetShop.Frontend/src/app/Navigation-tools/header/header.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../PetShop.Frontend/src/app/Navigation-tools/header/header.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PetShop.Frontend/src/app/Navigation-tools/header/header.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../PetShop.Frontend/src/app/Navigation-tools/header/header.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PetShop.Frontend/src/app/Pages/admin/admin.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../PetShop.Frontend/src/app/Pages/admin/admin.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PetShop.Frontend/src/app/Pages/admin/admin.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../PetShop.Frontend/src/app/Pages/admin/admin.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PetShop.Frontend/src/app/Pages/login/login.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../PetShop.Frontend/src/app/Pages/login/login.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PetShop.Frontend/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../PetShop.Frontend/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PetShop.Frontend/src/app/product-related/product-creation/product-creation.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../PetShop.Frontend/src/app/product-related/product-creation/product-creation.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PetShop.Frontend/src/app/product-related/product-creation/product-creation.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../PetShop.Frontend/src/app/product-related/product-creation/product-creation.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PetShop.Frontend/src/app/product-related/product-list/product-list.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../PetShop.Frontend/src/app/product-related/product-list/product-list.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PetShop.Frontend/src/app/specification-related/current-spec-list/current-spec-list.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../PetShop.Frontend/src/app/specification-related/current-spec-list/current-spec-list.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PetShop.Frontend/src/app/specification-related/specification-creation/specification-creation.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../PetShop.Frontend/src/app/specification-related/specification-creation/specification-creation.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PetShop.Frontend/src/app/specification-related/specification-creation/specification-creation.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../PetShop.Frontend/src/app/specification-related/specification-creation/specification-creation.component.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PetShopAPI/db.db" beforeDir="false" afterPath="$PROJECT_DIR$/../PetShopAPI/db.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PetShopAPI/db.db-shm" beforeDir="false" afterPath="$PROJECT_DIR$/../PetShopAPI/db.db-shm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PetShopAPI/db.db-wal" beforeDir="false" afterPath="$PROJECT_DIR$/../PetShopAPI/db.db-wal" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
