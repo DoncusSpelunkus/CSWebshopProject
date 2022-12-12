@@ -1,4 +1,4 @@
-﻿using Factory.Domain;
+﻿using PetShop.Domain;
 using PetShop.Application.PostProdDTO;
 
 namespace PetShop.Application.Interfaces;
@@ -9,7 +9,7 @@ public interface IBrandService
         
     public Brand CreateBrand(BrandDto dto);
 
-    public Brand UpdateBrand(int brandID, Brand brand);
+    public Brand UpdateBrand(int brandID, BrandDto brandDto);
         
     public Brand DeleteBrand(int brandID);
 

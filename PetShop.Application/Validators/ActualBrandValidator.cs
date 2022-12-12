@@ -1,13 +1,13 @@
-﻿using Factory.Domain;
+﻿using PetShop.Domain;
 using FluentValidation;
 
 namespace PetShop.Application.Validators;
 
-public class ActualSubCatValidator
+public class ActualBrandValidator
 {
-    public class SubCatValidator : AbstractValidator<MainCategory>
+    public class BrandValidator : AbstractValidator<Brand>
     {
-        public SubCatValidator()
+        public BrandValidator()
         {
             RuleFor(c => c.Name).NotEmpty();
         }

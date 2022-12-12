@@ -28,6 +28,7 @@ public class SpecsRepo : ISpecRepo
 
     public Specs UpdateSpecs(Specs specs)
     {
+        
         _specsDbContext.SpecsTable.Update(specs);
         _specsDbContext.SaveChanges();
         return specs;

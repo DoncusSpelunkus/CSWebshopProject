@@ -13,14 +13,11 @@ namespace PetShopApi.Controllers
     [Route("[Controller]")]
     public class SpecsController : ControllerBase
     {
-        private SpecValidator _specsValidator;
-        private IMapper _mapper;
+        
         private ISpecService _specService;
-        public SpecsController(ISpecService service, IMapper mapper)
+        public SpecsController(ISpecService service)
         {
             _specService = service;
-            _specsValidator = new SpecValidator();
-            _mapper = mapper;
         }
 
         [HttpGet]
@@ -79,11 +76,11 @@ namespace PetShopApi.Controllers
         [HttpPut]
         [Route("{specID}")]
 
-        public ActionResult<Specs> UpdateSpecs([FromRoute] int specID, [FromBody] Specs specs)
+        public ActionResult<Specs> UpdateSpecs([FromRoute] int specID, [FromBody] SpecDTO dto)
         {
             try
             {
-                return Ok(_specService.UpdateSpecs(specID, specs));
+                return Ok(_specService.UpdateSpecs(specID, dto));
             }
             catch (KeyNotFoundException e)
             {
