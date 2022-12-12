@@ -8,14 +8,14 @@ namespace PetShop.Application;
 
 public class SpecService : ISpecService
     {
-        private ISpecRepo _productRepository;
+        private ISpecRepo _specRepository;
         private IMapper _mapper;
         private IValidator<SpecDTO> _validator;
         private IValidator<Specs> _productValidator;
 
         public SpecService(ISpecRepo repository, IMapper mapper, IValidator<SpecDTO> validator,IValidator<Specs> specValidator) 
         {
-            _productRepository = repository;
+            _specRepository = repository;
             _mapper = mapper;
             _validator = validator;
             _productValidator = specValidator;
@@ -24,7 +24,7 @@ public class SpecService : ISpecService
     
         public List<Specs> GetAllSpecs()
         {
-            return _productRepository.GetAllSpecs();
+            return _specRepository.GetAllSpecs();
         }
         
         public Specs CreateSpecs(SpecDTO dto)
@@ -33,34 +33,34 @@ public class SpecService : ISpecService
             if (!validation.IsValid)
                 throw new ValidationException(validation.ToString());
             
-            return _productRepository.CreateSpecs(_mapper.Map<Specs>(dto));
+            return _specRepository.CreateSpecs(_mapper.Map<Specs>(dto));
         }
 
-        public Specs UpdateSpecs(int specId, Specs specs)
+        public Specs UpdateSpecs(int specId, SpecDTO dto)
         {
-            
-            if (specId != specs.ID)
-                throw new ValidationException("ID in body and route are different (Update)");
-            var validation = _productValidator.Validate(specs);
+            var validation = _validator.Validate(dto);
             if (!validation.IsValid)
             {
                 throw new ValidationException(validation.ToString());
             }
-            return _productRepository.UpdateSpecs(specs);
+            var specs = _mapper.Map<Specs>(dto);
+            specs.ID = specId;
+            return _specRepository.UpdateSpecs(specs);
+                    
         }
 
         public Specs DeleteSpecsById(int specId)
         {
             if (specId == null)
                 throw new ValidationException("ID is invalid");
-            return _productRepository.DeleteSpecsById(specId);
+            return _specRepository.DeleteSpecsById(specId);
         }
 
         public Specs GetSpecByID(int specId)
         {
             if (specId <= 0)
                 throw new ValidationException("ID is invalid");
-            return _productRepository.GetSpecsByID(specId);
+            return _specRepository.GetSpecsByID(specId);
         }
         
 }

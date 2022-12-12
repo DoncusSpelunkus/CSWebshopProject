@@ -1,4 +1,4 @@
-﻿using Factory.Domain;
+﻿using PetShop.Domain;
 using Microsoft.EntityFrameworkCore;
 using PetShop.Application.Interfaces;
 
@@ -14,7 +14,7 @@ public class BrandRepo : IBrandRepo
     }
     public List<Brand> GetAllBrands()
     {
-        return _dbContext.BrandTable.Include(c=> c.ProdList).ToList();
+        return _dbContext.BrandTable.ToList();
     }
 
     public Brand CreateBrand(Brand brand)

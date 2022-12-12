@@ -13,14 +13,12 @@ namespace PetShopApi.Controllers
     [Route("[Controller]")]
     public class ShopController : ControllerBase
     { 
-        private ProdValidator _productValidator;
-        private IMapper _mapper;
-        private IShopService _shopService;
-        public ShopController(IShopService service, IMapper mapper)
+      
+        private IProductService _productService;
+        public ShopController(IProductService service)
         {
-            _shopService = service;
-            _productValidator = new ProdValidator();
-            _mapper = mapper;
+            _productService = service;
+           
         }
 
         [HttpGet]
@@ -28,7 +26,7 @@ namespace PetShopApi.Controllers
         {
             try
             {
-                return Ok(_shopService.GetAllProducts());
+                return Ok(_productService.GetAllProducts());
             }
             catch (KeyNotFoundException e)
             {
@@ -46,7 +44,7 @@ namespace PetShopApi.Controllers
         {
             try
             {
-                return Ok(_shopService.GetProductByID(productID));
+                return Ok(_productService.GetProductByID(productID));
             }
             catch (KeyNotFoundException e)
             {
@@ -64,7 +62,7 @@ namespace PetShopApi.Controllers
             Console.WriteLine("hit");
             try
             {
-                var result = _shopService.CreateProduct(dto);
+                var result = _productService.CreateProduct(dto);
                 return Created("shop/" + result.ID, result);
             }
             catch (ValidationException e)
@@ -84,7 +82,7 @@ namespace PetShopApi.Controllers
         {
             try
             {
-                return Ok(_shopService.UpdateProduct(productID, dto));
+                return Ok(_productService.UpdateProduct(productID, dto));
             }
             catch (KeyNotFoundException e)
             {
@@ -102,7 +100,7 @@ namespace PetShopApi.Controllers
         {
             try
             {
-                return Ok(_shopService.DeleteProduct(productID));
+                return Ok(_productService.DeleteProduct(productID));
             }
             catch (KeyNotFoundException e)
             {
@@ -120,10 +118,19 @@ namespace PetShopApi.Controllers
         [Route("RebuildDB")]
         public void RebuildDB()
         {
-            _shopService.RebuildDB();
+            _productService.RebuildDB();
         }
+
+       
+        
+        
+        
+        
+        
         
         
     }
+    
+    
     
 }

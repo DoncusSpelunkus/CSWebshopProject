@@ -1,6 +1,4 @@
-﻿using Factory.Domain;
-using PetShop.Application.PostProdDTO;
-using PetShop.Domain;
+﻿using PetShop.Domain;
 
 namespace PetShop.Application.Interfaces
 {
@@ -17,5 +15,10 @@ namespace PetShop.Application.Interfaces
         public Product GetProductByID(int productID);
         
         public void RebuildDB();
+        
+        public Rating AddRating(Rating rating);
+        public Rating UpdateRating(Rating rating);
+        public int GetTheAverageRatingForProduct(int productId);
+        public int GetProductID(int productId);
     }
 }

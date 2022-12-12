@@ -1,5 +1,4 @@
 using PetShop.Application.Interfaces;
-using Factory.Domain;
 using Microsoft.EntityFrameworkCore;
 
 using PetShop.Domain;
@@ -9,6 +8,7 @@ namespace PetShop.Infastructure
     public class ShopRepo : IShopRepo
     {
         private DBContext _dbContext;
+        private IShopRepo _shopRepoImplementation;
 
         public ShopRepo(DBContext dbContext)
         {
@@ -108,6 +108,54 @@ namespace PetShop.Infastructure
             product.SpecsDescriptions = ListofProductsSpecsDescriptions;
             return product;
         }
+        public Rating AddRating(Rating rating)
+        {
+            _dbContext.RatingsTable.Add(rating);
+            _dbContext.SaveChanges();
+            return rating;
+        }
+       
+
+        
+        public Rating UpdateRating(Rating rating)
+        {
+            _dbContext.RatingsTable.Update(rating);
+            _dbContext.SaveChanges();
+            return rating;
+        }
+        
+        
+        // method to get all ratings for a product by getting all ratings for a product and then averaging them
+        public int GetTheAverageRatingForProduct(int productId)
+        {   
+            // get all the ratings for the specific product
+            List<int> ratings = GetAllRatingsForProduct(productId);
+
+            int sum = 0;
+
+            foreach (var rating in ratings)
+            {
+                sum += rating;
+            }
+
+            int average = sum / ratings.Count;
+
+            return average;
+        }
+        
+        // gets all ratings for a product
+        public  List<int>  GetAllRatingsForProduct(int productid)
+        {   
+            // gets all ratings for a product with in the ratingstable where product id is equal to the productid, to list
+            return _dbContext.RatingsTable.Where(r => r.ProductId == productid).Select(r => r.RatingValue).ToList();
+        }
+
+        public int GetProductID(int productId)
+        {
+            return _shopRepoImplementation.GetProductID(productId);
+        }
+        
+        
         
         public void RebuildDB()
         {
