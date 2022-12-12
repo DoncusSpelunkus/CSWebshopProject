@@ -6,7 +6,7 @@ public class UserLoginDTO
 {
     [Required]
     [StringLength(150)]
-    public String UserName { get; set; }
+    public String Email { get; set; }
     [Required]
     [StringLength(20)]
     public String Password { get; set; }
