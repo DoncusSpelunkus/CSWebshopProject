@@ -14,5 +14,6 @@ public class UserDTO
     public int type { get; set; }
     public string Address { get; set; }
     public int Zipcode { get; set; }
+    public string City { get; set; }
     public int PhoneNumber { get; set; }
 }
