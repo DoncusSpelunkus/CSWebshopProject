@@ -16,7 +16,7 @@ export const customAxios = axios.create({
 })
 export class LoginService{
 
-  constructor(private matSnackbar: MatSnackBar, private http: HttpClient) {
+  constructor(private matSnackbar: MatSnackBar) {
     customAxios.interceptors.response.use(
       response => {
         if(response.status == 201) {
@@ -39,5 +39,15 @@ export class LoginService{
     }
     let httpRepsonse = await customAxios.post<any>('',dto,);
     return httpRepsonse.data;
+  }
+
+  async registerUser(username: string, password: string) {
+    let dto = {
+      username: username,
+      password: password
+    }
+    let httpResponse = await customAxios.post<any>('', dto);
+    return httpResponse.data;
+
   }
 }

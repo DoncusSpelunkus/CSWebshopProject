@@ -12,4 +12,11 @@ export class LoginState{
     localStorage.setItem('auth', data);
 
   }
+
+  async registerUser(username: string, password: string, repeatPassword: string){
+    if(password === repeatPassword){
+      let data = await this.loginService.registerUser(username, password);
+      return data;
+    }
+  }
 }
