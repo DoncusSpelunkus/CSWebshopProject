@@ -13,9 +13,8 @@ public class User
     public byte[] HashPassword { get; set; }
     public byte[] SaltPassword { get; set; }
     public int type { get; set; }
-    public string RefreshToken { get; set; } = string.Empty;
-    public DateTime TokenCreated{ get; set; }
-    public DateTime TokenExpires { get; set; }
+    public string Address { get; set; }
+    public int Zipcode { get; set; }
     public List<Rating> Ratings { get; set; }
     
 }

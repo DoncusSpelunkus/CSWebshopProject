@@ -7,7 +7,7 @@ public class UserloginValidator : AbstractValidator<UserLoginDTO>
 {
     public UserloginValidator()
     {
-        RuleFor(x => x.UserName).NotEmpty().WithMessage("Username is required");
+        RuleFor(x => x.Email).NotEmpty().WithMessage("Username is required");
         RuleFor(x => x.Password).NotEmpty().WithMessage("Password is required");
         RuleFor(x => x.Password.ToString()).MinimumLength(8).WithMessage("Password must be at least 8 characters");
         RuleFor(x => x.Password.ToString()).MaximumLength(50).WithMessage("Password must be at most 20 characters");

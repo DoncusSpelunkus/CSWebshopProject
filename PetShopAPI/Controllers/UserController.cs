@@ -62,15 +62,15 @@ public class UserController : ControllerBase
             public async Task<ActionResult<string>> Login(UserLoginDTO userLogin)
             {   
                 
-                var currentUser = _userService.GetUserByName(userLogin.UserName);
-                if (currentUser.Name != userLogin.UserName)
+                var currentUser = _userService.GetUserByName(userLogin.Email);
+                if (currentUser.Name != userLogin.Email)
                 {
-                    return BadRequest("Wrong password or username.");
+                    return BadRequest("Wrong password or Email.");
                 }
 
                 if (!_logic.ValidateHash(userLogin.Password, currentUser.HashPassword, currentUser.SaltPassword))
                 {
-                    return BadRequest("Wrong password or username.");
+                    return BadRequest("Wrong password or Email.");
                 }
                
                 string token = _authentication.CreateToken(currentUser);
