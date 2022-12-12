@@ -17,6 +17,7 @@ namespace PetShop.Application.Interfaces
         
         public void RebuildDB();
         public Rating AddRating(Rating rating);
+        public Rating UpdateRating(Rating rating);
     }
 }
 

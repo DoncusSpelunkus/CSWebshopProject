@@ -117,19 +117,14 @@ namespace PetShop.Infastructure
        
 
         
-        public Rating UpdateRating(int ratingValue, int productId, Guid userId)
+        public Rating UpdateRating(Rating rating)
         {
-            // Find the rating in the ratings table
-            var rating = _dbContext.RatingsTable.FirstOrDefault(r => r.ProductId == productId && r.UserId == userId);
-
-            // Update the rating value
-            rating.RatingValue = ratingValue;
-
-            // Save the updated rating to the database
             _dbContext.RatingsTable.Update(rating);
             _dbContext.SaveChanges();
             return rating;
         }
+        
+        
         // method to get all ratings for a product by getting all ratings for a product and then averaging them
         public int GetTheAverageRatingForProduct(int productId)
         {   

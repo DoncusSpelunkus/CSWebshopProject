@@ -62,7 +62,7 @@ public class Usertest
         }
 
         [Fact]
-        public void CreateUsers_ValidInput_CreatesUser()
+        public void CreateUsers_ValidInput()
         {
             // Arrange
             Mock<IMapper> mapper = new Mock<IMapper>();

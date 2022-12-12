@@ -46,7 +46,7 @@ public class SpecService : ISpecService
             var specs = _mapper.Map<Specs>(dto);
             specs.ID = specId;
             return _specRepository.UpdateSpecs(specs);
-
+                    
         }
 
         public Specs DeleteSpecsById(int specId)
