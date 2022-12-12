@@ -15,7 +15,7 @@ public interface IUserService
 
     public User GetUserByID(Guid userId);
  
-    public User GetUserByName(string userName);
+    public User GetUserByEmail(string userEmail);
     
     
 }
