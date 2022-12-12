@@ -58,10 +58,10 @@ public class UserRepo : IUserRepo
         return user;
     }
 
-    public User GetUserByName(string currentUserName)
+    public User GetUserByEmail(string Currentemail)
     {   
       
-        return _dbcontext.UserTable.FirstOrDefault(u => u.Name == currentUserName);
+        return _dbcontext.UserTable.FirstOrDefault(u => u.Email == Currentemail);
     }
 
     public string GetUserID(string userId)

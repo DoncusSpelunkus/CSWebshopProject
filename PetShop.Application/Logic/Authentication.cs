@@ -26,12 +26,25 @@ public class Authentication
             // not allowed to use the api stuff for creating product if its just a basic user.
             claims.Add(new Claim(ClaimTypes.Name, user.Name));
             claims.Add(new Claim(ClaimTypes.Role, "Admin"));
+            claims.Add(new Claim(ClaimTypes.Email,user.Email));
+            claims.Add(new Claim(ClaimTypes.MobilePhone, user.PhoneNumber.ToString()));
+            claims.Add(new Claim(ClaimTypes.StreetAddress, user.Address));
+            claims.Add(new Claim(ClaimTypes.PostalCode, user.Zipcode.ToString()));
+            claims.Add(new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()));
+            claims.Add(new Claim(ClaimTypes.StateOrProvince, user.City));
+            
                     
         }
         else if (user.type== 1)
         {
             claims.Add(new Claim(ClaimTypes.Name, user.Name));
             claims.Add(new Claim(ClaimTypes.Role, "User"));
+            claims.Add(new Claim(ClaimTypes.Email,user.Email));
+            claims.Add(new Claim(ClaimTypes.MobilePhone, user.PhoneNumber.ToString()));
+            claims.Add(new Claim(ClaimTypes.StreetAddress, user.Address));
+            claims.Add(new Claim(ClaimTypes.PostalCode, user.Zipcode.ToString()));
+            claims.Add(new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()));
+            claims.Add(new Claim(ClaimTypes.StateOrProvince, user.City));
         }
         // creting token for admin, 2 = admin
         if (String.IsNullOrEmpty(user.Name))

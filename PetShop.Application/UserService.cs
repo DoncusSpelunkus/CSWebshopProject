@@ -86,10 +86,10 @@ public class UserService : IUserService
     }
     
 
-    public User GetUserByName(string userName)
+    public User GetUserByEmail(string userEmail)
     {
         
-        return _UserRepository.GetUserByName(userName);
+        return _UserRepository.GetUserByEmail(userEmail);
     }
 
 

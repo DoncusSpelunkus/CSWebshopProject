@@ -62,8 +62,8 @@ public class UserController : ControllerBase
             public async Task<ActionResult<string>> Login(UserLoginDTO userLogin)
             {   
                 
-                var currentUser = _userService.GetUserByName(userLogin.Email);
-                if (currentUser.Name != userLogin.Email)
+                var currentUser = _userService.GetUserByEmail(userLogin.Email);
+                if (currentUser.Email != userLogin.Email)
                 {
                     return BadRequest("Wrong password or Email.");
                 }
@@ -99,8 +99,8 @@ public class UserController : ControllerBase
             }
     
             [HttpPut]
-            [Route("{userID}")]
-            public ActionResult<User> UpdateUser([FromRoute] Guid userID, [FromBody] UserDTO userDto, string currentPassword)
+            [Route("update")]
+            public ActionResult<User> UpdateUser(Guid userID, [FromBody] UserDTO userDto, string currentPassword)
             {
                
                 var actualUser = _userService.GetUserByID(userID);
