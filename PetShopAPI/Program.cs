@@ -39,6 +39,7 @@ builder.Services.AddScoped<IShopRepo, ShopRepo>();
 builder.Services.AddScoped<ISpecRepo , SpecsRepo>();
 builder.Services.AddScoped<IBrandRepo, BrandRepo>();
 
+
 builder.Services.AddValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
 
 PetShop.Application.DependencyResolver.DependencyResolverService.RegisterApplicationLayer(builder.Services);

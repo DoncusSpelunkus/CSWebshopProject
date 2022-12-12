@@ -26,20 +26,20 @@ public class CatRepo: ICatRepo
         return _dbContext.MainCategoryTable.ToList();
     }
     
-    public MainCategory? UpdateMainCategory(MainCategory? mainCategory)
+    public MainCategory UpdateMainCategory(MainCategory mainCategory)
     {
         _dbContext.MainCategoryTable.Update(mainCategory);
         _dbContext.SaveChanges();
         return mainCategory;
     }
-    public MainCategory? GetMainCategoryByID(int mainCatId)
+    public MainCategory GetMainCategoryByID(int mainCatId)
     {
         return _dbContext.MainCategoryTable
             .Include(c=> c.ProdList)
             .FirstOrDefault(c => c.MainCategoryID == mainCatId);
     }
 
-    public MainCategory? DeleteMainCategoryByID(int mainCatId)
+    public MainCategory DeleteMainCategoryByID(int mainCatId)
     {
         MainCategory? mainCategory = GetMainCategoryByID(mainCatId);
         _dbContext.MainCategoryTable.Remove(mainCategory);

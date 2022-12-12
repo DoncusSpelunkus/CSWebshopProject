@@ -11,19 +11,15 @@ using PetShop.Domain;
 namespace PetShopApi.Controllers
 {
     [ApiController]
-    [Route("category/[Controller]")]
+    [Route("[Controller]")]
     public class SubCatController : ControllerBase
     {
         
-        private ActualSubCatValidator.SubCatValidator _subCatValidator;
-        private IMapper _mapper;
         private ICatService _catService;
 
-        public SubCatController(ICatService service, IMapper mapper)
+        public SubCatController(ICatService service)
         {
             _catService = service;
-            _subCatValidator = new ActualSubCatValidator.SubCatValidator();
-            _mapper = mapper;
         }
         [HttpGet]
         [Route("GetAllSubCategories")]
@@ -82,11 +78,12 @@ namespace PetShopApi.Controllers
         [HttpPut]
         [Route("{subCatID}")]
 
-        public ActionResult<SubCategory> UpdateSubCategory([FromRoute] int subCatID, [FromBody] SubCategory subCategory)
+        public ActionResult<SubCategory> UpdateSubCategory([FromRoute] int subCatID, [FromBody] SubCatDTO subCategory)
         {
+            
             try
             {
-                return Ok(_catService.UpdateSubCategory(subCatID, subCategory));
+                return Ok(_catService.UpdateSubCategory(subCatID,subCategory));
             }
             catch (KeyNotFoundException e)
             {

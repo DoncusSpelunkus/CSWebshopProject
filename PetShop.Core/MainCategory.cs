@@ -10,7 +10,7 @@ public class MainCategory
     [Key]
     public int MainCategoryID { get; set; }
     public string Name { get; set; }
-    [AllowNull]
-    public virtual ICollection<Product> ProdList { get; set; }
+    
+    public List<Product>?  ProdList{ get; set; }
 
 }

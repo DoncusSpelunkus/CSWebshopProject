@@ -23,6 +23,12 @@ namespace PetShop.Infastructure
             modelBuilder.Entity<SubCategory>()
                 .Property(f => f.SubCategoryID)
                 .ValueGeneratedOnAdd();
+            modelBuilder.Entity<Brand>()
+                .Property(b => b.Id)
+                .ValueGeneratedOnAdd();
+            modelBuilder.Entity<Specs>()
+                .Property(s => s.ID)
+                .ValueGeneratedOnAdd();
 
             //Setting keys
             modelBuilder.Entity<Product>()
@@ -31,18 +37,10 @@ namespace PetShop.Infastructure
                 .HasKey(c => new { ManFacId = c.MainCategoryID });
             modelBuilder.Entity<SubCategory>()
                 .HasKey(c => new { ManFacId = c.SubCategoryID });
-        
-            //Making foreign keys for the categories.
-            //The product stores a single category but the categories store multiple products
+            modelBuilder.Entity<SpecsDescription>()
+                .HasKey(sd => new { sd.ProductId, sd.SpecsId });
             
-            /*modelBuilder.Entity<Product>()
-                .HasOne<MainCategory>(p => p.MainCategoryObj)
-                .WithMany(c => c.ProdList)
-                .HasForeignKey(p => p.MainCategoryID);
-            modelBuilder.Entity<Product>()
-                .HasOne<SubCategory>(p => p.SubCategoryObj)
-                .WithMany(c => c.ProdList)
-                .HasForeignKey(p => p.SubCategoryID);*/
+            
             
             modelBuilder.Entity<MainCategory>()
                 .HasMany<Product>(mc => mc.ProdList)
@@ -53,13 +51,7 @@ namespace PetShop.Infastructure
                 .WithOne(p => p.SubCategoryObj)
                 .HasForeignKey(p => p.SubCategoryID);
 
-            modelBuilder.Entity<Specs>()
-                .Property(s => s.ID)
-                .ValueGeneratedOnAdd();
-
-            modelBuilder.Entity<SpecsDescription>()
-                .HasKey(sd => new { sd.ProductId, sd.SpecsId });
-            
+           
             
 
             // specsDescription has one product, one product has many specsDecription.

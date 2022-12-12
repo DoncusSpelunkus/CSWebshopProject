@@ -10,6 +10,5 @@ public class SubCategory
     [Key]
     public int SubCategoryID { get; set; }
     public string Name { get; set; }
-    [AllowNull]
-    public ICollection<Product> ProdList { get; set; }
+    public List<Product>?  ProdList{ get; set; }
 }
