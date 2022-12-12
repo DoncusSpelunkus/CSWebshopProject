@@ -42,27 +42,11 @@ namespace PetShop.Infastructure
                 .HasKey(c => new { ManFacId = c.MainCategoryID });
             modelBuilder.Entity<SubCategory>()
                 .HasKey(c => new { ManFacId = c.SubCategoryID });
+            modelBuilder.Entity<Brand>()
+                .HasKey(c => new { ManFacId = c.Id });
             modelBuilder.Entity<Rating>(r => r
                 .HasKey(r => new { r.ProductId, r.UserId }));
-            
-          
-                
 
-            //Making foreign keys for the categories. The product stores a single category but the categories store multiple products
-            modelBuilder.Entity<Product>()
-                .HasOne<MainCategory>(p => p.MainCategoryObj)
-                .WithMany(c => c.ProdList)
-                .HasForeignKey(p => p.MainCategoryID);
-            modelBuilder.Entity<Product>()
-                .HasOne<SubCategory>(p => p.SubCategoryObj)
-                .WithMany(c => c.ProdList)
-                .HasForeignKey(p => p.SubCategoryID);
-            modelBuilder.Entity<Product>()
-                .HasOne<Brand>(p => p.Brand)
-                .WithMany(c => c.ProdList)
-                .HasForeignKey(p => p.BrandID);
-           
-            
             // a rating has a single product but a product has multiple ratings
             modelBuilder.Entity<Rating>()
                 .HasOne(r => r.Product)
@@ -84,19 +68,33 @@ namespace PetShop.Infastructure
                 .HasMany(p => p.Ratings)
                 .WithOne(r => r.Product);
             
+            
+            // a main category has many products, but product has one main category 
             modelBuilder.Entity<MainCategory>()
                 .HasMany<Product>(mc => mc.ProdList)
-                .WithOne(p => p.MainCategoryObj)
-                .HasForeignKey(p => p.MainCategoryID);
+                .WithOne(p => p.MainCategoryObj);
+            //  a sub category has many products, but product has one sub category
             modelBuilder.Entity<SubCategory>()
                 .HasMany<Product>(sc => sc.ProdList)
-                .WithOne(p => p.SubCategoryObj)
-                .HasForeignKey(p => p.SubCategoryID);
+                .WithOne(p => p.SubCategoryObj);
+            // a brand has many products, but product has one brand 
             modelBuilder.Entity<Brand>()
                 .HasMany<Product>(sc => sc.ProdList)
-                .WithOne(p => p.Brand)
+                .WithOne(p => p.Brand);
+            //Making foreign keys for the categories. The product stores a single category but the categories store multiple products
+            modelBuilder.Entity<Product>()
+                .HasOne<MainCategory>(p => p.MainCategoryObj)
+                .WithMany(c => c.ProdList)
+                .HasForeignKey(p => p.MainCategoryID);
+            modelBuilder.Entity<Product>()
+                .HasOne<SubCategory>(p => p.SubCategoryObj)
+                .WithMany(c => c.ProdList)
+                .HasForeignKey(p => p.SubCategoryID);
+            modelBuilder.Entity<Product>()
+                .HasOne<Brand>(p => p.Brand)
+                .WithMany(c => c.ProdList)
                 .HasForeignKey(p => p.BrandID);
-            
+
             // specsDescription has one product, one product has many specsDecription.
             modelBuilder.Entity<SpecsDescription>()
                 .HasOne(sd => sd.Product)

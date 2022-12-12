@@ -9,8 +9,8 @@ namespace PetShop.Application.PostProdDTO
         public string ImageUrl { get; set; }
 
         public List<SpecDescDTO> SpecsDescriptions { get; set; }
-        public int MainCategoryObjId { get; set; }
-        public int SubCategoryObjId { get; set; }        
+        public int MainCategoryID { get; set; }
+        public int SubCategoryID { get; set; }        
         public int BrandID { get; set; }
 
     }

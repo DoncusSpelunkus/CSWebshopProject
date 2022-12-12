@@ -34,14 +34,12 @@ public class CatRepo: ICatRepo
     }
     public MainCategory GetMainCategoryByID(int mainCatId)
     {
-        return _dbContext.MainCategoryTable
-            .Include(c=> c.ProdList)
-            .FirstOrDefault(c => c.MainCategoryID == mainCatId);
+        return _dbContext.MainCategoryTable.FirstOrDefault(c => c.MainCategoryID == mainCatId);
     }
 
     public MainCategory DeleteMainCategoryByID(int mainCatId)
     {
-        MainCategory? mainCategory = GetMainCategoryByID(mainCatId);
+        MainCategory mainCategory = GetMainCategoryByID(mainCatId);
         _dbContext.MainCategoryTable.Remove(mainCategory);
         _dbContext.SaveChanges();
         return mainCategory;
