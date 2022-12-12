@@ -12,4 +12,7 @@ public class UserDTO
     [StringLength(20)]
     public string password { get; set; }
     public int type { get; set; }
+    public string Address { get; set; }
+    public int Zipcode { get; set; }
+    public int PhoneNumber { get; set; }
 }
