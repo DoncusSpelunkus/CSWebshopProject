@@ -1,6 +1,3 @@
-import {ProductService} from "../services/Product.service";
-import {Product} from "../Entities/Product";
-import {SpecificationService} from "../services/SpecificationService";
 import {Injectable} from "@angular/core";
 import {User} from "../Entities/User";
 import {UserService} from "../services/user.service";
@@ -8,9 +5,6 @@ import {UserService} from "../services/user.service";
 @Injectable({ providedIn: 'root' })
 
 export class UserState { // State class for data manipulation
-
-  usersUnmodified: User[] = [];
-
 
   constructor(private userService: UserService) {
   }

@@ -8,10 +8,11 @@ import {
   SpecificationUpdateComponent
 } from "./specification-related/specification-update/specification-update.component";
 import {LoginComponent} from "./Pages/login/login.component";
+import {AuthGuardService} from "../services/AuthGuardService";
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'admin', component: AdminComponent},
+  { path: 'admin', component: AdminComponent, canActivate: [AuthGuardService]},
   { path: 'user', component: UserComponent},
   { path: 'product-edit/:id', component: ProductEditComponent},
   { path: 'specification-update/:id', component: SpecificationUpdateComponent},

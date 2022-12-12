@@ -1,11 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {CurrentSpecs} from "../../../Entities/CurrentSpecs";
-import {SpecTemplates} from "../../../Entities/SpecTemplates";
 import {ActivatedRoute, Router} from "@angular/router";
-import {AdminState} from "../../../states/AdminState";
-import {Product} from "../../../Entities/Product";
 import {User} from "../../../Entities/User";
 import jwtDecode from "jwt-decode";
+import {UserState} from "../../../states/UserState";
 
 @Component({
   selector: 'app-user-edit',
@@ -15,7 +12,7 @@ import jwtDecode from "jwt-decode";
 export class UserEditComponent implements OnInit {
   user: any;
 
-  constructor(private Aroute: ActivatedRoute, private userState: AdminState, public route: Router) {
+  constructor(private Aroute: ActivatedRoute, private userState: UserState, public route: Router) {
     this.user = User;
   }
 
@@ -25,14 +22,20 @@ export class UserEditComponent implements OnInit {
       let decode = jwtDecode(localToken) as User;
       this.user = decode
     }
+
   }
+
+  async postUser() {
+    await this.userState.postUser(this.user)
+  }
+
 
   updateUser(){
-    this.userState.putProduct(this.user);
+    this.userState.putUser(this.user);
   }
 
-  onDelete(event: number): void{
-
+  deleteProduct(id){
+    this.userState.deleteUserById(id);
   }
 
 }

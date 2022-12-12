@@ -7,15 +7,15 @@ export class LoginState{
   constructor(private loginService: LoginService) {
   }
 
-  async onLoginCall(username: string, password: string){
-    let data = await this.loginService.onLoginCall(username,password);
+  async onLoginCall(email: string, password: string){
+    let data = await this.loginService.onLoginCall(email,password);
     localStorage.setItem('auth', data);
 
   }
 
-  async registerUser(username: string, password: string, repeatPassword: string){
+  async registerUser(email: string, password: string, repeatPassword: string){
     if(password === repeatPassword){
-      let data = await this.loginService.registerUser(username, password);
+      let data = await this.loginService.registerUser(email, password);
       return data;
     }
   }

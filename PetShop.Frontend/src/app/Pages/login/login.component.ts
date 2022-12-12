@@ -10,7 +10,7 @@ import {LoginState} from "../../../states/LoginState";
 export class LoginComponent implements OnInit {
 
   loginObj: any = {
-    userName: '',
+    email: '',
     password:''
   };
   constructor(private router: Router, private loginState: LoginState) { }
@@ -19,7 +19,8 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin(){
-    this.loginState.onLoginCall(this.loginObj.userName, this.loginObj.password)
+    this.loginState.onLoginCall(this.loginObj.email, this.loginObj.password)
+    this.router.navigateByUrl("admin")
   }
 
 }

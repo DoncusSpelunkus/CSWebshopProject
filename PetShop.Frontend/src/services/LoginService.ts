@@ -5,7 +5,7 @@ import {catchError} from "rxjs";
 import {Injectable} from "@angular/core";
 
 export const customAxios = axios.create({
-  baseURL: 'https://localhost:7143/User/Login',
+  baseURL: 'https://localhost:7143/User/login',
   headers: {
     Authorization: `Bearer ${localStorage.getItem('auth')}`
   }
@@ -32,18 +32,19 @@ export class LoginService{
     )
   }
 
-  async onLoginCall(username: string, password: string){
+  async onLoginCall(email: string, password: string){
     let dto = {
-      username: username,
+      email: email,
       password: password
     }
-    let httpRepsonse = await customAxios.post<any>('',dto,);
-    return httpRepsonse.data;
+    let httpResponse = await customAxios.post<any>('',dto);
+    console.log(httpResponse)
+    return httpResponse.data;
   }
 
-  async registerUser(username: string, password: string) {
+  async registerUser(email: string, password: string) {
     let dto = {
-      username: username,
+      email: email,
       password: password
     }
     let httpResponse = await customAxios.post<any>('', dto);
