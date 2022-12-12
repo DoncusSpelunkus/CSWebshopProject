@@ -10,12 +10,29 @@ namespace PetShop.Application;
 public class CatService: ICatService
 {
     private ICatRepo _catRepository;
-    private Mapper _mapper;
-    private IValidator<MainCategory> _mainCatValidator;
-    private IValidator<SubCategory> _subCatValidator;
+    private IMapper _mapper;
+    private ActualMainCatValidator.MainCatValidator _mainCatValidator;
+    private ActualSubCatValidator.SubCatValidator _subCatValidator;
     private IValidator<MainCatDTO> _mainValidator;
     private IValidator<SubCatDTO> _subValidator;
-    public List<MainCategory> GetAllMainCategories()
+
+    public CatService(
+        ICatRepo repo, 
+        IMapper mapper,
+        IValidator<MainCategory> mainCatValidator, 
+        IValidator<SubCategory> subCatValidator,
+        IValidator<MainCatDTO> mainValidator,
+        IValidator<SubCatDTO> subValidator
+        )
+    {
+        _mapper = mapper;
+        _catRepository = repo;
+        _mainCatValidator = new ActualMainCatValidator.MainCatValidator();
+        _subCatValidator = new ActualSubCatValidator.SubCatValidator();
+        _mainValidator = new MainCatValidator();
+        _subValidator = new SubCatValidator();
+    }
+    public List<MainCategory> GetAllMainCategories( )
     {
         return _catRepository.GetAllMainCategories();
     }
@@ -24,20 +41,22 @@ public class CatService: ICatService
         var validation = _mainValidator.Validate(mainCategory);
         if (!validation.IsValid)
             throw new ValidationException(validation.ToString());
-            
+        Console.WriteLine("I Validated the create mc");
         return _catRepository.CreateMainCategory(_mapper.Map<MainCategory>(mainCategory));
     }
 
-    public MainCategory UpdateMainCategory(int mainCatRefID, MainCategory mainCategory)
+    public MainCategory UpdateMainCategory(int mainCatRefID, MainCatDTO mainCategoryDto)
     {
-        if (mainCatRefID != mainCategory.RefID)
-            throw new ValidationException("ID in body and route are different (Update)");
-        var validation = _mainCatValidator.Validate(mainCategory);
+        var validation = _mainValidator.Validate(mainCategoryDto);
         if (!validation.IsValid)
         {
             throw new ValidationException(validation.ToString());
         }
-        return _catRepository.UpdateMainCategory(mainCategory);
+
+        var mainCat = _mapper.Map<MainCategory>(mainCategoryDto);
+        mainCat.MainCategoryID = mainCatRefID;
+        return _catRepository.UpdateMainCategory(mainCat);
+        
     }
 
     public MainCategory GetMainCategoryById(int mainCatId)
@@ -64,20 +83,21 @@ public class CatService: ICatService
         var validation = _subValidator.Validate(subCategory);
         if (!validation.IsValid)
             throw new ValidationException(validation.ToString());
-            
+        Console.WriteLine("I Validated the create sc");
         return _catRepository.CreateSubCategory(_mapper.Map<SubCategory>(subCategory));
     }
 
-    public SubCategory UpdateSubCategory(int subCatRefID,SubCategory subCategory)
+    public SubCategory UpdateSubCategory(int subCatRefID, SubCatDTO subCategoryDto)
     {
-        if (subCatRefID != subCategory.RefID)
-            throw new ValidationException("ID in body and route are different (Update)");
-        var validation = _subCatValidator.Validate(subCategory);
+        var validation = _subValidator.Validate(subCategoryDto);
         if (!validation.IsValid)
         {
             throw new ValidationException(validation.ToString());
         }
-        return _catRepository.UpdateSubCategory(subCategory);
+
+        var subCat = _mapper.Map<SubCategory>(subCategoryDto);
+        subCat.SubCategoryID = subCatRefID;
+        return _catRepository.UpdateSubCategory(subCat);
     }
 
     public SubCategory GetSubCategoryById(int subCatId)

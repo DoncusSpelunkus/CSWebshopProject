@@ -8,23 +8,18 @@ using PetShop.Application.Validators;
 
 namespace PetShopApi.Controllers{
     [ApiController]
-    [Route("Brand/[Controller]")]
+    [Route("[Controller]")]
     public class BrandController : ControllerBase
     {
-        
-        private BrandValidator _brandValidator;
-        private IMapper _mapper;
         private IBrandService _brandService;
 
-        public BrandController(IBrandService service, IMapper mapper)
+        public BrandController(IBrandService service)
         {
             _brandService = service;
-            _brandValidator = new BrandValidator();
-            _mapper = mapper;
         }
 
         [HttpGet]
-        [Route("GetAllMainCategories")]
+        [Route("GetAllBrands")]
         public ActionResult<List<Brand>> GetAllBrands()
         {
             try
@@ -80,11 +75,11 @@ namespace PetShopApi.Controllers{
         [HttpPut]
         [Route("{brandID}")]
 
-        public ActionResult<MainCategory> UpdateBrand([FromRoute] int brandID, [FromBody] Brand brand)
+        public ActionResult<MainCategory> UpdateBrand([FromRoute] int brandID, [FromBody] BrandDto brandDto)
         {
             try
             {
-                return Ok(_brandService.UpdateBrand(brandID , brand));
+                return Ok(_brandService.UpdateBrand(brandID , brandDto));
             }
             catch (KeyNotFoundException e)
             {

@@ -87,6 +87,7 @@ builder.Services.AddScoped<Authentication>();
 
 
 
+
 builder.Services.AddValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
 
 PetShop.Application.DependencyResolver.DependencyResolverService.RegisterApplicationLayer(builder.Services);

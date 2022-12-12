@@ -9,10 +9,16 @@ namespace PetShop.Application;
 public class BrandService: IBrandService
 {
     private IBrandRepo _brandRepository;
-    private Mapper _mapper;
-    private IValidator<Brand> _brandValidator;
-    private IValidator<BrandDto> _validator;
+    private IMapper _mapper;
+    private IValidator<BrandDto> _dtoValidator;
 
+    
+    public BrandService(IBrandRepo brandRepository, IMapper mapper,  IValidator<BrandDto> dtoValidator) 
+    {
+        _brandRepository = brandRepository;
+        _mapper = mapper;
+        _dtoValidator = dtoValidator;
+    }
     public List<Brand> GetAllBrands()
     {
         return _brandRepository.GetAllBrands();
@@ -20,22 +26,23 @@ public class BrandService: IBrandService
 
     public Brand CreateBrand(BrandDto dto)
     {
-        var validation = _validator.Validate(dto);
+        var validation = _dtoValidator.Validate(dto);
         if (!validation.IsValid)
             throw new ValidationException(validation.ToString());
         return _brandRepository.CreateBrand(_mapper.Map<Brand>(dto));
     }
     
 
-    public Brand UpdateBrand(int brandID, Brand brand)
+    public Brand UpdateBrand(int brandID, BrandDto brandDto)
     {
-        if (brandID != brand.Id)
-            throw new ValidationException("ID in body and route are different (Update)");
-        var validation = _brandValidator.Validate(brand);
+        var validation = _dtoValidator.Validate(brandDto);
         if (!validation.IsValid)
         {
             throw new ValidationException(validation.ToString());
         }
+
+        var brand = _mapper.Map<Brand>(brandDto);
+        brand.Id = brandID;
         return _brandRepository.UpdateBrand(brand);
     }
 

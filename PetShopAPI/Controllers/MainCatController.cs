@@ -10,7 +10,7 @@ using PetShop.Domain;
 namespace PetShopApi.Controllers
 {
     [ApiController]
-    [Route("category/[Controller]")]
+    [Route("[Controller]")]
     public class MainCatController : ControllerBase
     {
         private ActualMainCatValidator.MainCatValidator _mainCatValidator;
@@ -66,7 +66,7 @@ namespace PetShopApi.Controllers
             try
             {
                 var result = _catService.CreateMainCategory(dto);
-                return Created("shop/" + result.RefID, result);
+                return Created("shop/" + result.MainCategoryID, result);
             }
             catch (ValidationException e)
             {
@@ -81,8 +81,9 @@ namespace PetShopApi.Controllers
         [HttpPut]
         [Route("{mainCatID}")]
 
-        public ActionResult<MainCategory> UpdateMainCategory([FromRoute] int mainCatID, [FromBody] MainCategory mainCategory)
+        public ActionResult<MainCategory> UpdateMainCategory([FromRoute] int mainCatID, [FromBody] MainCatDTO mainCategory)
         {
+            
             try
             {
                 return Ok(_catService.UpdateMainCategory(mainCatID,mainCategory));

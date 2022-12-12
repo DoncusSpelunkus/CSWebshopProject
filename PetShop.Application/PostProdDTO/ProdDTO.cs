@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using PetShop.Domain;
+﻿
 
 namespace PetShop.Application.PostProdDTO
 {
@@ -14,7 +13,6 @@ namespace PetShop.Application.PostProdDTO
         public int MainCategoryObjId { get; set; }
         public int SubCategoryObjId { get; set; }        
         public int BrandID { get; set; }
-        
 
     }
     

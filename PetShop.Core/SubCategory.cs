@@ -8,8 +8,7 @@ namespace PetShop.Domain;
 public class SubCategory
 {
     [Key]
-    public int RefID { get; set; }
+    public int SubCategoryID { get; set; }
     public string Name { get; set; }
-    [AllowNull]
-    public List<Product> ProdList { get; set; }
+    public List<Product>?  ProdList{ get; set; }
 }
