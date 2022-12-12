@@ -68,7 +68,7 @@ public class UserController : ControllerBase
                     return BadRequest("Wrong password or username.");
                 }
 
-                if (_logic.ValidateHash(userLogin.Password, currentUser.HashPassword, currentUser.SaltPassword))
+                if (!_logic.ValidateHash(userLogin.Password, currentUser.HashPassword, currentUser.SaltPassword))
                 {
                     return BadRequest("Wrong password or username.");
                 }
@@ -106,7 +106,7 @@ public class UserController : ControllerBase
                 var actualUser = _userService.GetUserByID(userID);
                 try
                 {
-                    if(_logic.ValidateHash(currentPassword, actualUser.HashPassword, actualUser.SaltPassword))
+                    if(!_logic.ValidateHash(currentPassword, actualUser.HashPassword, actualUser.SaltPassword))
                     {
                         return BadRequest("Wrong password.");
                     }

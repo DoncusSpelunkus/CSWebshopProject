@@ -91,12 +91,17 @@ namespace PetShop.Infastructure
             modelBuilder.Entity<SubCategory>()
                 .HasMany<Product>(sc => sc.ProdList)
                 .WithOne(p => p.SubCategoryObj)
+<<<<<<< Updated upstream
                 .HasForeignKey(p => p.SubCategoryID);
             modelBuilder.Entity<Brand>()
                 .HasMany<Product>(sc => sc.ProdList)
                 .WithOne(p => p.Brand)
                 .HasForeignKey(p => p.BrandID);
 
+=======
+                .HasForeignKey(p => p.SubCategoryObjId);
+            
+>>>>>>> Stashed changes
             // specsDescription has one product, one product has many specsDecription.
             modelBuilder.Entity<SpecsDescription>()
                 .HasOne(sd => sd.Product)
