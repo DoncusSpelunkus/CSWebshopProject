@@ -77,7 +77,7 @@ public class ProductService : IProductService
     public Rating AddRating(ratingDTO ratingValue, int productId, Guid userId)
     {
         // Validate the rating to ensure it is within the acceptable range.
-        if (ratingValue.Rating < 1 || ratingValue.Rating > 6)
+        if (ratingValue.RatingValue < 1 || ratingValue.RatingValue > 6)
         {
             throw new ArgumentException("Rating must be between 1 and 5.");
         }

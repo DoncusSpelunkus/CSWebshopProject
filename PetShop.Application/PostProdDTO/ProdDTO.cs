@@ -1,10 +1,5 @@
-<<<<<<< Updated upstream
-﻿
-
 namespace PetShop.Application.PostProdDTO
-=======
-﻿namespace PetShop.Application.PostProdDTO
->>>>>>> Stashed changes
+
 {
     public class ProdDTO
     {
@@ -22,6 +17,6 @@ namespace PetShop.Application.PostProdDTO
     
     public class ratingDTO
     {
-        public int Rating { get; set; }
+        public int RatingValue { get; set; }
     }
 }
