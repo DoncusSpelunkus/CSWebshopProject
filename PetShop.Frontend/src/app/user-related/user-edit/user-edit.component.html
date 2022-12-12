@@ -1,0 +1,22 @@
+<div style="text-align: center">
+  <mat-form-field>Name:
+    <input type="string" matInput [(ngModel)]="user.name">
+  </mat-form-field>
+  <mat-form-field>Username:
+    <input type="string" matInput [(ngModel)]="user.username">
+  </mat-form-field>
+  <mat-form-field>Email:
+    <input type="string" matInput [(ngModel)]="user.email">
+  </mat-form-field>
+  <mat-form-field>Address:
+    <input type="string" matInput [(ngModel)]="user.address">
+  </mat-form-field>
+  <mat-form-field>Zip Code:
+    <input type="number" matInput [(ngModel)]="user.zip">
+  </mat-form-field>
+  <mat-form-field>Phone:
+    <input type="number" matInput [(ngModel)]="user.phone">
+  </mat-form-field>
+  <button mat-raised-button (click)="updateUser()">Update</button>
+</div>
+

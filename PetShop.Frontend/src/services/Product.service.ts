@@ -51,7 +51,7 @@ export class ProductService {
   }
 
   async deleteProductByID(id: any){
-    let httpResponse = await customAxios.delete<Product>(this.apiUrl+'/' + id)
+    let httpResponse = await customAxios.delete<Product>('/' + id)
   }
 
   async getProductById(id: number) {

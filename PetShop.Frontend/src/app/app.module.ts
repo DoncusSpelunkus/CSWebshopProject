@@ -32,6 +32,8 @@ import { SpecificationListComponent } from './specification-related/specificatio
 import { SpecificationUpdateComponent } from './specification-related/specification-update/specification-update.component';
 import { CurrentSpecListComponent } from './specification-related/current-spec-list/current-spec-list.component';
 import { LoginComponent } from './Pages/login/login.component';
+import { UserComponent } from './Pages/user/user.component';
+import { UserEditComponent } from './user-related/user-edit/user-edit.component';
 
 
 
@@ -53,6 +55,8 @@ import { LoginComponent } from './Pages/login/login.component';
     SpecificationUpdateComponent,
     CurrentSpecListComponent,
     LoginComponent,
+    UserComponent,
+    UserEditComponent,
 
   ],
   imports: [

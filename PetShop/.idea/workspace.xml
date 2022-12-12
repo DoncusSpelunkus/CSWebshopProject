@@ -2,24 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e433f57f-6238-46d2-97e8-786875e4a194" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../PetShop.Frontend/src/app/Navigation-tools/header/header.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../PetShop.Frontend/src/app/Navigation-tools/header/header.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PetShop.Frontend/src/app/Navigation-tools/header/header.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../PetShop.Frontend/src/app/Navigation-tools/header/header.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PetShop.Frontend/src/app/Pages/admin/admin.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../PetShop.Frontend/src/app/Pages/admin/admin.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PetShop.Frontend/src/app/Pages/admin/admin.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../PetShop.Frontend/src/app/Pages/admin/admin.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PetShop.Frontend/src/app/Pages/login/login.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../PetShop.Frontend/src/app/Pages/login/login.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../PetShop.Frontend/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../PetShop.Frontend/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PetShop.Frontend/src/app/product-related/product-creation/product-creation.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../PetShop.Frontend/src/app/product-related/product-creation/product-creation.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PetShop.Frontend/src/app/product-related/product-creation/product-creation.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../PetShop.Frontend/src/app/product-related/product-creation/product-creation.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PetShop.Frontend/src/app/product-related/product-list/product-list.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../PetShop.Frontend/src/app/product-related/product-list/product-list.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PetShop.Frontend/src/app/specification-related/current-spec-list/current-spec-list.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../PetShop.Frontend/src/app/specification-related/current-spec-list/current-spec-list.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PetShop.Frontend/src/app/specification-related/specification-creation/specification-creation.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../PetShop.Frontend/src/app/specification-related/specification-creation/specification-creation.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PetShop.Frontend/src/app/specification-related/specification-creation/specification-creation.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../PetShop.Frontend/src/app/specification-related/specification-creation/specification-creation.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PetShop.Frontend/src/app/app.router.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../PetShop.Frontend/src/app/app.router.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PetShop.Frontend/src/services/Product.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../PetShop.Frontend/src/services/Product.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
