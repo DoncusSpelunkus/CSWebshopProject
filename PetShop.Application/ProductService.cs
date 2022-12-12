@@ -74,21 +74,26 @@ public class ProductService : IProductService
         _productRepository.RebuildDB();
     }
     
-    public Rating AddRating(ratingDTO ratingValue, int productId, Guid userId)
+    public Rating AddRating(Rating ratingValue)
     {
         // Validate the rating to ensure it is within the acceptable range.
-        if (ratingValue.Rating < 1 || ratingValue.Rating > 6)
+        if (ratingValue.RatingValue < 1 || ratingValue.RatingValue > 5)
         {
             throw new ArgumentException("Rating must be between 1 and 5.");
         }
+
+        if (ratingValue.ProductId <= 0 || ratingValue.UserId.ToString() == null)
+        {
+            throw new ValidationException("ID is invalid");
+        }
         
+
         // Create a new Rating object and set its properties.
         var ratingValuetoAdd = _mapper.Map<Rating>(ratingValue);
-        ratingValuetoAdd.ProductId = productId;
-        ratingValuetoAdd.UserId = userId;
 
         // Add the rating to the database.
-         return _productRepository.AddRating(ratingValuetoAdd);
+        _productRepository.AddRating(ratingValuetoAdd);
+        return ratingValuetoAdd;
     }
 
     public Rating UpdateRating(Rating rating)

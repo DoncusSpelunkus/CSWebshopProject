@@ -1,10 +1,6 @@
-<<<<<<< Updated upstream
 ﻿
 
 namespace PetShop.Application.PostProdDTO
-=======
-﻿namespace PetShop.Application.PostProdDTO
->>>>>>> Stashed changes
 {
     public class ProdDTO
     {

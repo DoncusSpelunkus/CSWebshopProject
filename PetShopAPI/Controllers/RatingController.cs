@@ -22,9 +22,9 @@ public class RatingController : ControllerBase
     
     
     [HttpPost]
-    [Route("postRewiev, {userId}, {productId}")]
+    [Route("postRewiev, {userID}, {productID}")]
     [Authorize]
-    public async Task<ActionResult<Rating>> CreateRating(ratingDTO ratingDto, [FromRoute] int productId, [FromRoute] Guid userId)
+    public async Task<ActionResult<Rating>> CreateRating(ratingDTO ratingDto, [FromRoute] int productid, [FromRoute] string userId)
     {   
         // checking if the token holds a user
         bool hasClaim = User.HasClaim(ClaimTypes.Role, "User");
@@ -34,10 +34,15 @@ public class RatingController : ControllerBase
         {
             return Unauthorized();
         }
+        
+        var rating = _mapper.Map<Rating>(ratingDto);
+        rating.ProductId = productid;
+        rating.UserId = new Guid(userId);
         if (hasClaim.Equals(true))
         {
             // Add the rating to the database
-            return Ok(_productService.AddRating(ratingDto, productId, userId ));
+            var result =  _productService.AddRating(rating);
+            return Ok(result);
         }
         else
         {
