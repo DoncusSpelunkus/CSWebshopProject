@@ -1,14 +1,14 @@
 import { Routes, RouterModule } from '@angular/router';
 
-import { HomeComponent } from './Pages/home/home.component';
-import { AdminComponent } from "./Pages/admin/admin.component";
-import { UserComponent } from "./Pages/user/user.component";
-import { ProductEditComponent } from "./product-related/product-edit/product-edit.component";
+import { HomeComponent } from './landingPages/home/home.component';
+import { AdminComponent } from "./landingPages/admin/admin.component";
+import { UserComponent } from "./landingPages/user/user.component";
+import { ProductEditComponent } from "./productComponents/product-edit/product-edit.component";
 import {
   SpecificationUpdateComponent
-} from "./specification-related/specification-update/specification-update.component";
-import {LoginComponent} from "./Pages/login/login.component";
-import {UserRegistrationComponent} from "./Pages/user-registration/user-registration.component";
+} from "./specificationComponents/specification-update/specification-update.component";
+import {LoginComponent} from "./landingPages/login/login.component";
+import {UserRegistrationComponent} from "./landingPages/user-registration/user-registration.component";
 import {AuthGuardService} from "../services/AuthGuardService";
 import {LoginGuardService} from "../services/LoginGuardService";
 

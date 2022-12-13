@@ -14,27 +14,27 @@ import {Overlay} from "@angular/cdk/overlay";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatTableModule} from "@angular/material/table";
 import {MatSelectModule} from "@angular/material/select";
-import { HeaderComponent } from './Navigation-tools/header/header.component';
+import { HeaderComponent } from './navigationComponents/header/header.component';
 import {MatSidenavModule} from "@angular/material/sidenav";
-import { ProductCreationComponent } from './product-related/product-creation/product-creation.component';
-import { ProductListComponent } from './product-related/product-list/product-list.component';
-import { HomeComponent } from './Pages/home/home.component';
+import { ProductCreationComponent } from './productComponents/product-creation/product-creation.component';
+import { ProductListComponent } from './productComponents/product-list/product-list.component';
+import { HomeComponent } from './landingPages/home/home.component';
 import { appRoutingModule } from './app.router';
-import { AdminComponent } from './Pages/admin/admin.component';
-import { ProductEditComponent } from './product-related/product-edit/product-edit.component'
+import { AdminComponent } from './landingPages/admin/admin.component';
+import { ProductEditComponent } from './productComponents/product-edit/product-edit.component'
 import { AgGridModule } from "ag-grid-angular";
-import { CategoryCreationComponent } from './category-related/category-creation/category-creation.component';
+import { CategoryCreationComponent } from './categoryComponents/category-creation/category-creation.component';
 import {MatTabsModule} from "@angular/material/tabs";
-import { CategoryEditComponent } from './category-related/category-edit/category-edit.component';
-import { CategoryListComponent } from './category-related/category-list/category-list.component';
-import { SpecificationCreationComponent } from './specification-related/specification-creation/specification-creation.component';
-import { SpecificationListComponent } from './specification-related/specification-list/specification-list.component';
-import { SpecificationUpdateComponent } from './specification-related/specification-update/specification-update.component';
-import { CurrentSpecListComponent } from './specification-related/current-spec-list/current-spec-list.component';
-import { LoginComponent } from './Pages/login/login.component';
-import { UserComponent } from './Pages/user/user.component';
-import { UserEditComponent } from './user-related/user-edit/user-edit.component';
-import { UserRegistrationComponent } from './Pages/user-registration/user-registration.component';
+import { CategoryEditComponent } from './categoryComponents/category-edit/category-edit.component';
+import { CategoryListComponent } from './categoryComponents/category-list/category-list.component';
+import { SpecificationCreationComponent } from './specificationComponents/specification-creation/specification-creation.component';
+import { SpecificationListComponent } from './specificationComponents/specification-list/specification-list.component';
+import { SpecificationUpdateComponent } from './specificationComponents/specification-update/specification-update.component';
+import { CurrentSpecListComponent } from './specificationComponents/current-spec-list/current-spec-list.component';
+import { LoginComponent } from './landingPages/login/login.component';
+import { UserComponent } from './landingPages/user/user.component';
+import { UserEditComponent } from './userComponents/user-edit/user-edit.component';
+import { UserRegistrationComponent } from './landingPages/user-registration/user-registration.component';
 
 
 

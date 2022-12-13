@@ -1,6 +1,5 @@
 import axios from "axios";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {HttpClient} from "@angular/common/http";
 import {catchError} from "rxjs";
 import {Injectable} from "@angular/core";
 import {User} from "../Entities/User";
@@ -15,7 +14,7 @@ export const customAxios = axios.create({
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService{
+export class LoginService{ // Class for crud requests from the /user/** route of the api (login and registration)
 
   constructor(private matSnackbar: MatSnackBar) {
     customAxios.interceptors.response.use(

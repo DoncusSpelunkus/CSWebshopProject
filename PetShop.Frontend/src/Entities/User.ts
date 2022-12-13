@@ -1,4 +1,4 @@
-export class User {
+export class User { // template for the user token
   id: number = 0;
   fullName: string = '';
   email: string = '';

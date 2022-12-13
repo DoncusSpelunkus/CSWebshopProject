@@ -1,9 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import { ActivatedRoute } from '@angular/router'
-import { ProductService } from "../../../services/Product.service";
 import { Product } from "../../../Entities/Product";
 import { Router } from "@angular/router";
-import {SpecificationService} from "../../../services/SpecificationService";
 import {SpecTemplates} from "../../../Entities/SpecTemplates";
 import {CurrentSpecs} from "../../../Entities/CurrentSpecs";
 import {AdminState} from "../../../states/AdminState";

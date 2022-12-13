@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {SpecificationService} from "../../../services/SpecificationService";
 import {SpecTemplates} from "../../../Entities/SpecTemplates";
 import {AdminState} from "../../../states/AdminState";
 

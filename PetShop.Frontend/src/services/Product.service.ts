@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import axios from "axios";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {HttpClient} from "@angular/common/http";
-import {catchError, Observable} from "rxjs";
+import {catchError} from "rxjs";
 import {Product} from "../Entities/Product";
 
 export const customAxios = axios.create({
@@ -15,7 +15,7 @@ export const customAxios = axios.create({
 @Injectable({
   providedIn: 'root'
 })
-export class ProductService {
+export class ProductService { // Class for crud requests from the /product route of the api
   apiUrl = 'https://localhost:7143/Product';
 
   constructor(private matSnackbar: MatSnackBar, private http: HttpClient) {
@@ -34,7 +34,7 @@ export class ProductService {
     )
   }
 
-  async getProducts(){ // calls and waits for a list of all products via the get http request of the api on the route /product
+  async getProducts(){
     let httpResponse = await customAxios.get<Product[]>('');
     return httpResponse.data;
   }

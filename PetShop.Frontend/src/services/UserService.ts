@@ -15,7 +15,7 @@ export const customAxios = axios.create({
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class UserService { // Class for crud requests from the /user route of the api
   apiUrl = 'https://localhost:7143/User';
 
   constructor(private matSnackbar: MatSnackBar, private http: HttpClient) {

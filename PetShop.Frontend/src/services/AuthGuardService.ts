@@ -1,4 +1,3 @@
-import axios from "axios";
 import {Injectable} from "@angular/core";
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from "@angular/router";
 import {Observable} from "rxjs";
@@ -21,21 +20,19 @@ export class AuthGuardService implements CanActivate{
       console.log(decodToken.exp)
       if(decodToken.exp){
         let expiry = new Date(decodToken.exp * 1000);
-        if(currentdate<expiry && decodToken.type === "admin"){ // checks the role assigned to the token and exp date
+        if(currentdate<expiry && decodToken.type === "Admin"){ // checks the role assigned to the token and exp date
           return true;
         }
         else if(currentdate<expiry && decodToken.type === "user")
-          this.router.navigateByUrl("user") // Redirects if the token has a user role
+          this.router.navigateByUrl("User") // Redirects if the token has a user role
           return false;
       }
 
     }
     return false;
   }
-
-
-
 }
+
 class Token{ // a small expression of the token
   exp?: number;
   type?: string;

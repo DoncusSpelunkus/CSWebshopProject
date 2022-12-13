@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {HttpClient} from "@angular/common/http";
-import {catchError, Observable} from "rxjs";
+import {catchError} from "rxjs";
 import {SpecTemplates} from "../Entities/SpecTemplates";
 import axios from "axios";
 
@@ -15,10 +14,9 @@ export const customAxios = axios.create({
 @Injectable({
   providedIn: 'root'
 })
-export class SpecificationService {
-  apiUrl = 'https://localhost:7143/Specs';
+export class SpecificationService { // Class for crud requests from the /specs route of the api
 
-  constructor(private matSnackbar: MatSnackBar, private http: HttpClient) {
+  constructor(private matSnackbar: MatSnackBar) {
     customAxios.interceptors.response.use(
       response => {
         if(response.status == 201) {
