@@ -12,9 +12,9 @@ public class UserValidator : AbstractValidator<UserDTO>
         RuleFor(u => u.Name).NotEmpty();
         RuleFor(u => u.Email).NotEmpty().EmailAddress();
         RuleFor(u =>u.Address).NotEmpty();
-        RuleFor(u => u.PhoneNumber).NotEmpty();
-        RuleFor(u => u.PhoneNumber.ToString()).Length(8);
+        RuleFor(u => u.Phone).NotEmpty();
+        RuleFor(u => u.Phone.ToString()).Length(8);
         RuleFor(u =>u.City).NotEmpty();
-        RuleFor(u => u.Zipcode.ToString()).Length(4);
+        RuleFor(u => u.Zip.ToString()).Length(4);
     }
 }

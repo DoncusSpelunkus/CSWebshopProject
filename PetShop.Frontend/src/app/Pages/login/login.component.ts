@@ -20,7 +20,6 @@ export class LoginComponent implements OnInit {
 
   onLogin(){
     this.loginState.onLoginCall(this.loginObj.email, this.loginObj.password)
-    this.router.navigateByUrl("admin")
   }
 
 }

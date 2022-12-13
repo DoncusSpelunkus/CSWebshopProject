@@ -15,38 +15,32 @@ public class Authentication
         _configuration = configuration;
     }
     
-
-    
-
     public string CreateToken(User user)
     {
         List<Claim> claims = new List<Claim>();
 
-        if (user.type == 2){
-            // not allowed to use the api stuff for creating product if its just a basic user.
-            claims.Add(new Claim(ClaimTypes.Name, user.Name));
-            claims.Add(new Claim(ClaimTypes.Role, "Admin"));
-            claims.Add(new Claim(ClaimTypes.Email,user.Email));
-            claims.Add(new Claim(ClaimTypes.MobilePhone, user.PhoneNumber.ToString()));
-            claims.Add(new Claim(ClaimTypes.StreetAddress, user.Address));
-            claims.Add(new Claim(ClaimTypes.PostalCode, user.Zipcode.ToString()));
-            claims.Add(new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()));
-            claims.Add(new Claim(ClaimTypes.StateOrProvince, user.City));
-            
-                    
-        }
-        else if (user.type== 1)
+        var userRole = "";
+
+        if (user.type == 1)
         {
-            claims.Add(new Claim(ClaimTypes.Name, user.Name));
-            claims.Add(new Claim(ClaimTypes.Role, "User"));
-            claims.Add(new Claim(ClaimTypes.Email,user.Email));
-            claims.Add(new Claim(ClaimTypes.MobilePhone, user.PhoneNumber.ToString()));
-            claims.Add(new Claim(ClaimTypes.StreetAddress, user.Address));
-            claims.Add(new Claim(ClaimTypes.PostalCode, user.Zipcode.ToString()));
-            claims.Add(new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()));
-            claims.Add(new Claim(ClaimTypes.StateOrProvince, user.City));
+            userRole = "User";
         }
-        // creting token for admin, 2 = admin
+
+        if (user.type == 2)
+        {
+            userRole = "Admin";
+        }
+        
+        claims.Add(new Claim("id", user.Id.ToString()));
+        claims.Add(new Claim("name", user.Name)); ;
+        claims.Add(new Claim("email",user.Email));
+        claims.Add(new Claim("type", userRole));
+        claims.Add(new Claim("city", user.City));
+        claims.Add(new Claim("address", user.Address));
+        claims.Add(new Claim("zip", user.Zip.ToString()));
+        claims.Add(new Claim("phone", user.Phone.ToString()));
+            
+            // creating token for admin, 2 = admin
         if (String.IsNullOrEmpty(user.Name))
             throw new ArgumentNullException(nameof(user.Name));
                 

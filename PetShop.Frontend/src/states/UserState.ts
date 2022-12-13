@@ -13,9 +13,9 @@ export class UserState { // State class for data manipulation
     let dto = {
       id: user.id,
       name: user.name,
-      username: user.username,
       email: user.email,
       address: user.address,
+      city: user.city,
       zip: user.zip,
       phone: user.phone,
     }
@@ -27,9 +27,9 @@ export class UserState { // State class for data manipulation
     let dto = {
       id: user.id,
       name: user.name,
-      username: user.username,
       email: user.email,
       address: user.address,
+      city: user.city,
       zip: user.zip,
       phone: user.phone,
     }

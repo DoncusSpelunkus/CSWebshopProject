@@ -6,11 +6,11 @@
 <form>
   <h3>Login Here</h3>
 
-  <label for="username">Username</label>
-  <input type="text" name ="userName" [(ngModel)]="loginObj.userName" placeholder="Username" id="username">
+  <label for="username">email</label>
+  <input type="text" name ="email" [(ngModel)]="loginObj.email" placeholder="Username" id="username">
 
   <label for="password">Password</label>
   <input type="password" name ="password" [(ngModel)]="loginObj.password" placeholder="Password" id="password">
 
-  <button style="color: black" routerLink="/admin" (click)="onLogin()">Log In</button>
+  <button style="color: black" (click)="onLogin()">Log In</button>
 </form>
