@@ -18,6 +18,7 @@ namespace PetShop.Application.Interfaces
         public void RebuildDB();
         public Rating AddRating(ratingDTO rating, int productID, Guid userId);    
         public Rating UpdateRating(Rating rating);
+        public double GetTheAverageRatingForProduct(int productId);
     }
 }
 

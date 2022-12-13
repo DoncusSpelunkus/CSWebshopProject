@@ -44,5 +44,26 @@ public class RatingController : ControllerBase
             return Unauthorized("You need to login to post a review");
         }
     }
+
+    [HttpPut]
+    [Route("updateRating")]
+    [Authorize]
+    public async Task<ActionResult<Rating>> UpdateRating(ratingDTO ratingDto)
+    {
+        if (ratingDto.RatingValue < 0 || ratingDto.RatingValue > 5)
+        {
+            return BadRequest("Rating value must be between 0 and 5");
+        }
+        
+        var RatingToUpdate = _mapper.Map<Rating>(ratingDto);
+        return Ok(_productService.UpdateRating(RatingToUpdate));
+    }
+    
+    [HttpGet]
+    [Route("getRating")]
+    public async Task<ActionResult<Rating>> GetRating([FromQuery] int ratingId)
+    {
+        return Ok(_productService.GetTheAverageRatingForProduct(ratingId));
+    }
     
 }

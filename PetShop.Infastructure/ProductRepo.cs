@@ -126,7 +126,7 @@ namespace PetShop.Infastructure
         
         
         // method to get all ratings for a product by getting all ratings for a product and then averaging them
-        public int GetTheAverageRatingForProduct(int productId)
+        public double GetTheAverageRatingForProduct(int productId)
         {   
             // get all the ratings for the specific product
             List<int> ratings = GetAllRatingsForProduct(productId);

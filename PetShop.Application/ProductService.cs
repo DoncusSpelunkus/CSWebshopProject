@@ -109,9 +109,19 @@ public class ProductService : IProductService
         // Create a new Rating object and set its properties.
 
         // Add the rating to the database.
-        _productRepository.UpdateRating(ratingToUpdate);
-        return ratingToUpdate;
+        return _productRepository.UpdateRating(ratingToUpdate);
     }
+
+    public double GetTheAverageRatingForProduct(int productId)
+    {
+        if (productId == 0)
+        {
+            throw new ValidationException("ID is invalid");
+        }
+
+        return _productRepository.GetTheAverageRatingForProduct(productId);
+    }
+    
 }
 
 
