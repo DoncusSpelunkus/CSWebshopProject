@@ -34,6 +34,7 @@ import { CurrentSpecListComponent } from './specification-related/current-spec-l
 import { LoginComponent } from './Pages/login/login.component';
 import { UserComponent } from './Pages/user/user.component';
 import { UserEditComponent } from './user-related/user-edit/user-edit.component';
+import { UserRegistrationComponent } from './Pages/user-registration/user-registration.component';
 
 
 
@@ -57,6 +58,7 @@ import { UserEditComponent } from './user-related/user-edit/user-edit.component'
     LoginComponent,
     UserComponent,
     UserEditComponent,
+    UserRegistrationComponent,
 
   ],
   imports: [

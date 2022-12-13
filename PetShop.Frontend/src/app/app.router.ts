@@ -8,6 +8,7 @@ import {
   SpecificationUpdateComponent
 } from "./specification-related/specification-update/specification-update.component";
 import {LoginComponent} from "./Pages/login/login.component";
+import {UserRegistrationComponent} from "./Pages/user-registration/user-registration.component";
 import {AuthGuardService} from "../services/AuthGuardService";
 
 const routes: Routes = [
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'product-edit/:id', component: ProductEditComponent},
   { path: 'specification-update/:id', component: SpecificationUpdateComponent},
   { path: 'login', component: LoginComponent},
+  { path: 'register', component: UserRegistrationComponent},
 
   // otherwise redirect to home
   { path: '**', redirectTo: '' }

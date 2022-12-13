@@ -9,6 +9,8 @@ import {LoginState} from "../../../states/LoginState";
 })
 export class LoginComponent implements OnInit {
 
+  user: any;
+
   loginObj: any = {
     email: '',
     password:''
@@ -18,8 +20,15 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onLogin(){
-    this.loginState.onLoginCall(this.loginObj.email, this.loginObj.password)
+  async onLogin(){
+    await this.loginState.onLoginCall(this.loginObj.email, this.loginObj.password);
+    let thisRole = this.loginState.getTokenRole();
+    if(thisRole === "Admin"){
+      await this.router.navigateByUrl("admin")
+    }
+    else if (thisRole === "User"){
+      await this.router.navigateByUrl("user")
+    }
   }
 
 }

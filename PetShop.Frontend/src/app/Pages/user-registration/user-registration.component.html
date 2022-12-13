@@ -1,0 +1,45 @@
+<div class="background">
+  <div class="shape"></div>
+  <div class="shape"></div>
+  <div class="shape"></div>
+</div>
+<form>
+  <h3>Register here Here</h3>
+  <ul>
+    <li>
+      <label for="email">email</label>
+      <input type="text" name ="email" [(ngModel)]="user.email" placeholder="Email" id="email">
+    </li>
+    <li>
+      <label for="name">Full name</label>
+      <input type="text" name ="name" [(ngModel)]="user.fullName" placeholder="Name" id="name">
+    </li>
+    <li>
+      <label for="phone">Phone</label>
+      <input type="number" name ="phone" [(ngModel)]="user.phone" placeholder="Phone number" id="phone">
+    </li>
+  </ul>
+  <ul>
+    <li>
+      <label for="city">City</label>
+      <input type="text" name ="city" [(ngModel)]="user.city" placeholder="City" id="city">
+    </li>
+    <li>
+      <label for="zip">Zip code</label>
+      <input type="number" name ="zip" [(ngModel)]="user.zip" placeholder="Postal code" id="zip">
+    </li>
+    <li>
+      <label for="address">Street address</label>
+      <input type="text" name ="address" [(ngModel)]="user.address" placeholder="Street address" id="address">
+    </li>
+  </ul>
+
+  <label for="password">Password</label>
+  <input type="password" name ="password" [(ngModel)]="registerObj.password" placeholder="Password" id="password">
+
+  <label for="repeatPassword">Repeat password</label>
+  <input type="password" name ="repeatPassword" [(ngModel)]="registerObj.repeatPassword" placeholder="Repeat Password" id="repeatPassword">
+
+
+  <button style="color: black" (click)="onRegister()">Log In</button>
+</form>

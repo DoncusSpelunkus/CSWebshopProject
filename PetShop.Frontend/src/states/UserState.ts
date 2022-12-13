@@ -12,7 +12,7 @@ export class UserState { // State class for data manipulation
   async postUser(user: User){
     let dto = {
       id: user.id,
-      name: user.name,
+      name: user.fullName,
       email: user.email,
       address: user.address,
       city: user.city,
@@ -26,7 +26,7 @@ export class UserState { // State class for data manipulation
   async putUser(user: User){
     let dto = {
       id: user.id,
-      name: user.name,
+      name: user.fullName,
       email: user.email,
       address: user.address,
       city: user.city,

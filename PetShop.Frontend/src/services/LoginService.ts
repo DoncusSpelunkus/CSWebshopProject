@@ -3,9 +3,10 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {HttpClient} from "@angular/common/http";
 import {catchError} from "rxjs";
 import {Injectable} from "@angular/core";
+import {User} from "../Entities/User";
 
 export const customAxios = axios.create({
-  baseURL: 'https://localhost:7143/User/login',
+  baseURL: 'https://localhost:7143/User/',
   headers: {
     Authorization: `Bearer ${localStorage.getItem('auth')}`
   }
@@ -25,7 +26,7 @@ export class LoginService{
         return response;
       }, rejected => {
         if(rejected.response.status>=400 && rejected.response.status <= 500) {
-          matSnackbar.open(rejected.response.data, "x", {duration: 500});
+          matSnackbar.open("Incorrect username or password", "x", {duration: 500});
         }
         catchError(rejected);
       }
@@ -37,18 +38,22 @@ export class LoginService{
       email: email,
       password: password
     }
-    let httpResponse = await customAxios.post<any>('',dto);
-    console.log(httpResponse)
+    let httpResponse = await customAxios.post<any>('login',dto);
     return httpResponse.data;
   }
 
-  async registerUser(email: string, password: string) {
+  async registerUser(user: User, password: string) {
     let dto = {
-      email: email,
-      password: password
+      name: user.fullName,
+      password: password,
+      email: user.email,
+      address: user.address,
+      city: user.city,
+      zip: user.zip,
+      phone: user.phone,
+      type: 1
     }
-    let httpResponse = await customAxios.post<any>('', dto);
-    return httpResponse.data;
-
+    let httpResponse = await customAxios.post<any>('register', dto);
+    return httpResponse.status;
   }
 }
