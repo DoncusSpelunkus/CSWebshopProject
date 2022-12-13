@@ -75,7 +75,6 @@ namespace PetShopApi.Controllers
 
         [HttpPut]
         [Route("{specID}")]
-
         public ActionResult<Specs> UpdateSpecs([FromRoute] int specID, [FromBody] SpecDTO dto)
         {
             try
