@@ -10,6 +10,7 @@ import {
 import {LoginComponent} from "./Pages/login/login.component";
 import {UserRegistrationComponent} from "./Pages/user-registration/user-registration.component";
 import {AuthGuardService} from "../services/AuthGuardService";
+import {LoginGuardService} from "../services/LoginGuardService";
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -17,7 +18,7 @@ const routes: Routes = [
   { path: 'user', component: UserComponent},
   { path: 'product-edit/:id', component: ProductEditComponent},
   { path: 'specification-update/:id', component: SpecificationUpdateComponent},
-  { path: 'login', component: LoginComponent},
+  { path: 'login', component: LoginComponent, canActivate: [LoginGuardService]},
   { path: 'register', component: UserRegistrationComponent},
 
   // otherwise redirect to home

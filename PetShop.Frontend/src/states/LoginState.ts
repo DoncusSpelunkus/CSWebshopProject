@@ -41,7 +41,6 @@ export class LoginState{
     console.log(userProperties)
     if (userProperties != null) {
       let decodedToken = jwtDecode(userProperties) as User;
-      console.log(decodedToken.type)
       if (decodedToken.type != null) {
         return decodedToken.type;
     }
