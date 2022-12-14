@@ -53,8 +53,8 @@ namespace PetShop.Infastructure
 
         public Product UpdateProduct(Product product)
         {
-            var listofProductspecs = _dbContext.SpecsDescriptionsTable.AsNoTracking().ToList();
-            foreach (var specs in listofProductspecs)
+            var listOfProductSpecsDesc = _dbContext.SpecsDescriptionsTable.AsNoTracking().ToList();
+            foreach (var specs in listOfProductSpecsDesc)
             {
                 if (specs.ProductId == product.ID)
                 {
@@ -76,9 +76,11 @@ namespace PetShop.Infastructure
         public Product DeleteProduct(int productID)
         {
             Product product = GetProductByID(productID);
-            foreach (var productSpecsDescription in product.SpecsDescriptions)
+            var listOfProductSpecsDesc = _dbContext.SpecsDescriptionsTable.AsNoTracking().ToList();
+
+            foreach (var productSpecsDescription in listOfProductSpecsDesc)
             {
-                if (product.ID == productSpecsDescription.ProductId)
+                if (productID == productSpecsDescription.ProductId)
                 {
                     _dbContext.SpecsDescriptionsTable.Remove(productSpecsDescription);
                 }

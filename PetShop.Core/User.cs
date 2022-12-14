@@ -19,5 +19,6 @@ public class User
     public int Zip { get; set; }
     public int Phone { get; set; }
     public List<Rating> Ratings { get; set; }
+    public List<Order> Orders { get; set; }
     
 }
