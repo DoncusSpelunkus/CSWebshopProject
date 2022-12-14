@@ -30,6 +30,8 @@ var config = new MapperConfiguration(conf =>
     conf.CreateMap<BrandDto, Brand>();
     conf.CreateMap<UserDTO, User>();
     conf.CreateMap<UserLoginDTO, User>();
+    conf.CreateMap<OrderDTO, Order>();
+    conf.CreateMap<OrderedProductsDTO, OrderedProducts>();
 });
 
 var mapper = config.CreateMapper();
@@ -77,11 +79,13 @@ builder.Services.AddScoped<ISpecService , SpecService>();
 builder.Services.AddScoped<ICatService , CatService>();
 builder.Services.AddScoped<IBrandService , BrandService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<ICatRepo, CatRepo>();
 builder.Services.AddScoped<IShopRepo, ShopRepo>();
 builder.Services.AddScoped<ISpecRepo , SpecsRepo>();
 builder.Services.AddScoped<IBrandRepo, BrandRepo>();
 builder.Services.AddScoped<IUserRepo, UserRepo>();
+builder.Services.AddScoped<IOrderRepo, OrderRepo>();
 builder.Services.AddScoped<Logic>();
 builder.Services.AddScoped<Authentication>();
 
