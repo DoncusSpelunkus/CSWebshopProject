@@ -139,8 +139,8 @@ namespace PetShop.Infastructure
         {   
             // get all the ratings for the specific product
             List<int> ratings = _dbContext.RatingsTable.Where(r => r.ProductId == productId).Select(r => r.RatingValue).ToList();
-            int count = 0;
-            int sum = 0;
+            var count = 0;
+            var sum = 0;
 
             for (int i = 0; i < ratings.Count; i++)
             {
@@ -160,13 +160,10 @@ namespace PetShop.Infastructure
         }
         
         
-        
         public void RebuildDB()
         {
             _dbContext.Database.EnsureDeleted();
             _dbContext.Database.EnsureCreated();
-            
-
         }
     }
 }
