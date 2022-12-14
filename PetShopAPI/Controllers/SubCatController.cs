@@ -21,7 +21,6 @@ namespace PetShopApi.Controllers
             _catService = service;
         }
         [HttpGet]
-        [Route("GetAllSubCategories")]
         public ActionResult<List<SubCategory>> GetAllSubCategories()
         {
             try

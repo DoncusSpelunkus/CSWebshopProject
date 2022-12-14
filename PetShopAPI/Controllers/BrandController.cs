@@ -19,7 +19,6 @@ namespace PetShopApi.Controllers{
         }
 
         [HttpGet]
-        [Route("GetAllBrands")]
         public ActionResult<List<Brand>> GetAllBrands()
         {
             try
