@@ -138,26 +138,21 @@ namespace PetShop.Infastructure
         public double GetTheAverageRatingForProduct(int productId)
         {   
             // get all the ratings for the specific product
-            List<int> ratings = GetAllRatingsForProduct(productId);
-
+            List<int> ratings = _dbContext.RatingsTable.Where(r => r.ProductId == productId).Select(r => r.RatingValue).ToList();
+            int count = 0;
             int sum = 0;
 
-            foreach (var rating in ratings)
+            for (int i = 0; i < ratings.Count; i++)
             {
-                sum += rating;
+                count++;
+                sum += ratings[i];
             }
 
-            double average = sum / ratings.Count;
+            double average = sum / count;
 
             return average;
         }
-        
-        // gets all ratings for a product
-        public  List<int>  GetAllRatingsForProduct(int productid)
-        {   
-            // gets all ratings for a product with in the ratingstable where product id is equal to the productid, to list
-            return _dbContext.RatingsTable.Where(r => r.ProductId == productid).Select(r => r.RatingValue).ToList();
-        }
+      
 
         public int GetProductID(int productId)
         {
