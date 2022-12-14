@@ -44,17 +44,16 @@ export class AdminState { // State class for data manipulation
 
   async putProduct(product: Product){
     let dto = {
-      id: product.id,
       name: product.name,
       price: product.price,
       description: product.description,
       imageUrl: product.imageUrl,
-      rating: product.rating,
-      mainCategory: product.mainCategory,
-      subCategory: product.subCategory,
-      brand: product.brand
+      mainCategoryID: product.mainCategory,
+      subCategoryID: product.subCategory,
+      brandID: product.brand,
+      specsDescriptions: product.specsDescriptions
     }
-    return await this.productService.putProduct(dto);
+    return await this.productService.putProduct(dto, product.id);
   }
 
   async getProductById(id: number){

@@ -34,9 +34,7 @@ export class CategoryService { // Class for crud requests from the all the categ
   }
 
   async getCategories(path: string){
-    console.log('https://localhost:7143/'+path)
     let httpResponse = await customAxios.get<Category[]>(path);
-    console.log(httpResponse.data)
     return httpResponse.data;
 
   }

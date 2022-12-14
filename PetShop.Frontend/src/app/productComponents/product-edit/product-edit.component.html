@@ -15,7 +15,7 @@
     <input type="number" matInput [(ngModel)]="product.rating">
   </mat-form-field>
   <mat-form-field appearance="outline">Main category:
-    <mat-select [(ngModel)]="selected" name="Main Category">
+    <mat-select [(ngModel)]="product.mainCategory" name="Main Category">
       <mat-option *ngFor="let categories of mainCatList" [value]="categories.mainCategoryID" >
         {{categories.name}}
       </mat-option>

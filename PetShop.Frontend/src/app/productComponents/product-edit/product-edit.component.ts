@@ -34,18 +34,18 @@ export class ProductEditComponent implements OnInit { // This component tend to 
   async ngOnInit() {
     const id = Number(this.Aroute.snapshot.paramMap.get(`id`))
     this.product = await this.adminState.getProductById(id);
+    this.specNames = await this.adminState.getSpecifications();
     this.mainCatList = await this.adminState.getCategories("MainCat")
     this.subCatList = await this.adminState.getCategories("SubCat")
     this.brandCatList = await this.adminState.getCategories("Brand")
+    this.specDesc = this.product.specsDescriptions;
     this.specList = await this.adminState.makeCurrentSpecList(id)
     this.child.updateNow(this.specList)
-    this.selected = this.product.mainCategory;
-    console.log(this.selected)
   }
 
-  updateProduct(){
-    this.product.specList = this.specList;
-    this.adminState.putProduct(this.product);
+  async updateProduct(){
+    console.log(this.product)
+    await this.adminState.putProduct(this.product);
   }
 
   addTooSpecList(spec: number, desc: string){
@@ -53,8 +53,9 @@ export class ProductEditComponent implements OnInit { // This component tend to 
     newSpec.specsId = spec;
     newSpec.description = desc;
     this.specDesc.push({specsId: spec, description: desc}) // attachs value on an Array that mirrors the requested field in the post method
-    this.product.specsDescriptions = this.specDesc;
     this.specList.push(newSpec)
+    this.product.specsDescriptions = this.specDesc;
+    console.log(this.product.specsDescriptions)
     this.child.updateNow(this.specList); // signals the specification list to refresh
   }
 

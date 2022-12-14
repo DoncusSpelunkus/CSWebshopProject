@@ -43,18 +43,8 @@ export class ProductService { // Class for crud requests from the /product route
     let httpResponse = await customAxios.post<any>('',dto)
   }
 
-  async putProduct(product: any){
-    let dto = {
-      name: product.name,
-      price: product.price,
-      description: product.description,
-      imageUrl: product.imageUrl,
-      mainCategoryID: product.mainCategory,
-      subCategoryID: product.subCategory,
-      brandID: product.brand,
-      specsDescriptions: product.specsDescriptions
-    }
-    let httpResponse = await customAxios.put<Product>('/' + product.id, dto);
+  async putProduct(dto: any, id: number){
+    let httpResponse = await customAxios.put<Product>('/' + id, dto);
     return httpResponse.data;
   }
 
