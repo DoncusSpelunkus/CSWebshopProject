@@ -14,16 +14,44 @@
   <mat-form-field>Rating:
     <input type="number" matInput [(ngModel)]="product.rating">
   </mat-form-field>
-  <mat-form-field>Main Category:
-    <input type="number" matInput [(ngModel)]="product.mainCategory">
+  <mat-form-field appearance="outline">Main category:
+    <mat-select [(ngModel)]="selected" name="Main Category">
+      <mat-option *ngFor="let categories of mainCatList" [value]="categories.mainCategoryID" >
+        {{categories.name}}
+      </mat-option>
+    </mat-select>
   </mat-form-field>
-  <mat-form-field>Sub Category:
-    <input type="number" matInput [(ngModel)]="product.subCategory">
+  <mat-form-field appearance="outline" >Sub category:
+    <mat-select [(ngModel)]="product.subCategory" name="Sub Category">
+      <mat-option *ngFor="let categories of subCatList" [value]="categories.subCategoryID" >
+        {{categories.name}}
+      </mat-option>
+    </mat-select>
   </mat-form-field>
-  <mat-form-field>Brand:
-    <input type="number" matInput [(ngModel)]="product. brand">
+  <mat-form-field appearance="outline">Brand:
+    <mat-select [(ngModel)]="product.brand" name="Brand">
+      <mat-option *ngFor="let categories of brandCatList" [value]="categories.id" >
+        {{categories.name}}
+      </mat-option>
+    </mat-select>
   </mat-form-field>
   <button mat-raised-button (click)="updateProduct()">Finish update of this product</button>
+  <br>
+  <h2>Add specifications</h2>
+  <mat-form-field appearance="outline">Specification type:
+    <mat-select [(ngModel)]="selected" name="Specification">
+      <mat-option *ngFor="let specifications of specNames" [value]="specifications.id" >
+        {{specifications.specName}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="outline">Specification description:
+    <input type="string" matInput [(ngModel)]="sdesc">
+  </mat-form-field>
+  <br>
+  <button mat-raised-button (click)="addTooSpecList(selected, sdesc)">Add to product</button>
+  <h2>List of current specs</h2>
   <app-current-spec-list (delete)="onDelete($event)" #child></app-current-spec-list>
+  <hr>
 </div>
 

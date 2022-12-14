@@ -20,18 +20,27 @@
   <mat-form-field appearance="outline">Rating:
     <input type="number" matInput [(ngModel)]="newProduct.rating">
   </mat-form-field>
-  <mat-form-field appearance="outline">Main Category:
-    <input type="number" matInput [(ngModel)]="newProduct.mainCategory">
+  <mat-form-field appearance="outline">Main category:
+    <mat-select [(ngModel)]="newProduct.mainCategory" name="Main Category">
+      <mat-option *ngFor="let categories of mainCatList" [value]="categories.mainCategoryID" >
+        {{categories.name}}
+      </mat-option>
+    </mat-select>
   </mat-form-field>
-  <mat-form-field appearance="outline">Sub Category:
-    <input type="number" matInput [(ngModel)]="newProduct.subCategory">
+  <mat-form-field appearance="outline">Sub category:
+    <mat-select [(ngModel)]="newProduct.subCategory" name="SubCategory">
+      <mat-option *ngFor="let categories of subCatList" [value]="categories.subCategoryID" >
+        {{categories.name}}
+      </mat-option>
+    </mat-select>
   </mat-form-field>
   <mat-form-field appearance="outline">Brand:
-    <input type="number" matInput [(ngModel)]="newProduct.brand">
+    <mat-select [(ngModel)]="newProduct.brand" name="Brand">
+      <mat-option *ngFor="let categories of brandCatList" [value]="categories.id" >
+        {{categories.name}}
+      </mat-option>
+    </mat-select>
   </mat-form-field>
-  <hr>
-  <button mat-raised-button (click)="consoleLog()">console</button>
-  <hr>
   <h2>Add specifications</h2>
   <mat-form-field appearance="outline">Specification type:
     <mat-select [(ngModel)]="selected" name="Specification">

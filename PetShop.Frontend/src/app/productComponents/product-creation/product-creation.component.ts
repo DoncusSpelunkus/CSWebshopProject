@@ -4,6 +4,7 @@ import { Product } from "../../../Entities/Product";
 import { SpecTemplates } from "../../../Entities/SpecTemplates";
 import {CurrentSpecs} from "../../../Entities/CurrentSpecs";
 import {AdminState} from "../../../states/AdminState";
+import {Category} from "../../../Entities/Category";
 
 @Component({
   selector: 'app-product-creation',
@@ -11,26 +12,28 @@ import {AdminState} from "../../../states/AdminState";
   styleUrls: ['./product-creation.component.scss']
 })
 export class ProductCreationComponent implements OnInit{
-  newProduct: any;
+  newProduct: any = new Product();
   specList: CurrentSpecs[] = [];
   specNames: SpecTemplates[] = [];
   specDesc: {specsId: number, description: string}[] = [];
-  sname: number;
-  sdesc: string;
-  productDeleteId: number;
+  mainCatList: Category[] = [];
+  subCatList: Category[] = [];
+  brandCatList: Category[] = [];
+  sname: number = 0;
+  sdesc: string = '';
+  productDeleteId: number = 0;
   selected: number = 0;
 
   @ViewChild('child') child;
 
   constructor(public router: Router, private adminState: AdminState){
-    this.newProduct = new Product;
-    this.sname = 0;
-    this.sdesc = '';
-    this.productDeleteId = 0;
   }
 
   async ngOnInit() {
     this.specNames = await this.adminState.getSpecifications();
+    this.mainCatList = await this.adminState.getCategories("MainCat")
+    this.subCatList = await this.adminState.getCategories("SubCat")
+    this.brandCatList = await this.adminState.getCategories("Brand")
   }
 
   async postProduct() {
@@ -38,12 +41,8 @@ export class ProductCreationComponent implements OnInit{
   }
 
 
-  deleteProduct(id){
-    this.adminState.deleteProductById(id).then(r => this.updateList());
-  }
-
-  updateList(){
-
+  async deleteProduct(id){
+    await this.adminState.deleteProductById(id);
   }
 
   onDelete(event: number): void{ // Delete the spec with the id from the mat-card selected in the child component
@@ -59,9 +58,5 @@ export class ProductCreationComponent implements OnInit{
     this.newProduct.specsDescriptions = this.specDesc;
     this.specList.push(newSpec)
     this.child.updateNow(this.specList); // signals the specification list to refresh
-  }
-
-  consoleLog(){
-    console.log(this.newProduct)
   }
 }

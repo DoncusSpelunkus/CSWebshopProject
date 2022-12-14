@@ -14,6 +14,7 @@ export class AdminState { // State class for data manipulation
   productsUnmodified: Product[] = [];
   newSpecList: CurrentSpecs[] = [];
   specNames: SpecTemplates[] = [];
+  product: any = Product;
 
 
   constructor(private productService: ProductService, private specificationService: SpecificationService,
@@ -29,9 +30,9 @@ export class AdminState { // State class for data manipulation
       imageUrl: product.imageUrl,
       rating: product.rating,
       specsDescriptions: product.specsDescriptions,
-      mainCategory: product.mainCategory,
-      subCategory: product.subCategory,
-      brand: product.brand,
+      mainCategoryID: product.mainCategory,
+      subCategoryID: product.subCategory,
+      brandID: product.brand,
     }
     await this.productService.postProduct(dto)
   }
@@ -57,7 +58,12 @@ export class AdminState { // State class for data manipulation
   }
 
   async getProductById(id: number){
-    return this.productService.getProductById(id);
+    let dto = await this.productService.getProductById(id);
+    this.product = dto;
+    this.product.mainCategory = dto.mainCategoryID;
+    this.product.subCategory = dto.subCategoryID;
+    this.product.brand = dto.brandID;
+    return this.product;
   }
 
   async deleteProductById(id: number){

@@ -41,12 +41,20 @@ export class ProductService { // Class for crud requests from the /product route
 
   async postProduct(dto: any) { //
     let httpResponse = await customAxios.post<any>('',dto)
-    console.log(dto);
-    console.log(httpResponse.data)
   }
 
-  async putProduct(dto: any){
-    let httpResponse = await customAxios.put<Product>('', dto);
+  async putProduct(product: any){
+    let dto = {
+      name: product.name,
+      price: product.price,
+      description: product.description,
+      imageUrl: product.imageUrl,
+      mainCategoryID: product.mainCategory,
+      subCategoryID: product.subCategory,
+      brandID: product.brand,
+      specsDescriptions: product.specsDescriptions
+    }
+    let httpResponse = await customAxios.put<Product>('/' + product.id, dto);
     return httpResponse.data;
   }
 
@@ -55,7 +63,7 @@ export class ProductService { // Class for crud requests from the /product route
   }
 
   async getProductById(id: number) {
-    let httpResponse = await customAxios.get<Product>('/'+id)
+    let httpResponse = await customAxios.get<any>('/'+id)
     return httpResponse.data
   }
 
