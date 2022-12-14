@@ -1,4 +1,12 @@
+html{
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+
 body{
   margin: 0px;
   padding: 0px;
 }
+
+*{ overflow: visible !important; }

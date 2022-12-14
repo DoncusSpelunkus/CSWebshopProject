@@ -1,11 +1,24 @@
 <div>
-  <app-header></app-header>
-  <mat-sidenav-container>
-    <mat-sidenav mode="side" opened>Title</mat-sidenav>
-    <mat-sidenav-content>
+  <div id ="ScrollButton">
+    <button mat-raised-button (click)="drawer.toggle()">Open Filters</button>
+  </div>
+  <app-header class="header"></app-header>
+  <mat-drawer-container>
+    <mat-drawer #drawer mode="side">
+      <mat-card-title>Filters:</mat-card-title>
+      <mat-card-subtitle>Max Price</mat-card-subtitle>
+      <input matInput type="number">
+      <mat-card-subtitle>Brand</mat-card-subtitle>
+      <input matInput type="string">
+      <mat-card-subtitle>Category</mat-card-subtitle>
+      <input matInput type="string">
+      <mat-card-subtitle>Rating</mat-card-subtitle>
+      <input matInput type="number">
+    </mat-drawer>
+    <mat-drawer-content>
       <div>
         <app-product-list></app-product-list>
       </div>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
+    </mat-drawer-content>
+  </mat-drawer-container>
 </div>

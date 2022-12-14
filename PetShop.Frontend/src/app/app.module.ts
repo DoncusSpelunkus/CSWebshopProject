@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {FormsModule} from "@angular/forms";
 import {MatButtonModule} from "@angular/material/button";
 import {MatCardModule} from "@angular/material/card";
 import {MatListModule} from "@angular/material/list";
@@ -35,6 +35,7 @@ import { LoginComponent } from './landingPages/login/login.component';
 import { UserComponent } from './landingPages/user/user.component';
 import { UserEditComponent } from './userComponents/user-edit/user-edit.component';
 import { UserRegistrationComponent } from './landingPages/user-registration/user-registration.component';
+import {MatGridListModule} from "@angular/material/grid-list";
 
 
 
@@ -61,25 +62,25 @@ import { UserRegistrationComponent } from './landingPages/user-registration/user
     UserRegistrationComponent,
 
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    appRoutingModule,
-    MatFormFieldModule,
-    MatInputModule,
-    FormsModule,
-    MatButtonModule,
-    MatCardModule,
-    MatListModule,
-    MatTooltipModule,
-    MatTableModule,
-    MatSelectModule,
-    MatSidenavModule,
-    HttpClientModule,
-    AgGridModule,
-    MatTabsModule,
-    ReactiveFormsModule
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        appRoutingModule,
+        MatFormFieldModule,
+        MatInputModule,
+        FormsModule,
+        MatButtonModule,
+        MatCardModule,
+        MatListModule,
+        MatTooltipModule,
+        MatTableModule,
+        MatSelectModule,
+        MatSidenavModule,
+        HttpClientModule,
+        AgGridModule,
+        MatTabsModule,
+        MatGridListModule
+    ],
   providers: [MatSnackBar, Overlay],
   bootstrap: [AppComponent]
 })
