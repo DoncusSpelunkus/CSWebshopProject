@@ -13,6 +13,12 @@
       <hr>
       <app-specification-list></app-specification-list>
     </mat-tab>
+    <mat-tab label="Categories">
+      <h1>Create and delete categories</h1>
+      <app-category-creation (change)="onChange($event)"></app-category-creation>
+      <hr>
+      <app-category-list #child></app-category-list>
+    </mat-tab>
   </mat-tab-group>
 </div>
 

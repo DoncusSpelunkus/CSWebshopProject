@@ -4,6 +4,8 @@ import {SpecificationService} from "../services/SpecificationService";
 import {CurrentSpecs} from "../Entities/CurrentSpecs";
 import {SpecTemplates} from "../Entities/SpecTemplates";
 import {Injectable} from "@angular/core";
+import {CategoryService} from "../services/CategoryService";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Injectable({ providedIn: 'root' })
 
@@ -14,7 +16,9 @@ export class AdminState { // State class for data manipulation
   specNames: SpecTemplates[] = [];
 
 
-  constructor(private productService: ProductService, private specificationService: SpecificationService) {
+  constructor(private productService: ProductService, private specificationService: SpecificationService,
+              private categoryService: CategoryService, private matSnackbar: MatSnackBar) {
+
   }
 
   async postProduct(product: Product){
@@ -94,5 +98,30 @@ export class AdminState { // State class for data manipulation
     return this.newSpecList;
   }
 
+  async getCategories(path: string){
+    return this.categoryService.getCategories(path);
+  }
+
+  async deleteCategoryById(id: number | undefined, path: string){
+    if(id && path != ""){
+      return await this.categoryService.deleteCategoryByID(id, path);
+    }
+    else this.matSnackbar.open("Error: Either missing category id or type")
+  }
+
+  async postCategory(dto: any, path: string){
+    if(path != ""){
+      return this.categoryService.postCategory(dto, path);
+    }
+    else this.matSnackbar.open("Please select category type")
+  }
+
+  async putCategory(dto: any, path: string){
+    return this.categoryService.putCategory(dto, path);
+  }
+
+  async getCategoryById(id: number, path: string){
+    return this.categoryService.getCategoryById(id, path);
+  }
 
 }

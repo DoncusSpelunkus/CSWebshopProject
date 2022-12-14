@@ -58,7 +58,7 @@ export class ProductCreationComponent implements OnInit{
     this.specDesc.push({specsId: spec, description: desc}) // attachs value on an Array that mirrors the requested field in the post method
     this.newProduct.specsDescriptions = this.specDesc;
     this.specList.push(newSpec)
-    this.child.updateNow(this.specList);
+    this.child.updateNow(this.specList); // signals the specification list to refresh
   }
 
   consoleLog(){

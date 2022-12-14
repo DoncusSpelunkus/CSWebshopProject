@@ -25,7 +25,6 @@ namespace PetShopApi.Controllers
         }
 
         [HttpGet]
-        [Route("GetAllMainCategories")]
         public ActionResult<List<MainCategory>> GetAllMainCategories()
         {
             try
