@@ -20,7 +20,6 @@ export class CategoryListComponent implements OnInit {
   }
 
   async updateCat(path: string){ // Receives a call from admin parent to update one or all lists
-    console.log(path)
     if(path === "MainCat") {
       this.mainCatList = await this.adminState.getCategories("MainCat");
     }
