@@ -35,6 +35,7 @@ import { LoginComponent } from './landingPages/login/login.component';
 import { UserComponent } from './landingPages/user/user.component';
 import { UserEditComponent } from './userComponents/user-edit/user-edit.component';
 import { UserRegistrationComponent } from './landingPages/user-registration/user-registration.component';
+import {MatGridListModule} from "@angular/material/grid-list";
 
 
 
@@ -61,24 +62,25 @@ import { UserRegistrationComponent } from './landingPages/user-registration/user
     UserRegistrationComponent,
 
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    appRoutingModule,
-    MatFormFieldModule,
-    MatInputModule,
-    FormsModule,
-    MatButtonModule,
-    MatCardModule,
-    MatListModule,
-    MatTooltipModule,
-    MatTableModule,
-    MatSelectModule,
-    MatSidenavModule,
-    HttpClientModule,
-    AgGridModule,
-    MatTabsModule
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        appRoutingModule,
+        MatFormFieldModule,
+        MatInputModule,
+        FormsModule,
+        MatButtonModule,
+        MatCardModule,
+        MatListModule,
+        MatTooltipModule,
+        MatTableModule,
+        MatSelectModule,
+        MatSidenavModule,
+        HttpClientModule,
+        AgGridModule,
+        MatTabsModule,
+        MatGridListModule
+    ],
   providers: [MatSnackBar, Overlay],
   bootstrap: [AppComponent]
 })
