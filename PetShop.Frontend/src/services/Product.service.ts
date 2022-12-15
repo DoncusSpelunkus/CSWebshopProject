@@ -44,8 +44,7 @@ export class ProductService { // Class for crud requests from the /product route
   }
 
   async putProduct(dto: any, id: number){
-    let httpResponse = await customAxios.put<Product>('/' + id, dto);
-    return httpResponse.data;
+    return await customAxios.put<Product>('/' + id, dto);
   }
 
   async deleteProductByID(id: any){

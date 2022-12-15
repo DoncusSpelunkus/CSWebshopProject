@@ -25,8 +25,6 @@ export class CategoryCreationComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.change.emit("all")
-
   }
 
   async postCategory(path: string) {

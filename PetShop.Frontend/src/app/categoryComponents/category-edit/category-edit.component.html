@@ -1,1 +1,7 @@
-<p>category-edit works!</p>
+<div style="text-align: center">
+  <mat-form-field>Name:
+    <input type="string" matInput [(ngModel)]="category.name">
+  </mat-form-field>
+  <button mat-raised-button (click)="updateCat()">update</button>
+</div>
+

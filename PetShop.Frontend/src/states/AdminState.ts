@@ -53,7 +53,12 @@ export class AdminState { // State class for data manipulation
       brandID: product.brand,
       specsDescriptions: product.specsDescriptions
     }
-    return await this.productService.putProduct(dto, product.id);
+    let httpResponse = await this.productService.putProduct(dto, product.id);
+    if(httpResponse.status > 199 && httpResponse.status < 300 ){
+      this.matSnackbar.open("great success")
+      return httpResponse;
+    }
+    return undefined;
   }
 
   async getProductById(id: number){
@@ -66,27 +71,33 @@ export class AdminState { // State class for data manipulation
   }
 
   async deleteProductById(id: number){
-    return this.productService.deleteProductByID(id);
+    return await this.productService.deleteProductByID(id);
   }
 
   async getSpecifications(){
-    return this.specificationService.getSpecifications();
+    return await this.specificationService.getSpecifications();
   }
 
   async deleteSpecificationById(id: number){
-    return this.specificationService.deleteSpecificationById(id);
+    return await this.specificationService.deleteSpecificationById(id);
   }
 
   async postSpecification(spec: any){
-    return this.specificationService.postSpecification(spec);
+    return await this.specificationService.postSpecification(spec);
   }
 
   async putSpecification(spec: any){
-    return this.specificationService.putSpecification(spec);
+    let httpresponse = await this.specificationService.putSpecification(spec);
+    if(httpresponse.status>199 && httpresponse.status <300) {
+      this.matSnackbar.open("Great success","x", {duration: 1000})
+      return httpresponse.data
+    }
+    return undefined;
   }
 
   async getSpecificationById(id: number){
-    return this.specificationService.getSpecificationByID(id);
+    let httpresponse = await this.specificationService.getSpecificationByID(id);
+    return httpresponse.data;
   }
 
   async makeCurrentSpecList(id: number){
@@ -114,7 +125,10 @@ export class AdminState { // State class for data manipulation
     else this.matSnackbar.open("Error: Either missing category id or type")
   }
 
-  async postCategory(dto: any, path: string){
+  async postCategory(cat: any, path: string){
+    let dto = {
+      name: cat.catName
+    }
     if(path != ""){
       return this.categoryService.postCategory(dto, path);
     }
@@ -122,7 +136,12 @@ export class AdminState { // State class for data manipulation
   }
 
   async putCategory(dto: any, path: string){
-    return this.categoryService.putCategory(dto, path);
+    let httpresponse = await this.categoryService.putCategory(dto, path);
+    if(httpresponse.status>199 && httpresponse.status <300) {
+      this.matSnackbar.open("Great success","x", {duration: 1000})
+      return httpresponse.data
+    }
+    return undefined;
   }
 
   async getCategoryById(id: number, path: string){

@@ -39,17 +39,15 @@ export class CategoryService { // Class for crud requests from the all the categ
 
   }
 
-  async postCategory(cat: Category, path: string) { //
-    let dto =
-    {
-      name: cat.catName
-    }
+  async postCategory(dto: any, path: string) { //
     await customAxios.post<any>(path,dto)
   }
 
-  async putCategory(dto: any, path: string){
-    let httpResponse = await customAxios.put<Category>(path, dto);
-    return httpResponse.data;
+  async putCategory(cat: any, path: string){
+    let dto = {
+      name: cat.name
+    }
+    return await customAxios.put<Category>(path + "/" + cat.id, dto);
   }
 
   async deleteCategoryByID(id: any, path: string){

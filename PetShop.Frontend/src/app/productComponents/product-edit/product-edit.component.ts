@@ -44,23 +44,26 @@ export class ProductEditComponent implements OnInit { // This component tend to 
   }
 
   async updateProduct(){
-    console.log(this.product)
-    await this.adminState.putProduct(this.product);
+    let httpResponse = await this.adminState.putProduct(this.product)
+      if(httpResponse != undefined){
+      await this.route.navigateByUrl("admin")
+    }
   }
 
   addTooSpecList(spec: number, desc: string){
-    let newSpec = new CurrentSpecs();
+    let newSpec = new CurrentSpecs(); // a new current spec for list to send to the child list component
     newSpec.specsId = spec;
     newSpec.description = desc;
-    this.specDesc.push({specsId: spec, description: desc}) // attachs value on an Array that mirrors the requested field in the post method
+    this.specDesc.push({specsId: spec, description: desc}) // push to both the products own desc list and the visual component list
     this.specList.push(newSpec)
     this.product.specsDescriptions = this.specDesc;
-    console.log(this.product.specsDescriptions)
     this.child.updateNow(this.specList); // signals the specification list to refresh
   }
 
-  onDelete(event: number): void{ // Delete the spec with the id from the mat-card selected in the child component
+  onDelete(event: number): void{ // Delete the spec from both the visual and the product lists
     this.specList.splice(this.specList.findIndex(a => a.specsId === event) , 1)
+    this.specDesc.splice(this.specDesc.findIndex(a => a.specsId === event) , 1)
+    this.product.specsDescriptions = this.specDesc;
     this.child.updateNow(this.specList);
   }
 }

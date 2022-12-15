@@ -17,6 +17,7 @@ export class CategoryListComponent implements OnInit {
   constructor(private adminState: AdminState) { }
 
   ngOnInit(): void {
+    this.updateCat("all")
   }
 
   async updateCat(path: string){ // Receives a call from admin parent to update one or all lists

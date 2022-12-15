@@ -3,21 +3,21 @@
     <mat-card style="margin: 20px;text-align: center" *ngFor="let c of mainCatList" >
       <mat-card-title>Name: {{c.name}}</mat-card-title>
       <mat-card>Id: {{c.mainCategoryID}}</mat-card>
-      <button routerLink="/category-update/{{c.mainCategoryID}}"> Edit category </button>
+      <button routerLink="/category/MainCat/{{c.mainCategoryID}}"> Edit category </button>
     </mat-card>
   </mat-tab>
   <mat-tab label="Sub categories">
     <mat-card style="margin: 20px;text-align: center" *ngFor="let c of subCatList" >
       <mat-card-title>Name: {{c.name}}</mat-card-title>
       <mat-card>Id: {{c.subCategoryID}}</mat-card>
-      <button routerLink="/category-update/{{c.subCategoryID}}"> Edit category </button>
+      <button routerLink="/category/SubCat/{{c.subCategoryID}}"> Edit category </button>
     </mat-card>
   </mat-tab>
   <mat-tab label="Brand categories">
     <mat-card style="margin: 20px;text-align: center" *ngFor="let c of brandCatList" >
       <mat-card-title>Name: {{c.name}}</mat-card-title>
       <mat-card>Id: {{c.id}}</mat-card>
-      <button routerLink="/category-update/{{c.id}}"> Edit category </button>
+      <button routerLink="/category/Brand/{{c.id}}"> Edit category </button>
     </mat-card>
   </mat-tab>
 </mat-tab-group>

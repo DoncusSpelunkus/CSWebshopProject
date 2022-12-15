@@ -11,13 +11,15 @@ import {LoginComponent} from "./landingPages/login/login.component";
 import {UserRegistrationComponent} from "./landingPages/user-registration/user-registration.component";
 import {AuthGuardService} from "../services/AuthGuardService";
 import {LoginGuardService} from "../services/LoginGuardService";
+import {CategoryEditComponent} from "./categoryComponents/category-edit/category-edit.component";
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuardService]},
   { path: 'user', component: UserComponent},
-  { path: 'product-edit/:id', component: ProductEditComponent},
-  { path: 'specification-update/:id', component: SpecificationUpdateComponent},
+  { path: 'product-edit/:id', component: ProductEditComponent, canActivate: [AuthGuardService]},
+  { path: 'specification-update/:id', component: SpecificationUpdateComponent, canActivate: [AuthGuardService]},
+  { path: 'category/:path/:id', component: CategoryEditComponent, canActivate: [AuthGuardService]},
   { path: 'login', component: LoginComponent, canActivate: [LoginGuardService]},
   { path: 'register', component: UserRegistrationComponent},
 

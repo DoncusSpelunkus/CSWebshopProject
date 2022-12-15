@@ -16,13 +16,16 @@ specification: any;
     this.specification = SpecTemplates;
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     const id = Number(this.Aroute.snapshot.paramMap.get('id'))
-    this.specification = this.adminState.getSpecificationById(id);
+    this.specification = await this.adminState.getSpecificationById(id);
   }
 
-  updateSpec(){
-    this.adminState.putSpecification(this.specification);
+  async updateSpec(){
+    let data = await this.adminState.putSpecification(this.specification);
+    if(data != undefined){
+      await this.route.navigateByUrl("admin")
+    }
   }
 
 }
