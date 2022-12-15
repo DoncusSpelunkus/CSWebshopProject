@@ -121,36 +121,40 @@ namespace PetShop.Infastructure
         
         public Rating UpdateRating(Rating rating)
         {
-            _dbContext.RatingsTable.Update(rating);
-            _dbContext.SaveChanges();
+            var existingRating = _dbContext.RatingsTable.FirstOrDefaultAsync(r =>
+                    r.ProductId == rating.ProductId && r.UserId == rating.UserId).Result;
+            existingRating.RatingValue = rating.RatingValue;
+            if (existingRating != null)
+            {
+                _dbContext.RatingsTable.Update(existingRating);
+                _dbContext.SaveChanges();
+                
+            }
+
             return rating;
+
         }
         
         
-        // method to get all ratings for a product by getting all ratings for a product and then averaging them
-        public int GetTheAverageRatingForProduct(int productId)
+        // method for getting the average rating of a product
+        public double GetTheAverageRatingForProduct(int productId)
         {   
             // get all the ratings for the specific product
-            List<int> ratings = GetAllRatingsForProduct(productId);
+            List<int> ratings = _dbContext.RatingsTable.Where(r => r.ProductId == productId).Select(r => r.RatingValue).ToList();
+            double count = 0;
+            double sum = 0;
 
-            int sum = 0;
 
             foreach (var rating in ratings)
             {
-                sum += rating;
+                count++;
+                sum = sum + rating;
             }
-
-            int average = sum / ratings.Count;
-
+            
+            double average = sum / count;
             return average;
         }
-        
-        // gets all ratings for a product
-        public  List<int>  GetAllRatingsForProduct(int productid)
-        {   
-            // gets all ratings for a product with in the ratingstable where product id is equal to the productid, to list
-            return _dbContext.RatingsTable.Where(r => r.ProductId == productid).Select(r => r.RatingValue).ToList();
-        }
+      
 
         public int GetProductID(int productId)
         {
@@ -158,13 +162,10 @@ namespace PetShop.Infastructure
         }
         
         
-        
         public void RebuildDB()
         {
             _dbContext.Database.EnsureDeleted();
             _dbContext.Database.EnsureCreated();
-            
-
         }
     }
 }
