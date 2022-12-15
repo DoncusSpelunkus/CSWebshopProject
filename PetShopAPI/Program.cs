@@ -1,6 +1,7 @@
 
 using System.Text;
 using AutoMapper;
+using Factory.Application.PostProdDTO;
 using PetShop.Application.PostProdDTO;
 using PetShop.Domain;
 using PetShop.Infastructure;
@@ -30,8 +31,9 @@ var config = new MapperConfiguration(conf =>
     conf.CreateMap<BrandDto, Brand>();
     conf.CreateMap<UserDTO, User>();
     conf.CreateMap<UserLoginDTO, User>();
-    conf.CreateMap<OrderDTO, Order>();
+    conf.CreateMap<HistoryOrderDTO, HistoryOrder>();
     conf.CreateMap<OrderedProductsDTO, OrderedProducts>();
+    conf.CreateMap<OrderDTO, Order>();
 });
 
 var mapper = config.CreateMapper();
@@ -79,13 +81,15 @@ builder.Services.AddScoped<ISpecService , SpecService>();
 builder.Services.AddScoped<ICatService , CatService>();
 builder.Services.AddScoped<IBrandService , BrandService>();
 builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IHistyoryOrderService, HistyoryOrderService>();
 builder.Services.AddScoped<ICatRepo, CatRepo>();
 builder.Services.AddScoped<IShopRepo, ShopRepo>();
 builder.Services.AddScoped<ISpecRepo , SpecsRepo>();
 builder.Services.AddScoped<IBrandRepo, BrandRepo>();
 builder.Services.AddScoped<IUserRepo, UserRepo>();
+builder.Services.AddScoped<IHistyoryOrderRepo, HistoryOrderRepo>();
 builder.Services.AddScoped<IOrderRepo, OrderRepo>();
+builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<Logic>();
 builder.Services.AddScoped<Authentication>();
 

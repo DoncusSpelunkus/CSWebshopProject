@@ -1,10 +1,12 @@
-﻿using FluentValidation;
+﻿using Factory.Application.PostProdDTO;
+using FluentValidation;
 using PetShop.Application.PostProdDTO;
+using PetShop.Domain;
 
 
 namespace PetShop.Application.Validators;
 
-public class OrderValidator :AbstractValidator<OrderDTO>
+public class OrderValidator :AbstractValidator<HistoryOrderDTO>
 {
 
     public OrderValidator()
@@ -25,4 +27,14 @@ public class ListOfProductsValidator :AbstractValidator<OrderedProductsDTO>
         RuleFor(o => o.Amount).GreaterThan(0);
     }
     
+}
+
+public class ActualOrderValidator : AbstractValidator<OrderDTO>
+{
+    public ActualOrderValidator()
+    {
+        RuleFor(o => o.ProdouctId).NotEmpty().GreaterThan(0);
+        RuleFor(o => o.Amount).GreaterThan(0);
+        
+    }
 }

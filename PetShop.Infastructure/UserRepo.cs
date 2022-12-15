@@ -1,7 +1,5 @@
 ﻿
-using System.Text;
 using PetShop.Application.Interfaces;
-using PetShop.Application.PostProdDTO;
 using PetShop.Domain;
 
 
