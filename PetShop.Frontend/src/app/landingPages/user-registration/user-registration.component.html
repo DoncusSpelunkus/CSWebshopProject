@@ -2,12 +2,13 @@
   <div class="shape"></div>
   <div class="shape"></div>
   <div class="shape"></div>
+  <div class="shape"></div>
 </div>
 <form>
-  <h3>Register here Here</h3>
+  <h3>Register Here</h3>
   <ul>
     <li>
-      <label for="email">email</label>
+      <label for="email">Email</label>
       <input type="text" name ="email" [(ngModel)]="user.email" placeholder="Email" id="email">
     </li>
     <li>
@@ -41,5 +42,5 @@
   <input type="password" name ="repeatPassword" [(ngModel)]="registerObj.repeatPassword" placeholder="Repeat Password" id="repeatPassword">
 
 
-  <button style="color: black" (click)="onRegister()">Log In</button>
+  <button style="color: black" (click)="onRegister()">Register</button>
 </form>

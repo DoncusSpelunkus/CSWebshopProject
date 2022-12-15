@@ -45,9 +45,14 @@ $background-color_5: rgba(255,255,255,0.47);
     top: -80px;
   }
   &:nth-child(2){
-    background: linear-gradient( to right, #ff512f, #f09819 );
-    right: -50px;
-    bottom: -20px;
+    background: linear-gradient( to right, #7CFC00, #008000 );
+    right: -400px;
+    bottom: 300px;
+  }
+  &:nth-child(3){
+    background: linear-gradient( to right, #BDB76B, #EEE8AA );
+    left: -400px;
+    top: 250px;
   }
   &:last-child {
     background: linear-gradient( to right, #ff512f, #f09819 );

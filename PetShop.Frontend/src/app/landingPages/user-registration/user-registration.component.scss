@@ -26,7 +26,7 @@ $background-color_5: rgba(255,255,255,0.47);
 }
 
 .background {
-  width: 430px;
+  width: 600px;
   height: 520px;
   position: absolute;
   transform: translate(-50%,-50%);
@@ -46,9 +46,14 @@ $background-color_5: rgba(255,255,255,0.47);
     top: -80px;
   }
   &:nth-child(2){
-    background: linear-gradient( to right, #ff512f, #f09819 );
-    right: -50px;
-    bottom: -20px;
+    background: linear-gradient( to right, #7CFC00, #008000 );
+    right: -400px;
+    bottom: 300px;
+  }
+  &:nth-child(3){
+    background: linear-gradient( to right, #BDB76B, #EEE8AA );
+    left: -400px;
+    top: 250px;
   }
   &:last-child {
     background: linear-gradient( to right, #ff512f, #f09819 );
@@ -57,8 +62,8 @@ $background-color_5: rgba(255,255,255,0.47);
   }
 }
 form {
-  height: 520px;
-  width: 400px;
+  height: 770px;
+  width: 600px;
   background-color: $background-color_1;
   position: absolute;
   transform: translate(-50%,-50%);
@@ -96,7 +101,7 @@ input {
   width: 100%;
   background-color: $background-color_2;
   border-radius: 3px;
-  padding: 0 10px;
+  padding: 0 50px;
   border-style: solid;
   margin-top: 8px;
   font-size: 14px;
@@ -120,3 +125,11 @@ button {
   border-color: $color_3;
   cursor: pointer;
 }
+
+ul {
+  list-style: none;
+  padding-left: 5px;
+  padding-right: 5px;
+  display: inline-block;
+}
+
