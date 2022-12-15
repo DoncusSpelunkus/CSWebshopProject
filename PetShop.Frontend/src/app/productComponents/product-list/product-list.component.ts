@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { Router } from '@angular/router'
-import {AdminState} from "../../../states/AdminState";
+import {SearchState} from "../../../states/SearchState";
+import {Category} from "../../../Entities/Category";
 
 @Component({
   selector: 'app-product-list',
@@ -10,7 +11,9 @@ import {AdminState} from "../../../states/AdminState";
 export class ProductListComponent implements OnInit{
   productList: any;
 
-  constructor(private adminState: AdminState, public router: Router) {
+  @Input() name = '';
+
+  constructor(private searchState: SearchState, public router: Router) {
 
   }
 
@@ -19,6 +22,10 @@ export class ProductListComponent implements OnInit{
   }
 
   async getProducts(){
-    this.productList = await this.adminState.getProducts();
+    this.productList = await this.searchState.getProducts();
+  }
+
+  async sortList(){
+    this.productList = await this.searchState.sortProducts();
   }
 }

@@ -5,8 +5,8 @@ export class Product { // product template
   description: string = '';
   imageUrl: string = '';
   rating: number = 0;
-  mainCategory: number = 0;
-  subCategory: number = 0;
-  brand: number = 0;
+  mainCategoryID: number = 0;
+  subCategoryID: number = 0;
+  brandID: number = 0;
   specsDescriptions: any[] = [];
 }

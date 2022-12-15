@@ -1,5 +1,5 @@
 <mat-grid-list cols="3" rowHeight="400px" gutterSize="15px">
-<mat-grid-tile *ngFor="let p of productList">
+<mat-grid-tile *ngFor="let p of productList | filter: name" >
 <mat-card>
   <mat-card-header>
     <mat-card-title>{{p.name}}</mat-card-title>

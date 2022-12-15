@@ -2,22 +2,38 @@
   <div id ="ScrollButton">
     <button mat-raised-button (click)="drawer.toggle()">Open Filters</button>
   </div>
-  <app-header class="header"></app-header>
+  <app-header class="header" (emitter)="send($event)"></app-header>
   <mat-drawer-container>
     <mat-drawer #drawer mode="side">
-      <mat-card-title>Filters:</mat-card-title>
-      <mat-card-subtitle>Max Price</mat-card-subtitle>
-      <input matInput type="number">
-      <mat-card-subtitle>Brand</mat-card-subtitle>
-      <input matInput type="string">
-      <mat-card-subtitle>Category</mat-card-subtitle>
-      <input matInput type="string">
-      <mat-card-subtitle>Rating</mat-card-subtitle>
-      <input matInput type="number">
+      <mat-form-field appearance="outline">Main category:
+        <mat-select [(ngModel)]="categorySelector.mainCategoryID" name="Main Category">
+          <mat-option *ngFor="let categories of mainCatList" [value]="categories.mainCategoryID" >
+            {{categories.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline">Sub category:
+        <mat-select [(ngModel)]="categorySelector.subCategoryID" name="SubCategory">
+          <mat-option *ngFor="let categories of subCatList" [value]="categories.subCategoryID" >
+            {{categories.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline">Brand:
+        <mat-select [(ngModel)]="categorySelector.id" name="Brand">
+          <mat-option *ngFor="let categories of brandCatList" [value]="categories.id" >
+            {{categories.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <ul>
+      <button style="color: black" (click)="filter()">Filter</button>
+      <button style="color: black" (click)="clearFilter()">Clear filter</button>
+      </ul>
     </mat-drawer>
     <mat-drawer-content>
       <div>
-        <app-product-list></app-product-list>
+        <app-product-list [name]="currentName" #child></app-product-list>
       </div>
     </mat-drawer-content>
   </mat-drawer-container>

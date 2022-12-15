@@ -58,7 +58,7 @@ export class SpecificationService { // Class for crud requests from the /specs r
   }
 
   async getSpecificationByID(id: number) {
-    return  await customAxios.get<SpecTemplates>('/' + id)
+    return await customAxios.get<SpecTemplates>('/' + id)
   }
 
 }

@@ -30,9 +30,9 @@ export class AdminState { // State class for data manipulation
       imageUrl: product.imageUrl,
       rating: product.rating,
       specsDescriptions: product.specsDescriptions,
-      mainCategoryID: product.mainCategory,
-      subCategoryID: product.subCategory,
-      brandID: product.brand,
+      mainCategoryID: product.mainCategoryID,
+      subCategoryID: product.subCategoryID,
+      brandID: product.brandID,
     }
     await this.productService.postProduct(dto)
   }
@@ -48,9 +48,9 @@ export class AdminState { // State class for data manipulation
       price: product.price,
       description: product.description,
       imageUrl: product.imageUrl,
-      mainCategoryID: product.mainCategory,
-      subCategoryID: product.subCategory,
-      brandID: product.brand,
+      mainCategoryID: product.mainCategoryID,
+      subCategoryID: product.subCategoryID,
+      brandID: product.brandID,
       specsDescriptions: product.specsDescriptions
     }
     let httpResponse = await this.productService.putProduct(dto, product.id);
