@@ -8,7 +8,7 @@ public interface IOrderRepo
     public Order CreateOrder(Order order);
     public Order UpdateOrder(Order order);
     public Order DeleteOrderById(int productId, Guid userId);
-    public void SendEmailtoUser(String email);
+    public void SendEmailToUser(String email);
   
 
 }

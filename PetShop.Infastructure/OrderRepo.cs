@@ -1,6 +1,6 @@
-﻿using PetShop.Application.Interfaces;
+﻿using MailKit.Net.Smtp;
+using PetShop.Application.Interfaces;
 using PetShop.Domain;
-using System.Net.Mail;
 using MimeKit;
 
 namespace PetShop.Infastructure;
@@ -45,19 +45,24 @@ public class OrderRepo : IOrderRepo
         return order;
     }
 
-    public void SendEmailtoUser(string email)
-    {
+    public void SendEmailToUser(string email)
+    {   
+        // get the user's id by email
+        var id = _OrderDbContext.UserTable.FirstOrDefault(u => u.Email == email).Id;
+        // get the user's orders
+        var UserOrderProducts = GetAllOrdersByUserId(id);
         var emailsend = new MimeMessage();
         emailsend.From.Add(MailboxAddress.Parse("sosugroup2022@gmail.com"));
         emailsend.To.Add(MailboxAddress.Parse(email));
         emailsend.Subject = "Order Confirmation";
         emailsend.Body = new TextPart("plain")
         {
-            Text = "Your order has been confirmed"
+            Text = "Your order has been confirmed" + UserOrderProducts,
         };
-        using var smpt = new SmtpClient();
-        
-        smpt.("smtp.gmail.com", 587, false);
-        
+        using var smpt = new SmtpClient(); 
+        smpt.Connect("smtp.gmail.com", 587, false);
+        smpt.Authenticate("sosugroup2022@gmail.com", "rgkmsmycxkqxtexb");
+        smpt.Send(emailsend);
+
     }
 }

@@ -87,6 +87,22 @@ public class OrderController : ControllerBase
             return StatusCode(500, e.ToString());
         }
     }
+
+    [HttpPost]
+    [Route("sendEmail")]
+    public IActionResult SendOrderConfirmationEmail(String userEmail)
+    {
+        try
+        {
+            _orderService.SendEmailtoUser(userEmail);
+            return Ok("Email sent");
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, e.ToString());
+        }
+    }
+   
     
     
     

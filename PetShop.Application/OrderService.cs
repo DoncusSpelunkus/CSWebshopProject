@@ -58,4 +58,9 @@ public class OrderService : IOrderService
     {
        return _orderRepository.DeleteOrderById(productId, userId);
     }
+
+    public void SendEmailtoUser(string email)
+    {
+        _orderRepository.SendEmailToUser(email);
+    }
 }
