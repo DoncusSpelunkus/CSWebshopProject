@@ -119,9 +119,9 @@ namespace PetShop.Infastructure
         
         public Rating UpdateRating(Rating rating)
         {
-            var existingRating =
-                _dbContext.RatingsTable.FirstOrDefaultAsync(r =>
+            var existingRating = _dbContext.RatingsTable.FirstOrDefaultAsync(r =>
                     r.ProductId == rating.ProductId && r.UserId == rating.UserId).Result;
+            existingRating.RatingValue = rating.RatingValue;
             if (existingRating != null)
             {
                 _dbContext.RatingsTable.Update(existingRating);
@@ -139,17 +139,17 @@ namespace PetShop.Infastructure
         {   
             // get all the ratings for the specific product
             List<int> ratings = _dbContext.RatingsTable.Where(r => r.ProductId == productId).Select(r => r.RatingValue).ToList();
-            var count = 0;
-            var sum = 0;
+            double count = 0;
+            double sum = 0;
 
-            for (int i = 0; i < ratings.Count; i++)
+
+            foreach (var rating in ratings)
             {
                 count++;
-                sum += ratings[i];
+                sum = sum + rating;
             }
-
+            
             double average = sum / count;
-
             return average;
         }
       

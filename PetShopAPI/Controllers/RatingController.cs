@@ -27,7 +27,7 @@ public class RatingController : ControllerBase
             return BadRequest();
         }
         {
-            return Ok(_productService.AddRating(ratingDto, productId, userId ));
+            return Ok(_productService.AddRating(ratingDto, productId, userId));
         }
             
         
@@ -55,7 +55,7 @@ public class RatingController : ControllerBase
     
     [HttpGet]
     [Route("getRating")]
-    public async Task<ActionResult<Rating>> GetRating([FromQuery] int ProductId)
+    public async Task<ActionResult<Rating>> GetRating(int ProductId)
     {
         return Ok(_productService.GetTheAverageRatingForProduct(ProductId));
     }
