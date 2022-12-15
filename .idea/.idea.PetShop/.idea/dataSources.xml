@@ -8,5 +8,12 @@
       <jdbc-url>jdbc:sqlite:C:\Users\manid\RiderProjects\CSWebshopProject\PetShopAPI\db.db</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="db [2]" uuid="3d9ef981-ff1c-4dcb-a9c3-c047c253220e">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:C:\Users\bruger\Desktop\skole\2022 exam\CSWebshopProject\PetShopAPI\db.db</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>
