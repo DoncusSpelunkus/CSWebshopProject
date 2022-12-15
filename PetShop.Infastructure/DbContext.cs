@@ -129,12 +129,12 @@ namespace PetShop.Infastructure
                 .OnDelete(DeleteBehavior.ClientCascade);
             
             
-            // specsDescription has one product, one product has many specsDecription.
+            // Order has many OrderedProducts and OrderedProducts have one order
             modelBuilder.Entity<Order>()
                 .HasMany(o => o.OrderedProductsList)
                 .WithOne(p => p.Order)
                 .OnDelete(DeleteBehavior.ClientCascade);
-            // one specs has many specsDescription, and one specsDescription has one specs
+            // Order has one user and user has many orders 
             modelBuilder.Entity<Order>()
                 .HasOne(o => o.User)
                 .WithMany(u => u.Orders)
@@ -142,30 +142,31 @@ namespace PetShop.Infastructure
                 .OnDelete(DeleteBehavior.ClientCascade);
             
             /*
-             * a product has many specsDescription and a specsDescription has one product
+             * a product has many OrderedProducts and a OrderedProducts have one product
              */
             modelBuilder.Entity<Product>()
-                .HasMany(p => p.ListOfProducts)
+                .HasMany(p => p.OrderedProducts)
                 .WithOne(o => o.Product)
                 .OnDelete(DeleteBehavior.ClientCascade);
             /*
-            * a specs has many specsDescription and a specsDescription has one specs
+            * a user has many OrderedProducts and a OrderedProducts have one user
             */
             modelBuilder.Entity<User>()
                 .HasMany(u => u.Orders)
                 .WithOne(o => o.User)
                 .OnDelete(DeleteBehavior.ClientCascade);
             
+            // OrderedProducts have one order and order has many OrderedProducts
             modelBuilder.Entity<OrderedProducts>()
                 .HasOne(p => p.Order)
                 .WithMany(o => o.OrderedProductsList)
                 .HasForeignKey(o =>o.OrderId)
                 .OnDelete(DeleteBehavior.ClientCascade);
           
-            
+          // OrderedProducts have one product and product has many OrderedProducts  
             modelBuilder.Entity<OrderedProducts>()
                 .HasOne(p => p.Product)
-                .WithMany(o => o.ListOfProducts)
+                .WithMany(o => o.OrderedProducts)
                 .HasForeignKey(o =>o.ProductId)
                 .OnDelete(DeleteBehavior.ClientCascade);
             
