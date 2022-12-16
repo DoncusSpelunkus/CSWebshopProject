@@ -1,0 +1,5 @@
+<mat-card style="margin: 20px;text-align: center" *ngFor="let s of specificationList" >
+  <mat-card-title>Name: {{s.specName}}</mat-card-title>
+  <mat-card>Id: {{s.id}}</mat-card>
+  <button routerLink="/specification-update/{{s.id}}"> Edit Product </button>
+</mat-card>

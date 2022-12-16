@@ -1,0 +1,47 @@
+.mat-card-image:first-child{
+  margin-top: 0px;
+}
+
+img{
+  width: 50%;
+  length: 50%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 5px;
+}
+
+a{
+  text-decoration: none;
+  color: inherit;
+}
+
+.article{
+  display: block;
+  box-sizing: border-box;
+}
+.title{
+  width: 100%;
+  text-align: center;
+  align-items: center;
+  align-content: center;
+  padding-bottom: 10px;
+}
+
+.picture{
+  width: 50%;
+  float: left;
+  position: relative;
+  text-align: center;
+  align-items: center;
+  align-content: center;
+  padding-top: 10px;
+  height: 410px;
+}
+.information{
+  width: 50%;
+  float: right;
+  position: relative;
+  padding-top: 10px;
+  height: 410px;
+}

@@ -2,18 +2,21 @@ import { Injectable } from '@angular/core';
 import axios from "axios";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {HttpClient} from "@angular/common/http";
-import {catchError, Observable} from "rxjs";
+import {catchError} from "rxjs";
 import {Product} from "../Entities/Product";
 
 export const customAxios = axios.create({
-  baseURL: 'https://localhost:7143'
+  baseURL: 'https://localhost:7143/Product',
+  headers: {
+    Authorization: `Bearer ${localStorage.getItem('auth')}`
+  }
 })
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProductService {
-  apiUrl = 'https://localhost:7143/shop';
+export class ProductService { // Class for crud requests from the /product route of the api
+  apiUrl = 'https://localhost:7143/Product';
 
   constructor(private matSnackbar: MatSnackBar, private http: HttpClient) {
     customAxios.interceptors.response.use(
@@ -31,47 +34,26 @@ export class ProductService {
     )
   }
 
-  getProductStatus(): Observable<[Product]>{
-    return this.http.get<[Product]>(this.apiUrl)
-
+  async getProducts(){
+    let httpResponse = await customAxios.get<Product[]>('');
+    return httpResponse.data;
   }
 
-  addProduct(product: Product): Observable<Product>{
-    let dto = {
-      name: product.name,
-      price: product.price,
-      description: product.description,
-      imageUrl: product.imageUrl,
-      rating: product.rating,
-      mainCategory: product.mainCategory,
-      subCategory: product.subCategory,
-      brand: product.brand
-    }
-    return this.http.post<Product>(this.apiUrl, dto);
+  async postProduct(dto: any) { //
+    let httpResponse = await customAxios.post<any>('',dto)
   }
 
-  UpdateProduct(product: Product): Observable<Product>{
-    let dto = {
-      id: product.id,
-      name: product.name,
-      price: product.price,
-      description: product.description,
-      imageUrl: product.imageUrl,
-      rating: product.rating,
-      mainCategory: product.mainCategory,
-      subCategory: product.subCategory,
-      brand: product.brand
-    }
-    console.log(this.apiUrl+'/'+product.id, Product)
-    return this.http.put<Product>(this.apiUrl+'/'+product.id, dto)
+  async putProduct(dto: any, id: number){
+    return await customAxios.put<Product>('/' + id, dto);
   }
 
-  DeleteProductByID(id: any): Observable<Product> {
-    return this.http.delete<Product>(this.apiUrl+'/' + id)
+  async deleteProductByID(id: any){
+    let httpResponse = await customAxios.delete<Product>('/' + id)
   }
 
-  GetProductByID(id: number): Observable<Product> {
-    return this.http.get<Product>(this.apiUrl+'/' + id)
-}
+  async getProductById(id: number) {
+    let httpResponse = await customAxios.get<any>('/'+id)
+    return httpResponse.data
+  }
 
 }

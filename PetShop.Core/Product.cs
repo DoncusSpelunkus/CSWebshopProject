@@ -1,24 +1,38 @@
-﻿namespace PetShop.Domain
+﻿using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
+using System.Reflection;
+using PetShop.Domain;
+
+namespace PetShop.Domain
 {
     public class Product
     {
-        // push
+        [Key]
         public int ID { get; set; }
+        [MaxLength(256)]
         public string Name { get; set; }
         public double Price { get; set; }
         public string Description { get; set; }
         public string ImageUrl { get; set; }
-        public double Rating { get; set; }
-        
-        /*
-         *The list should hold the Specs entity which it self holds on to an id, specs and a description of the specs
-         * and an int, which is the ID.
-         * 
-         */
-        //private List<Specs> _specsList { get; set; }
-        public int MainCategory { get; set; }
-        public int SubCategory { get; set; }
-        public int Brand { get; set; }
+        public List<SpecsDescription> SpecsDescriptions { get; set; }
+        public List<Order>? CurrentOrderList { get; set; }
+        public List<Rating>? Ratings { get; set; }
+        public double? AverageRating { get; set; }
+        public MainCategory? MainCategoryObj { get; set; }
+        public int MainCategoryID { get; set; }
+        public SubCategory? SubCategoryObj { get; set; }
+        public int SubCategoryID { get; set; }
+        public Brand? Brand { get; set; }
+        public int BrandID { get; set; }
+     }
+    public class Rating
+    {  
+        public int RatingValue { get; set; } // The rating value, from 1 to 5
+        public int ProductId { get; set; } // The ID of the product being rated
+        public Guid UserId { get; set; } // The ID of the user who posted the rating
 
+        // Navigation properties
+        public  Product? Product { get; set; }
+        public  User? User { get; set; }
     }
 }

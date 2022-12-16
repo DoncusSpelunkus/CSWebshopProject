@@ -1,0 +1,18 @@
+<mat-grid-list cols="3" rowHeight="400px" gutterSize="15px">
+<mat-grid-tile *ngFor="let p of productList | filter: name" >
+<mat-card>
+  <mat-card-header>
+    <mat-card-title><a style="text-decoration: none; color: inherit;" [routerLink]="['/product', p.id]">{{p.name}}</a></mat-card-title>
+    <mat-card-subtitle>{{p.mainCategory}}</mat-card-subtitle>
+  </mat-card-header>
+    <img mat-card-image src="{{p.imageUrl}}" alt="Image error" [routerLink]="['/product', p.id]">
+  <mat-card-content>
+    <p>Price: {{p.price}}dkk - Product Number: {{p.id}} </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button (click)="addToCart(p)">Add to cart</button>
+  </mat-card-actions>
+</mat-card>
+</mat-grid-tile>
+</mat-grid-list>
+

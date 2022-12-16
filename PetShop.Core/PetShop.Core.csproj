@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.25.1" />
   </ItemGroup>
 
 </Project>

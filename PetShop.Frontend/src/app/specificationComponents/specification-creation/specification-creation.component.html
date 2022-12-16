@@ -1,0 +1,15 @@
+<div style="text-align: center">
+  <h2>Create specification</h2>
+  <mat-form-field appearance="outline">Name:
+    <input type="string" matInput [(ngModel)]="specification.specName">
+  </mat-form-field>
+  <br>
+  <button mat-raised-button (click)="postSpecification()">Create</button>
+  <hr>
+  <h2>Deletion specification</h2>
+  <mat-form-field appearance="outline">id:
+    <input type="number" matInput [(ngModel)]="specificationDeletionId">
+  </mat-form-field>
+  <br>
+  <button mat-raised-button (click)="deleteSpecification()">Delete</button>
+</div>

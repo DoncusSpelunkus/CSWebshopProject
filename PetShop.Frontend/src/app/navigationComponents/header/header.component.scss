@@ -1,0 +1,24 @@
+nav{
+  background-color: khaki;
+}
+nav img{
+  width: 100px;
+  length: 100px;
+}
+
+nav ul{
+  float: right;
+  list-style-type: none;
+  margin: 0;
+}
+
+ul li{
+  display: inline-block;
+  margin: 0;
+}
+
+.container {
+  padding-top: 50px;
+  padding-bottom: 10px;
+  color: #405065;
+}

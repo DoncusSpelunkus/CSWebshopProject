@@ -1,0 +1,18 @@
+<div class="background">
+  <div class="shape"></div>
+  <div class="shape"></div>
+  <div class="shape"></div>
+</div>
+<form>
+  <h3>Login Here</h3>
+
+  <label for="username">Email</label>
+  <input type="text" name ="email" [(ngModel)]="loginObj.email" placeholder="Email" id="username">
+
+  <label for="password">Password</label>
+  <input type="password" name ="password" [(ngModel)]="loginObj.password" placeholder="Password" id="password">
+
+  <button style="color: black" (click)="onLogin()">Log In</button>
+
+  <label>Don't have an account? <a href="/register">sign up here!</a></label>
+</form>
