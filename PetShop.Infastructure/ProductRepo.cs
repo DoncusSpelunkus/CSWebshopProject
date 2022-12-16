@@ -29,10 +29,16 @@ namespace PetShop.Infastructure
                     count++;
                     sum = sum + rating;
                 }
-            
-                double average = sum / count;
-                average = Math.Round(average, 2);
-                product.AverageRating = average;
+
+                double average;
+                if (count != 0)
+                { average = sum / count;
+                    average = Math.Round(average, 2);
+                    product.AverageRating = average;
+                }
+
+                
+                
                 
                 var listofSpecDesc = new List<SpecsDescription>();
                 foreach (var specDesc in specsList)
@@ -120,8 +126,6 @@ namespace PetShop.Infastructure
                 sum = sum + rating;
             }
             
-            double average = sum / count;
-            average = Math.Round(average, 2);
             foreach (var specs in SpecsDiscription)
             {
                 if (productId == specs.ProductId) 
@@ -133,7 +137,13 @@ namespace PetShop.Infastructure
             
             product =  _dbContext.ProductTable.FirstOrDefault(p => p.ID == productId);
             product.SpecsDescriptions = ListofProductsSpecsDescriptions;
-            product.AverageRating = average;
+            double average;
+            if (count != 0)
+            { average = sum / count;
+                average = Math.Round(average, 2);
+                product.AverageRating = average;
+            }
+           
             return product;
         }
         public Rating AddRating(Rating rating)
