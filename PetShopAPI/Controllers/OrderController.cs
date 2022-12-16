@@ -1,133 +1,140 @@
-﻿using System.ComponentModel.DataAnnotations;
-using AutoMapper;
-using PetShop.Application.Interfaces;
-using PetShop.Application.PostProdDTO;
-using PetShop.Domain;
-using Microsoft.AspNetCore.Authorization;
+﻿using Factory.Application.PostProdDTO;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
-using PetShop.Application;
-using PetShop.Application.Validators;
+using PetShop.Application.Interfaces;
+using PetShop.Domain;
 
-namespace PetShopApi.Controllers
+namespace PetShopApi.Controllers;
+[ApiController]
+[Route("[controller]")]
+public class OrderController : ControllerBase
 {
-    [ApiController]
-    [Route("[Controller]")]
-    public class OrderController : ControllerBase
+    private readonly IOrderService _orderService;
+    public OrderController(IOrderService orderService)
     {
-        
-        private IOrderService _orderService;
-        public OrderController(IOrderService service)
-        {
-            _orderService = service;
-        }
-
-        [HttpGet]
-        public ActionResult<List<Order>> GetAllOrders()
-        {
-            try
-            {
-                return Ok(_orderService.GetAllOrders());
-            }
-            catch (KeyNotFoundException e)
-            {
-                return NotFound("No orders found");
-            }
-            catch (Exception e)
-            {
-                return StatusCode(500, e.ToString());
-            }
-        }
-        [HttpGet]
-        [Route("GetOrderByUser/{userId}")]
-        public ActionResult<List<Order>> GetAllOrdersByUser(Guid userId)
-        {
-            try
-            {
-                return Ok(_orderService.GetAllOrdersByUser(userId));
-            }
-            catch (KeyNotFoundException e)
-            {
-                return NotFound("No orders found");
-            }
-            catch (Exception e)
-            {
-                return StatusCode(500, e.ToString());
-            }
-        }
-        
-        [HttpGet]
-        [Route("GetOrderById/{orderId}")]
-        public ActionResult<Order> GetOrderById(int orderId)
-        {
-            try
-            {
-                return Ok(_orderService.GetOrderById(orderId));
-            }
-            catch (KeyNotFoundException e)
-            {
-                return NotFound("No order found at ID " + orderId);
-            }
-            catch (Exception e)
-            {
-                return StatusCode(500, e.ToString());
-            }
-        }
-        
-        [HttpPost]
-        public ActionResult<Order> CreateOrder(OrderDTO dto)
-        {
-            try
-            {
-                var result = _orderService.CreateOrder(dto);
-                return Created("Order/" + result.Id, result);
-            }
-            catch (ValidationException e)
-            {
-                return BadRequest(e.Message);
-            }
-            catch (Exception e)
-            {
-                return StatusCode(500, e.Message);
-            }
-        }
-
-        [HttpPut]
-        [Route("{orderId}")]
-
-        public ActionResult<Order> UpdateOrder([FromRoute] int orderId, [FromBody] OrderDTO dto)
-        {
-            try
-            {
-                return Ok(_orderService.UpdateOrder(orderId, dto));
-            }
-            catch (KeyNotFoundException e)
-            {
-                return NotFound("No order found at ID " + orderId);
-            }
-            catch (Exception e)
-            {
-                return StatusCode(500, e.ToString());
-            }
-        }
-
-        [HttpDelete("{orderId}")]
-
-        public ActionResult<Order> DeleteOrdersById(int orderId)
-        {
-            try
-            {
-                return Ok(_orderService.DeleteOrderById(orderId));
-            }
-            catch (KeyNotFoundException e)
-            {
-                return NotFound("No order found at ID " + orderId);
-            }
-            catch (Exception e)
-            {
-                return StatusCode(500, e.ToString());
-            }
-        }
+        _orderService = orderService;
         
     }
     
+    [HttpGet]
+    public ActionResult<List<Order>> GetAllOrdersByUserId(Guid userId)
+    {
+        try
+        {
+            return Ok(_orderService.GetCurrentOrderByUserId(userId));
+        }
+        catch (KeyNotFoundException e)
+        {
+            return NotFound("No orders found for this user");
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, e.ToString());
+        }
+    }
+    [HttpGet]
+    [Route("OrderHistory")]
+    public ActionResult<List<Order>> GetOrdersHistoryByUserId(Guid userId)
+    {
+        try
+        {
+            return Ok(_orderService.GetOrdersHistoryByUserId(userId));
+        }
+        catch (KeyNotFoundException e)
+        {
+            return NotFound("No orders found for this user");
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, e.ToString());
+        }
+    }
+    
+    [HttpPost]
+    [Route("{userId}")]
+    public ActionResult<Order> CreateOrder(OrderDTO dto, Guid userId)
+    
+    {
+        try
+        {
+            var result = _orderService.CreateOrder(dto, userId);
+            return Created("order for this user" + result.UserId  +" was created ", result);
+        }
+        catch (ValidationException e)
+        {
+            return BadRequest(e.Message);
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, e.Message);
+        }
+    }[HttpPost]
+    [Route("OrderHistory,{userId}")]
+    public ActionResult<List<Order>> AddDateOfOrder(Guid userId)
+    
+    {
+        try
+        {
+            var result = _orderService.AddDateOfOrder(userId);
+            return Created("Orders of this user" + userId  +" was moved to orders history ", result);
+        }
+        catch (ValidationException e)
+        {
+            return BadRequest(e.Message);
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, e.Message);
+        }
+    }
+    
+    [HttpPut]
+    [Route("{userId}")]
+    public ActionResult<Order> UpdateOrder([FromRoute] Guid userId, [FromBody] OrderDTO orderDto)
+    {
+        try
+        {
+            return Ok(_orderService.UpdateOrder(userId, orderDto));
+        }
+        catch (KeyNotFoundException e)
+        {
+            return NotFound("No order found at ID " + userId);
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, e.ToString());
+        }
+    }
+    
+    [HttpDelete("{userId}")]
+    public ActionResult<Order> DeleteOrderById(int productId, Guid userId)
+    {
+        try
+        {
+            return Ok(_orderService.DeleteOrder(productId, userId));
+        }
+        catch (KeyNotFoundException e)
+        {
+            return NotFound("No order found with product ID " + productId);
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, e.ToString());
+        }
+    }
+
+    [HttpPost]
+    [Route("sendEmail")]
+    public IActionResult SendOrderConfirmationEmail(String userEmail)
+    {
+        try
+        {
+            _orderService.SendEmailtoUser(userEmail);
+            return Ok("Email sent");
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, e.ToString());
+        }
+    }
 }

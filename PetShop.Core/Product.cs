@@ -15,8 +15,9 @@ namespace PetShop.Domain
         public string Description { get; set; }
         public string ImageUrl { get; set; }
         public List<SpecsDescription> SpecsDescriptions { get; set; }
-        public List<OrderedProducts> OrderedProducts { get; set; }
+        public List<Order>? CurrentOrderList { get; set; }
         public List<Rating>? Ratings { get; set; }
+        public double? AverageRating { get; set; }
         public MainCategory? MainCategoryObj { get; set; }
         public int MainCategoryID { get; set; }
         public SubCategory? SubCategoryObj { get; set; }

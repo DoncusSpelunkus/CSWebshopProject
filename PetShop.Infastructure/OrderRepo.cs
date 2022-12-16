@@ -1,119 +1,85 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using MailKit.Net.Smtp;
 using PetShop.Application.Interfaces;
 using PetShop.Domain;
+using MimeKit;
 
 namespace PetShop.Infastructure;
 
 public class OrderRepo : IOrderRepo
 
 {
-    private DBContext _orderDbContext;
+    private DBContext _OrderDbContext;
 
     public OrderRepo(DBContext orderDbContext)
     {
-        _orderDbContext = orderDbContext;
+        _OrderDbContext = orderDbContext;
     }
     
     
-    public List<Order> GetAllOrders()
+    public List<Order> GetCurrentOrdersByUserId(Guid userId)
     {
-        var orders = _orderDbContext.OrderTable.ToList();
-        var orderedProducts = _orderDbContext.OrderedProductsTable.ToList();
-
-
-        foreach (var order in orders)
-        {
-            var orderedProdList = new List<OrderedProducts>();
-            foreach (var orderedProd in orderedProducts)
-            {
-             if(orderedProd.OrderId == order.Id)
-                 orderedProdList.Add(orderedProd);
-            }
-
-            order.OrderedProductsList = orderedProdList;
-        }
-
-        return orders;
+        return _OrderDbContext.OrdersTable.Where(o => o.UserId == userId && o.DateOfOrder == null).ToList();
+    }
+    public List<Order> GetOrdersHistoryByUserId(Guid userId)
+    {
+        return _OrderDbContext.OrdersTable.Where(o => o.UserId == userId && o.DateOfOrder != null).ToList();
     }
     
-    public List<Order> GetAllOrdersByUser(Guid userId)
-    {
-        var listOfOrders = _orderDbContext.OrderTable.ToList();
-        var listOfOrdersByUser = new List<Order>();
-        var orderedProdList = _orderDbContext.OrderedProductsTable.ToList();
-        
-        foreach (var order in listOfOrders)
-        {
-            var listOfOrderedProd = new List<OrderedProducts>();
-            if(userId == order.UserId)
-                listOfOrdersByUser.Add(order);
-            foreach (var orderedProd in orderedProdList)
-            {
-                if(order.Id == orderedProd.OrderId)
-                    listOfOrderedProd.Add(orderedProd);
-            }
-
-            order.OrderedProductsList = listOfOrderedProd;
-        }
-
-        return listOfOrdersByUser;
-    }
 
     public Order CreateOrder(Order order)
     {
-        foreach (var orderedProd in order.OrderedProductsList)
-        {
-            orderedProd.OrderId = order.Id;
-            _orderDbContext.OrderedProductsTable.Add(orderedProd);
-        }
-        _orderDbContext.OrderTable.Add(order);
-        _orderDbContext.SaveChanges();
+        _OrderDbContext.OrdersTable.Add(order);
+        _OrderDbContext.SaveChanges();
         return order;
+    }
+
+    public List<Order> AddDateOfOrder(Guid userId)
+    {
+        var listOfCurrentOrders = _OrderDbContext.OrdersTable.Where(o => o.UserId == userId && o.DateOfOrder == null);
+        foreach (var order in listOfCurrentOrders)
+        {
+            order.DateOfOrder = DateTime.Now;
+            _OrderDbContext.SaveChanges();
+        }
+        var listOfOrderHistory = _OrderDbContext.OrdersTable.Where(o => o.UserId == userId && o.DateOfOrder != null).ToList();
+
+        return listOfOrderHistory;
     }
 
     public Order UpdateOrder(Order order)
     {
-        var orderedProdList = _orderDbContext.OrderedProductsTable.AsNoTracking().ToList();
-        foreach (var orderedProd in orderedProdList)
-        {
-            if (orderedProd.OrderId == order.Id)
-                _orderDbContext.OrderedProductsTable.Remove(orderedProd);
-        }
         
-        foreach (var orderedProd in order.OrderedProductsList)
-        {
-            orderedProd.OrderId = order.Id;
-            _orderDbContext.OrderedProductsTable.Add(orderedProd);
-        }
-        
-        _orderDbContext.OrderTable.Update(order);
-        _orderDbContext.SaveChanges();
+        _OrderDbContext.OrdersTable.Update(order);
+        _OrderDbContext.SaveChanges();
         return order;
     }
 
-    public Order DeleteOrderById(int orderId)
+    public Order DeleteOrderById(int productId, Guid userid)
     {
-        Order order = GetOrderById(orderId);
-        _orderDbContext.OrderTable.Remove(order);
-        _orderDbContext.SaveChanges();
+        var order = _OrderDbContext.OrdersTable.FirstOrDefault(o => o.ProductId == productId && o.UserId == userid);
+        _OrderDbContext.OrdersTable.Remove(order);
+        _OrderDbContext.SaveChanges();
         return order;
     }
 
-    public Order GetOrderById(int orderId)
-    {
-        Order order = new Order();
-        var orderedProdList = _orderDbContext.OrderedProductsTable.ToList();
-        var orderedProducts = new List<OrderedProducts>();
-        foreach (var orderedProd in orderedProdList)
+    public void SendEmailToUser(string email)
+    {   
+        // get the user's id by email
+        var id = _OrderDbContext.UserTable.FirstOrDefault(u => u.Email == email).Id;
+        // get the user's orders
+        var UserOrderProducts = GetCurrentOrdersByUserId(id);
+        var emailsend = new MimeMessage();
+        emailsend.From.Add(MailboxAddress.Parse("sosugroup2022@gmail.com"));
+        emailsend.To.Add(MailboxAddress.Parse(email));
+        emailsend.Subject = "Order Confirmation";
+        emailsend.Body = new TextPart("plain")
         {
-            if(orderedProd.OrderId == orderId)
-                orderedProducts.Add(orderedProd);
-        }
-        order = _orderDbContext.OrderTable.FirstOrDefault(s => s.Id == orderId);
-        order.OrderedProductsList = orderedProducts;
-
-        return order;
-
+            Text = "Your order has been confirmed" + UserOrderProducts,
+        };
+        using var smpt = new SmtpClient(); 
+        smpt.Connect("smtp.gmail.com", 587, false);
+        smpt.Authenticate("sosugroup2022@gmail.com", "rgkmsmycxkqxtexb");
+        smpt.Send(emailsend);
 
     }
 }
