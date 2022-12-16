@@ -23,8 +23,7 @@ public class User
 }
 
 public class Order
-{   
-    public int Id { get; set; }
+{
     // foreign key
     public int  ProductId { get; set; }
     public Guid? UserId { get; set; }

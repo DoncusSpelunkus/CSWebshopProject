@@ -40,6 +40,13 @@ public class OrderService : IOrderService
         {
             throw new ValidationException(validationResult.Errors);
         }
+
+        var orderList = _orderRepository.GetCurrentOrdersByUserId(userId);
+        foreach (var o in orderList)
+        {
+            if (o.ProductId == orderDto.ProductId) 
+             throw new ValidationException("This product is already in your cart");
+        }
         
         var order = _mapper.Map<Order>(orderDto);
         order.UserId = userId;
@@ -51,12 +58,14 @@ public class OrderService : IOrderService
     }
 
     public Order UpdateOrder(Guid userId, OrderDTO dto)
+    
     {
         var validationResult = _validator.Validate(dto);
         if (!validationResult.IsValid)  
         {
             throw new ValidationException(validationResult.ToString());
         }
+        
         var order = _mapper.Map<Order>(dto);
         order.UserId = userId;
         return _orderRepository.UpdateOrder(order);

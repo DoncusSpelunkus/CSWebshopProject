@@ -51,11 +51,12 @@ public class OrderRepo : IOrderRepo
         }
         foreach (var order in listOfCurrentOrders)
         {
+            _OrderDbContext.OrdersTable.Remove(order);
+            _OrderDbContext.SaveChanges();
             order.OrderId = orderId;
             order.DateOfOrder = DateTime.Now;
+            _OrderDbContext.OrdersTable.Add(order);
             _OrderDbContext.SaveChanges();
-            
-            
         }
         var listOfOrderHistory = _OrderDbContext.OrdersTable.Where(o => o.UserId == userId && o.DateOfOrder != null).ToList();
 
@@ -64,7 +65,6 @@ public class OrderRepo : IOrderRepo
 
     public Order UpdateOrder(Order order)
     {
-        
         _OrderDbContext.OrdersTable.Update(order);
         _OrderDbContext.SaveChanges();
         return order;
