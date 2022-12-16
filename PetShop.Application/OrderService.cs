@@ -1,68 +1,74 @@
 ﻿using AutoMapper;
+using Factory.Application.PostProdDTO;
 using FluentValidation;
 using PetShop.Application.Interfaces;
-using PetShop.Application.PostProdDTO;
 using PetShop.Domain;
 
 namespace PetShop.Application;
 
 public class OrderService : IOrderService
+
+{
+    
+    private readonly IOrderRepo _orderRepository;
+    private readonly IMapper _mapper;
+    private IValidator<OrderDTO> _validator;
+    private IOrderService _orderServiceImplementation;
+
+    public OrderService(IOrderRepo orderRepository, IMapper mapper, IValidator<OrderDTO> validator)
     {
-        private IOrderRepo _orderRepository;
-        private IMapper _mapper;
-        private IValidator<OrderDTO> _validator;
+        _orderRepository = orderRepository;
+        _mapper = mapper;
+        _validator = validator;
+    }
 
-        public OrderService(IOrderRepo repository, IMapper mapper, IValidator<OrderDTO> validator) 
-        {
-            _orderRepository = repository;
-            _mapper = mapper;
-            _validator = validator;
-        }
     
-    
-        public List<Order> GetAllOrders()
+    public List<Order> GetCurrentOrderByUserId(Guid userId)
+    {
+        return _orderRepository.GetCurrentOrdersByUserId(userId);
+    }
+
+    public List<Order> GetOrdersHistoryByUserId(Guid userId)
+    {
+        return _orderRepository.GetOrdersHistoryByUserId(userId);
+    }
+    public Order CreateOrder(OrderDTO orderDto, Guid userId)
+    {
+        
+        var validationResult = _validator.Validate(orderDto);
+        if (!validationResult.IsValid)
         {
-            return _orderRepository.GetAllOrders();
-        }
-        public List<Order> GetAllOrdersByUser(Guid userId)
-        {
-            return _orderRepository.GetAllOrdersByUser(userId);
+            throw new ValidationException(validationResult.Errors);
         }
         
-        public Order CreateOrder(OrderDTO dto)
-        {
-            var validation = _validator.Validate(dto);
-            if (!validation.IsValid)
-                throw new ValidationException(validation.ToString());
-            
-            return _orderRepository.CreateOrder(_mapper.Map<Order>(dto));
-        }
+        var order = _mapper.Map<Order>(orderDto);
+        order.UserId = userId;
+        return _orderRepository.CreateOrder(order);
+    }
+    public List<Order> AddDateOfOrder(Guid userId)
+    {
+        return _orderRepository.AddDateOfOrder(userId);
+    }
 
-        public Order UpdateOrder(int orderId, OrderDTO dto)
+    public Order UpdateOrder(Guid userId, OrderDTO dto)
+    {
+        var validationResult = _validator.Validate(dto);
+        if (!validationResult.IsValid)  
         {
-            var validation = _validator.Validate(dto);
-            if (!validation.IsValid)
-            {
-                throw new ValidationException(validation.ToString());
-            }
-            var order = _mapper.Map<Order>(dto);
-            order.Id = orderId;
-            return _orderRepository.UpdateOrder(order);
-                    
+            throw new ValidationException(validationResult.ToString());
         }
+        var order = _mapper.Map<Order>(dto);
+        order.UserId = userId;
+        return _orderRepository.UpdateOrder(order);
+    }
 
-        public Order DeleteOrderById(int orderId)
-        {
-            if (orderId == 0)
-                throw new ValidationException("ID is invalid");
-            return _orderRepository.DeleteOrderById(orderId);
-        }
+    public Order DeleteOrder(int productId, Guid userId)
+    {
+       return _orderRepository.DeleteOrderById(productId, userId);
+    }
 
-        public Order GetOrderById(int orderId)
-        {
-            if (orderId <= 0)
-                throw new ValidationException("ID is invalid");
-            return _orderRepository.GetOrderById(orderId);
-        }
-        
+    public void SendEmailtoUser(string email)
+    {
+        _orderRepository.SendEmailToUser(email);
+    }
 }

@@ -107,17 +107,6 @@ public class ProductService : IProductService
         // Add the rating to the database.
         return _productRepository.UpdateRating(ratingValuetoAdd);
     }
-
-    public double GetTheAverageRatingForProduct(int productId)
-    {
-        if (productId == 0)
-        {
-            throw new ValidationException("ID is invalid");
-        }
-
-        return _productRepository.GetTheAverageRatingForProduct(productId);
-    }
-    
 }
 
 

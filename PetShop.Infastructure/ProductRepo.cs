@@ -14,14 +14,26 @@ namespace PetShop.Infastructure
         {
             _dbContext = dbContext;
         }
-
+        
         public List<Product> GetAllProducts()
         {
             var specsList = _dbContext.SpecsDescriptionsTable.ToList();
             var producttablelist= _dbContext.ProductTable.ToList();
             
             foreach (var product in producttablelist)
-            {
+            {List<int> ratings = _dbContext.RatingsTable.Where(r => r.ProductId == product.ID).Select(r => r.RatingValue).ToList();
+                double count = 0;
+                double sum = 0;
+                foreach (var rating in ratings)
+                {
+                    count++;
+                    sum = sum + rating;
+                }
+            
+                double average = sum / count;
+                average = Math.Round(average, 2);
+                product.AverageRating = average;
+                
                 var listofSpecDesc = new List<SpecsDescription>();
                 foreach (var specDesc in specsList)
                 {
@@ -97,6 +109,19 @@ namespace PetShop.Infastructure
             Product product = new Product();
             var ListofProductsSpecsDescriptions = new List<SpecsDescription>();
             var SpecsDiscription = _dbContext.SpecsDescriptionsTable.ToList();
+            List<int> ratings = _dbContext.RatingsTable.Where(r => r.ProductId == productId).Select(r => r.RatingValue).ToList();
+            double count = 0;
+            double sum = 0;
+
+
+            foreach (var rating in ratings)
+            {
+                count++;
+                sum = sum + rating;
+            }
+            
+            double average = sum / count;
+            average = Math.Round(average, 2);
             foreach (var specs in SpecsDiscription)
             {
                 if (productId == specs.ProductId) 
@@ -108,6 +133,7 @@ namespace PetShop.Infastructure
             
             product =  _dbContext.ProductTable.FirstOrDefault(p => p.ID == productId);
             product.SpecsDescriptions = ListofProductsSpecsDescriptions;
+            product.AverageRating = average;
             return product;
         }
         public Rating AddRating(Rating rating)
@@ -134,27 +160,6 @@ namespace PetShop.Infastructure
             return rating;
 
         }
-        
-        
-        // method for getting the average rating of a product
-        public double GetTheAverageRatingForProduct(int productId)
-        {   
-            // get all the ratings for the specific product
-            List<int> ratings = _dbContext.RatingsTable.Where(r => r.ProductId == productId).Select(r => r.RatingValue).ToList();
-            double count = 0;
-            double sum = 0;
-
-
-            foreach (var rating in ratings)
-            {
-                count++;
-                sum = sum + rating;
-            }
-            
-            double average = sum / count;
-            return average;
-        }
-      
 
         public int GetProductID(int productId)
         {

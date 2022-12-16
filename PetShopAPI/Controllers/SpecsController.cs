@@ -1,11 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using AutoMapper;
 using PetShop.Application.Interfaces;
 using PetShop.Application.PostProdDTO;
 using PetShop.Domain;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using PetShop.Application.Validators;
+
 
 namespace PetShopApi.Controllers
 {
@@ -38,7 +36,6 @@ namespace PetShopApi.Controllers
         }
         
         [HttpGet("{specID}")]
-        
         public ActionResult<Specs> GetSpecById(int specID)
         {
             try
@@ -92,7 +89,6 @@ namespace PetShopApi.Controllers
         }
 
         [HttpDelete("{specID}")]
-
         public ActionResult<Specs> DeleteSpecsById(int specID)
         {
             try
