@@ -70,12 +70,12 @@ public class OrderController : ControllerBase
         }
     }[HttpPost]
     [Route("OrderHistory,{userId}")]
-    public ActionResult<List<Order>> AddDateOfOrder(Guid userId)
+    public ActionResult<List<Order>> AddDateAndPriceOfOrder(Guid userId)
     
     {
         try
         {
-            var result = _orderService.AddDateOfOrder(userId);
+            var result = _orderService.AddDateAndPriceOfOrder(userId);
             return Created("Orders of this user" + userId  +" was moved to orders history ", result);
         }
         catch (ValidationException e)

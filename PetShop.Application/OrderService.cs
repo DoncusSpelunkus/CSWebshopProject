@@ -40,23 +40,32 @@ public class OrderService : IOrderService
         {
             throw new ValidationException(validationResult.Errors);
         }
+
+        var orderList = _orderRepository.GetCurrentOrdersByUserId(userId);
+        foreach (var o in orderList)
+        {
+            if (o.ProductId == orderDto.ProductId) 
+             throw new ValidationException("This product is already in your cart");
+        }
         
         var order = _mapper.Map<Order>(orderDto);
         order.UserId = userId;
         return _orderRepository.CreateOrder(order);
     }
-    public List<Order> AddDateOfOrder(Guid userId)
+    public List<Order> AddDateAndPriceOfOrder(Guid userId)
     {
-        return _orderRepository.AddDateOfOrder(userId);
+        return _orderRepository.AddDateAndPriceOfOrder(userId);
     }
 
     public Order UpdateOrder(Guid userId, OrderDTO dto)
+    
     {
         var validationResult = _validator.Validate(dto);
         if (!validationResult.IsValid)  
         {
             throw new ValidationException(validationResult.ToString());
         }
+        
         var order = _mapper.Map<Order>(dto);
         order.UserId = userId;
         return _orderRepository.UpdateOrder(order);
@@ -64,7 +73,20 @@ public class OrderService : IOrderService
 
     public Order DeleteOrder(int productId, Guid userId)
     {
-       return _orderRepository.DeleteOrderById(productId, userId);
+        var orderList = _orderRepository.GetCurrentOrdersByUserId(userId);
+        var order = new Order();
+        foreach (var o in orderList)
+        {
+            if (o.ProductId == productId)
+            {
+                order = o;
+            }
+        }
+        
+        if(order.ProductId != productId)
+            throw new ValidationException("You don't have product with this id " +productId + " in your cart");
+        
+        return _orderRepository.DeleteOrderById(order);
     }
 
     public void SendEmailtoUser(string email)
