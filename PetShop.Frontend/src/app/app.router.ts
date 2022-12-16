@@ -12,6 +12,8 @@ import {UserRegistrationComponent} from "./landingPages/user-registration/user-r
 import {AuthGuardService} from "../services/AuthGuardService";
 import {LoginGuardService} from "../services/LoginGuardService";
 import {CategoryEditComponent} from "./categoryComponents/category-edit/category-edit.component";
+import {CartComponent} from "./cart/cart.component";
+import {ProductDetailComponent} from "./productComponents/product-detail/product-detail.component";
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -22,6 +24,8 @@ const routes: Routes = [
   { path: 'category/:path/:id', component: CategoryEditComponent, canActivate: [AuthGuardService]},
   { path: 'login', component: LoginComponent, canActivate: [LoginGuardService]},
   { path: 'register', component: UserRegistrationComponent},
+  { path: 'product/:id', component: ProductDetailComponent},
+  { path: 'cart', component: CartComponent},
 
   // otherwise redirect to home
   { path: '**', redirectTo: '' }

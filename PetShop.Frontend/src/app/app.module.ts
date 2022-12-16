@@ -38,6 +38,8 @@ import { UserRegistrationComponent } from './landingPages/user-registration/user
 import {MatGridListModule} from "@angular/material/grid-list";
 import {Ng2SearchPipeModule} from "ng2-search-filter";
 import {MatSliderModule} from "@angular/material/slider";
+import { CartComponent } from './cart/cart.component';
+import { ProductDetailComponent } from './productComponents/product-detail/product-detail.component';
 
 
 
@@ -62,6 +64,8 @@ import {MatSliderModule} from "@angular/material/slider";
     UserComponent,
     UserEditComponent,
     UserRegistrationComponent,
+    CartComponent,
+    ProductDetailComponent,
 
   ],
     imports: [
