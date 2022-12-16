@@ -25,7 +25,11 @@ export class ProductListComponent implements OnInit{
     this.productList = await this.searchState.getProducts();
   }
 
-  async sortList(){
-    this.productList = await this.searchState.sortProducts();
+  async catSort(){
+    this.productList = await this.searchState.catSort();
+  }
+
+  async priceSort(){
+    this.productList = await this.searchState.priceSort();
   }
 }

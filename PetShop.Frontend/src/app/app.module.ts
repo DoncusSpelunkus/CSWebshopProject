@@ -37,6 +37,7 @@ import { UserEditComponent } from './userComponents/user-edit/user-edit.componen
 import { UserRegistrationComponent } from './landingPages/user-registration/user-registration.component';
 import {MatGridListModule} from "@angular/material/grid-list";
 import {Ng2SearchPipeModule} from "ng2-search-filter";
+import {MatSliderModule} from "@angular/material/slider";
 
 
 
@@ -63,26 +64,27 @@ import {Ng2SearchPipeModule} from "ng2-search-filter";
     UserRegistrationComponent,
 
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    appRoutingModule,
-    MatFormFieldModule,
-    MatInputModule,
-    FormsModule,
-    MatButtonModule,
-    MatCardModule,
-    MatListModule,
-    MatTooltipModule,
-    MatTableModule,
-    MatSelectModule,
-    MatSidenavModule,
-    HttpClientModule,
-    AgGridModule,
-    MatTabsModule,
-    MatGridListModule,
-    Ng2SearchPipeModule
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        appRoutingModule,
+        MatFormFieldModule,
+        MatInputModule,
+        FormsModule,
+        MatButtonModule,
+        MatCardModule,
+        MatListModule,
+        MatTooltipModule,
+        MatTableModule,
+        MatSelectModule,
+        MatSidenavModule,
+        HttpClientModule,
+        AgGridModule,
+        MatTabsModule,
+        MatGridListModule,
+        Ng2SearchPipeModule,
+        MatSliderModule
+    ],
   providers: [MatSnackBar, Overlay],
   bootstrap: [AppComponent]
 })

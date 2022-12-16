@@ -11,6 +11,7 @@ export class SearchState{
   productsUnmodified: Product[] = [];
   productsModified: Product[] = [];
   categorySelector: any = Category;
+  currentPrice: number = 0;
 
   constructor(private productService: ProductService, private categoryService: CategoryService) {
   }
@@ -21,15 +22,19 @@ export class SearchState{
 
   async getProducts(){
     this.productsUnmodified = await this.productService.getProducts();
+    this.productsModified = this.productsUnmodified;
     return this.productsUnmodified;
+  }
+
+  setCurrentPrice(currentPrice: number){
+    this.currentPrice = currentPrice;
   }
 
   setCategorySelector(category: Category){
     this.categorySelector = category;
   }
 
-  async sortProducts(){ // Sorts the unmodified list given the category id's
-    this.productsModified = this.productsUnmodified;
+  async catSort(){ // Sorts the unmodified list given the category id's
     if(this.categorySelector.mainCategoryID != undefined){
       this.productsModified = this.productsModified.filter(product => product.mainCategoryID === this.categorySelector.mainCategoryID)
     }
@@ -40,6 +45,11 @@ export class SearchState{
       this.productsModified = this.productsModified.filter(product => product.brandID === this.categorySelector.brandID)
     }
     return this.productsModified;
+  }
+
+  async priceSort(){
+    this.productsModified = this.productsUnmodified;
+    return this.productsModified.filter(product => product.price > this.currentPrice)
   }
 
 }

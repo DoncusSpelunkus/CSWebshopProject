@@ -5,6 +5,12 @@
   <app-header class="header" (emitter)="send($event)"></app-header>
   <mat-drawer-container>
     <mat-drawer #drawer mode="side">
+      <mat-label>Price:</mat-label>
+      <br>
+      <mat-slider min="0" max="1000" step="10" thumbLabel (change)="updateList($event)">
+        <input value="300" matSliderStartThumb>
+        <input value="400" matSliderEndThumb>
+      </mat-slider>
       <mat-form-field appearance="outline">Main category:
         <mat-select [(ngModel)]="categorySelector.mainCategoryID" name="Main Category">
           <mat-option *ngFor="let categories of mainCatList" [value]="categories.mainCategoryID" >
