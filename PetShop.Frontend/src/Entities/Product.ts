@@ -4,7 +4,7 @@ export class Product { // product template
   price: number = 0;
   description: string = '';
   imageUrl: string = '';
-  rating: number = 0;
+  AverageRating: number = 0;
   mainCategoryID: number = 0;
   subCategoryID: number = 0;
   brandID: number = 0;

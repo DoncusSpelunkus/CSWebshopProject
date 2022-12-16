@@ -28,7 +28,7 @@ export class AdminState { // State class for data manipulation
       price: product.price,
       description: product.description,
       imageUrl: product.imageUrl,
-      rating: product.rating,
+      rating: product.AverageRating,
       specsDescriptions: product.specsDescriptions,
       mainCategoryID: product.mainCategoryID,
       subCategoryID: product.subCategoryID,

@@ -15,9 +15,6 @@
     <input type="string" matInput [(ngModel)]="newProduct.imageUrl">
   </mat-form-field>
   <br>
-  <mat-form-field appearance="outline">Rating:
-    <input type="number" matInput [(ngModel)]="newProduct.rating">
-  </mat-form-field>
   <mat-form-field appearance="outline">Main category:
     <mat-select [(ngModel)]="newProduct.mainCategoryID" name="Main Category">
       <mat-option *ngFor="let categories of mainCatList" [value]="categories.mainCategoryID" >
