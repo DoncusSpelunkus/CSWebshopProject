@@ -18,7 +18,6 @@ public class User
     public int Zip { get; set; }
     public int Phone { get; set; }
     public List<Rating> Ratings { get; set; }
-    public List<HistoryOrder> HistoryOrders { get; set; }
     public List<Order> CurrentOrderList { get; set; }
 
 }
@@ -26,12 +25,16 @@ public class User
 public class Order
 {   
     // foreign key
-    public int  ProdouctId { get; set; }
-    public Guid UserId { get; set; }
+    public int  ProductId { get; set; }
+    public Guid? UserId { get; set; }
     
     public int Amount { get; set; }
+    
+    public DateTime? DateOfOrder { get; set; }
 
     //navigation purpose
-    public Product Product { get; set; }
-    public User User { get; set; }
+    public Product? Product { get; set; }
+    public User? User { get; set; }
+    
+    
 }

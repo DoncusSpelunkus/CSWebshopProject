@@ -21,7 +21,24 @@ public class OrderController : ControllerBase
     {
         try
         {
-            return Ok(_orderService.GetAllOrderByUserId(userId));
+            return Ok(_orderService.GetCurrentOrderByUserId(userId));
+        }
+        catch (KeyNotFoundException e)
+        {
+            return NotFound("No orders found for this user");
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, e.ToString());
+        }
+    }
+    [HttpGet]
+    [Route("OrderHistory")]
+    public ActionResult<List<Order>> GetOrdersHistoryByUserId(Guid userId)
+    {
+        try
+        {
+            return Ok(_orderService.GetOrdersHistoryByUserId(userId));
         }
         catch (KeyNotFoundException e)
         {
@@ -35,7 +52,7 @@ public class OrderController : ControllerBase
     
     [HttpPost]
     [Route("{userId}")]
-    public ActionResult<Specs> CreateOrder(OrderDTO dto, Guid userId)
+    public ActionResult<Order> CreateOrder(OrderDTO dto, Guid userId)
     
     {
         try
@@ -51,11 +68,29 @@ public class OrderController : ControllerBase
         {
             return StatusCode(500, e.Message);
         }
+    }[HttpPost]
+    [Route("OrderHistory,{userId}")]
+    public ActionResult<List<Order>> AddDateOfOrder(Guid userId)
+    
+    {
+        try
+        {
+            var result = _orderService.AddDateOfOrder(userId);
+            return Created("Orders of this user" + userId  +" was moved to orders history ", result);
+        }
+        catch (ValidationException e)
+        {
+            return BadRequest(e.Message);
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, e.Message);
+        }
     }
     
     [HttpPut]
     [Route("{userId}")]
-    public ActionResult<Order> UpdateSpecs([FromRoute] Guid userId, [FromBody] OrderDTO orderDto)
+    public ActionResult<Order> UpdateOrder([FromRoute] Guid userId, [FromBody] OrderDTO orderDto)
     {
         try
         {
@@ -72,15 +107,15 @@ public class OrderController : ControllerBase
     }
     
     [HttpDelete("{userId}")]
-    public ActionResult<Specs> DeleteSpecsById(int orderId, Guid userId)
+    public ActionResult<Order> DeleteOrderById(int productId, Guid userId)
     {
         try
         {
-            return Ok(_orderService.DeleteOrder(orderId, userId));
+            return Ok(_orderService.DeleteOrder(productId, userId));
         }
         catch (KeyNotFoundException e)
         {
-            return NotFound("No specification found at ID " + orderId);
+            return NotFound("No order found with product ID " + productId);
         }
         catch (Exception e)
         {
@@ -102,8 +137,4 @@ public class OrderController : ControllerBase
             return StatusCode(500, e.ToString());
         }
     }
-   
-    
-    
-    
 }

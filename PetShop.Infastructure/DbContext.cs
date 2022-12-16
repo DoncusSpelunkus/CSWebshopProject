@@ -31,11 +31,7 @@ namespace PetShop.Infastructure
             modelBuilder.Entity<User>()
                 .Property(id => id.Id)
                 .ValueGeneratedOnAdd(); 
-            modelBuilder.Entity<HistoryOrder>()
-                .Property(o => o.Id)
-                .ValueGeneratedOnAdd(); 
-
-
+            
             //Setting keys
             modelBuilder.Entity<SpecsDescription>()
                 .HasKey(sd => new { sd.ProductId, sd.SpecsId });
@@ -49,10 +45,8 @@ namespace PetShop.Infastructure
                 .HasKey(c => new { ManFacId = c.Id });
             modelBuilder.Entity<Rating>(r => r
                 .HasKey(r => new { r.ProductId, r.UserId }));
-            modelBuilder.Entity<OrderedProducts>()
-                .HasKey(op => new { op.ProductId, op.OrderId });
             modelBuilder.Entity<Order>()
-                .HasKey(ord => new { ord.ProdouctId, ord.UserId });
+                .HasKey(ord => new { ProdouctId = ord.ProductId, ord.UserId });
 
             // a rating has a single product but a product has multiple ratings
             modelBuilder.Entity<Rating>()
@@ -80,7 +74,7 @@ namespace PetShop.Infastructure
             modelBuilder.Entity<Order>()
                 .HasOne(sd => sd.Product)
                 .WithMany(p => p.CurrentOrderList)
-                .HasForeignKey(sd => sd.ProdouctId)
+                .HasForeignKey(sd => sd.ProductId)
                 .OnDelete(DeleteBehavior.ClientCascade);
             // one specs has many specsDescription, and one specsDescription has one specs
             modelBuilder.Entity<Order>()
@@ -163,48 +157,7 @@ namespace PetShop.Infastructure
                 .WithOne(sd => sd.Specs)
                 .OnDelete(DeleteBehavior.ClientCascade);
             
-            
-            // Order has many OrderedProducts and OrderedProducts have one order
-            modelBuilder.Entity<HistoryOrder>()
-                .HasMany(o => o.OrderedProductsList)
-                .WithOne(p => p.Order)
-                .OnDelete(DeleteBehavior.ClientCascade);
-            // Order has one user and user has many orders 
-            modelBuilder.Entity<HistoryOrder>()
-                .HasOne(o => o.User)
-                .WithMany(u => u.HistoryOrders)
-                .HasForeignKey(o => o.UserId)
-                .OnDelete(DeleteBehavior.ClientCascade);
-            
-            /*
-             * a product has many OrderedProducts and a OrderedProducts have one product
-             */
-            modelBuilder.Entity<Product>()
-                .HasMany(p => p.OrderedProducts)
-                .WithOne(o => o.Product)
-                .OnDelete(DeleteBehavior.ClientCascade);
-            /*
-            * a user has many OrderedProducts and a OrderedProducts have one user
-            */
-            modelBuilder.Entity<User>()
-                .HasMany(u => u.HistoryOrders)
-                .WithOne(o => o.User)
-                .OnDelete(DeleteBehavior.ClientCascade);
-            
-            // OrderedProducts have one order and order has many OrderedProducts
-            modelBuilder.Entity<OrderedProducts>()
-                .HasOne(p => p.Order)
-                .WithMany(o => o.OrderedProductsList)
-                .HasForeignKey(o =>o.OrderId)
-                .OnDelete(DeleteBehavior.ClientCascade);
-          
-          // OrderedProducts have one product and product has many OrderedProducts  
-            modelBuilder.Entity<OrderedProducts>()
-                .HasOne(p => p.Product)
-                .WithMany(o => o.OrderedProducts)
-                .HasForeignKey(o =>o.ProductId)
-                .OnDelete(DeleteBehavior.ClientCascade);
-            
+
             //Dont auto include  
             modelBuilder.Entity<SpecsDescription>()
                 .Ignore(sd => sd.Product);
@@ -228,18 +181,10 @@ namespace PetShop.Infastructure
                 .Ignore(c => c.ProdList);
             modelBuilder.Entity<Brand>()
                 .Ignore(c => c.ProdList);
-            modelBuilder.Entity<OrderedProducts>()
-                .Ignore(o => o.Product);
-            modelBuilder.Entity<OrderedProducts>()
-                .Ignore(o => o.Order);
-            modelBuilder.Entity<HistoryOrder>()
-                .Ignore(o => o.User);
             modelBuilder.Entity<Order>()
                 .Ignore(o => o.Product);
             modelBuilder.Entity<Order>()
                 .Ignore(o => o.User);
-            modelBuilder.Entity<Product>()
-                .Ignore(p => p.OrderedProducts);
             modelBuilder.Entity<Product>()
                 .Ignore(p => p.CurrentOrderList);
         }
@@ -252,8 +197,6 @@ namespace PetShop.Infastructure
         public DbSet<Brand> BrandTable { get; set; }
         public DbSet<User> UserTable { get; set; }
         public DbSet<Rating> RatingsTable { get; set; }
-        public DbSet<HistoryOrder> HistoryOrderTable { get; set; }
-        public DbSet<OrderedProducts> OrderedProductsTable { get; set; }
         public DbSet<Order> OrdersTable { get; set; }
     }
 

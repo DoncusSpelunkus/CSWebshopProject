@@ -23,11 +23,15 @@ public class OrderService : IOrderService
     }
 
     
-    public List<Order> GetAllOrderByUserId(Guid userId)
+    public List<Order> GetCurrentOrderByUserId(Guid userId)
     {
-        return _orderRepository.GetAllOrdersByUserId(userId);
+        return _orderRepository.GetCurrentOrdersByUserId(userId);
     }
 
+    public List<Order> GetOrdersHistoryByUserId(Guid userId)
+    {
+        return _orderRepository.GetOrdersHistoryByUserId(userId);
+    }
     public Order CreateOrder(OrderDTO orderDto, Guid userId)
     {
         
@@ -40,6 +44,10 @@ public class OrderService : IOrderService
         var order = _mapper.Map<Order>(orderDto);
         order.UserId = userId;
         return _orderRepository.CreateOrder(order);
+    }
+    public List<Order> AddDateOfOrder(Guid userId)
+    {
+        return _orderRepository.AddDateOfOrder(userId);
     }
 
     public Order UpdateOrder(Guid userId, OrderDTO dto)
