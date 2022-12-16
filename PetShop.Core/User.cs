@@ -24,6 +24,7 @@ public class User
 
 public class Order
 {   
+    public int Id { get; set; }
     // foreign key
     public int  ProductId { get; set; }
     public Guid? UserId { get; set; }
@@ -31,6 +32,8 @@ public class Order
     public int Amount { get; set; }
     
     public DateTime? DateOfOrder { get; set; }
+    public int OrderId { get; set; }
+    public double Price { get; set; }
 
     //navigation purpose
     public Product? Product { get; set; }

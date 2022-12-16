@@ -45,9 +45,9 @@ public class OrderService : IOrderService
         order.UserId = userId;
         return _orderRepository.CreateOrder(order);
     }
-    public List<Order> AddDateOfOrder(Guid userId)
+    public List<Order> AddDateAndPriceOfOrder(Guid userId)
     {
-        return _orderRepository.AddDateOfOrder(userId);
+        return _orderRepository.AddDateAndPriceOfOrder(userId);
     }
 
     public Order UpdateOrder(Guid userId, OrderDTO dto)
