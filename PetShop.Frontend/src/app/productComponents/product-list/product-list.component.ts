@@ -12,6 +12,7 @@ import { Product} from "../../../Entities/Product";
   styleUrls: ['./product-list.component.scss']
 })
 export class ProductListComponent implements OnInit{
+  product: any = Product;
   productList: any;
   @Input() name = '';
 
@@ -35,8 +36,11 @@ export class ProductListComponent implements OnInit{
     this.productList = await this.searchState.priceSort();
   }
 
-  addToCart(product: Product) {
-    this.cartService.addToCart(product);
+  addToCart(product: any) {
+    if (!this.cartService.productInCart(product)){
+      this.cartService.addToCart(product);
+      this.product = [this.cartService.getProduct()];
+    }
     window.alert('Your product has been added to the cart!');
   }
 }

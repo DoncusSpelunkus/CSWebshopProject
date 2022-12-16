@@ -16,17 +16,23 @@ export class ProductDetailComponent implements OnInit {
   SubCat: any = Category;
   Brand: any = Category;
 
-  constructor(private Aroute: ActivatedRoute, private adminState: AdminState, public router: Router, private cartService: CartService) {
+  constructor(private route: ActivatedRoute, private adminState: AdminState, public router: Router, private cartService: CartService) {
 
   }
 
   async ngOnInit() {
-    const id = Number(this.Aroute.snapshot.paramMap.get(`id`))
+    const id = Number(this.route.snapshot.paramMap.get(`id`))
     this.product = await this.adminState.getProductById(id);
     this.MainCat = await this.adminState.getCategoryById(this.product.mainCategory, "MainCat")
     this.SubCat = await this.adminState.getCategoryById(this.product.subCategory, "SubCat")
     this.Brand = await this.adminState.getCategoryById(this.product.brand, "Brand")
   }
 
-
+  addToCart(product: any) {
+    if (!this.cartService.productInCart(product)){
+      this.cartService.addToCart(product);
+      this.product = [this.cartService.getProduct()];
+    }
+    window.alert('Your product has been added to the cart!');
+  }
 }

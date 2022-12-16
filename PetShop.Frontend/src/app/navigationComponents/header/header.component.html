@@ -5,7 +5,7 @@
       <input type="text" [(ngModel)]="name" placeholder="Search here.." (keyup)="emit(keyword.value);" #keyword>
     </li>
     <li><a href="login"><img src="https://cdn4.iconfinder.com/data/icons/man-user-human-person-avatar-business-profile/100/18A-1User-128.png" alt=""></a></li>
-    <li><a href="cart"><img src="https://images.emojiterra.com/google/noto-emoji/v2.034/512px/1f6d2.png" alt=""></a></li>
+    <li><img src="https://images.emojiterra.com/google/noto-emoji/v2.034/512px/1f6d2.png" alt="" (click)="changeRoute()"></li>
     <a href="''"><button mat-raised-button (click)="logOut()">Logout</button></a>
   </ul>
 </nav>

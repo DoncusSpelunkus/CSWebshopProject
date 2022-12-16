@@ -4,22 +4,46 @@ import { Product } from "../Entities/Product";
 @Injectable({
   providedIn: 'root'
 })
+
 export class CartService {
 
-  items: Product[] = [];
+  products: any[] = [];
 
-  constructor() { }
-
-  addToCart(product: Product) {
-    this.items.push(product);
+  constructor() {
   }
 
-  getItems() {
-    return this.items;
+  getProduct() {
+    return this.products;
   }
 
-  clearCart() {
-    this.items = [];
-    return this.items;
+  saveCart(): void {
+    localStorage.setItem('cart_items', JSON.stringify(this.products));
   }
+
+  addToCart(addedProduct: any) {
+    this.products.push(addedProduct);
+    this.saveCart();
+  }
+
+  loadCart(): void {
+    this.products = JSON.parse(localStorage.getItem('cart_items') as any) || [];
+  }
+
+  productInCart(product: any): boolean {
+    return this.products.findIndex((x: any) => x.id === product.id) > -1;
+  }
+
+  removeProduct(product: any) {
+    const index = this.products.findIndex((x: any) => x.id === product.id);
+
+    if (index > -1) {
+      this.products.splice(index, 1);
+      this.saveCart();
+    }
+  }
+
+  clearProducts() {
+    localStorage.clear();
+  }
+
 }
