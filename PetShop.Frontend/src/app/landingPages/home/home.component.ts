@@ -1,9 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {SearchState} from "../../../states/SearchState";
 import {Category} from "../../../Entities/Category";
-
-class MatSliderDragEvent {
-}
 
 @Component({
   selector: 'app-home',
@@ -18,6 +15,8 @@ export class HomeComponent implements OnInit {
   subCatList: Category[] = [];
   brandCatList: Category[] = [];
   currentPrice: number = 0;
+  ratingStorage: number = 0;
+  ratings: number[] = [1,2,3,4,5];
   @ViewChild('child') child;
 
   constructor(private searchState: SearchState) { }
@@ -33,7 +32,7 @@ export class HomeComponent implements OnInit {
   }
 
   filter(){
-    this.searchState.setCategorySelector(this.categorySelector)
+    this.searchState.setCategorySelector(this.categorySelector, this.ratingStorage)
     this.child.catSort();
   }
 
