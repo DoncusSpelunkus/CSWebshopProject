@@ -9,7 +9,7 @@ public interface IOrderRepo
     public Order CreateOrder(Order order);
     public List<Order> AddDateAndPriceOfOrder(Guid userId);
     public Order UpdateOrder(Order order);
-    public Order DeleteOrderById(int productId, Guid userId);
+    public Order DeleteOrderById(Order order);
     public void SendEmailToUser(String email);
 
 }

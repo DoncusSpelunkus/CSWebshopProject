@@ -24,6 +24,7 @@ public class User
 
 public class Order
 {
+    
     // foreign key
     public int  ProductId { get; set; }
     public Guid? UserId { get; set; }

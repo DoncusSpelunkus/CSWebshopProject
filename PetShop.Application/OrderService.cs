@@ -73,7 +73,20 @@ public class OrderService : IOrderService
 
     public Order DeleteOrder(int productId, Guid userId)
     {
-       return _orderRepository.DeleteOrderById(productId, userId);
+        var orderList = _orderRepository.GetCurrentOrdersByUserId(userId);
+        var order = new Order();
+        foreach (var o in orderList)
+        {
+            if (o.ProductId == productId)
+            {
+                order = o;
+            }
+        }
+        
+        if(order.ProductId != productId)
+            throw new ValidationException("You don't have product with this id " +productId + " in your cart");
+        
+        return _orderRepository.DeleteOrderById(order);
     }
 
     public void SendEmailtoUser(string email)

@@ -70,12 +70,12 @@ public class OrderRepo : IOrderRepo
         return order;
     }
 
-    public Order DeleteOrderById(int productId, Guid userid)
+    public Order DeleteOrderById(Order order)
     {
-        var order = _OrderDbContext.OrdersTable.FirstOrDefault(o => o.ProductId == productId && o.UserId == userid);
-        _OrderDbContext.OrdersTable.Remove(order);
-        _OrderDbContext.SaveChanges();
-        return order;
+        
+            _OrderDbContext.OrdersTable.Remove(order);
+            _OrderDbContext.SaveChanges();
+            return order;
     }
 
     public void SendEmailToUser(string email)
