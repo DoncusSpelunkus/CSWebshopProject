@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {SpecTemplates} from "../../../Entities/SpecTemplates";
 import {AdminState} from "../../../states/AdminState";
 
@@ -12,6 +12,9 @@ export class SpecificationCreationComponent implements OnInit {
 specification: any;
 specificationDeletionId: number;
 
+  @Output()
+  change: EventEmitter<any> = new EventEmitter<any>();
+
   constructor(private adminState: AdminState) {
     this.specification = new SpecTemplates;
     this.specificationDeletionId = 0;
@@ -22,10 +25,12 @@ specificationDeletionId: number;
 
   postSpecification(){
     this.adminState.postSpecification(this.specification);
+    this.change.emit()
   }
 
   deleteSpecification(){
     this.adminState.deleteSpecificationById(this.specificationDeletionId);
+    this.change.emit()
   }
 
 }

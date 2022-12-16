@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import { Router} from "@angular/router";
 import { Product } from "../../../Entities/Product";
 import { SpecTemplates } from "../../../Entities/SpecTemplates";
@@ -26,6 +26,9 @@ export class ProductCreationComponent implements OnInit{
 
   @ViewChild('child') child;
 
+  @Output()
+  change: EventEmitter<any> = new EventEmitter<any>();
+
   constructor(public router: Router, private adminState: AdminState){
   }
 
@@ -38,17 +41,19 @@ export class ProductCreationComponent implements OnInit{
 
   async postProduct() {
     await this.adminState.postProduct(this.newProduct)
-    await this.ngOnInit();
+    this.change.emit()
   }
 
 
   async deleteProduct(id){
     await this.adminState.deleteProductById(id);
+    this.change.emit()
   }
 
   onDelete(event: number): void{ // Delete the spec with the id from the mat-card selected in the child component
     this.specList.splice(this.specList.findIndex(a => a.specsId === event) , 1)
     this.child.updateNow(this.specList);
+    this.change.emit();
   }
 
   addTooSpecList(spec: number, desc: string){

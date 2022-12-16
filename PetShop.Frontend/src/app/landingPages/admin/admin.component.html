@@ -3,21 +3,21 @@
   <mat-tab-group mat-stretch-tabs>
     <mat-tab label="Products">
       <h1>Create and delete products</h1>
-      <app-product-creation></app-product-creation>
+      <app-product-creation (change)="onChangeProd($event)"></app-product-creation>
        <hr>
-      <app-product-list></app-product-list>
+      <app-product-list #prodList></app-product-list>
     </mat-tab>
     <mat-tab label="Specifications">
       <h1>Create and delete specifications</h1>
-      <app-specification-creation></app-specification-creation>
+      <app-specification-creation (change)="onChangeSpec($event)"></app-specification-creation>
       <hr>
-      <app-specification-list></app-specification-list>
+      <app-specification-list #specList></app-specification-list>
     </mat-tab>
     <mat-tab label="Categories">
       <h1>Create and delete categories</h1>
-      <app-category-creation (change)="onChange($event)"></app-category-creation>
+      <app-category-creation (change)="onChangeCat($event)"></app-category-creation>
       <hr>
-      <app-category-list #child></app-category-list>
+      <app-category-list #catList></app-category-list>
     </mat-tab>
   </mat-tab-group>
 </div>

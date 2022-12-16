@@ -7,15 +7,24 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 })
 export class AdminComponent implements OnInit {
 
-  @ViewChild('child') child;
+  @ViewChild('catList') catChild;
+  @ViewChild('specList') specChild;
+  @ViewChild('prodList') prodChild;
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  onChange($event: string) {
-    console.log($event)
-    this.child.updateCat($event)
+  onChangeSpec(event) {
+    this.specChild.ngOnInit()
+  }
+
+  onChangeProd(event) {
+    this.prodChild.ngOnInit()
+  }
+
+  onChangeCat($event: string) {
+    this.catChild.updateCat($event)
   }
 }

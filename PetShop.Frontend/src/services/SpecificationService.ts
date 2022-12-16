@@ -53,7 +53,7 @@ export class SpecificationService { // Class for crud requests from the /specs r
   }
 
   async deleteSpecificationById(id: any) {
-    let httpResponse = await customAxios.get<SpecTemplates>('/'+id)
+    let httpResponse = await customAxios.delete<SpecTemplates>('/'+id)
     return httpResponse.data;
   }
 
