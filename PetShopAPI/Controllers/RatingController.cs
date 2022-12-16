@@ -52,12 +52,4 @@ public class RatingController : ControllerBase
         // Set the ProductId and UserId properties of the ratingToUpdate object.
         return Ok(_productService.UpdateRating(ratingDto, productId, userId));
     }
-    
-    [HttpGet]
-    [Route("getRating")]
-    public async Task<ActionResult<Rating>> GetRating(int ProductId)
-    {
-        return Ok(_productService.GetTheAverageRatingForProduct(ProductId));
-    }
-    
 }

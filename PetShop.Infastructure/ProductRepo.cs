@@ -31,7 +31,7 @@ namespace PetShop.Infastructure
                 }
             
                 double average = sum / count;
-                
+                average = Math.Round(average, 2);
                 product.AverageRating = average;
                 
                 var listofSpecDesc = new List<SpecsDescription>();
@@ -121,6 +121,7 @@ namespace PetShop.Infastructure
             }
             
             double average = sum / count;
+            average = Math.Round(average, 2);
             foreach (var specs in SpecsDiscription)
             {
                 if (productId == specs.ProductId) 
@@ -159,6 +160,7 @@ namespace PetShop.Infastructure
             return rating;
 
         }
+
         public int GetProductID(int productId)
         {
             return _shopRepoImplementation.GetProductID(productId);
