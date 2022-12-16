@@ -1,0 +1,40 @@
+<app-header></app-header>
+<mat-card>
+  <mat-card-subtitle><a routerLink="/">Home</a>/<a>{{MainCat.name}}</a>/<a>{{SubCat.name}}</a>/{{product.name}}</mat-card-subtitle>
+  <article>
+    <section class="title">
+        <mat-card-title>{{product.name}}</mat-card-title>
+    </section>
+    <hr>
+    <section class="picture">
+      <img mat-card-image src="{{product.imageUrl}}" alt="Image error">
+        <p>Product number: {{product.id}}</p>
+    </section>
+    <section class="information">
+      <mat-card-content>
+        <h2>Name:</h2>
+        <p>{{product.name}}</p>
+        <h2>Price:</h2>
+        <p>{{product.price}}dkk</p>
+        <h2>Main category:</h2>
+        <p>{{MainCat.name}}</p>
+        <h2>Sub category:</h2>
+        <p>{{SubCat.name}}</p>
+        <h2>Brand:</h2>
+        <p>{{Brand.name}}</p>
+      </mat-card-content>
+    </section>
+    <section class="long-info">
+      <h2>Description:</h2>
+      <p>{{product.description}}</p>
+      <h2>Specifications:</h2>
+      <ul >
+        <li></li>
+      </ul>
+    </section>
+  </article>
+      <mat-card-actions>
+        <button mat-raised-button>Add to cart</button>
+      </mat-card-actions>
+ </mat-card>
+

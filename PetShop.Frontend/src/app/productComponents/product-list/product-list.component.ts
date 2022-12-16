@@ -2,6 +2,9 @@ import {Component, Input, OnInit} from '@angular/core';
 import { Router } from '@angular/router'
 import {SearchState} from "../../../states/SearchState";
 import {Category} from "../../../Entities/Category";
+import {AdminState} from "../../../states/AdminState";
+import { CartService} from "../../../services/cart.service";
+import { Product} from "../../../Entities/Product";
 
 @Component({
   selector: 'app-product-list',
@@ -10,10 +13,9 @@ import {Category} from "../../../Entities/Category";
 })
 export class ProductListComponent implements OnInit{
   productList: any;
-
   @Input() name = '';
 
-  constructor(private searchState: SearchState, public router: Router) {
+  constructor(private searchState: SearchState, private adminState: AdminState, private cartService: CartService, public router: Router) {
 
   }
 
@@ -31,5 +33,10 @@ export class ProductListComponent implements OnInit{
 
   async priceSort(){
     this.productList = await this.searchState.priceSort();
+  }
+
+  addToCart(product: Product) {
+    this.cartService.addToCart(product);
+    window.alert('Your product has been added to the cart!');
   }
 }
