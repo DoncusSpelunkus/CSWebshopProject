@@ -10,6 +10,7 @@ export class SearchState{
 
   productsUnmodified: Product[] = [];
   productsModified: Product[] = [];
+  priceModified: Product[] = [];
   categorySelector: any = Category;
   currentPrice: number = 0;
 
@@ -48,8 +49,8 @@ export class SearchState{
   }
 
   async priceSort(){
-    this.productsModified = this.productsUnmodified;
-    return this.productsModified.filter(product => product.price > this.currentPrice)
+    this.priceModified = this.productsModified;
+    return this.priceModified.filter(product => product.price > this.currentPrice)
   }
 
 }

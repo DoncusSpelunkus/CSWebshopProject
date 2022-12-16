@@ -38,6 +38,7 @@ export class ProductCreationComponent implements OnInit{
 
   async postProduct() {
     await this.adminState.postProduct(this.newProduct)
+    await this.ngOnInit();
   }
 
 
