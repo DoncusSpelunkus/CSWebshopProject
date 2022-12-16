@@ -33,12 +33,29 @@ public class OrderRepo : IOrderRepo
         return order;
     }
 
-    public List<Order> AddDateOfOrder(Guid userId)
+    public List<Order> AddDateAndPriceOfOrder(Guid userId)
     {
         var listOfCurrentOrders = _OrderDbContext.OrdersTable.Where(o => o.UserId == userId && o.DateOfOrder == null);
+        var orderId = 1;
+        var listOfAllOrders = _OrderDbContext.OrdersTable.Where(o => o.DateOfOrder != null);
+        foreach (var order in listOfAllOrders)
+        {
+            if (orderId < order.OrderId)
+            {
+                orderId = order.OrderId;
+            }
+            else if (order.OrderId == orderId)
+            {
+                orderId++;
+            }
+        }
         foreach (var order in listOfCurrentOrders)
         {
+            _OrderDbContext.OrdersTable.Remove(order);
+            _OrderDbContext.SaveChanges();
+            order.OrderId = orderId;
             order.DateOfOrder = DateTime.Now;
+            _OrderDbContext.OrdersTable.Add(order);
             _OrderDbContext.SaveChanges();
         }
         var listOfOrderHistory = _OrderDbContext.OrdersTable.Where(o => o.UserId == userId && o.DateOfOrder != null).ToList();
@@ -48,18 +65,17 @@ public class OrderRepo : IOrderRepo
 
     public Order UpdateOrder(Order order)
     {
-        
         _OrderDbContext.OrdersTable.Update(order);
         _OrderDbContext.SaveChanges();
         return order;
     }
 
-    public Order DeleteOrderById(int productId, Guid userid)
+    public Order DeleteOrderById(Order order)
     {
-        var order = _OrderDbContext.OrdersTable.FirstOrDefault(o => o.ProductId == productId && o.UserId == userid);
-        _OrderDbContext.OrdersTable.Remove(order);
-        _OrderDbContext.SaveChanges();
-        return order;
+        
+            _OrderDbContext.OrdersTable.Remove(order);
+            _OrderDbContext.SaveChanges();
+            return order;
     }
 
     public void SendEmailToUser(string email)

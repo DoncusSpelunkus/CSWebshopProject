@@ -32,6 +32,7 @@ namespace PetShop.Infastructure
                 .Property(id => id.Id)
                 .ValueGeneratedOnAdd(); 
             
+            
             //Setting keys
             modelBuilder.Entity<SpecsDescription>()
                 .HasKey(sd => new { sd.ProductId, sd.SpecsId });
@@ -46,7 +47,7 @@ namespace PetShop.Infastructure
             modelBuilder.Entity<Rating>(r => r
                 .HasKey(r => new { r.ProductId, r.UserId }));
             modelBuilder.Entity<Order>()
-                .HasKey(ord => new { ProdouctId = ord.ProductId, ord.UserId });
+                .HasKey(o => new { o.ProductId, o.UserId, o.OrderId });
 
             // a rating has a single product but a product has multiple ratings
             modelBuilder.Entity<Rating>()
