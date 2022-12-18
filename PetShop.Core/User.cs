@@ -30,6 +30,9 @@ public class Order
     public Guid? UserId { get; set; }
     
     public int Amount { get; set; }
+    public string? productName { get; set; }
+
+    public string? productImage { get; set; }
     
     public DateTime? DateOfOrder { get; set; }
     public int OrderId { get; set; }
