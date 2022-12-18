@@ -175,7 +175,10 @@ namespace PetShop.Infastructure
         {
             return _shopRepoImplementation.GetProductID(productId);
         }
-        
+        public List<Rating> GetAllRatings()
+        {
+            return _dbContext.RatingsTable.ToList();
+        }
         
         public void RebuildDB()
         {
