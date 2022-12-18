@@ -18,6 +18,7 @@ namespace PetShop.Application.Interfaces
         
         public Rating AddRating(Rating rating);
         public Rating UpdateRating(Rating rating);
+        public List<Rating> GetAllRatings();
         public int GetProductID(int productId);
     }
 }
