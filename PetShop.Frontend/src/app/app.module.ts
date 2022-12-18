@@ -41,6 +41,8 @@ import {MatSliderModule} from "@angular/material/slider";
 import { CartComponent } from './cart/cart.component';
 import { ProductDetailComponent } from './productComponents/product-detail/product-detail.component';
 import {MatExpansionModule} from "@angular/material/expansion";
+import { RatingComponent } from './productComponents/rating/rating.component';
+import {MatIconModule} from "@angular/material/icon";
 
 
 
@@ -67,30 +69,31 @@ import {MatExpansionModule} from "@angular/material/expansion";
     UserRegistrationComponent,
     CartComponent,
     ProductDetailComponent,
+    RatingComponent,
 
   ],
-    imports: [
-        BrowserModule,
-        BrowserAnimationsModule,
-        appRoutingModule,
-        MatFormFieldModule,
-        MatInputModule,
-        FormsModule,
-        MatButtonModule,
-        MatCardModule,
-        MatListModule,
-        MatTooltipModule,
-        MatTableModule,
-        MatSelectModule,
-        MatSidenavModule,
-        HttpClientModule,
-        AgGridModule,
-        MatTabsModule,
-        MatGridListModule,
-        Ng2SearchPipeModule,
-        MatSliderModule,
-        MatExpansionModule
-    ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    appRoutingModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    MatButtonModule,
+    MatCardModule,
+    MatListModule,
+    MatTooltipModule,
+    MatTableModule,
+    MatSelectModule,
+    MatSidenavModule,
+    HttpClientModule,
+    AgGridModule,
+    MatTabsModule,
+    MatGridListModule,
+    Ng2SearchPipeModule,
+    MatSliderModule,
+    MatIconModule
+  ],
   providers: [MatSnackBar, Overlay],
   bootstrap: [AppComponent]
 })

@@ -22,6 +22,9 @@
         <p>{{SubCat.name}}</p>
         <h2>Brand:</h2>
         <p>{{Brand.name}}</p>
+        <h2>Rating:</h2>
+        <p>{{product.ratings}}</p>
+        <app-rating #child></app-rating>
       </mat-card-content>
     </section>
     <section class="long-info">
@@ -37,4 +40,5 @@
         <button mat-raised-button (click)="postOrder(product.id, product.price)">Add to cart</button>
       </mat-card-actions>
  </mat-card>
+
 
