@@ -49,7 +49,7 @@ export class SearchState{
       this.productsModified = this.productsModified.filter(product => product.brandID === this.categorySelector.brandID)
     }
     if(this.categorySelector.rating != 0){
-      this.productsModified = this.productsModified.filter(product => product.AverageRating > this.ratingStorage)
+      this.productsModified = this.productsModified.filter(product => product.ratings > this.ratingStorage)
     }
     return this.productsModified;
   }

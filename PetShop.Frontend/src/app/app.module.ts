@@ -40,6 +40,8 @@ import {Ng2SearchPipeModule} from "ng2-search-filter";
 import {MatSliderModule} from "@angular/material/slider";
 import { CartComponent } from './cart/cart.component';
 import { ProductDetailComponent } from './productComponents/product-detail/product-detail.component';
+import { RatingComponent } from './productComponents/rating/rating.component';
+import {MatIconModule} from "@angular/material/icon";
 
 
 
@@ -66,29 +68,31 @@ import { ProductDetailComponent } from './productComponents/product-detail/produ
     UserRegistrationComponent,
     CartComponent,
     ProductDetailComponent,
+    RatingComponent,
 
   ],
-    imports: [
-        BrowserModule,
-        BrowserAnimationsModule,
-        appRoutingModule,
-        MatFormFieldModule,
-        MatInputModule,
-        FormsModule,
-        MatButtonModule,
-        MatCardModule,
-        MatListModule,
-        MatTooltipModule,
-        MatTableModule,
-        MatSelectModule,
-        MatSidenavModule,
-        HttpClientModule,
-        AgGridModule,
-        MatTabsModule,
-        MatGridListModule,
-        Ng2SearchPipeModule,
-        MatSliderModule
-    ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    appRoutingModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    MatButtonModule,
+    MatCardModule,
+    MatListModule,
+    MatTooltipModule,
+    MatTableModule,
+    MatSelectModule,
+    MatSidenavModule,
+    HttpClientModule,
+    AgGridModule,
+    MatTabsModule,
+    MatGridListModule,
+    Ng2SearchPipeModule,
+    MatSliderModule,
+    MatIconModule
+  ],
   providers: [MatSnackBar, Overlay],
   bootstrap: [AppComponent]
 })
