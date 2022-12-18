@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router'
 import {AdminState} from "../../../states/AdminState";
-import { CartService} from "../../../services/cart.service";
+import { CartState } from "../../../states/CartState";
 import { Product} from "../../../Entities/Product";
 import {Category} from "../../../Entities/Category";
 
@@ -16,7 +16,7 @@ export class ProductDetailComponent implements OnInit {
   SubCat: any = Category;
   Brand: any = Category;
 
-  constructor(private route: ActivatedRoute, private adminState: AdminState, public router: Router, private cartService: CartService) {
+  constructor(private route: ActivatedRoute, private adminState: AdminState, public router: Router, private cartState: CartState) {
 
   }
 
@@ -28,11 +28,8 @@ export class ProductDetailComponent implements OnInit {
     this.Brand = await this.adminState.getCategoryById(this.product.brand, "Brand")
   }
 
-  addToCart(product: any) {
-    if (!this.cartService.productInCart(product)){
-      this.cartService.addToCart(product);
-      this.product = [this.cartService.getProduct()];
-    }
-    window.alert('Your product has been added to the cart!');
+  async postOrder(id: number, price: number) {
+    await this.cartState.postOrder(id, price)
   }
+
 }

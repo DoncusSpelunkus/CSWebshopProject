@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {CartService} from "../../../services/cart.service";
+import {CartState} from "../../../states/CartState";
+import {Order} from "../../../Entities/Order";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-user',
@@ -7,9 +11,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserComponent implements OnInit {
 
-  constructor() { }
+  order: any = Order;
+  orderList: any;
 
-  ngOnInit(): void {
+  constructor(private Aroute: ActivatedRoute, private cartService: CartService, private cartState: CartState) { }
+
+  async ngOnInit() {
+    const id = Number(this.Aroute.snapshot.paramMap.get(`id`))
+    await this.getOrderById(id);
+  }
+
+  async getOrderById(id) {
+    this.orderList = await this.cartState.getOrderById(id);
   }
 
 }

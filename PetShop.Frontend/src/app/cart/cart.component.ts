@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {CartService} from "../../services/cart.service";
-import {Product} from "../../Entities/Product";
 import {ProductService} from "../../services/Product.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
+import {Order} from "../../Entities/Order";
+import { CartState} from "../../states/CartState";
+import jwtDecode from "jwt-decode";
+import {User} from "../../Entities/User";
 
 @Component({
   selector: 'app-cart',
@@ -11,45 +14,42 @@ import {Router} from "@angular/router";
 })
 export class CartComponent implements OnInit {
 
-  products: any[] = [];
-  productList: any;
-  subTotal!: any;
+  order: any = Order;
+  orderList: Order[] = [];
 
-  constructor(private cartService: CartService, private productService: ProductService, private router: Router) { }
+  constructor(private Aroute: ActivatedRoute, private cartState: CartState, private router: Router) { }
 
   async ngOnInit() {
-    await this.productService.getProducts()
-    this.cartService.loadCart();
-    this.products = this.cartService.getProduct();
+    await this.getOrders();
   }
 
-  addToCart(product: any) {
-    if (!this.cartService.productInCart(product)) {
-      product.quantity = 1;
-      this.cartService.addToCart(product);
-      this.products = [...this.cartService.getProduct()];
-      this.subTotal = product.price;
+  async getOrders(){
+    console.log(this.orderList)
+    let localToken = localStorage.getItem('auth');
+    if(localToken) {
+      let decodToken = jwtDecode(localToken) as User;
+      if (decodToken.id)
+      this.orderList = await this.cartState.getOrders(decodToken.id);
     }
+    console.log(this.orderList)
   }
 
-  removeFromCart(product: any) {
-    this.cartService.removeProduct(product);
-    this.products = this.cartService.getProduct();
+  async putOrder(id: number, amount: number, price: number){
+    await this.cartState.putOrder(id, amount, price)
   }
 
-  get total() {
-    return this.products?.reduce(
-      (sum, product) => ({
-        quantity: 1,
-        price: sum.price + product.quantity * product.price,
-      }),
-      { quantity: 1, price: 0 }
-    ).price;
+  async deleteOrderByID(id){
+    await this.cartState.deleteOrderByID(id);
   }
 
-  checkout() {
-    localStorage.setItem('cart_total', JSON.stringify(this.total));
-    this.router.navigate(['/payment']);
+  async placeOrder(id){
+    await this.cartState.placeOrder(id);
   }
+
+
+  async SendOrderMail(userEmail: String) { //
+
+  }
+
 
 }

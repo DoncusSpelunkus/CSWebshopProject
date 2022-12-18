@@ -1,5 +1,5 @@
 export class User { // template for the user token
-  id: number = 0;
+  id?: number;
   fullName: string = '';
   email: string = '';
   address: string = '';

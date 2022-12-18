@@ -10,7 +10,7 @@
     <p>Price: {{p.price}}dkk - Product Number: {{p.id}} </p>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-raised-button (click)="addToCart(p)">Add to cart</button>
+    <button mat-raised-button (click)="postOrder(p.id, p.price)">Add to cart</button>
   </mat-card-actions>
 </mat-card>
 </mat-grid-tile>

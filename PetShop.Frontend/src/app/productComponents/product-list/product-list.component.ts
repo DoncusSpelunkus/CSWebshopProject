@@ -1,10 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
 import { Router } from '@angular/router'
 import {SearchState} from "../../../states/SearchState";
-import {Category} from "../../../Entities/Category";
-import {AdminState} from "../../../states/AdminState";
 import { CartService} from "../../../services/cart.service";
 import { Product} from "../../../Entities/Product";
+import {CartState} from "../../../states/CartState";
+import {Order} from "../../../Entities/Order";
+
 
 @Component({
   selector: 'app-product-list',
@@ -14,9 +15,10 @@ import { Product} from "../../../Entities/Product";
 export class ProductListComponent implements OnInit{
   product: any = Product;
   productList: any;
+  order: any = Order;
   @Input() name = '';
 
-  constructor(private searchState: SearchState, private adminState: AdminState, private cartService: CartService, public router: Router) {
+  constructor(private searchState: SearchState, private cartState: CartState, public router: Router) {
 
   }
 
@@ -36,11 +38,7 @@ export class ProductListComponent implements OnInit{
     this.productList = await this.searchState.priceSort();
   }
 
-  addToCart(product: any) {
-    if (!this.cartService.productInCart(product)){
-      this.cartService.addToCart(product);
-      this.product = [this.cartService.getProduct()];
-    }
-    window.alert('Your product has been added to the cart!');
+  async postOrder(id: number, price: number) {
+    await this.cartState.postOrder(id, price)
   }
 }
