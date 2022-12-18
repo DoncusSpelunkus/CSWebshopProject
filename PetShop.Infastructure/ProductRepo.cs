@@ -152,6 +152,11 @@ namespace PetShop.Infastructure
             return _dbContext.RatingsTable.Where(r => r.ProductId == productid).Select(r => r.RatingValue).ToList();
         }
 
+        public List<Rating> GetAllRatings()
+        {
+            return _dbContext.RatingsTable.ToList();
+        }
+
         public int GetProductID(int productId)
         {
             return _shopRepoImplementation.GetProductID(productId);
