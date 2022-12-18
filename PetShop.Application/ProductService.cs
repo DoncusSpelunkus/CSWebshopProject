@@ -81,13 +81,6 @@ public class ProductService : IProductService
         {
             throw new ArgumentException("Rating must be between 1 and 5.");
         }
-
-        var listOfRatings = _productRepository.GetAllRatings().ToList();
-        foreach (var rating in listOfRatings)
-        {
-            if (rating.ProductId == productId && rating.UserId == userId)
-                throw new ArgumentException("This user already rated this product.");
-        }
         
         // Create a new Rating object and set its properties.
         var ratingValuetoAdd = _mapper.Map<Rating>(ratingValue);
