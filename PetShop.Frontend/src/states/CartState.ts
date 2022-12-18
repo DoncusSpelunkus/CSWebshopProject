@@ -16,6 +16,10 @@ export class CartState { // State class for data manipulation
       return await this.cartService.getOrders(id);
   }
 
+  async getOrderById(id){ // Gets all previous orders.
+    return await this.cartService.getOrderById(id);
+  }
+
   async postOrder(id: number, price: number) { // Add to cart
     let dto = {
       productId: id,
@@ -36,15 +40,11 @@ export class CartState { // State class for data manipulation
     await this.cartService.putOrder(dto, dto.productId);
   }
 
-  async deleteOrderByID(id: any) { // Remove from cart
-    return this.cartService.deleteOrderByID(id);
+  async deleteOrderByID(id: any, productId: any) { // Remove from cart
+    return this.cartService.deleteOrderByID(id, productId);
   }
 
   async placeOrder(id: any) { // Checkout from cart
     return this.cartService.placeOrder(id);
-  }
-
-  async getOrderById(id: number){ // Gets all previous orders.
-    return this.cartService.getOrderById(id);
   }
 }

@@ -34,20 +34,23 @@ export class CartComponent implements OnInit {
     console.log(this.orderList)
   }
 
-  async putOrder(id: number, amount: number, price: number){
+  async putOrder(id, amount, price){
     await this.cartState.putOrder(id, amount, price)
+    console.log(amount)
   }
 
-  async deleteOrderByID(id){
-    await this.cartState.deleteOrderByID(id);
+  async deleteOrderByID(id, productId){
+    await this.cartState.deleteOrderByID(id, productId);
+    await this.getOrders();
   }
 
   async placeOrder(id){
     await this.cartState.placeOrder(id);
+    await this.getOrders();
   }
 
 
-  async SendOrderMail(userEmail: String) { //
+  async SendOrderMail(userEmail) { //
 
   }
 

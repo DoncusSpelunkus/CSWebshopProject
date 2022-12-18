@@ -38,18 +38,12 @@ export class CartService {
 
   async getOrders(id: number){
       let httpResponse = await customAxios.get<Order[]>('?userId=' + id);
-      console.log(httpResponse.data)
       return httpResponse.data;
   }
 
   async getOrderById(id: number) {
-    let localToken = localStorage.getItem('auth');
-    if(localToken) {
-      let decodToken = jwtDecode(localToken) as User;
-      console.log(decodToken)
-    let httpResponse = await customAxios.get<any>('/OrderHistory' + decodToken.id)
+    let httpResponse = await customAxios.get<Order[]>('/OrderHistory?userId=' + id)
       return httpResponse.data;
-    }
   }
 
   async postOrder(dto: any, id: number) { //
@@ -68,13 +62,16 @@ export class CartService {
     }
   }
 
-  async deleteOrderByID(id: any){
-    let httpResponse = await customAxios.delete<Order>('/' + id)
+  async deleteOrderByID(id: any, productId: any){
+    let httpResponse = await customAxios.delete<Order>('/' + id + '?productId=' + productId)
   }
 
   async placeOrder(id: number) { //
-    let httpResponse = await customAxios.post<any>('/OrderHistory/' + id)
-    return httpResponse.data;
+    let localToken = localStorage.getItem('auth');
+    if(localToken) {
+      let decodToken = jwtDecode(localToken) as User;
+      let httpResponse = await customAxios.post<any>('/OrderHistory,' + decodToken.id)
+    }
   }
 
   async SendOrderMail(userEmail: String) { //

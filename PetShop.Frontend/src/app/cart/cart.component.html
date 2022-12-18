@@ -1,12 +1,14 @@
 <app-header></app-header>
+<div id ="ScrollButton">
+  <button mat-raised-button (click)="placeOrder(order)">Order</button>
+</div>
 <mat-grid-list cols="3" rowHeight="400px" gutterSize="15px">
   <mat-grid-tile >
     <mat-card *ngFor="let o of orderList">
   <mat-card-title>{{ o.productId }} </mat-card-title>
   <!-- <img mat-card-image src="{{o.imageUrl}}" alt="Image error"> -->
   <mat-card-subtitle>{{ o.price}} dkk</mat-card-subtitle>
-  <button mat-raised-button (click)="deleteOrderByID(o)">Remove from cart</button>
+      <button mat-raised-button (click)="deleteOrderByID(o.userId, o.productId)">Remove from cart</button>
     </mat-card>
   </mat-grid-tile>
 </mat-grid-list>
-<button mat-raised-button (click)="placeOrder(order)">Order</button>

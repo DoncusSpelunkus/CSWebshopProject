@@ -7,16 +7,25 @@
     </mat-tab>
     <mat-tab label="Previous orders.">
       <h1>Previous orders</h1>
-      <mat-grid-list cols="3" rowHeight="400px" gutterSize="15px">
-        <mat-grid-tile >
-          <mat-card *ngFor="let o of orderList">
-            <mat-card-title>Order ID: {{ o.orderId }} </mat-card-title>
-            <mat-card-subtitle>Price: {{ o.price}} dkk</mat-card-subtitle>
-            <mat-card-subtitle>Quantity: {{ o.amount}}</mat-card-subtitle>
-            <mat-card-subtitle>Date of Order: {{ o.dateOfOrder}}</mat-card-subtitle>
-          </mat-card>
-        </mat-grid-tile>
-      </mat-grid-list>
+      <div *ngFor="let o of orderProductList">
+        <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Order ID: {{o.uniqueId}}</mat-panel-title>
+          <div>
+          <mat-panel-description>
+          {{o.time}}
+          </mat-panel-description>
+          </div>
+        </mat-expansion-panel-header>
+        <div *ngFor="let p of o.listOfUniqueId">
+          <hr>
+        <p>ProductId: {{p.productId}}</p>
+        <p>Price: {{p.price}}</p>
+        <p>Quantity: {{p.amount}}</p>
+        </div>
+          <hr>
+        </mat-expansion-panel>
+      </div>
     </mat-tab>
   </mat-tab-group>
 </div>

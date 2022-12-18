@@ -40,6 +40,7 @@ import {Ng2SearchPipeModule} from "ng2-search-filter";
 import {MatSliderModule} from "@angular/material/slider";
 import { CartComponent } from './cart/cart.component';
 import { ProductDetailComponent } from './productComponents/product-detail/product-detail.component';
+import {MatExpansionModule} from "@angular/material/expansion";
 
 
 
@@ -87,7 +88,8 @@ import { ProductDetailComponent } from './productComponents/product-detail/produ
         MatTabsModule,
         MatGridListModule,
         Ng2SearchPipeModule,
-        MatSliderModule
+        MatSliderModule,
+        MatExpansionModule
     ],
   providers: [MatSnackBar, Overlay],
   bootstrap: [AppComponent]
