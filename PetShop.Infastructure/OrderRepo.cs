@@ -18,11 +18,35 @@ public class OrderRepo : IOrderRepo
     
     public List<Order> GetCurrentOrdersByUserId(Guid userId)
     {
-        return _OrderDbContext.OrdersTable.Where(o => o.UserId == userId && o.DateOfOrder == null).ToList();
+        var list = _OrderDbContext.OrdersTable.Where(o => o.UserId == userId && o.DateOfOrder == null).ToList();
+        foreach (var order in list)
+        {
+            var prodList = _OrderDbContext.ProductTable.Where(p => p.ID == order.ProductId);
+            foreach (var prod in prodList)
+            {
+                order.productName = prod.Name;
+                order.productImage = prod.ImageUrl;
+            }
+            
+        }
+
+        return list;
     }
     public List<Order> GetOrdersHistoryByUserId(Guid userId)
     {
-        return _OrderDbContext.OrdersTable.Where(o => o.UserId == userId && o.DateOfOrder != null).ToList();
+        var list = _OrderDbContext.OrdersTable.Where(o => o.UserId == userId && o.DateOfOrder != null).ToList();
+        foreach (var order in list)
+        {
+            var prodList = _OrderDbContext.ProductTable.Where(p => p.ID == order.ProductId);
+            foreach (var prod in prodList)
+            {
+                order.productName = prod.Name;
+                order.productImage = prod.ImageUrl;
+            }
+            
+        }
+
+        return list;
     }
     
 
