@@ -1,6 +1,6 @@
-<div class="content">
+<div class="wrapper">
   <app-header></app-header>
-  <mat-tab-group mat-stretch-tabs>
+  <mat-tab-group mat-stretch-tabs class="content">
     <mat-tab label="Personal information">
       <h1>Personal information</h1>
       <app-user-edit></app-user-edit>
@@ -28,7 +28,9 @@
         </mat-expansion-panel>
       </div>
     </mat-tab>
-  </mat-tab-group>
+    </mat-tab-group>
+  <app-footer></app-footer>
 </div>
-<app-footer></app-footer>
+
+
 

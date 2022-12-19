@@ -33,4 +33,12 @@ export class HeaderComponent implements OnInit {
     this.router.navigateByUrl("cart")
   }
 
+  checkLocalStorage(){
+    return !!localStorage.getItem('auth');
+
+  }
+
+  isHomeRoute(){
+    return this.router.url === '/';
+  }
 }

@@ -103,18 +103,25 @@ public class OrderRepo : IOrderRepo
     }
 
     public void SendEmailToUser(string email)
-    {   
+    {
+        var message = "Your order has been confirmed";
+        
         // get the user's id by email
         var id = _OrderDbContext.UserTable.FirstOrDefault(u => u.Email == email).Id;
         // get the user's orders
         var UserOrderProducts = GetCurrentOrdersByUserId(id);
         var emailsend = new MimeMessage();
+        
+        foreach (var product in UserOrderProducts)
+        {
+            message = message + " " + product.productName + ",";
+        }
         emailsend.From.Add(MailboxAddress.Parse("sosugroup2022@gmail.com"));
         emailsend.To.Add(MailboxAddress.Parse(email));
         emailsend.Subject = "Order Confirmation";
         emailsend.Body = new TextPart("plain")
         {
-            Text = "Your order has been confirmed" + UserOrderProducts,
+            Text = message
         };
         using var smpt = new SmtpClient(); 
         

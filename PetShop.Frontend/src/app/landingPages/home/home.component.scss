@@ -34,3 +34,10 @@ mat-card-subtitle{
 app-footer{
   z-index: 3;
 }
+
+::ng-deep .flex-wrapper {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  justify-content: space-between;
+}

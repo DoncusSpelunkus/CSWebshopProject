@@ -30,6 +30,7 @@ var config = new MapperConfiguration(conf =>
     conf.CreateMap<SpecDescDTO, SpecsDescription>();
     conf.CreateMap<BrandDto, Brand>();
     conf.CreateMap<UserDTO, User>();
+    conf.CreateMap<UpdateUserDTO, User>().ForMember(opt => opt.type, opt => opt.Ignore());
     conf.CreateMap<UserLoginDTO, User>();
     conf.CreateMap<OrderDTO, Order>();
 });

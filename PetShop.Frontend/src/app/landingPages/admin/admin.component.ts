@@ -30,6 +30,6 @@ export class AdminComponent implements OnInit {
   }
 
   onChangeUser(event) {
-    this.userChild.ngOnInit()
+    this.userChild.updateList()
   }
 }

@@ -16,8 +16,13 @@ export class UserAdminListComponent implements OnInit {
     this.userList = await this.adminState.getUserList()
   }
 
+  async updateList(){
+    await this.ngOnInit()
+  }
+
   async userDelete(id: number){
     this.userList.filter(x => x.id === id);
     await this.adminState.deleteUserById(id)
+    this.updateList()
   }
 }

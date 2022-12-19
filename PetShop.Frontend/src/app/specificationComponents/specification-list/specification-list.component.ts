@@ -15,15 +15,12 @@ export class SpecificationListComponent implements OnInit {
   }
 s
   async ngOnInit() {
-    await this.getList();
+    this.specificationList = await this.adminState.getSpecifications()
   }
 
   async updateList(){
     await this.ngOnInit()
   }
 
-  async getList(){
-    this.specificationList = await this.adminState.getSpecifications()
-  }
 
 }

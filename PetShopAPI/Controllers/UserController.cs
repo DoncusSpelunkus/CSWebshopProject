@@ -112,7 +112,7 @@ public class UserController : ControllerBase
 
             [HttpPut]
             [Route("update")]
-            public ActionResult<User> UpdateUser(Guid userID, [FromBody] UserDTO userDto, string currentPassword)
+            public ActionResult<User> UpdateUser(Guid userID, [FromBody] UpdateUserDTO userDto, string currentPassword)
             {
                
                 var actualUser = _userService.GetUserById(userID);

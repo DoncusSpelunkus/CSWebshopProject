@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {PseudoLogicSearch} from "../../../states/PseudoLogicSearch";
 import {Category} from "../../../Entities/Category";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-home',
@@ -46,4 +47,5 @@ export class HomeComponent implements OnInit {
     this.searchState.setCurrentPrice(event.value)
     this.child.priceSort();
   }
+
 }
