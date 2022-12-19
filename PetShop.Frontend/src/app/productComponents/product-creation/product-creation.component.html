@@ -39,7 +39,7 @@
   <h2>Add specifications</h2>
   <mat-form-field appearance="outline">Specification type:
     <mat-select [(ngModel)]="selected" name="Specification">
-      <mat-option *ngFor="let specifications of specNames" [value]="specifications" >
+      <mat-option *ngFor="let specifications of specTemplates" [value]="specifications" >
         {{specifications.specName}}
       </mat-option>
     </mat-select>

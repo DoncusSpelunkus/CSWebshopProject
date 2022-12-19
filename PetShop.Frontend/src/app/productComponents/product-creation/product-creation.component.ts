@@ -14,7 +14,7 @@ import {Category} from "../../../Entities/Category";
 export class ProductCreationComponent implements OnInit{
   newProduct: any = new Product();
   specList: CurrentSpecs[] = [];
-  specNames: SpecTemplates[] = [];
+  specTemplates: SpecTemplates[] = [];
   specDesc: {specsId: number, description: string}[] = [];
   mainCatList: Category[] = [];
   subCatList: Category[] = [];
@@ -29,24 +29,24 @@ export class ProductCreationComponent implements OnInit{
   @Output()
   change: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(public router: Router, private adminState: PsuedoLogicAdmin){
+  constructor(public router: Router, private psuedoLogicAdmin: PsuedoLogicAdmin){
   }
 
   async ngOnInit() {
-    this.specNames = await this.adminState.getSpecifications();
-    this.mainCatList = await this.adminState.getCategories("MainCat")
-    this.subCatList = await this.adminState.getCategories("SubCat")
-    this.brandCatList = await this.adminState.getCategories("Brand")
+    this.specTemplates = await this.psuedoLogicAdmin.getSpecifications();
+    this.mainCatList = await this.psuedoLogicAdmin.getCategories("MainCat")
+    this.subCatList = await this.psuedoLogicAdmin.getCategories("SubCat")
+    this.brandCatList = await this.psuedoLogicAdmin.getCategories("Brand")
   }
 
   async postProduct() {
-    await this.adminState.postProduct(this.newProduct)
+    await this.psuedoLogicAdmin.postProduct(this.newProduct)
     this.change.emit()
   }
 
 
   async deleteProduct(id){
-    await this.adminState.deleteProductById(id);
+    await this.psuedoLogicAdmin.deleteProductById(id);
     this.change.emit()
   }
 
@@ -57,6 +57,7 @@ export class ProductCreationComponent implements OnInit{
   }
 
   addTooSpecList(desc: string){
+
     let newSpec = new CurrentSpecs();
     newSpec.specsId = this.selected.id;
     newSpec.description = desc;

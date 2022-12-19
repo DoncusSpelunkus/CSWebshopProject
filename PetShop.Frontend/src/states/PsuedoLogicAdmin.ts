@@ -105,7 +105,7 @@ export class PsuedoLogicAdmin { // State class for data manipulation
   async makeCurrentSpecList(id: number){
     this.specNames = await this.specificationService.getSpecifications(); // get the specification template names with ids
     let product = await this.productService.getProductById(id);
-    this.newSpecList = product.specsDescriptions; // gets the list descriptions from the product
+            this.newSpecList = product.specsDescriptions; // gets the list descriptions from the product
     this.newSpecList.forEach((cspec) => { // get the specification template names for the decriptions by using id
       this.specNames.find((nspec) => {
         if(cspec.specsId === nspec.id){
