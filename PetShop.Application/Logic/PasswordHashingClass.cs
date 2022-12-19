@@ -15,13 +15,13 @@ public class Logic
 
         }
     }
-    public Boolean ValidateHash(string password, byte[] passwordHash, byte[] passwordSalt)
+    public Boolean ValidateHash(string password, byte[] passwordhash, byte[] passwordsalt)
     {
-        using (var hash = new System.Security.Cryptography.HMACSHA512(passwordSalt))
+        using (var hash = new System.Security.Cryptography.HMACSHA512(passwordsalt))
         {
             var newPassHash = hash.ComputeHash(Encoding.UTF8.GetBytes(password));
             for (int i = 0; i < newPassHash.Length; i++)
-                if (newPassHash[i] != passwordHash[i])
+                if (newPassHash[i] != passwordhash[i])
                     return false;
         }
 

@@ -1,8 +1,6 @@
-﻿using System.Security.Claims;
-using AutoMapper;
+﻿using AutoMapper;
 using PetShop.Domain;
 using FluentValidation;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PetShop.Application.Interfaces;
 using PetShop.Application.PostProdDTO;
@@ -43,7 +41,7 @@ namespace PetShopApi.Controllers{
         {
             try
             {
-                return Ok(_brandService.GetBrandById(brandID));
+                return Ok(_brandService.GetBrandByID(brandID));
             }
             catch (KeyNotFoundException e)
             {
@@ -56,21 +54,12 @@ namespace PetShopApi.Controllers{
         }
 
         [HttpPost]
-        [Authorize]
         public ActionResult<Brand> CreateBrand(BrandDto dto)
         {
-            // checking if the token holds an admin
-            bool hasClaim = User.HasClaim(ClaimTypes.Role, "Admin");
             try
             {
-                // Ensure the user is authenticated
-                if (!User.Identity.IsAuthenticated)
-                    return Unauthorized();
-                else
-                {
-                    var result = _brandService.CreateBrand(dto);
-                    return Created("shop/" + result.Id, result);
-                }
+                var result = _brandService.CreateBrand(dto);
+                return Created("shop/" + result.Id, result);
             }
             catch (ValidationException e)
             {
@@ -84,20 +73,12 @@ namespace PetShopApi.Controllers{
 
         [HttpPut]
         [Route("{brandID}")]
-        [Authorize]
+
         public ActionResult<MainCategory> UpdateBrand([FromRoute] int brandID, [FromBody] BrandDto brandDto)
         {
-            // checking if the token holds an admin
-            bool hasClaim = User.HasClaim(ClaimTypes.Role, "Admin");
             try
             {
-                // Ensure the user is authenticated
-                if (!User.Identity.IsAuthenticated)
-                    return Unauthorized();
-                else
-                {
-                    return Ok(_brandService.UpdateBrand(brandID, brandDto));
-                }
+                return Ok(_brandService.UpdateBrand(brandID , brandDto));
             }
             catch (KeyNotFoundException e)
             {
@@ -110,20 +91,12 @@ namespace PetShopApi.Controllers{
         }
 
         [HttpDelete("{brandID}")]
-        [Authorize]
+
         public ActionResult<Brand> DeleteBrandByID(int brandID)
         {
-            // checking if the token holds an admin
-            bool hasClaim = User.HasClaim(ClaimTypes.Role, "Admin");
             try
             {
-                // Ensure the user is authenticated
-                if (!User.Identity.IsAuthenticated)
-                    return Unauthorized();
-                else
-                {
-                    return Ok(_brandService.DeleteBrand(brandID));
-                }
+                return Ok(_brandService.DeleteBrand(brandID));
             }
             catch (KeyNotFoundException e)
             {

@@ -72,17 +72,17 @@ public class UserService : IUserService
     
 
 
-    public User DeleteUserById(Guid userId)
+    public User DeleteUserById(Guid userID)
     {
 
-        if (userId == null) throw new ValidationException("Id is invalid (Delete)");
-        return _UserRepository.DeleteUser(userId);
+        if (userID == null) throw new ValidationException("Id is invalid (Delete)");
+        return _UserRepository.DeleteUser(userID);
     }
 
-    public User GetUserById(Guid userId)
+    public User GetUserByID(Guid userId)
     {
         if (userId == null) throw new ValidationException("Id is invalid (Get)");
-        return _UserRepository.GetUserById(userId);
+        return _UserRepository.GetUserByID(userId);
     }
     
 

@@ -12,6 +12,7 @@ public class UserDTO
     [Required]
     [StringLength(20)]
     public string password { get; set; }
+    public int type { get; set; }
     [Required]
     public string City { get; set; }
     [Required]

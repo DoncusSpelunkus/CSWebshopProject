@@ -1,7 +1,5 @@
-﻿using System.Security.Claims;
-using AutoMapper;
+﻿using AutoMapper;
 using FluentValidation;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PetShop.Application;
 using PetShop.Application.Interfaces;
@@ -58,20 +56,12 @@ namespace PetShopApi.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public ActionResult<SubCategory> CreateSubCategory(SubCatDTO dto)
-        { // checking if the token holds an admin
-            bool hasClaim = User.HasClaim(ClaimTypes.Role, "Admin");
+        {
             try
             {
-                // Ensure the user is authenticated
-                if (!User.Identity.IsAuthenticated)
-                    return Unauthorized();
-                else
-                {
-                    var result = _catService.CreateSubCategory(dto);
-                    return Created("shop/" + result.SubCategoryID, result);
-                }
+                var result = _catService.CreateSubCategory(dto);
+                return Created("shop/" + result.SubCategoryID, result);
             }
             catch (ValidationException e)
             {
@@ -85,20 +75,13 @@ namespace PetShopApi.Controllers
 
         [HttpPut]
         [Route("{subCatID}")]
-        [Authorize]
+
         public ActionResult<SubCategory> UpdateSubCategory([FromRoute] int subCatID, [FromBody] SubCatDTO subCategory)
         {
-            // checking if the token holds an admin
-            bool hasClaim = User.HasClaim(ClaimTypes.Role, "Admin");
+            
             try
             {
-                // Ensure the user is authenticated
-                if (!User.Identity.IsAuthenticated)
-                    return Unauthorized();
-                else
-                {
-                    return Ok(_catService.UpdateSubCategory(subCatID, subCategory));
-                }
+                return Ok(_catService.UpdateSubCategory(subCatID,subCategory));
             }
             catch (KeyNotFoundException e)
             {
@@ -111,21 +94,12 @@ namespace PetShopApi.Controllers
         }
 
         [HttpDelete("{subCatID}")]
-        [Authorize]
 
         public ActionResult<SubCategory> DeleteSubCategoryByID(int subCatID)
         {
-            // checking if the token holds an admin
-            bool hasClaim = User.HasClaim(ClaimTypes.Role, "Admin");
             try
             {
-                // Ensure the user is authenticated
-                if (!User.Identity.IsAuthenticated)
-                    return Unauthorized();
-                else
-                {
-                    return Ok(_catService.DeleteSubCategoryById(subCatID));
-                }
+                return Ok(_catService.DeleteSubCategoryById(subCatID));
             }
             catch (KeyNotFoundException e)
             {

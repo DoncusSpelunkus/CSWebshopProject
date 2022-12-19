@@ -1,7 +1,5 @@
-﻿using System.Security.Claims;
-using AutoMapper;
+﻿using AutoMapper;
 using FluentValidation;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PetShop.Application;
 using PetShop.Application.Interfaces;
@@ -62,21 +60,12 @@ namespace PetShopApi.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public ActionResult<MainCategory> CreateMainCategory(MainCatDTO dto)
         {
-            // checking if the token holds an admin
-            bool hasClaim = User.HasClaim(ClaimTypes.Role, "Admin");
             try
             {
-                // Ensure the user is authenticated
-                if (!User.Identity.IsAuthenticated)
-                    return Unauthorized();
-                else
-                {
-                    var result = _catService.CreateMainCategory(dto);
-                    return Created("shop/" + result.MainCategoryID, result);
-                }
+                var result = _catService.CreateMainCategory(dto);
+                return Created("shop/" + result.MainCategoryID, result);
             }
             catch (ValidationException e)
             {
@@ -90,22 +79,13 @@ namespace PetShopApi.Controllers
 
         [HttpPut]
         [Route("{mainCatID}")]
-        [Authorize]
 
         public ActionResult<MainCategory> UpdateMainCategory([FromRoute] int mainCatID, [FromBody] MainCatDTO mainCategory)
         {
             
-            // checking if the token holds an admin
-            bool hasClaim = User.HasClaim(ClaimTypes.Role, "Admin");
             try
             {
-                // Ensure the user is authenticated
-                if (!User.Identity.IsAuthenticated)
-                    return Unauthorized();
-                else
-                {
-                    return Ok(_catService.UpdateMainCategory(mainCatID, mainCategory));
-                }
+                return Ok(_catService.UpdateMainCategory(mainCatID,mainCategory));
             }
             catch (KeyNotFoundException e)
             {
@@ -118,21 +98,12 @@ namespace PetShopApi.Controllers
         }
 
         [HttpDelete("{mainCatID}")]
-        [Authorize]
 
         public ActionResult<MainCategory> DeleteMainCategoryByID(int mainCatID)
         {
-            // checking if the token holds an admin
-            bool hasClaim = User.HasClaim(ClaimTypes.Role, "Admin");
             try
             {
-                // Ensure the user is authenticated
-                if (!User.Identity.IsAuthenticated)
-                    return Unauthorized();
-                else
-                {
-                    return Ok(_catService.DeleteMainCategoryById(mainCatID));
-                }
+                return Ok(_catService.DeleteMainCategoryById(mainCatID));
             }
             catch (KeyNotFoundException e)
             {

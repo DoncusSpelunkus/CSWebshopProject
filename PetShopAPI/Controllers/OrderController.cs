@@ -129,7 +129,7 @@ public class OrderController : ControllerBase
     {
         try
         {
-            _orderService.SendEmailToUser(userEmail);
+            _orderService.SendEmailtoUser(userEmail);
             return Ok("Email sent");
         }
         catch (Exception e)

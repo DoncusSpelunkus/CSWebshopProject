@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Security.Claims;
 using AutoMapper;
 using PetShop.Application.Interfaces;
 using PetShop.Application.PostProdDTO;
@@ -47,7 +46,7 @@ namespace PetShopApi.Controllers
         {
             try
             {
-                return Ok(_productService.GetProductById(productID));
+                return Ok(_productService.GetProductByID(productID));
             }
             catch (KeyNotFoundException e)
             {
@@ -60,22 +59,13 @@ namespace PetShopApi.Controllers
         }
         
         [HttpPost]
-        [Authorize]
         public ActionResult<Product> CreateProduct(ProdDTO dto)
         {
-            
-            // checking if the token holds an admin
-            bool hasClaim = User.HasClaim(ClaimTypes.Role, "Admin");
+            Console.WriteLine("hit");
             try
             {
-                // Ensure the user is authenticated
-                if (!User.Identity.IsAuthenticated)
-                    return Unauthorized();
-                else
-                {
-                    var result = _productService.CreateProduct(dto);
-                    return Created("shop/" + result.ID, result);
-                }
+                var result = _productService.CreateProduct(dto);
+                return Created("shop/" + result.ID, result);
             }
             catch (ValidationException e)
             {
@@ -89,20 +79,12 @@ namespace PetShopApi.Controllers
 
         [HttpPut]
         [Route("{productID}")]
-        [Authorize]
+
         public ActionResult<Product> UpdateProduct([FromRoute] int productID, [FromBody] ProdDTO dto)
         {
-            // checking if the token holds an admin
-            bool hasClaim = User.HasClaim(ClaimTypes.Role, "Admin");
             try
             {
-                // Ensure the user is authenticated
-                if (!User.Identity.IsAuthenticated)
-                    return Unauthorized();
-                else
-                {
-                    return Ok(_productService.UpdateProduct(productID, dto));
-                }
+                return Ok(_productService.UpdateProduct(productID, dto));
             }
             catch (KeyNotFoundException e)
             {
@@ -115,20 +97,12 @@ namespace PetShopApi.Controllers
         }
 
         [HttpDelete("{productID}")]
-        [Authorize]
+
         public ActionResult<Product> DeleteProductByID(int productID)
         {
-            // checking if the token holds an admin
-            bool hasClaim = User.HasClaim(ClaimTypes.Role, "Admin");
             try
             {
-                // Ensure the user is authenticated
-                if (!User.Identity.IsAuthenticated)
-                    return Unauthorized();
-                else
-                {
-                    return Ok(_productService.DeleteProduct(productID));
-                }
+                return Ok(_productService.DeleteProduct(productID));
             }
             catch (KeyNotFoundException e)
             {
@@ -140,24 +114,25 @@ namespace PetShopApi.Controllers
             }
         }
         
+        
+        [AllowAnonymous]
         [HttpGet]
         [Route("RebuildDB")]
-        [Authorize]
         public void RebuildDB()
-
         {
-            // checking if the token holds an admin
-            bool hasClaim = User.HasClaim(ClaimTypes.Role, "Admin");
-           
-            
-                // Ensure the user is authenticated
-                if (!User.Identity.IsAuthenticated)
-                    Unauthorized();
-                else
-                {
-                    _productService.RebuildDB();
-                }
-            
+            _productService.RebuildDB();
         }
+
+       
+        
+        
+        
+        
+        
+        
+        
     }
+    
+    
+    
 }

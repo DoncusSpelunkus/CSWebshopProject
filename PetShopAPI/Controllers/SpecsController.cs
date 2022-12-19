@@ -1,6 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Security.Claims;
-using Microsoft.AspNetCore.Authorization;
 using PetShop.Application.Interfaces;
 using PetShop.Application.PostProdDTO;
 using PetShop.Domain;
@@ -42,7 +40,7 @@ namespace PetShopApi.Controllers
         {
             try
             {
-                return Ok(_specService.GetSpecById(specID));
+                return Ok(_specService.GetSpecByID(specID));
             }
             catch (KeyNotFoundException e)
             {
@@ -55,21 +53,12 @@ namespace PetShopApi.Controllers
         }
         
         [HttpPost]
-        [Authorize]
         public ActionResult<Specs> CreateSpecs(SpecDTO dto)
         {
-            // checking if the token holds an admin
-            bool hasClaim = User.HasClaim(ClaimTypes.Role, "Admin");
             try
             {
-                // Ensure the user is authenticated
-                if (!User.Identity.IsAuthenticated)
-                    return Unauthorized();
-                else
-                {
-                    var result = _specService.CreateSpecs(dto);
-                    return Created("Spec/" + result.ID, result);
-                }
+                var result = _specService.CreateSpecs(dto);
+                return Created("Spec/" + result.ID, result);
             }
             catch (ValidationException e)
             {
@@ -83,20 +72,11 @@ namespace PetShopApi.Controllers
 
         [HttpPut]
         [Route("{specID}")]
-        [Authorize]
         public ActionResult<Specs> UpdateSpecs([FromRoute] int specID, [FromBody] SpecDTO dto)
         {
-            // checking if the token holds an admin
-            bool hasClaim = User.HasClaim(ClaimTypes.Role, "Admin");
             try
             {
-                // Ensure the user is authenticated
-                if (!User.Identity.IsAuthenticated)
-                    return Unauthorized();
-                else
-                {
-                    return Ok(_specService.UpdateSpecs(specID, dto));
-                }
+                return Ok(_specService.UpdateSpecs(specID, dto));
             }
             catch (KeyNotFoundException e)
             {
@@ -109,20 +89,11 @@ namespace PetShopApi.Controllers
         }
 
         [HttpDelete("{specID}")]
-        [Authorize]
         public ActionResult<Specs> DeleteSpecsById(int specID)
         {
-            // checking if the token holds an admin
-            bool hasClaim = User.HasClaim(ClaimTypes.Role, "Admin");
             try
             {
-                // Ensure the user is authenticated
-                if (!User.Identity.IsAuthenticated)
-                    return Unauthorized();
-                else
-                {
-                    return Ok(_specService.DeleteSpecsById(specID));
-                }
+                return Ok(_specService.DeleteSpecsById(specID));
             }
             catch (KeyNotFoundException e)
             {

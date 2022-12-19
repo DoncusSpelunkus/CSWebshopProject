@@ -9,9 +9,9 @@ public interface IBrandService
         
     public Brand CreateBrand(BrandDto dto);
 
-    public Brand UpdateBrand(int brandId, BrandDto brandDto);
+    public Brand UpdateBrand(int brandID, BrandDto brandDto);
         
-    public Brand DeleteBrand(int brandId);
+    public Brand DeleteBrand(int brandID);
 
-    public Brand GetBrandById(int brandId);
+    public Brand GetBrandByID(int brandID);
 }

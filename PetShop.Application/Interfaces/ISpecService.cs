@@ -9,9 +9,9 @@ public interface ISpecService
         
     public Specs CreateSpecs(SpecDTO dto);
 
-    public Specs UpdateSpecs(int specId, SpecDTO dto);
+    public Specs UpdateSpecs(int SpecID, SpecDTO dto);
         
-    public Specs DeleteSpecsById(int SpecId);
+    public Specs DeleteSpecsById(int SpecID);
 
-    public Specs GetSpecById(int SpecId);
+    public Specs GetSpecByID(int SpecID);
 }

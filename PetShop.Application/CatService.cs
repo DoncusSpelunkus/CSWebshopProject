@@ -45,7 +45,7 @@ public class CatService: ICatService
         return _catRepository.CreateMainCategory(_mapper.Map<MainCategory>(mainCategory));
     }
 
-    public MainCategory UpdateMainCategory(int mainCatRefId, MainCatDTO mainCategoryDto)
+    public MainCategory UpdateMainCategory(int mainCatRefID, MainCatDTO mainCategoryDto)
     {
         var validation = _mainValidator.Validate(mainCategoryDto);
         if (!validation.IsValid)
@@ -54,7 +54,7 @@ public class CatService: ICatService
         }
 
         var mainCat = _mapper.Map<MainCategory>(mainCategoryDto);
-        mainCat.MainCategoryID = mainCatRefId;
+        mainCat.MainCategoryID = mainCatRefID;
         return _catRepository.UpdateMainCategory(mainCat);
         
     }
@@ -63,14 +63,14 @@ public class CatService: ICatService
     {
         if (mainCatId <= 0)
             throw new ValidationException("ID is invalid");
-        return _catRepository.GetMainCategoryById(mainCatId);
+        return _catRepository.GetMainCategoryByID(mainCatId);
     }
 
     public MainCategory DeleteMainCategoryById(int mainCatId)
     {
         if (mainCatId == null)
             throw new ValidationException("ID is invalid");
-        return _catRepository.DeleteMainCategoryById(mainCatId);
+        return _catRepository.DeleteMainCategoryByID(mainCatId);
     }
 
     public List<SubCategory> GetAllSubCategories()
@@ -87,7 +87,7 @@ public class CatService: ICatService
         return _catRepository.CreateSubCategory(_mapper.Map<SubCategory>(subCategory));
     }
 
-    public SubCategory UpdateSubCategory(int subCatRefId, SubCatDTO subCategoryDto)
+    public SubCategory UpdateSubCategory(int subCatRefID, SubCatDTO subCategoryDto)
     {
         var validation = _subValidator.Validate(subCategoryDto);
         if (!validation.IsValid)
@@ -96,7 +96,7 @@ public class CatService: ICatService
         }
 
         var subCat = _mapper.Map<SubCategory>(subCategoryDto);
-        subCat.SubCategoryID = subCatRefId;
+        subCat.SubCategoryID = subCatRefID;
         return _catRepository.UpdateSubCategory(subCat);
     }
 
@@ -104,11 +104,11 @@ public class CatService: ICatService
     {
         if (subCatId <= 0)
             throw new ValidationException("ID is invalid");
-        return _catRepository.GetSubCategoryById(subCatId);
+        return _catRepository.GetSubCategoryByID(subCatId);
     }
     
     public SubCategory DeleteSubCategoryById(int subCatId)
     {
-        return _catRepository.DeleteSubCategoryById(subCatId);
+        return _catRepository.DeleteSubCategoryByID(subCatId);
     }
 }

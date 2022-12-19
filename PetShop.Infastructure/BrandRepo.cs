@@ -31,16 +31,16 @@ public class BrandRepo : IBrandRepo
         return brand;
     }
 
-    public Brand DeleteBrand(int brandId)
+    public Brand DeleteBrand(int brandID)
     {
-        Brand brand = GetBrandById(brandId);
+        Brand brand = GetBrandByID(brandID);
         _dbContext.BrandTable.Remove(brand);
         _dbContext.SaveChanges();
         return brand;
     }
 
-    public Brand GetBrandById(int brandId)
+    public Brand GetBrandByID(int brandID)
     {
-        return _dbContext.BrandTable.FirstOrDefault(b => b.Id == brandId);
+        return _dbContext.BrandTable.FirstOrDefault(b => b.Id == brandID);
     }
 }

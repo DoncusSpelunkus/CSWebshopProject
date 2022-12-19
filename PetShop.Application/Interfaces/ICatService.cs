@@ -7,7 +7,7 @@ public interface ICatService
 {
     public List<MainCategory> GetAllMainCategories();
     public MainCategory CreateMainCategory(MainCatDTO mainCategory);
-    public MainCategory UpdateMainCategory(int mainCatRefId, MainCatDTO mainCategory);
+    public MainCategory UpdateMainCategory(int mainCatRefID, MainCatDTO mainCategory);
     public MainCategory GetMainCategoryById(int mainCatId);
     public MainCategory DeleteMainCategoryById(int mainCatId);
     public List<SubCategory> GetAllSubCategories();

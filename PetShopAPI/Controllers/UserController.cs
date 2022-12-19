@@ -1,6 +1,4 @@
-﻿using System.Security.Claims;
-using FluentValidation;
-using Microsoft.AspNetCore.Authorization;
+﻿using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using PetShop.Application;
 using PetShop.Application.Interfaces;
@@ -25,21 +23,11 @@ public class UserController : ControllerBase
     }
     
     [HttpGet]
-    [Authorize]
     public ActionResult<List<User>> GetAllUsers()
     {
-        // checking if the token holds an admin
-        bool hasClaim = User.HasClaim(ClaimTypes.Role, "Admin");
         try
         {
-            // Ensure the user is authenticated
-            if (!User.Identity.IsAuthenticated)
-                return Unauthorized();
-            else
-            {
-                return Ok(_userService.GetAllUsers());
-            }
-                
+            return Ok(_userService.GetAllUsers());
         }
         catch (KeyNotFoundException e)
         {
@@ -57,7 +45,7 @@ public class UserController : ControllerBase
             {
                 try
                 {
-                    return Ok(_userService.GetUserById(userID));
+                    return Ok(_userService.GetUserByID(userID));
                 }
                 catch (KeyNotFoundException e)
                 {
@@ -109,13 +97,13 @@ public class UserController : ControllerBase
                     return StatusCode(500, e.Message);
                 }
             }
-
+    
             [HttpPut]
             [Route("update")]
             public ActionResult<User> UpdateUser(Guid userID, [FromBody] UserDTO userDto, string currentPassword)
             {
                
-                var actualUser = _userService.GetUserById(userID);
+                var actualUser = _userService.GetUserByID(userID);
                 try
                 {
                     if(!_logic.ValidateHash(currentPassword, actualUser.HashPassword, actualUser.SaltPassword))

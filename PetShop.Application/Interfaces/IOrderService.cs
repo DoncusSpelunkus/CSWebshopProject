@@ -14,6 +14,6 @@ public interface IOrderService
         
     public Order DeleteOrder(int productId, Guid userId );
     
-    public void SendEmailToUser(string email);
+    public void SendEmailtoUser(string email);
 
 }
