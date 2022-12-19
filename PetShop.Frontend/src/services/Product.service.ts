@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import axios from "axios";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {HttpClient} from "@angular/common/http";
 import {catchError} from "rxjs";
 import {Product} from "../Entities/Product";
 
@@ -18,16 +17,16 @@ export const customAxios = axios.create({
 export class ProductService { // Class for crud requests from the /product route of the api
   apiUrl = 'https://localhost:7143/Product';
 
-  constructor(private matSnackbar: MatSnackBar, private http: HttpClient) {
+  constructor(private matSnackbar: MatSnackBar) {
     customAxios.interceptors.response.use(
       response => {
       if(response.status == 201) {
-        this.matSnackbar.open("Great success", "x", {duration: 500})
+        this.matSnackbar.open("Great success", "x", {duration: 1000})
       }
       return response;
     }, rejected => {
       if(rejected.response.status>=400 && rejected.response.status <= 500) {
-        matSnackbar.open(rejected.response.data, "x", {duration: 500});
+        matSnackbar.open(rejected.response.data, "x", {duration: 1000});
       }
         catchError(rejected);
     }

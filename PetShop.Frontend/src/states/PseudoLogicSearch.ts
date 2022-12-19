@@ -22,7 +22,7 @@ export class PseudoLogicSearch {
     return this.categoryService.getCategories(path);
   }
 
-  async getProducts(){
+  async getProducts(){ // sets both a list to store of ALL products and makes a duplicate for manipulation
     this.productsUnmodified = await this.productService.getProducts();
     this.productsModified = this.productsUnmodified;
     return this.productsUnmodified;
@@ -54,7 +54,7 @@ export class PseudoLogicSearch {
     return this.productsModified;
   }
 
-  async priceSort(){
+  async priceSort(){ // sorts list by price
     this.priceModified = this.productsModified;
     return this.priceModified.filter(product => product.price > this.currentPrice)
   }

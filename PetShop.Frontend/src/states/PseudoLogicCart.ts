@@ -10,7 +10,7 @@ export class PseudoLogicCart { // State class for data manipulation
   }
 
   async getOrders(id){ // Get Cart
-      return await this.cartService.getOrders(id);
+    return await this.cartService.getOrders(id);
   }
 
   async getOrderById(id){ // Gets all previous orders.
@@ -39,11 +39,11 @@ export class PseudoLogicCart { // State class for data manipulation
     return this.cartService.deleteOrderByID(id, productId);
   }
 
-  async placeOrder(id: any) { // Checkout from cart
-    return this.cartService.placeOrder(id);
+  async placeOrder() { // Checkout from cart
+    return this.cartService.placeOrder();
   }
 
-  async sendOrderMail(userEmail: String) { //
+  async sendOrderMail(userEmail: String) {
     return this.cartService.sendOrderMail(userEmail);
   }
 }

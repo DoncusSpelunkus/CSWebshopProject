@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import axios from "axios";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {HttpClient} from "@angular/common/http";
+
 import {catchError} from "rxjs";
 import {User} from "../Entities/User";
 
@@ -18,16 +18,16 @@ export const customAxios = axios.create({
 export class UserService { // Class for crud requests from the /user route of the api
   apiUrl = 'https://localhost:7143/User';
 
-  constructor(private matSnackbar: MatSnackBar, private http: HttpClient) {
+  constructor(private matSnackbar: MatSnackBar) {
     customAxios.interceptors.response.use(
       response => {
         if(response.status == 201) {
-          this.matSnackbar.open("Great success", "x", {duration: 500})
+          this.matSnackbar.open("Great success", "x", {duration: 1000})
         }
         return response;
       }, rejected => {
         if(rejected.response.status>=400 && rejected.response.status <= 500) {
-          matSnackbar.open(rejected.response.data, "x", {duration: 500});
+          matSnackbar.open(rejected.response.data, "x", {duration: 1000});
         }
         catchError(rejected);
       }
@@ -39,8 +39,7 @@ export class UserService { // Class for crud requests from the /user route of th
   }
 
   async putUser(id, dto){
-    console.log(dto)
-    let httpResponse = await customAxios.put<User>('update?userID=' + id + '&currentPassword=' + dto.password, dto);
+    await customAxios.put<User>('update?userID=' + id + '&currentPassword=' + dto.password, dto);
   }
 
   async deleteUserById(id: any){

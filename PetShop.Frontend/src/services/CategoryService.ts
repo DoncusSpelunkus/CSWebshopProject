@@ -21,12 +21,12 @@ export class CategoryService { // Class for crud requests from the all the categ
     customAxios.interceptors.response.use(
       response => {
         if(response.status == 201) {
-          this.matSnackbar.open("Great success", "x", {duration: 500})
+          this.matSnackbar.open("Great success", "x", {duration: 1000})
         }
         return response;
       }, rejected => {
         if(rejected.response.status>=400 && rejected.response.status <= 500) {
-          matSnackbar.open(rejected.response.data, "x", {duration: 500});
+          matSnackbar.open(rejected.response.data, "x", {duration: 1000});
         }
         catchError(rejected);
       }
@@ -39,7 +39,7 @@ export class CategoryService { // Class for crud requests from the all the categ
 
   }
 
-  async postCategory(dto: any, path: string) { //
+  async postCategory(dto: any, path: string) {
     await customAxios.post<any>(path,dto)
   }
 
@@ -51,7 +51,7 @@ export class CategoryService { // Class for crud requests from the all the categ
   }
 
   async deleteCategoryByID(id: any, path: string){
-    let httpResponse = await customAxios.delete<Category>(path + '/' + id)
+    await customAxios.delete<Category>(path + '/' + id)
   }
 
   async getCategoryById(id: number, path: string) {

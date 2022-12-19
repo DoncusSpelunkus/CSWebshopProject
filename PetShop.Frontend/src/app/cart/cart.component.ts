@@ -41,8 +41,8 @@ export class CartComponent implements OnInit {
     await this.getOrders();
   }
 
-  async placeOrder(id){
-    await this.pseudoLogicCart.placeOrder(id);
+  async placeOrder(){
+    await this.pseudoLogicCart.placeOrder();
     await this.getOrders();
   }
 

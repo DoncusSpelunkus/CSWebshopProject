@@ -11,7 +11,7 @@ import {User} from "../Entities/User";
 
 @Injectable({ providedIn: 'root' })
 
-export class PsuedoLogicAdmin { // State class for data manipulation
+export class PsuedoLogicAdmin {
 
   productsUnmodified: Product[] = [];
   newSpecList: CurrentSpecs[] = [];
@@ -21,7 +21,6 @@ export class PsuedoLogicAdmin { // State class for data manipulation
 
   constructor(private productService: ProductService, private specificationService: SpecificationService,
               private categoryService: CategoryService, private matSnackbar: MatSnackBar, private userService: UserService) {
-
   }
 
   async postProduct(product: Product){
@@ -105,7 +104,7 @@ export class PsuedoLogicAdmin { // State class for data manipulation
   async makeCurrentSpecList(id: number){
     this.specNames = await this.specificationService.getSpecifications(); // get the specification template names with ids
     let product = await this.productService.getProductById(id);
-            this.newSpecList = product.specsDescriptions; // gets the list descriptions from the product
+    this.newSpecList = product.specsDescriptions; // gets the list descriptions from the product
     this.newSpecList.forEach((cspec) => { // get the specification template names for the decriptions by using id
       this.specNames.find((nspec) => {
         if(cspec.specsId === nspec.id){
@@ -158,7 +157,7 @@ export class PsuedoLogicAdmin { // State class for data manipulation
     await this.userService.deleteUserById(id)
   }
 
-  async postUser(user: User, password: string){ // adds a small check on the
+  async postUser(user: User, password: string){
     let dto = {
       name: user.fullName,
       password: password,
@@ -172,7 +171,7 @@ export class PsuedoLogicAdmin { // State class for data manipulation
     await this.userService.postUser(dto)
   }
 
-  async getCurrentSpeclist(specList: CurrentSpecs[]){
+  async getCurrentSpeclist(specList: CurrentSpecs[]){ // compares a list of spectemplates and current specs to get the specTemplate names
     this.specNames = await this.specificationService.getSpecifications();
     specList.forEach((spec) => {
       this.specNames.find((specTemp) => {

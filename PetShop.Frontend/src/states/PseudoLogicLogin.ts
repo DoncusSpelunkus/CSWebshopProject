@@ -45,7 +45,7 @@ export class PseudoLogicLogin {
         }
         let status = await this.loginService.registerUser(dto)
         if(status == 201){
-          await this.matSnackbar.open("Great success", 'x', {duration:500})
+          await this.matSnackbar.open("Great success", 'x', {duration:1000})
           await this.router.navigateByUrl('')
         }
       }
@@ -56,9 +56,8 @@ export class PseudoLogicLogin {
     this.matSnackbar.open("Password can not be empty")
   }
 
-  getTokenRole(){
+  getTokenRole(){ // gets the tokens user type
     let userProperties = localStorage.getItem('auth')
-    console.log(userProperties)
     if (userProperties != null) {
       let decodedToken = jwtDecode(userProperties) as User;
       if (decodedToken.type != null) {

@@ -5,7 +5,7 @@ import {RatingService} from "../services/RatingService";
 
 @Injectable({ providedIn: 'root' })
 
-export class PseudoLogicUser { // State class for data manipulation
+export class PseudoLogicUser {
 
   constructor(private userService: UserService, private ratingService: RatingService) {
   }
@@ -35,7 +35,6 @@ export class PseudoLogicUser { // State class for data manipulation
       zip: user.zip,
       phone: user.phone,
     }
-    console.log(dto)
     return await this.userService.putUser(user.id, dto);
   }
 
