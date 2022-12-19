@@ -36,13 +36,13 @@ public class SpecsRepo : ISpecRepo
 
     public Specs DeleteSpecsById(int specsId)
     {
-        Specs specs = GetSpecsByID(specsId);
+        Specs specs = GetSpecsById(specsId);
         _specsDbContext.SpecsTable.Remove(specs);
         _specsDbContext.SaveChanges();
         return specs;
     }
 
-    public Specs GetSpecsByID(int specsId)
+    public Specs GetSpecsById(int specsId)
     {
        
            return _specsDbContext.SpecsTable.FirstOrDefault(s => s.ID == specsId);

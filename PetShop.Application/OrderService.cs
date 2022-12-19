@@ -13,7 +13,6 @@ public class OrderService : IOrderService
     private readonly IOrderRepo _orderRepository;
     private readonly IMapper _mapper;
     private IValidator<OrderDTO> _validator;
-    private IOrderService _orderServiceImplementation;
 
     public OrderService(IOrderRepo orderRepository, IMapper mapper, IValidator<OrderDTO> validator)
     {
@@ -89,7 +88,7 @@ public class OrderService : IOrderService
         return _orderRepository.DeleteOrderById(order);
     }
 
-    public void SendEmailtoUser(string email)
+    public void SendEmailToUser(string email)
     {
         _orderRepository.SendEmailToUser(email);
     }

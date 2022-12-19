@@ -36,9 +36,6 @@ namespace PetShop.Infastructure
                     average = Math.Round(average, 2);
                     product.AverageRating = average;
                 }
-
-                
-                
                 
                 var listofSpecDesc = new List<SpecsDescription>();
                 foreach (var specDesc in specsList)
@@ -91,30 +88,20 @@ namespace PetShop.Infastructure
             return product;
         }
         
-        public Product DeleteProduct(int productID)
+        public Product DeleteProduct(int productId)
         {
-            Product product = GetProductByID(productID);
-            var listOfProductSpecsDesc = _dbContext.SpecsDescriptionsTable.AsNoTracking().ToList();
-
-            foreach (var productSpecsDescription in listOfProductSpecsDesc)
-            {
-                if (productID == productSpecsDescription.ProductId)
-                {
-                    _dbContext.SpecsDescriptionsTable.Remove(productSpecsDescription);
-                }
-              
-            }
+            Product product = GetProductById(productId);
             _dbContext.ProductTable.Remove(product);
             _dbContext.SaveChanges();
             return product;
         }
         
 
-        public Product GetProductByID(int productId)
+        public Product GetProductById(int productId)
         {
             Product product = new Product();
-            var ListofProductsSpecsDescriptions = new List<SpecsDescription>();
-            var SpecsDiscription = _dbContext.SpecsDescriptionsTable.ToList();
+            var listOfProductsSpecsDescriptions = new List<SpecsDescription>();
+            var specsDescription = _dbContext.SpecsDescriptionsTable.ToList();
             List<int> ratings = _dbContext.RatingsTable.Where(r => r.ProductId == productId).Select(r => r.RatingValue).ToList();
             double count = 0;
             double sum = 0;
@@ -126,17 +113,17 @@ namespace PetShop.Infastructure
                 sum = sum + rating;
             }
             
-            foreach (var specs in SpecsDiscription)
+            foreach (var specs in specsDescription)
             {
                 if (productId == specs.ProductId) 
                 {
-                 ListofProductsSpecsDescriptions.Add(specs);   
+                 listOfProductsSpecsDescriptions.Add(specs);   
                 }
                 
             }
             
             product =  _dbContext.ProductTable.FirstOrDefault(p => p.ID == productId);
-            product.SpecsDescriptions = ListofProductsSpecsDescriptions;
+            product.SpecsDescriptions = listOfProductsSpecsDescriptions;
             double average;
             if (count != 0)
             { average = sum / count;
@@ -171,9 +158,9 @@ namespace PetShop.Infastructure
 
         }
 
-        public int GetProductID(int productId)
+        public int GetProductId(int productId)
         {
-            return _shopRepoImplementation.GetProductID(productId);
+            return _shopRepoImplementation.GetProductId(productId);
         }
         public List<Rating> GetAllRatings()
         {
