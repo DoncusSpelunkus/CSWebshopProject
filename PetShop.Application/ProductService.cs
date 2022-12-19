@@ -54,18 +54,18 @@ public class ProductService : IProductService
         return _productRepository.UpdateProduct(product);
     }
 
-    public Product DeleteProduct(int productID)
+    public Product DeleteProduct(int productId)
     {
-        if (productID == null)
+        if (productId == null)
             throw new ValidationException("ID is invalid");
-        return _productRepository.DeleteProduct(productID);
+        return _productRepository.DeleteProduct(productId);
     }
 
-    public Product GetProductByID(int productId)
+    public Product GetProductById(int productId)
     {
         if (productId <= 0)
             throw new ValidationException("ID is invalid");
-        return _productRepository.GetProductByID(productId);
+        return _productRepository.GetProductById(productId);
     }
 
 
@@ -77,7 +77,7 @@ public class ProductService : IProductService
     public Rating AddRating(ratingDTO ratingValue, int productId, Guid userId)
     {
         // Validate the rating to ensure it is within the acceptable range.
-        if (ratingValue.RatingValue < 1 || ratingValue.RatingValue > 6)
+        if (ratingValue.RatingValue is < 1 or > 6)
         {
             throw new ArgumentException("Rating must be between 1 and 5.");
         }
@@ -89,29 +89,29 @@ public class ProductService : IProductService
                 throw new ArgumentException("This user already rated this product.");
         }
         // Create a new Rating object and set its properties.
-        var ratingValuetoAdd = _mapper.Map<Rating>(ratingValue);
-        ratingValuetoAdd.ProductId = productId;
-        ratingValuetoAdd.UserId = userId;
+        var ratingValueToAdd = _mapper.Map<Rating>(ratingValue);
+        ratingValueToAdd.ProductId = productId;
+        ratingValueToAdd.UserId = userId;
 
         // Add the rating to the database.
-         return _productRepository.AddRating(ratingValuetoAdd);
+         return _productRepository.AddRating(ratingValueToAdd);
     }
 
-    public Rating UpdateRating(ratingDTO ratingdto, int productId, Guid userId)
+    public Rating UpdateRating(ratingDTO ratingDto, int productId, Guid userId)
     {
         // Validate the rating to ensure it is within the acceptable range.
-        if (ratingdto.RatingValue < 1 || ratingdto.RatingValue > 6)
+        if (ratingDto.RatingValue is < 1 or > 6)
         {
             throw new ArgumentException("Rating must be between 1 and 5.");
         }
         
         // Create a new Rating object and set its properties.
-        var ratingValuetoAdd = _mapper.Map<Rating>(ratingdto);
-        ratingValuetoAdd.ProductId = productId;
-        ratingValuetoAdd.UserId = userId;
+        var ratingValueToAdd = _mapper.Map<Rating>(ratingDto);
+        ratingValueToAdd.ProductId = productId;
+        ratingValueToAdd.UserId = userId;
 
         // Add the rating to the database.
-        return _productRepository.UpdateRating(ratingValuetoAdd);
+        return _productRepository.UpdateRating(ratingValueToAdd);
     }
 }
 

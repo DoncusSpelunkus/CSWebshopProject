@@ -93,16 +93,12 @@ namespace PetShop.Infastructure
                 .OnDelete(DeleteBehavior.ClientCascade);
             
              
-            /*
-             * a product has many specsDescription and a specsDescription has one product
-             */
+            // product has many orders and order has one product
             modelBuilder.Entity<Product>()
                 .HasMany(p => p.CurrentOrderList)
                 .WithOne(sd => sd.Product)
                 .OnDelete(DeleteBehavior.ClientCascade);
-            /*
-            * a specs has many specsDescription and a specsDescription has one specs
-            */
+           // user has many orders and order has one user
             modelBuilder.Entity<User>()
                 .HasMany(s => s.CurrentOrderList)
                 .WithOne(sd => sd.User)
@@ -138,13 +134,13 @@ namespace PetShop.Infastructure
                 .WithMany(c => c.ProdList)
                 .HasForeignKey(p => p.BrandID);
 
-            // specsDescription has one product, one product has many specsDecription.
+            // specsDescription has one product, one product has many specsDescription.
             modelBuilder.Entity<SpecsDescription>()
                 .HasOne(sd => sd.Product)
                 .WithMany(p => p.SpecsDescriptions)
                 .HasForeignKey(sd => sd.ProductId)
                 .OnDelete(DeleteBehavior.ClientCascade);
-            // one specs has many specsDescription, and one specsDescription has one specs
+            // specsDescription has one specs, and one spec has many specDescription 
             modelBuilder.Entity<SpecsDescription>()
                 .HasOne(sd => sd.Specs)
                 .WithMany(s => s.SpecsDescriptions)
