@@ -1,5 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {CurrentSpecs} from "../../../Entities/CurrentSpecs";
+import {Component, OnInit} from '@angular/core';
 import {Category} from "../../../Entities/Category";
 import {AdminState} from "../../../states/AdminState";
 

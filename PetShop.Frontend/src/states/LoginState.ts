@@ -15,15 +15,28 @@ export class LoginState{
   }
 
   async onLoginCall(email: string, password: string){
-    let data = await this.loginService.onLoginCall(email,password);
+    let dto = {
+      email: email,
+      password: password
+    }
+    let data = await this.loginService.onLoginCall(dto);
     localStorage.setItem('auth', data);
   }
 
   async registerUser(user: User, password: string, repeatPassword: string){
-    console.log(user.fullName)
     if(password != ''){
       if(password === repeatPassword){
-        let status = await this.loginService.registerUser(user,password)
+        let dto = {
+          name: user.fullName,
+          password: password,
+          email: user.email,
+          address: user.address,
+          city: user.city,
+          zip: user.zip,
+          phone: user.phone,
+          type: 1
+        }
+        let status = await this.loginService.registerUser(dto)
         if(status == 201){
           await this.matSnackbar.open("Great success", 'x', {duration:500})
           await this.router.navigateByUrl('')

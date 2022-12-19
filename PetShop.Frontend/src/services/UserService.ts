@@ -3,7 +3,7 @@ import axios from "axios";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {HttpClient} from "@angular/common/http";
 import {catchError} from "rxjs";
-import {Product} from "../Entities/Product";
+import {User} from "../Entities/User";
 
 export const customAxios = axios.create({
   baseURL: 'https://localhost:7143/User',
@@ -35,17 +35,22 @@ export class UserService { // Class for crud requests from the /user route of th
   }
 
   async postUser(dto: any) { //
-    let httpResponse = await customAxios.post<any>('',dto)
-    console.log(dto);
-    console.log(httpResponse.data)
+    await customAxios.post<any>('/register',dto)
   }
 
   async putUser(dto: any){
-    let httpResponse = await customAxios.put<Product>('', dto);
+    let httpResponse = await customAxios.put<User>('', dto);
     return httpResponse.data;
   }
 
   async deleteUserById(id: any){
-    let httpResponse = await customAxios.delete<Product>('/' + id)
+    await customAxios.delete<User>('/' + id)
   }
+
+  async getUsers(){
+    let httpResponse = await customAxios.get<User>('')
+    return httpResponse.data
+  }
+
+
 }

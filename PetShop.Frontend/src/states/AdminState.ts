@@ -6,6 +6,8 @@ import {SpecTemplates} from "../Entities/SpecTemplates";
 import {Injectable} from "@angular/core";
 import {CategoryService} from "../services/CategoryService";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {UserService} from "../services/UserService";
+import {User} from "../Entities/User";
 
 @Injectable({ providedIn: 'root' })
 
@@ -18,7 +20,7 @@ export class AdminState { // State class for data manipulation
 
 
   constructor(private productService: ProductService, private specificationService: SpecificationService,
-              private categoryService: CategoryService, private matSnackbar: MatSnackBar) {
+              private categoryService: CategoryService, private matSnackbar: MatSnackBar, private userService: UserService) {
 
   }
 
@@ -148,4 +150,25 @@ export class AdminState { // State class for data manipulation
     return this.categoryService.getCategoryById(id, path);
   }
 
+  async getUserList(){
+    return await this.userService.getUsers();
+  }
+
+  async deleteUserById(id: number){
+    await this.userService.deleteUserById(id)
+  }
+
+  async postUser(user: User, password: string){ // adds a small check on the
+    let dto = {
+      name: user.fullName,
+      password: password,
+      email: user.email,
+      address: user.address,
+      city: user.city,
+      zip: user.zip,
+      phone: user.phone,
+      type: user.type
+    }
+    await this.userService.postUser(dto)
+  }
 }

@@ -32,26 +32,12 @@ export class LoginService{ // Class for crud requests from the /user/** route of
     )
   }
 
-  async onLoginCall(email: string, password: string){
-    let dto = {
-      email: email,
-      password: password
-    }
+  async onLoginCall(dto: any){
     let httpResponse = await customAxios.post<any>('login',dto);
     return httpResponse.data;
   }
 
-  async registerUser(user: User, password: string) {
-    let dto = {
-      name: user.fullName,
-      password: password,
-      email: user.email,
-      address: user.address,
-      city: user.city,
-      zip: user.zip,
-      phone: user.phone,
-      type: 1
-    }
+  async registerUser(dto: any) {
     let httpResponse = await customAxios.post<any>('register', dto);
     return httpResponse.status;
   }

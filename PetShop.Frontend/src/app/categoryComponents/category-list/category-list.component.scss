@@ -9,3 +9,15 @@ h1{
   margin: 20px;
   text-align: center;
 }
+
+.mat-card {
+  max-width: 150px;
+  max-height: 150%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  box-sizing: border-box;
+}
+
+::ng-deep .mat-card:not([class*=mat-elevation-z]){
+  size: 20px;
+}

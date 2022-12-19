@@ -17,7 +17,8 @@ export class CategoryEditComponent implements OnInit {
 
   }
 
-  async ngOnInit() {
+
+  async ngOnInit() { // Gets the category type and id by route
     const id = Number(this.Aroute.snapshot.paramMap.get('id'))
     this.path = String(this.Aroute.snapshot.paramMap.get('path'))
     this.category = await this.adminState.getCategoryById(id, this.path);

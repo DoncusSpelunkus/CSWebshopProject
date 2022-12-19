@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import { Router } from '@angular/router'
 import {SearchState} from "../../../states/SearchState";
-import { CartService} from "../../../services/cart.service";
 import { Product} from "../../../Entities/Product";
 import {CartState} from "../../../states/CartState";
 import {Order} from "../../../Entities/Order";

@@ -22,7 +22,7 @@ export class ProductCreationComponent implements OnInit{
   sname: number = 0;
   sdesc: string = '';
   productDeleteId: number = 0;
-  selected: number = 0;
+  selected: any = SpecTemplates;
 
   @ViewChild('child') child;
 
@@ -56,11 +56,12 @@ export class ProductCreationComponent implements OnInit{
     this.change.emit();
   }
 
-  addTooSpecList(spec: number, desc: string){
+  addTooSpecList(desc: string){
     let newSpec = new CurrentSpecs();
-    newSpec.specsId = spec;
+    newSpec.specsId = this.selected.id;
     newSpec.description = desc;
-    this.specDesc.push({specsId: spec, description: desc}) // attachs value on an Array that mirrors the requested field in the post method
+    newSpec.specName = this.selected.specName;
+    this.specDesc.push({specsId: this.selected.id, description: desc}) // attachs value on an Array that mirrors the requested field in the post method
     this.newProduct.specsDescriptions = this.specDesc;
     this.specList.push(newSpec)
     this.child.updateNow(this.specList); // signals the specification list to refresh

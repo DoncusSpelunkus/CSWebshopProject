@@ -27,6 +27,7 @@ const routes: Routes = [
   { path: 'product/:id', component: ProductDetailComponent},
   { path: 'cart', component: CartComponent},
 
+
   // otherwise redirect to home
   { path: '**', redirectTo: '' }
 ];

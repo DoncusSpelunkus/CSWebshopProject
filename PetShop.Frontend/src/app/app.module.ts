@@ -43,6 +43,9 @@ import { ProductDetailComponent } from './productComponents/product-detail/produ
 import {MatExpansionModule} from "@angular/material/expansion";
 import { RatingComponent } from './productComponents/rating/rating.component';
 import {MatIconModule} from "@angular/material/icon";
+import { UserAdminControlComponent } from './userComponents/user-admin-control/user-admin-control.component';
+import { UserAdminListComponent } from './userComponents/user-admin-list/user-admin-list.component';
+import { UserAdminEditComponent } from './userComponents/user-admin-edit/user-admin-edit.component';
 
 
 
@@ -70,6 +73,9 @@ import {MatIconModule} from "@angular/material/icon";
     CartComponent,
     ProductDetailComponent,
     RatingComponent,
+    UserAdminControlComponent,
+    UserAdminListComponent,
+    UserAdminEditComponent,
 
   ],
   imports: [
@@ -92,7 +98,8 @@ import {MatIconModule} from "@angular/material/icon";
     MatGridListModule,
     Ng2SearchPipeModule,
     MatSliderModule,
-    MatIconModule
+    MatIconModule,
+    MatExpansionModule,
   ],
   providers: [MatSnackBar, Overlay],
   bootstrap: [AppComponent]

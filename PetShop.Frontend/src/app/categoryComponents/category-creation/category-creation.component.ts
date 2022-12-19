@@ -27,6 +27,7 @@ export class CategoryCreationComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  // commits the category change and emits a call to refresh the given category list
   async postCategory(path: string) {
     await this.adminState.postCategory(this.category, path)
     this.change.emit(path)

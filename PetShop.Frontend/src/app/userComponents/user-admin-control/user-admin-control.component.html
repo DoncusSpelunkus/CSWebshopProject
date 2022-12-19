@@ -1,0 +1,38 @@
+<div style="text-align: center" xmlns="http://www.w3.org/1999/html">
+
+  <h2>Creation</h2>
+
+  <mat-form-field appearance="outline">Full name:
+    <input type="string" matInput [(ngModel)]="newUser.fullName">
+  </mat-form-field>
+  <mat-form-field appearance="outline">Email:
+    <input type="string" matInput [(ngModel)]="newUser.email">
+  </mat-form-field>
+  <mat-form-field appearance="outline">password:
+    <input type="string" matInput [(ngModel)]="password">
+  </mat-form-field>
+  <mat-form-field appearance="outline">Phone number:
+    <input type="number" matInput [(ngModel)]="newUser.phone">
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="outline">Street address:
+    <input type="string" matInput [(ngModel)]="newUser.address">
+  </mat-form-field>
+  <mat-form-field appearance="outline">city:
+    <input type="string" matInput [(ngModel)]="newUser.city">
+  </mat-form-field>
+  <mat-form-field appearance="outline">Zip code:
+    <input type="number" matInput [(ngModel)]="newUser.zip">
+  </mat-form-field>
+  <mat-form-field appearance="outline">User type:
+    <mat-select [(ngModel)]="newUser.type" name="SubCategory">
+      <mat-option [value]="1">User</mat-option>
+      <mat-option [value]="2">Admin</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br>
+  <br>
+  <button mat-raised-button (click)="postUser()">Create User</button>
+  <hr>
+  <br>
+</div>
