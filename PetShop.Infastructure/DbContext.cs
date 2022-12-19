@@ -70,14 +70,22 @@ namespace PetShop.Infastructure
                 .HasMany(p => p.Ratings)
                 .WithOne(r => r.Product);
             
-            // a user has many orders, but an order has one user
-            // specsDescription has one product, one product has many specsDecription.
+            // navigation expressions and foreign keys for order
             modelBuilder.Entity<Order>()
-                .HasOne(sd => sd.Product)
+                .HasOne(o => o.Product)
                 .WithMany(p => p.CurrentOrderList)
-                .HasForeignKey(sd => sd.ProductId)
+                .HasForeignKey(o => o.ProductId)
                 .OnDelete(DeleteBehavior.ClientCascade);
-            // one specs has many specsDescription, and one specsDescription has one specs
+            modelBuilder.Entity<Order>()
+                .HasOne(o => o.Product)
+                .WithMany(p => p.CurrentOrderList)
+                .HasForeignKey(o => o.productName)
+                .OnDelete(DeleteBehavior.ClientCascade);
+            modelBuilder.Entity<Order>()
+                .HasOne(o => o.Product)
+                .WithMany(p => p.CurrentOrderList)
+                .HasForeignKey(o => o.productImage)
+                .OnDelete(DeleteBehavior.ClientCascade);
             modelBuilder.Entity<Order>()
                 .HasOne(sd => sd.User)
                 .WithMany(s => s.CurrentOrderList)
