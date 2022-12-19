@@ -7,7 +7,7 @@ import jwtDecode from "jwt-decode";
   providedIn: 'root'
 })
 
-export class AuthGuardService implements CanActivate{
+export class UserGuard implements CanActivate{
 
   constructor(private router: Router) {
   }
@@ -19,12 +19,12 @@ export class AuthGuardService implements CanActivate{
       let currentdate = new Date();
       if(decodToken.exp){
         let expiry = new Date(decodToken.exp * 1000);
-        if(currentdate<expiry && decodToken.type === "Admin"){ // checks the role assigned to the token and exp date
+        if(currentdate<expiry && decodToken.type === "User"){ // checks the role assigned to the token and exp date
           return true;
         }
-        else if(currentdate<expiry && decodToken.type === "User")
-          this.router.navigateByUrl("user") // Redirects if the token has a user role
-          return false;
+        else if(currentdate<expiry && decodToken.type === "Admin")
+          this.router.navigateByUrl("admin") // Redirects if the token has a user role
+        return false;
       }
     }
     return false;
