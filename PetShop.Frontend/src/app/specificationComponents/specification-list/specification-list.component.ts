@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {SpecTemplates} from "../../../Entities/SpecTemplates";
 import {AdminState} from "../../../states/AdminState";
 
@@ -15,8 +15,15 @@ export class SpecificationListComponent implements OnInit {
   }
 s
   async ngOnInit() {
-    let specs = await this.adminState.getSpecifications();
-    this.specificationList = specs;
+    await this.getList();
+  }
+
+  async updateList(){
+    await this.ngOnInit()
+  }
+
+  async getList(){
+    this.specificationList = await this.adminState.getSpecifications()
   }
 
 }

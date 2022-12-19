@@ -23,13 +23,13 @@ specificationDeletionId: number;
   ngOnInit(): void {
   }
 
-  postSpecification(){
-    this.adminState.postSpecification(this.specification);
+  async postSpecification(){
+    await this.adminState.postSpecification(this.specification);
     this.change.emit()
   }
 
-  deleteSpecification(){
-    this.adminState.deleteSpecificationById(this.specificationDeletionId);
+  async deleteSpecification(){
+    await this.adminState.deleteSpecificationById(this.specificationDeletionId);
     this.change.emit()
   }
 
