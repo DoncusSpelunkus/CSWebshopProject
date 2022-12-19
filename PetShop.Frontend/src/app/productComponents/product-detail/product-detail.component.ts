@@ -5,7 +5,6 @@ import { PseudoLogicCart } from "../../../states/PseudoLogicCart";
 import { Product} from "../../../Entities/Product";
 import {Category} from "../../../Entities/Category";
 import {CurrentSpecs} from "../../../Entities/CurrentSpecs";
-import {SpecTemplates} from "../../../Entities/SpecTemplates";
 
 @Component({
   selector: 'app-product-detail',
@@ -22,7 +21,7 @@ export class ProductDetailComponent implements OnInit {
 
   @ViewChild('child') child;
 
-  constructor(private route: ActivatedRoute, private psuedoLogicAdmin: PsuedoLogicAdmin, public router: Router, private cartState: PseudoLogicCart) {
+  constructor(private route: ActivatedRoute, private psuedoLogicAdmin: PsuedoLogicAdmin, public router: Router, private pseudoLogicCart: PseudoLogicCart) {
 
   }
 
@@ -34,11 +33,10 @@ export class ProductDetailComponent implements OnInit {
     this.Brand = await this.psuedoLogicAdmin.getCategoryById(this.product.brand, "Brand")
     this.child.setProductId(this.product.id)
     this.specList = await this.psuedoLogicAdmin.getCurrentSpeclist(this.product.specsDescriptions)
-    console.log(this.product.ratings)
   }
 
   async postOrder(id: number, price: number) {
-    await this.cartState.postOrder(id, price)
+    await this.pseudoLogicCart.postOrder(id, price)
   }
 
 }

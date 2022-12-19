@@ -14,7 +14,7 @@ export class UserEditComponent implements OnInit {
   user: any;
   anything: string = '';
 
-  constructor(private Aroute: ActivatedRoute, private userState: PseudoLogicUser, public route: Router, private loginState: PseudoLogicLogin) {
+  constructor(private Aroute: ActivatedRoute, private pseudoLogicUser: PseudoLogicUser, public route: Router, private pseudoLogicLogin: PseudoLogicLogin) {
     this.user = User;
   }
 
@@ -25,24 +25,22 @@ export class UserEditComponent implements OnInit {
       this.user = decode
       if(decode.name)
       this.anything = decode.name;
-
     }
-
   }
 
   async postUser() {
-    await this.userState.postUser(this.user)
+    await this.pseudoLogicUser.postUser(this.user)
   }
 
   async updateUser(password){
-    await this.userState.putUser(this.user, password, this.anything);
+    await this.pseudoLogicUser.putUser(this.user, password, this.anything);
     localStorage.clear()
-    await this.loginState.onLoginCall(this.user.email, password)
+    await this.pseudoLogicLogin.onLoginCall(this.user.email, password)
     await this.ngOnInit()
   }
 
-  deleteProduct(id){
-    this.userState.deleteUserById(id);
+  async deleteProduct(id){
+    await this.pseudoLogicUser.deleteUserById(id);
   }
 
   async validatePassword(password){

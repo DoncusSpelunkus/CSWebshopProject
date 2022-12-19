@@ -10,10 +10,10 @@ export class UserAdminListComponent implements OnInit {
 
   userList: any;
 
-  constructor(private adminState: PsuedoLogicAdmin) { }
+  constructor(private psuedoLogicAdmin: PsuedoLogicAdmin) { }
 
   async ngOnInit() {
-    this.userList = await this.adminState.getUserList()
+    this.userList = await this.psuedoLogicAdmin.getUserList()
   }
 
   async updateList(){
@@ -22,7 +22,7 @@ export class UserAdminListComponent implements OnInit {
 
   async userDelete(id: number){
     this.userList.filter(x => x.id === id);
-    await this.adminState.deleteUserById(id)
-    this.updateList()
+    await this.psuedoLogicAdmin.deleteUserById(id)
+    await this.updateList()
   }
 }

@@ -17,7 +17,7 @@ export class ProductListComponent implements OnInit{
   order: any = Order;
   @Input() name = '';
 
-  constructor(private searchState: PseudoLogicSearch, private cartState: PseudoLogicCart, public router: Router) {
+  constructor(private searchState: PseudoLogicSearch, private pseudoLogicCart: PseudoLogicCart, public router: Router) {
 
   }
 
@@ -38,6 +38,6 @@ export class ProductListComponent implements OnInit{
   }
 
   async postOrder(id: number, price: number) {
-    await this.cartState.postOrder(id, price)
+    await this.pseudoLogicCart.postOrder(id, price)
   }
 }

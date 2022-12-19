@@ -16,7 +16,7 @@ export class AdminComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  // Emits the changes given the child event
   onChangeSpec(event) {
     this.specChild.ngOnInit()
   }

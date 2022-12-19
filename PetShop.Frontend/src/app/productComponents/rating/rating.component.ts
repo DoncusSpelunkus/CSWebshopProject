@@ -15,7 +15,7 @@ export class RatingComponent implements OnInit {
   ratingArr: number[] = []
   productId: number = 0;
 
-  constructor(private userState: PseudoLogicUser) {
+  constructor(private pseudoLogicUser: PseudoLogicUser) {
   }
 
 
@@ -34,7 +34,7 @@ export class RatingComponent implements OnInit {
     return false;
   }
 
-  showIcon(index:number) {
+  showIcon(index:number) { // sets the light up stars depending on rating
     if (this.rating >= index + 1) {
       return 'star';
     } else {
@@ -47,7 +47,7 @@ export class RatingComponent implements OnInit {
     if(localToken) {
       let decodedToken = jwtDecode(localToken) as User
       if(decodedToken.id){
-        await this.userState.giveRating(this.rating, decodedToken.id, this.productId)
+        await this.pseudoLogicUser.giveRating(this.rating, decodedToken.id, this.productId)
       }
     }
   }

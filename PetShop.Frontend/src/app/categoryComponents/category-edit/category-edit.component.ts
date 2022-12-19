@@ -13,7 +13,7 @@ export class CategoryEditComponent implements OnInit {
   category: any = Category;
   path: string = '';
 
-  constructor(private Aroute: ActivatedRoute, private adminState: PsuedoLogicAdmin, public route: Router) {
+  constructor(private Aroute: ActivatedRoute, private psuedoLogicAdmin: PsuedoLogicAdmin, public route: Router) {
 
   }
 
@@ -21,12 +21,12 @@ export class CategoryEditComponent implements OnInit {
   async ngOnInit() { // Gets the category type and id by route
     const id = Number(this.Aroute.snapshot.paramMap.get('id'))
     this.path = String(this.Aroute.snapshot.paramMap.get('path'))
-    this.category = await this.adminState.getCategoryById(id, this.path);
+    this.category = await this.psuedoLogicAdmin.getCategoryById(id, this.path);
     this.category.id = id;
   }
 
   async updateCat(){
-    let data = await this.adminState.putCategory(this.category, this.path);
+    let data = await this.psuedoLogicAdmin.putCategory(this.category, this.path);
     if(data != undefined){
       await this.route.navigateByUrl("admin")
     }

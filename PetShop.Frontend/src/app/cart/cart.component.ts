@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 import {Order} from "../../Entities/Order";
 import { PseudoLogicCart} from "../../states/PseudoLogicCart";
 import jwtDecode from "jwt-decode";
@@ -10,13 +10,14 @@ import {User} from "../../Entities/User";
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss']
 })
+
 export class CartComponent implements OnInit {
 
   order: any = Order;
   orderList: Order[] = [];
   amount: number = 1;
 
-  constructor(private Aroute: ActivatedRoute, private pseudoLogicCart: PseudoLogicCart, private router: Router) { }
+  constructor(private Aroute: ActivatedRoute, private pseudoLogicCart: PseudoLogicCart) { }
 
   async ngOnInit() {
     await this.getOrders();
@@ -33,7 +34,6 @@ export class CartComponent implements OnInit {
 
   async putOrder(id, amount, price){
     await this.pseudoLogicCart.putOrder(id, amount, price)
-    console.log(amount)
   }
 
   async deleteOrderByID(id, productId){
@@ -46,7 +46,7 @@ export class CartComponent implements OnInit {
     await this.getOrders();
   }
 
-  async changeAmount(id: number | undefined, price: number | undefined){
+  async changeAmount(id: number | undefined, price: number | undefined){ //Changes the amount on the cart element when input is changed
     if(id && price)
     if(this.amount >= 1){
       await this.pseudoLogicCart.putOrder(id, this.amount, price)
@@ -54,16 +54,14 @@ export class CartComponent implements OnInit {
   }
 
 
-  async sendOrderMail(userEmail) { //
+  async sendOrderMail(userEmail) { // Sends a request for a confirmation email to the users email
     let localToken = localStorage.getItem('auth');
     if(localToken) {
       let decodToken = jwtDecode(localToken) as User;
       if (decodToken.email)
         await this.pseudoLogicCart.sendOrderMail(decodToken.email);
-      console.log(decodToken.email)
     }
     await this.pseudoLogicCart.sendOrderMail(userEmail)
-    console.log(userEmail)
   }
 
 }

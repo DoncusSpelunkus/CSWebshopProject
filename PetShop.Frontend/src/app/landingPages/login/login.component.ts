@@ -11,24 +11,16 @@ export class LoginComponent implements OnInit {
 
   user: any;
 
-  loginObj: any = {
-    email: '',
-    password:''
-  };
-  constructor(private router: Router, private loginState: PseudoLogicLogin) { }
+  email: string = ''
+  password: string = ''
+
+  constructor(private router: Router, private pseudoLogicLogin: PseudoLogicLogin) { }
 
   ngOnInit(): void {
   }
 
   async onLogin(){
-    await this.loginState.onLoginCall(this.loginObj.email, this.loginObj.password);
-    let thisRole = this.loginState.getTokenRole();
-    if(thisRole === "Admin"){
-      await this.router.navigateByUrl("admin")
-    }
-    else if (thisRole === "User"){
-      await this.router.navigateByUrl("user")
-    }
+    await this.pseudoLogicLogin.onLoginCall(this.email, this.password);
   }
 
 }

@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {FormsModule} from "@angular/forms";
 import {MatButtonModule} from "@angular/material/button";
 import {MatCardModule} from "@angular/material/card";
 import {MatListModule} from "@angular/material/list";
@@ -45,7 +45,6 @@ import { RatingComponent } from './productComponents/rating/rating.component';
 import {MatIconModule} from "@angular/material/icon";
 import { UserAdminControlComponent } from './userComponents/user-admin-control/user-admin-control.component';
 import { UserAdminListComponent } from './userComponents/user-admin-list/user-admin-list.component';
-import { UserAdminEditComponent } from './userComponents/user-admin-edit/user-admin-edit.component';
 import { FooterComponent } from './navigationComponents/footer/footer.component';
 
 @NgModule({
@@ -74,7 +73,6 @@ import { FooterComponent } from './navigationComponents/footer/footer.component'
     RatingComponent,
     UserAdminControlComponent,
     UserAdminListComponent,
-    UserAdminEditComponent,
     FooterComponent
 
   ],

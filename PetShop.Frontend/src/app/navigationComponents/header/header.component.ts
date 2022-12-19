@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Product} from "../../../Entities/Product";
 import {PseudoLogicSearch} from "../../../states/PseudoLogicSearch";
 import {Router} from "@angular/router";

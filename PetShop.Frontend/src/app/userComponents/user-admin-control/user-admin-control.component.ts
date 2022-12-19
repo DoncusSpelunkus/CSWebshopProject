@@ -16,18 +16,18 @@ export class UserAdminControlComponent implements OnInit {
   @Output()
   change: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(private adminState: PsuedoLogicAdmin) { }
+  constructor(private psuedoLogicAdmin: PsuedoLogicAdmin) { }
 
   ngOnInit(): void {
   }
 
   async postUser(){
-    await this.adminState.postUser(this.newUser, this.password);
+    await this.psuedoLogicAdmin.postUser(this.newUser, this.password);
     this.change.emit();
   }
 
   async deleteUser(){
-    await this.adminState.deleteUserById(this.newUser.id)
+    await this.psuedoLogicAdmin.deleteUserById(this.newUser.id)
     this.change.emit();
   }
 

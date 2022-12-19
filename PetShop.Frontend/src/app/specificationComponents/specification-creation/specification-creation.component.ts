@@ -15,7 +15,7 @@ specificationDeletionId: number;
   @Output()
   change: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(private adminState: PsuedoLogicAdmin) {
+  constructor(private psuedoLogicAdmin: PsuedoLogicAdmin) {
     this.specification = new SpecTemplates;
     this.specificationDeletionId = 0;
   }
@@ -24,12 +24,12 @@ specificationDeletionId: number;
   }
 
   async postSpecification(){
-    await this.adminState.postSpecification(this.specification);
+    await this.psuedoLogicAdmin.postSpecification(this.specification);
     this.change.emit()
   }
 
   async deleteSpecification(){
-    await this.adminState.deleteSpecificationById(this.specificationDeletionId);
+    await this.psuedoLogicAdmin.deleteSpecificationById(this.specificationDeletionId);
     this.change.emit()
   }
 

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {CartService} from "../../../services/cart.service";
 import {PseudoLogicCart} from "../../../states/PseudoLogicCart";
 import {Order} from "../../../Entities/Order";
 import {ActivatedRoute} from "@angular/router";
@@ -22,7 +21,7 @@ export class UserComponent implements OnInit {
   orderProductList: OrderProduct[] = [];
   interMediateList: Order[] = [];
 
-  constructor(private Aroute: ActivatedRoute, private cartService: CartService, private cartState: PseudoLogicCart) { }
+  constructor(private Aroute: ActivatedRoute, private pseudoLogicCart: PseudoLogicCart) { }
 
   async ngOnInit() {
     await this.orderSort();
@@ -33,7 +32,7 @@ export class UserComponent implements OnInit {
     if(localToken) {
       let decodToken = jwtDecode(localToken) as User;
       if (decodToken.id)
-        this.orderList = await this.cartState.getOrderById(decodToken.id);
+        this.orderList = await this.pseudoLogicCart.getOrderById(decodToken.id);
     }
   }
 

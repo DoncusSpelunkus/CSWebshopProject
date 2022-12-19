@@ -10,12 +10,12 @@ import {PsuedoLogicAdmin} from "../../../states/PsuedoLogicAdmin";
 export class SpecificationListComponent implements OnInit {
   specificationList: SpecTemplates[] = [];
 
-  constructor(private adminState: PsuedoLogicAdmin) {
+  constructor(private psuedoLogicAdmin: PsuedoLogicAdmin) {
 
   }
 s
   async ngOnInit() {
-    this.specificationList = await this.adminState.getSpecifications()
+    this.specificationList = await this.psuedoLogicAdmin.getSpecifications()
   }
 
   async updateList(){

@@ -14,13 +14,20 @@ export class PseudoLogicLogin {
   constructor(private loginService: LoginService, private matSnackbar: MatSnackBar, private router: Router) {
   }
 
-  async onLoginCall(email: string, password: string){
+  async onLoginCall(email: string, password: string){ // converts the login details to dto object and navigates the user after login
     let dto = {
       email: email,
       password: password
     }
     let data = await this.loginService.onLoginCall(dto);
     localStorage.setItem('auth', data);
+    let thisRole = this.getTokenRole();
+    if(thisRole === "Admin"){
+      await this.router.navigateByUrl("admin")
+    }
+    else if (thisRole === "User"){
+      await this.router.navigateByUrl("user")
+    }
   }
 
   async registerUser(user: User, password: string, repeatPassword: string){

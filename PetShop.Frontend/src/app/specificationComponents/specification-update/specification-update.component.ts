@@ -12,17 +12,17 @@ export class SpecificationUpdateComponent implements OnInit {
 
 specification: any;
 
-  constructor(private Aroute: ActivatedRoute, private adminState: PsuedoLogicAdmin, public route: Router) {
+  constructor(private Aroute: ActivatedRoute, private psuedoLogicAdmin: PsuedoLogicAdmin, public route: Router) {
     this.specification = SpecTemplates;
   }
 
   async ngOnInit() {
     const id = Number(this.Aroute.snapshot.paramMap.get('id'))
-    this.specification = await this.adminState.getSpecificationById(id);
+    this.specification = await this.psuedoLogicAdmin.getSpecificationById(id);
   }
 
   async updateSpec(){
-    let data = await this.adminState.putSpecification(this.specification);
+    let data = await this.psuedoLogicAdmin.putSpecification(this.specification);
     if(data != undefined){
       await this.route.navigateByUrl("admin")
     }
