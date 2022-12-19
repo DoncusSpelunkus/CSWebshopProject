@@ -74,8 +74,9 @@ public class UserController : ControllerBase
             public async Task<ActionResult<string>> Login(UserLoginDTO userLogin)
             {   
                 
-                var currentUser = _userService.GetUserByEmail(userLogin.Email);
-                if (currentUser.Email != userLogin.Email)
+                var currentUser = _userService.GetUserByEmail(userLogin.Email.ToLower());
+                
+                if (currentUser.Email != userLogin.Email.ToLower())
                 {
                     return BadRequest("Wrong password or Email.");
                 }
