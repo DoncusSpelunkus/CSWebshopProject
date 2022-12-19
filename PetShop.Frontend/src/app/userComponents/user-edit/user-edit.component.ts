@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {User} from "../../../Entities/User";
 import jwtDecode from "jwt-decode";
 import {PseudoLogicUser} from "../../../states/PseudoLogicUser";
+import {PseudoLogicLogin} from "../../../states/PseudoLogicLogin";
 
 @Component({
   selector: 'app-user-edit',
@@ -13,7 +14,7 @@ export class UserEditComponent implements OnInit {
   user: any;
   anything: string = '';
 
-  constructor(private Aroute: ActivatedRoute, private userState: PseudoLogicUser, public route: Router) {
+  constructor(private Aroute: ActivatedRoute, private userState: PseudoLogicUser, public route: Router, private loginState: PseudoLogicLogin) {
     this.user = User;
   }
 
@@ -24,7 +25,6 @@ export class UserEditComponent implements OnInit {
       this.user = decode
       if(decode.name)
       this.anything = decode.name;
-      console.log(this.anything)
 
     }
 
@@ -34,18 +34,20 @@ export class UserEditComponent implements OnInit {
     await this.userState.postUser(this.user)
   }
 
-  updateUser(password){
-    this.userState.putUser(this.user, password, this.anything);
-    console.log(this.user)
+  async updateUser(password){
+    await this.userState.putUser(this.user, password, this.anything);
+    localStorage.clear()
+    await this.loginState.onLoginCall(this.user.email, password)
+    await this.ngOnInit()
   }
 
   deleteProduct(id){
     this.userState.deleteUserById(id);
   }
 
-  validatePassword(password){
-    if(password = this.user.password){
-      this.updateUser(password)
+  async validatePassword(password){
+    if(password === this.user.password){
+      await this.updateUser(password)
     }
 }
 

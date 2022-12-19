@@ -76,7 +76,6 @@ export class CartService {
 
   async sendOrderMail(userEmail: String) { //
     let httpResponse = await customAxios.post<any>('/sendEmail?userEmail=' + userEmail)
-    return httpResponse.data;
   }
 
 }

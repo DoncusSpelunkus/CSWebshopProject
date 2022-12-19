@@ -29,17 +29,16 @@ export class UserComponent implements OnInit {
   }
 
   async getOrderById() {
-    console.log(this.orderList)
     let localToken = localStorage.getItem('auth');
     if(localToken) {
       let decodToken = jwtDecode(localToken) as User;
       if (decodToken.id)
         this.orderList = await this.cartState.getOrderById(decodToken.id);
     }
-    console.log(this.orderList)
   }
 
   async orderSort(){
+    try{
     await this.getOrderById();
     let orderProduct = new OrderProduct()
     let number = this.orderList[0].orderId
@@ -64,5 +63,8 @@ export class UserComponent implements OnInit {
       orderProduct.time = dateOfOrder;
       this.orderProductList.push(orderProduct)
       this.interMediateList = [];
+    }
+    catch (e){
+    }
     }
 }

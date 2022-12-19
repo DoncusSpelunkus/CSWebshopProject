@@ -28,7 +28,7 @@ export class PseudoLogicUser { // State class for data manipulation
     let dto = {
       name: anything,
       password: password,
-      type: user.type,
+      type: 1,
       email: user.email,
       address: user.address,
       city: user.city,

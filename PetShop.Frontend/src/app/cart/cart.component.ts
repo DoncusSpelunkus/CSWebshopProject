@@ -43,6 +43,7 @@ export class CartComponent implements OnInit {
   async placeOrder(id){
     await this.cartState.placeOrder(id);
     await this.getOrders();
+    console.log(id)
   }
 
 
@@ -51,7 +52,8 @@ export class CartComponent implements OnInit {
     if(localToken) {
       let decodToken = jwtDecode(localToken) as User;
       if (decodToken.email)
-        this.orderList = await this.cartState.sendOrderMail(decodToken.email);
+        await this.cartState.sendOrderMail(decodToken.email);
+      console.log(decodToken.email)
     }
     await this.cartState.sendOrderMail(userEmail)
     console.log(userEmail)
