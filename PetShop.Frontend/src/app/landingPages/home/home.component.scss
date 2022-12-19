@@ -2,16 +2,20 @@
   position: fixed;
   bottom: 50px;
   right: 40px;
-  z-index: 2;
+  z-index: 4;
 }
 
 mat-drawer-container {
   z-index: 1;
 }
 mat-drawer{
+  top: 105.5px;
+  position: fixed;
   padding-top: 10px;
   text-align: center;
   width: 200px;
+  height: 620px;
+  z-index: 1;
  }
 
 input{
@@ -22,3 +26,11 @@ mat-card-subtitle{
   margin: 0px;
 }
 
+.mat-drawer-container,
+.mat-drawer-content {
+  height: auto;
+}
+
+app-footer{
+  z-index: 3;
+}

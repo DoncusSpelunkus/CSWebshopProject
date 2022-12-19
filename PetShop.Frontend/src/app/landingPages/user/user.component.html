@@ -5,7 +5,7 @@
       <h1>Personal information</h1>
       <app-user-edit></app-user-edit>
     </mat-tab>
-    <mat-tab label="Previous orders.">
+    <mat-tab label="Previous orders">
       <h1>Previous orders</h1>
       <div *ngFor="let o of orderProductList">
         <mat-expansion-panel hideToggle>
@@ -19,9 +19,10 @@
         </mat-expansion-panel-header>
         <div *ngFor="let p of o.listOfUniqueId">
           <hr>
-        <p>ProductId: {{p.productId}}</p>
-        <p>Price: {{p.price}}</p>
-        <p>Quantity: {{p.amount}}</p>
+          <p>Product: {{p.productName}}</p>
+          <p>ProductId: {{p.productId}}</p>
+          <p>Price: {{p.price}}</p>
+          <p>Quantity: {{p.amount}}</p>
         </div>
           <hr>
         </mat-expansion-panel>

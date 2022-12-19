@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import { Order } from "../Entities/Order";
-import { CartService } from "../services/cart.service";
+import {CartService, customAxios} from "../services/cart.service";
 import {Product} from "../Entities/Product";
 import jwtDecode from "jwt-decode";
 import {User} from "../Entities/User";
@@ -44,7 +44,11 @@ export class CartState { // State class for data manipulation
     return this.cartService.deleteOrderByID(id, productId);
   }
 
-  async placeOrder(id: any) { // Checkout from cart
+  async placeOrder(id: any,) { // Checkout from cart
     return this.cartService.placeOrder(id);
+  }
+
+  async sendOrderMail(userEmail: String) { //
+    return this.cartService.sendOrderMail(userEmail);
   }
 }

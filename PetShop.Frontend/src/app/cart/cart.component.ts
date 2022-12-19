@@ -22,14 +22,12 @@ export class CartComponent implements OnInit {
   }
 
   async getOrders(){
-    console.log(this.orderList)
     let localToken = localStorage.getItem('auth');
     if(localToken) {
       let decodToken = jwtDecode(localToken) as User;
       if (decodToken.id)
       this.orderList = await this.cartState.getOrders(decodToken.id);
     }
-    console.log(this.orderList)
   }
 
   async putOrder(id, amount, price){
@@ -48,9 +46,15 @@ export class CartComponent implements OnInit {
   }
 
 
-  async SendOrderMail(userEmail) { //
-
+  async sendOrderMail(userEmail) { //
+    let localToken = localStorage.getItem('auth');
+    if(localToken) {
+      let decodToken = jwtDecode(localToken) as User;
+      if (decodToken.email)
+        this.orderList = await this.cartState.sendOrderMail(decodToken.email);
+    }
+    await this.cartState.sendOrderMail(userEmail)
+    console.log(userEmail)
   }
-
 
 }

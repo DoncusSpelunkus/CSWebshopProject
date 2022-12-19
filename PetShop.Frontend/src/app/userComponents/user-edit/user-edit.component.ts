@@ -11,6 +11,7 @@ import {UserState} from "../../../states/UserState";
 })
 export class UserEditComponent implements OnInit {
   user: any;
+  anything: string = '';
 
   constructor(private Aroute: ActivatedRoute, private userState: UserState, public route: Router) {
     this.user = User;
@@ -21,6 +22,10 @@ export class UserEditComponent implements OnInit {
     if(localToken) {
       let decode = jwtDecode(localToken) as User;
       this.user = decode
+      if(decode.name)
+      this.anything = decode.name;
+      console.log(this.anything)
+
     }
 
   }
@@ -29,14 +34,20 @@ export class UserEditComponent implements OnInit {
     await this.userState.postUser(this.user)
   }
 
-
-  updateUser(){
-    this.userState.putUser(this.user);
+  updateUser(password){
+    this.userState.putUser(this.user, password, this.anything);
+    console.log(this.user)
   }
 
   deleteProduct(id){
     this.userState.deleteUserById(id);
   }
+
+  validatePassword(password){
+    if(password = this.user.password){
+      this.updateUser(password)
+    }
+}
 
 }
 

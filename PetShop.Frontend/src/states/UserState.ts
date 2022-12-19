@@ -24,17 +24,19 @@ export class UserState { // State class for data manipulation
   }
 
 
-  async putUser(user: User){
+  async putUser(user: User, password: string, anything: string){
     let dto = {
-      id: user.id,
-      name: user.fullName,
+      name: anything,
+      password: password,
+      type: user.type,
       email: user.email,
       address: user.address,
       city: user.city,
       zip: user.zip,
       phone: user.phone,
     }
-    return await this.userService.putUser(dto);
+    console.log(dto)
+    return await this.userService.putUser(user.id, dto);
   }
 
   async deleteUserById(id: number){

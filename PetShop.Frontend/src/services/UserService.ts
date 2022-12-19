@@ -35,12 +35,12 @@ export class UserService { // Class for crud requests from the /user route of th
   }
 
   async postUser(dto: any) { //
-    await customAxios.post<any>('/register',dto)
+    await customAxios.post<any>('/register', dto)
   }
 
-  async putUser(dto: any){
-    let httpResponse = await customAxios.put<User>('', dto);
-    return httpResponse.data;
+  async putUser(id, dto){
+    console.log(dto)
+    let httpResponse = await customAxios.put<User>('update?userID=' + id + '&currentPassword=' + dto.password, dto);
   }
 
   async deleteUserById(id: any){

@@ -7,4 +7,5 @@ export class User { // template for the user token
   zip: number = 0;
   phone: number = 0;
   type: string = '';
+  name?: string;
 }

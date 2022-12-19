@@ -1,9 +1,8 @@
-<mat-grid-list cols="3" rowHeight="400px" gutterSize="15px">
+<mat-grid-list cols="2" rowHeight="510px" gutterSize="15px">
 <mat-grid-tile *ngFor="let p of productList | filter: name" >
 <mat-card>
   <mat-card-header>
     <mat-card-title><a style="text-decoration: none; color: inherit;" [routerLink]="['/product', p.id]">{{p.name}}</a></mat-card-title>
-    <mat-card-subtitle>{{p.mainCategory}}</mat-card-subtitle>
   </mat-card-header>
     <img mat-card-image src="{{p.imageUrl}}" alt="Image error" [routerLink]="['/product', p.id]">
   <mat-card-content>

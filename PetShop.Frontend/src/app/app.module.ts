@@ -46,6 +46,7 @@ import {MatIconModule} from "@angular/material/icon";
 import { UserAdminControlComponent } from './userComponents/user-admin-control/user-admin-control.component';
 import { UserAdminListComponent } from './userComponents/user-admin-list/user-admin-list.component';
 import { UserAdminEditComponent } from './userComponents/user-admin-edit/user-admin-edit.component';
+import { FooterComponent } from './navigationComponents/footer/footer.component';
 
 
 
@@ -76,6 +77,7 @@ import { UserAdminEditComponent } from './userComponents/user-admin-edit/user-ad
     UserAdminControlComponent,
     UserAdminListComponent,
     UserAdminEditComponent,
+    FooterComponent
 
   ],
   imports: [
@@ -101,6 +103,7 @@ import { UserAdminEditComponent } from './userComponents/user-admin-edit/user-ad
     MatIconModule,
     MatExpansionModule,
   ],
+
   providers: [MatSnackBar, Overlay],
   bootstrap: [AppComponent]
 })
