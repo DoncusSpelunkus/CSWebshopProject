@@ -23,8 +23,6 @@ export class PseudoLogicCart { // State class for data manipulation
       amount: 1,
       price: price
     }
-    console.log(dto.productId)
-    console.log(id)
     await this.cartService.postOrder(dto, dto.productId);
   }
 
@@ -34,14 +32,14 @@ export class PseudoLogicCart { // State class for data manipulation
       amount: amount,
       price: price
     }
-    await this.cartService.putOrder(dto, dto.productId);
+    await this.cartService.putOrder(dto);
   }
 
   async deleteOrderByID(id: any, productId: any) { // Remove from cart
     return this.cartService.deleteOrderByID(id, productId);
   }
 
-  async placeOrder(id: any,) { // Checkout from cart
+  async placeOrder(id: any) { // Checkout from cart
     return this.cartService.placeOrder(id);
   }
 

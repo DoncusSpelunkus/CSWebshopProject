@@ -54,11 +54,12 @@ export class CartService {
     }
   }
 
-  async putOrder(dto: any, id: number){
+  async putOrder(dto: any){
     let localToken = localStorage.getItem('auth');
+    console.log(dto)
     if(localToken) {
       let decodToken = jwtDecode(localToken) as User;
-      let httpResponse = await customAxios.post<any>('/' + decodToken.id, dto)
+      let httpResponse = await customAxios.put<any>('/' + decodToken.id, dto)
     }
   }
 
