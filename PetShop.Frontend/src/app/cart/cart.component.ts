@@ -14,8 +14,9 @@ export class CartComponent implements OnInit {
 
   order: any = Order;
   orderList: Order[] = [];
+  amount: number = 1;
 
-  constructor(private Aroute: ActivatedRoute, private cartState: PseudoLogicCart, private router: Router) { }
+  constructor(private Aroute: ActivatedRoute, private pseudoLogicCart: PseudoLogicCart, private router: Router) { }
 
   async ngOnInit() {
     await this.getOrders();
@@ -26,24 +27,30 @@ export class CartComponent implements OnInit {
     if(localToken) {
       let decodToken = jwtDecode(localToken) as User;
       if (decodToken.id)
-      this.orderList = await this.cartState.getOrders(decodToken.id);
+      this.orderList = await this.pseudoLogicCart.getOrders(decodToken.id);
     }
   }
 
   async putOrder(id, amount, price){
-    await this.cartState.putOrder(id, amount, price)
+    await this.pseudoLogicCart.putOrder(id, amount, price)
     console.log(amount)
   }
 
   async deleteOrderByID(id, productId){
-    await this.cartState.deleteOrderByID(id, productId);
+    await this.pseudoLogicCart.deleteOrderByID(id, productId);
     await this.getOrders();
   }
 
   async placeOrder(id){
-    await this.cartState.placeOrder(id);
+    await this.pseudoLogicCart.placeOrder(id);
     await this.getOrders();
-    console.log(id)
+  }
+
+  async changeAmount(id: number | undefined, price: number | undefined){
+    if(id && price)
+    if(this.amount >= 1){
+      await this.pseudoLogicCart.putOrder(id, this.amount, price)
+    }
   }
 
 
@@ -52,10 +59,10 @@ export class CartComponent implements OnInit {
     if(localToken) {
       let decodToken = jwtDecode(localToken) as User;
       if (decodToken.email)
-        await this.cartState.sendOrderMail(decodToken.email);
+        await this.pseudoLogicCart.sendOrderMail(decodToken.email);
       console.log(decodToken.email)
     }
-    await this.cartState.sendOrderMail(userEmail)
+    await this.pseudoLogicCart.sendOrderMail(userEmail)
     console.log(userEmail)
   }
 

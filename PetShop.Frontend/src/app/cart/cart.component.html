@@ -11,7 +11,8 @@
       <mat-card-content>
   <img mat-card-image src="{{o.productImage}}" alt="Image error">
       <mat-card-subtitle>Product ID:{{ o.productId}}</mat-card-subtitle>
-  <mat-card-subtitle>{{ o.price}} dkk</mat-card-subtitle>
+      <mat-card-subtitle>{{ o.price}} dkk</mat-card-subtitle>
+        <input matInput [(ngModel)]="amount" (change)="changeAmount(o.productId, o.price)">
       </mat-card-content>
       <mat-card-actions>
       <button mat-raised-button (click)="deleteOrderByID(o.userId, o.productId)">Remove from cart</button>
