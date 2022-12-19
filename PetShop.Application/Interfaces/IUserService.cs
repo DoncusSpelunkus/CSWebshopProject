@@ -9,7 +9,7 @@ public interface IUserService
         
     public User CreateUsers(UserDTO userDto);
 
-    public User UpdateUser(User user, UserDTO userDto);
+    public User UpdateUser(User user, UpdateUserDTO userDto);
         
     public User DeleteUserById(Guid userId);
 
