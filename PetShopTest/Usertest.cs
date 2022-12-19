@@ -22,13 +22,14 @@ public class Usertest
             Mock<Logic> logic = new Mock<Logic>();
             Mock<IValidator<UserDTO>> validator = new Mock<IValidator<UserDTO>>();
             Mock<IUserRepo> userRepositoryMock = new Mock<IUserRepo>();
+            Mock<IValidator<UpdateUserDTO>> Updatevalidator = new Mock<IValidator<UpdateUserDTO>>();
             var userID = Guid.NewGuid();
             var user = new User { Id = userID, Name = "John Doe" };
             userRepositoryMock.Setup(x => x.DeleteUser(userID)).Returns(user);
 
 
             IUserService userService =
-                new UserService(userRepositoryMock.Object, mapper.Object, validator.Object, logic.Object);
+                new UserService(userRepositoryMock.Object, mapper.Object, validator.Object, logic.Object, Updatevalidator.Object);
 
             // Act
             var result = userService.DeleteUserById(userID);
@@ -45,13 +46,14 @@ public class Usertest
             var user1 = new User { Id = Guid.NewGuid(), Name = "John Doe" };
             var user2 = new User { Id = Guid.NewGuid(), Name = "Jane Doe" };
             var expectedUsers = new List<User> { user1, user2 };
+            Mock<IValidator<UpdateUserDTO>> Updatevalidator = new Mock<IValidator<UpdateUserDTO>>();
             Mock<IMapper> mapper = new Mock<IMapper>();
             Mock<Logic> logic = new Mock<Logic>();
             Mock<IValidator<UserDTO>> validator = new Mock<IValidator<UserDTO>>();
             Mock<IUserRepo> userRepositoryMock = new Mock<IUserRepo>();
             userRepositoryMock.Setup(r => r.GetAllUser()).Returns(expectedUsers);
 
-            var userService = new UserService(userRepositoryMock.Object, mapper.Object, validator.Object, logic.Object);
+            var userService = new UserService(userRepositoryMock.Object, mapper.Object, validator.Object, logic.Object,Updatevalidator.Object);
 
             // Act
             var users = userService.GetAllUsers();
@@ -69,6 +71,7 @@ public class Usertest
             Mock<Logic> logic = new Mock<Logic>();
             Mock<IValidator<UserDTO>> validator = new Mock<IValidator<UserDTO>>();
             Mock<IUserRepo> userRepositoryMock = new Mock<IUserRepo>();
+            Mock<IValidator<UpdateUserDTO>> Updatevalidator = new Mock<IValidator<UpdateUserDTO>>();
             var userDTO = new UserDTO { Name = "John Doe", password = "my_password" };
             var user = new User
                 { Id = Guid.NewGuid(), Name = "John Doe", HashPassword = new byte[0], SaltPassword = new byte[0] };
@@ -85,7 +88,7 @@ public class Usertest
             userRepositoryMock.Setup(x => x.CreateUser(user)).Returns(user);
             validator.Setup(x => x.Validate(userDTO)).Returns(new ValidationResult());
             IUserService userService =
-                new UserService(userRepositoryMock.Object, mapper.Object, validator.Object, logic.Object);
+                new UserService(userRepositoryMock.Object, mapper.Object, validator.Object, logic.Object, Updatevalidator.Object);
 
             // Act
             var result = userService.CreateUsers(userDTO);
@@ -106,9 +109,10 @@ public class Usertest
             Mock<Logic> logic = new Mock<Logic>();
             Mock<IValidator<UserDTO>> validator = new Mock<IValidator<UserDTO>>();
             Mock<IUserRepo> userRepositoryMock = new Mock<IUserRepo>();
+            Mock<IValidator<UpdateUserDTO>> Updatevalidator = new Mock<IValidator<UpdateUserDTO>>();
             var userID = Guid.NewGuid();
             var user = new User { Id = userID, Name = "John Doe" };
-            var userDTO = new UserDTO { Name = "Jane Doe", password = "new_password" };
+            var userDTO = new UpdateUserDTO() { Name = "Jane Doe", password = "new_password" };
             var hashPassword = user.HashPassword;
             var saltPassword = user.SaltPassword;
             mapper.Setup(x => x.Map(userDTO, user)).Callback(() =>
@@ -122,8 +126,8 @@ public class Usertest
                     salt = new byte[] { 4, 5, 6 };
                 });
             userRepositoryMock.Setup(x => x.UpdateUser(user)).Returns(user);
-            validator.Setup(x => x.Validate(userDTO)).Returns(new ValidationResult());
-            IUserService userService = new UserService(userRepositoryMock.Object, mapper.Object, validator.Object, logic.Object);
+            Updatevalidator.Setup(x => x.Validate(userDTO)).Returns(new ValidationResult());
+            IUserService userService = new UserService(userRepositoryMock.Object, mapper.Object, validator.Object, logic.Object, Updatevalidator.Object);
 
             // Act
             var result = userService.UpdateUser(user, userDTO);
