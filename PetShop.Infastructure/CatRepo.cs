@@ -32,14 +32,14 @@ public class CatRepo: ICatRepo
         _dbContext.SaveChanges();
         return mainCategory;
     }
-    public MainCategory GetMainCategoryByID(int mainCatId)
+    public MainCategory GetMainCategoryById(int mainCatId)
     {
         return _dbContext.MainCategoryTable.FirstOrDefault(c => c.MainCategoryID == mainCatId);
     }
 
-    public MainCategory DeleteMainCategoryByID(int mainCatId)
+    public MainCategory DeleteMainCategoryById(int mainCatId)
     {
-        MainCategory mainCategory = GetMainCategoryByID(mainCatId);
+        MainCategory mainCategory = GetMainCategoryById(mainCatId);
         _dbContext.MainCategoryTable.Remove(mainCategory);
         _dbContext.SaveChanges();
         return mainCategory;
@@ -64,14 +64,14 @@ public class CatRepo: ICatRepo
         return subCategory;
     }
     
-    public SubCategory GetSubCategoryByID(int subCatId)
+    public SubCategory GetSubCategoryById(int subCatId)
     {
         return _dbContext.SubCategoryTable.FirstOrDefault(c => c.SubCategoryID == subCatId);
     }
 
-    public SubCategory DeleteSubCategoryByID(int subCatId)
+    public SubCategory DeleteSubCategoryById(int subCatId)
     {
-        SubCategory subCategory = GetSubCategoryByID(subCatId);
+        SubCategory subCategory = GetSubCategoryById(subCatId);
         _dbContext.SubCategoryTable.Remove(subCategory);
         _dbContext.SaveChanges();
         return subCategory;

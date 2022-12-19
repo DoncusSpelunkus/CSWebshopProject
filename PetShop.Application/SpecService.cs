@@ -56,11 +56,11 @@ public class SpecService : ISpecService
             return _specRepository.DeleteSpecsById(specId);
         }
 
-        public Specs GetSpecByID(int specId)
+        public Specs GetSpecById(int specId)
         {
             if (specId <= 0)
                 throw new ValidationException("ID is invalid");
-            return _specRepository.GetSpecsByID(specId);
+            return _specRepository.GetSpecsById(specId);
         }
         
 }

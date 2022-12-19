@@ -47,8 +47,6 @@ import { UserAdminControlComponent } from './userComponents/user-admin-control/u
 import { UserAdminListComponent } from './userComponents/user-admin-list/user-admin-list.component';
 import { UserAdminEditComponent } from './userComponents/user-admin-edit/user-admin-edit.component';
 import { FooterComponent } from './navigationComponents/footer/footer.component';
-import { NgxsModule } from '@ngxs/store'
-
 
 @NgModule({
   declarations: [
@@ -102,7 +100,6 @@ import { NgxsModule } from '@ngxs/store'
     MatSliderModule,
     MatIconModule,
     MatExpansionModule,
-    NgxsModule,
   ],
 
   providers: [MatSnackBar, Overlay],
