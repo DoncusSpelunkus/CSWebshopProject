@@ -13,3 +13,17 @@ h1{
 mat-expansion-panel{
   margin: 5px;
 }
+
+app-footer{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 91.797px;
+  position: fixed;
+}
+content {
+  padding: 2rem;
+  width: 50%;
+  margin: 0 auto;
+}
