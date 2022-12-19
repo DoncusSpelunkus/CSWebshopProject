@@ -117,9 +117,17 @@ public class OrderRepo : IOrderRepo
             Text = "Your order has been confirmed" + UserOrderProducts,
         };
         using var smpt = new SmtpClient(); 
-        smpt.Connect("smtp.gmail.com", 587, false);
-        smpt.Authenticate("sosugroup2022@gmail.com", "rgkmsmycxkqxtexb");
-        smpt.Send(emailsend);
+        
+        try
+        {
+            smpt.Connect("smtp.gmail.com", 587, false);
+            smpt.Authenticate("sosugroup2022@gmail.com", "rgkmsmycxkqxtexb");
+            smpt.Send(emailsend);
+        }
+        catch(Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
 
     }
 }
