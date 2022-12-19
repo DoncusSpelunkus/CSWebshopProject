@@ -31,14 +31,22 @@
       <h2>Description:</h2>
       <p>{{product.description}}</p>
       <h2>Specifications:</h2>
-      <ul >
-        <li></li>
-      </ul>
+      <table>
+        <tr>
+          <th style="text-align: left">Specification:</th>
+          <th style="text-align: left">Description:</th>
+        </tr>
+        <tr *ngFor="let s of specList">
+          <td>{{s.specName}}</td>
+          <td>{{s.description}}</td>
+        </tr>
+      </table>
     </section>
   </article>
       <mat-card-actions>
         <button mat-raised-button (click)="postOrder(product.id, product.price)">Add to cart</button>
       </mat-card-actions>
  </mat-card>
+<app-footer></app-footer>
 
 

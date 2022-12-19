@@ -4,6 +4,8 @@ import {PsuedoLogicAdmin} from "../../../states/PsuedoLogicAdmin";
 import { PseudoLogicCart } from "../../../states/PseudoLogicCart";
 import { Product} from "../../../Entities/Product";
 import {Category} from "../../../Entities/Category";
+import {CurrentSpecs} from "../../../Entities/CurrentSpecs";
+import {SpecTemplates} from "../../../Entities/SpecTemplates";
 
 @Component({
   selector: 'app-product-detail',
@@ -16,19 +18,22 @@ export class ProductDetailComponent implements OnInit {
   SubCat: any = Category;
   Brand: any = Category;
   rating: number = 0;
+  specList: CurrentSpecs[] = [];
+
   @ViewChild('child') child;
 
-  constructor(private route: ActivatedRoute, private adminState: PsuedoLogicAdmin, public router: Router, private cartState: PseudoLogicCart) {
+  constructor(private route: ActivatedRoute, private psuedoLogicAdmin: PsuedoLogicAdmin, public router: Router, private cartState: PseudoLogicCart) {
 
   }
 
   async ngOnInit() {
     const id = Number(this.route.snapshot.paramMap.get(`id`))
-    this.product = await this.adminState.getProductById(id);
-    this.MainCat = await this.adminState.getCategoryById(this.product.mainCategory, "MainCat")
-    this.SubCat = await this.adminState.getCategoryById(this.product.subCategory, "SubCat")
-    this.Brand = await this.adminState.getCategoryById(this.product.brand, "Brand")
+    this.product = await this.psuedoLogicAdmin.getProductById(id);
+    this.MainCat = await this.psuedoLogicAdmin.getCategoryById(this.product.mainCategory, "MainCat")
+    this.SubCat = await this.psuedoLogicAdmin.getCategoryById(this.product.subCategory, "SubCat")
+    this.Brand = await this.psuedoLogicAdmin.getCategoryById(this.product.brand, "Brand")
     this.child.setProductId(this.product.id)
+    this.specList = await this.psuedoLogicAdmin.getCurrentSpeclist(this.product.specsDescriptions)
     console.log(this.product.ratings)
   }
 

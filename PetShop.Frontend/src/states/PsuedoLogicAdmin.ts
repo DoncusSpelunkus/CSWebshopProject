@@ -171,4 +171,16 @@ export class PsuedoLogicAdmin { // State class for data manipulation
     }
     await this.userService.postUser(dto)
   }
+
+  async getCurrentSpeclist(specList: CurrentSpecs[]){
+    this.specNames = await this.specificationService.getSpecifications();
+    specList.forEach((spec) => {
+      this.specNames.find((specTemp) => {
+        if(spec.specsId === specTemp.id){
+          spec.specName = specTemp.specName;
+        }
+      })
+    });
+    return specList;
+  }
 }
