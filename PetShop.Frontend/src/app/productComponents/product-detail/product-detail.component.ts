@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router'
-import {AdminState} from "../../../states/AdminState";
-import { CartState } from "../../../states/CartState";
+import {PsuedoLogicAdmin} from "../../../states/PsuedoLogicAdmin";
+import { PseudoLogicCart } from "../../../states/PseudoLogicCart";
 import { Product} from "../../../Entities/Product";
 import {Category} from "../../../Entities/Category";
 
@@ -18,7 +18,7 @@ export class ProductDetailComponent implements OnInit {
   rating: number = 0;
   @ViewChild('child') child;
 
-  constructor(private route: ActivatedRoute, private adminState: AdminState, public router: Router, private cartState: CartState) {
+  constructor(private route: ActivatedRoute, private adminState: PsuedoLogicAdmin, public router: Router, private cartState: PseudoLogicCart) {
 
   }
 

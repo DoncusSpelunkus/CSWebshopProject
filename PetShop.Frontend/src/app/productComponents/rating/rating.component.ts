@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import jwtDecode from "jwt-decode";
 import {User} from "../../../Entities/User";
-import {UserState} from "../../../states/UserState";
+import {PseudoLogicUser} from "../../../states/PseudoLogicUser";
 
 @Component({
   selector: 'app-rating',
@@ -15,7 +15,7 @@ export class RatingComponent implements OnInit {
   ratingArr: number[] = []
   productId: number = 0;
 
-  constructor(private userState: UserState) {
+  constructor(private userState: PseudoLogicUser) {
   }
 
 

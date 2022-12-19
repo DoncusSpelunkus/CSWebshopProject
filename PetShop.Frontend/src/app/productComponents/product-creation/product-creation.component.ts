@@ -3,7 +3,7 @@ import { Router} from "@angular/router";
 import { Product } from "../../../Entities/Product";
 import { SpecTemplates } from "../../../Entities/SpecTemplates";
 import {CurrentSpecs} from "../../../Entities/CurrentSpecs";
-import {AdminState} from "../../../states/AdminState";
+import {PsuedoLogicAdmin} from "../../../states/PsuedoLogicAdmin";
 import {Category} from "../../../Entities/Category";
 
 @Component({
@@ -29,7 +29,7 @@ export class ProductCreationComponent implements OnInit{
   @Output()
   change: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(public router: Router, private adminState: AdminState){
+  constructor(public router: Router, private adminState: PsuedoLogicAdmin){
   }
 
   async ngOnInit() {
