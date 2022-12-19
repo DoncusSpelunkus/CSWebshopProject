@@ -21,7 +21,7 @@ public class UserRepo : IUserRepo
         return _dbcontext.UserTable.ToList();
     }
 
-    public User GetUserByID(Guid id)
+    public User GetUserById(Guid id)
     {
         return _dbcontext.UserTable.FirstOrDefault(u => u.Id == id);
     }
@@ -56,13 +56,13 @@ public class UserRepo : IUserRepo
         return user;
     }
 
-    public User GetUserByEmail(string Currentemail)
+    public User GetUserByEmail(string currentEmail)
     {   
       
-        return _dbcontext.UserTable.FirstOrDefault(u => u.Email == Currentemail);
+        return _dbcontext.UserTable.FirstOrDefault(u => u.Email == currentEmail);
     }
 
-    public string GetUserID(string userId)
+    public string GetUserId(string userId)
     {   
         User? id = _dbcontext.UserTable.FirstOrDefault(u => u.Id.ToString().Equals(userId));
         return id.ToString();
