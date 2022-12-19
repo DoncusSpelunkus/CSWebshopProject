@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {LoginState} from "../../../states/LoginState";
+import {PseudoLogicLogin} from "../../../states/PseudoLogicLogin";
 import {Router} from "@angular/router";
 import {User} from "../../../Entities/User";
 
@@ -16,7 +16,7 @@ export class UserRegistrationComponent implements OnInit {
   }
   user: any = User;
 
-  constructor(private loginState: LoginState, private router: Router) { }
+  constructor(private loginState: PseudoLogicLogin, private router: Router) { }
 
   ngOnInit(): void {
   }

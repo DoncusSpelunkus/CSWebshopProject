@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {AdminState} from "../../../states/AdminState";
+import {PsuedoLogicAdmin} from "../../../states/PsuedoLogicAdmin";
 import {Category} from "../../../Entities/Category";
 
 @Component({
@@ -21,7 +21,7 @@ export class CategoryCreationComponent implements OnInit {
   @Output()
   change: EventEmitter<string> = new EventEmitter<string>();
 
-  constructor(private adminState: AdminState) { }
+  constructor(private adminState: PsuedoLogicAdmin) { }
 
 
   ngOnInit(): void {

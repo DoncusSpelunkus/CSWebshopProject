@@ -11,7 +11,7 @@ import {User} from "../Entities/User";
 
 @Injectable({ providedIn: 'root' })
 
-export class AdminState { // State class for data manipulation
+export class PsuedoLogicAdmin { // State class for data manipulation
 
   productsUnmodified: Product[] = [];
   newSpecList: CurrentSpecs[] = [];

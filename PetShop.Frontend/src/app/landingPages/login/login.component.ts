@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {LoginState} from "../../../states/LoginState";
+import {PseudoLogicLogin} from "../../../states/PseudoLogicLogin";
 
 @Component({
   selector: 'app-login',
@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
     email: '',
     password:''
   };
-  constructor(private router: Router, private loginState: LoginState) { }
+  constructor(private router: Router, private loginState: PseudoLogicLogin) { }
 
   ngOnInit(): void {
   }

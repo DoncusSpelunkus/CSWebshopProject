@@ -6,7 +6,7 @@ import {Category} from "../Entities/Category";
 
 @Injectable({ providedIn: 'root' })
 
-export class SearchState{
+export class PseudoLogicSearch {
 
   productsUnmodified: Product[] = [];
   productsModified: Product[] = [];

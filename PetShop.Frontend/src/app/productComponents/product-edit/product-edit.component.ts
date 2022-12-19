@@ -4,7 +4,7 @@ import { Product } from "../../../Entities/Product";
 import { Router } from "@angular/router";
 import {SpecTemplates} from "../../../Entities/SpecTemplates";
 import {CurrentSpecs} from "../../../Entities/CurrentSpecs";
-import {AdminState} from "../../../states/AdminState";
+import {PsuedoLogicAdmin} from "../../../states/PsuedoLogicAdmin";
 import {Category} from "../../../Entities/Category";
 
 @Component({
@@ -28,7 +28,7 @@ export class ProductEditComponent implements OnInit { // This component tend to 
   @ViewChild('child') child;
 
 
-  constructor(private Aroute: ActivatedRoute, private adminState: AdminState, public route: Router) {
+  constructor(private Aroute: ActivatedRoute, private adminState: PsuedoLogicAdmin, public route: Router) {
   }
 
   async ngOnInit() {

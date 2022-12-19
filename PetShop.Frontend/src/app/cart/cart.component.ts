@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {Order} from "../../Entities/Order";
-import { CartState} from "../../states/CartState";
+import { PseudoLogicCart} from "../../states/PseudoLogicCart";
 import jwtDecode from "jwt-decode";
 import {User} from "../../Entities/User";
 
@@ -15,7 +15,7 @@ export class CartComponent implements OnInit {
   order: any = Order;
   orderList: Order[] = [];
 
-  constructor(private Aroute: ActivatedRoute, private cartState: CartState, private router: Router) { }
+  constructor(private Aroute: ActivatedRoute, private cartState: PseudoLogicCart, private router: Router) { }
 
   async ngOnInit() {
     await this.getOrders();

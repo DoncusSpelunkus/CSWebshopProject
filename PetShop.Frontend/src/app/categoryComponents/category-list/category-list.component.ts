@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Category} from "../../../Entities/Category";
-import {AdminState} from "../../../states/AdminState";
+import {PsuedoLogicAdmin} from "../../../states/PsuedoLogicAdmin";
 
 @Component({
   selector: 'app-category-list',
@@ -13,7 +13,7 @@ export class CategoryListComponent implements OnInit {
   subCatList: Category[] = [];
   brandCatList: Category[] = [];
 
-  constructor(private adminState: AdminState) { }
+  constructor(private adminState: PsuedoLogicAdmin) { }
 
   ngOnInit(): void {
     this.updateCat("all")

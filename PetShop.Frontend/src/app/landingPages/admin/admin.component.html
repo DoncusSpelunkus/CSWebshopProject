@@ -21,8 +21,8 @@
     </mat-tab>
     <mat-tab label="Users">
       <h1>Create and delete User</h1>
-      <app-user-admin-control></app-user-admin-control>
-      <app-user-admin-list></app-user-admin-list>
+      <app-user-admin-control (change)="onChangeUser($event)"></app-user-admin-control>
+      <app-user-admin-list #userList></app-user-admin-list>
     </mat-tab>
   </mat-tab-group>
 </div>

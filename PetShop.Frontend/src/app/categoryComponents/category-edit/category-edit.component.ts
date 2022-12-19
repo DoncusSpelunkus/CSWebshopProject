@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Category} from "../../../Entities/Category";
 import {ActivatedRoute, Router} from "@angular/router";
-import {AdminState} from "../../../states/AdminState";
+import {PsuedoLogicAdmin} from "../../../states/PsuedoLogicAdmin";
 
 @Component({
   selector: 'app-category-edit',
@@ -13,7 +13,7 @@ export class CategoryEditComponent implements OnInit {
   category: any = Category;
   path: string = '';
 
-  constructor(private Aroute: ActivatedRoute, private adminState: AdminState, public route: Router) {
+  constructor(private Aroute: ActivatedRoute, private adminState: PsuedoLogicAdmin, public route: Router) {
 
   }
 

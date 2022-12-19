@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {User} from "../../../Entities/User";
-import {AdminState} from "../../../states/AdminState";
+import {PsuedoLogicAdmin} from "../../../states/PsuedoLogicAdmin";
 
 @Component({
   selector: 'app-user-admin-control',
@@ -16,7 +16,7 @@ export class UserAdminControlComponent implements OnInit {
   @Output()
   change: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(private adminState: AdminState) { }
+  constructor(private adminState: PsuedoLogicAdmin) { }
 
   ngOnInit(): void {
   }

@@ -5,7 +5,7 @@ import {RatingService} from "../services/RatingService";
 
 @Injectable({ providedIn: 'root' })
 
-export class UserState { // State class for data manipulation
+export class PseudoLogicUser { // State class for data manipulation
 
   constructor(private userService: UserService, private ratingService: RatingService) {
   }

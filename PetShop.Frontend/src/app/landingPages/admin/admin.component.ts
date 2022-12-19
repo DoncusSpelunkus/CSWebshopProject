@@ -10,6 +10,7 @@ export class AdminComponent implements OnInit {
   @ViewChild('catList') catChild;
   @ViewChild('specList') specChild;
   @ViewChild('prodList') prodChild;
+  @ViewChild('userList') userChild;
 
   constructor() { }
 
@@ -26,5 +27,9 @@ export class AdminComponent implements OnInit {
 
   onChangeCat($event: string) {
     this.catChild.updateCat($event)
+  }
+
+  onChangeUser(event) {
+    this.userChild.ngOnInit()
   }
 }

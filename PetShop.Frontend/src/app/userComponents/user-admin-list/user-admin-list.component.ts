@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {AdminState} from "../../../states/AdminState";
+import {PsuedoLogicAdmin} from "../../../states/PsuedoLogicAdmin";
 
 @Component({
   selector: 'app-user-admin-list',
@@ -10,7 +10,7 @@ export class UserAdminListComponent implements OnInit {
 
   userList: any;
 
-  constructor(private adminState: AdminState) { }
+  constructor(private adminState: PsuedoLogicAdmin) { }
 
   async ngOnInit() {
     this.userList = await this.adminState.getUserList()

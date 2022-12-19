@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import { Router } from '@angular/router'
-import {SearchState} from "../../../states/SearchState";
+import {PseudoLogicSearch} from "../../../states/PseudoLogicSearch";
 import { Product} from "../../../Entities/Product";
-import {CartState} from "../../../states/CartState";
+import {PseudoLogicCart} from "../../../states/PseudoLogicCart";
 import {Order} from "../../../Entities/Order";
 
 
@@ -17,7 +17,7 @@ export class ProductListComponent implements OnInit{
   order: any = Order;
   @Input() name = '';
 
-  constructor(private searchState: SearchState, private cartState: CartState, public router: Router) {
+  constructor(private searchState: PseudoLogicSearch, private cartState: PseudoLogicCart, public router: Router) {
 
   }
 

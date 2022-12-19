@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {SpecTemplates} from "../../../Entities/SpecTemplates";
-import {AdminState} from "../../../states/AdminState";
+import {PsuedoLogicAdmin} from "../../../states/PsuedoLogicAdmin";
 
 @Component({
   selector: 'app-specification-update',
@@ -12,7 +12,7 @@ export class SpecificationUpdateComponent implements OnInit {
 
 specification: any;
 
-  constructor(private Aroute: ActivatedRoute, private adminState: AdminState, public route: Router) {
+  constructor(private Aroute: ActivatedRoute, private adminState: PsuedoLogicAdmin, public route: Router) {
     this.specification = SpecTemplates;
   }
 

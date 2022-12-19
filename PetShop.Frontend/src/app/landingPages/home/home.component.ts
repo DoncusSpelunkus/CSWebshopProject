@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {SearchState} from "../../../states/SearchState";
+import {PseudoLogicSearch} from "../../../states/PseudoLogicSearch";
 import {Category} from "../../../Entities/Category";
 
 @Component({
@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
   ratings: number[] = [1,2,3,4,5];
   @ViewChild('child') child;
 
-  constructor(private searchState: SearchState) { }
+  constructor(private searchState: PseudoLogicSearch) { }
 
   async ngOnInit() {
     this.mainCatList = await this.searchState.getCategories("MainCat")

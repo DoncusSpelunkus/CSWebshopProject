@@ -7,7 +7,7 @@ import {Router} from "@angular/router";
 
 @Injectable({ providedIn: 'root' })
 
-export class LoginState{
+export class PseudoLogicLogin {
 
   user: any;
 

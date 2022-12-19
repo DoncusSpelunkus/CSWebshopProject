@@ -1,13 +1,10 @@
 import {Injectable} from "@angular/core";
-import { Order } from "../Entities/Order";
-import {CartService, customAxios} from "../services/cart.service";
-import {Product} from "../Entities/Product";
-import jwtDecode from "jwt-decode";
-import {User} from "../Entities/User";
+import {CartService} from "../services/cart.service";
+
 
 @Injectable({ providedIn: 'root' })
 
-export class CartState { // State class for data manipulation
+export class PseudoLogicCart { // State class for data manipulation
 
   constructor(private cartService: CartService) {
   }

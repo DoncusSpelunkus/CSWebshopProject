@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {User} from "../../../Entities/User";
 import jwtDecode from "jwt-decode";
-import {UserState} from "../../../states/UserState";
+import {PseudoLogicUser} from "../../../states/PseudoLogicUser";
 
 @Component({
   selector: 'app-user-edit',
@@ -13,7 +13,7 @@ export class UserEditComponent implements OnInit {
   user: any;
   anything: string = '';
 
-  constructor(private Aroute: ActivatedRoute, private userState: UserState, public route: Router) {
+  constructor(private Aroute: ActivatedRoute, private userState: PseudoLogicUser, public route: Router) {
     this.user = User;
   }
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {CartService} from "../../../services/cart.service";
-import {CartState} from "../../../states/CartState";
+import {PseudoLogicCart} from "../../../states/PseudoLogicCart";
 import {Order} from "../../../Entities/Order";
 import {ActivatedRoute} from "@angular/router";
 import jwtDecode from "jwt-decode";
@@ -22,7 +22,7 @@ export class UserComponent implements OnInit {
   orderProductList: OrderProduct[] = [];
   interMediateList: Order[] = [];
 
-  constructor(private Aroute: ActivatedRoute, private cartService: CartService, private cartState: CartState) { }
+  constructor(private Aroute: ActivatedRoute, private cartService: CartService, private cartState: PseudoLogicCart) { }
 
   async ngOnInit() {
     await this.orderSort();
