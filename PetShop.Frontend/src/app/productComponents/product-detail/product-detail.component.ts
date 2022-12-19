@@ -28,8 +28,8 @@ export class ProductDetailComponent implements OnInit {
     this.MainCat = await this.adminState.getCategoryById(this.product.mainCategory, "MainCat")
     this.SubCat = await this.adminState.getCategoryById(this.product.subCategory, "SubCat")
     this.Brand = await this.adminState.getCategoryById(this.product.brand, "Brand")
-    this.product.ratings = 5;
     this.child.setProductId(this.product.id)
+    console.log(this.product.ratings)
   }
 
   async postOrder(id: number, price: number) {
