@@ -9,14 +9,23 @@ mat-drawer-container {
   z-index: 1;
 }
 mat-drawer{
-  top: 105.5px;
-  position: fixed;
+  position: absolute;
   padding-top: 10px;
   text-align: center;
-  width: 200px;
-  height: 620px;
+  width: 220px;
+  height: 100%;
   z-index: 1;
+
  }
+
+.filterButtonsUl{
+  padding-left: 0;
+}
+
+.filterButtons{
+  margin-right: 5px !important;
+  width: 100px;
+}
 
 input{
   margin: 5px;
@@ -28,7 +37,7 @@ mat-card-subtitle{
 
 .mat-drawer-container,
 .mat-drawer-content {
-  height: auto;
+  height: 100%;
 }
 
 app-footer{
@@ -39,5 +48,13 @@ app-footer{
   display: flex;
   min-height: 100vh;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  align-content: stretch;
+}
+
+
+.footer {
+  margin-top: auto;
 }

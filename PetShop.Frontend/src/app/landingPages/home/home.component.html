@@ -1,56 +1,61 @@
-<div>
-  <div id ="ScrollButton">
-    <button mat-raised-button (click)="drawer.toggle()">Open Filters</button>
+<div class="flex-wrapper">
+  <div>
+    <div id ="ScrollButton">
+      <button mat-raised-button (click)="drawer.toggle()">Open Filters</button>
+    </div>
+    <app-header class="header" (emitter)="send($event)"></app-header>
+    <mat-drawer-container>
+      <mat-drawer #drawer mode="side">
+        <mat-label>Price:</mat-label>
+        <br>
+        <mat-slider min="0" max="1000" step="10" thumbLabel (input)="updateList($event)">
+        </mat-slider>
+        <mat-form-field appearance="outline">Main category:
+          <mat-select [(ngModel)]="categorySelector.mainCategoryID" name="Main Category">
+            <mat-option [value]=undefined>none</mat-option>
+            <mat-option *ngFor="let categories of mainCatList" [value]="categories.mainCategoryID" >
+              {{categories.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">Sub category:
+          <mat-select [(ngModel)]="categorySelector.subCategoryID" name="SubCategory">
+            <mat-option [value]=undefined>none</mat-option>
+            <mat-option *ngFor="let categories of subCatList" [value]="categories.subCategoryID" >
+              {{categories.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">Brand:
+          <mat-select [(ngModel)]="categorySelector.id" name="Brand">
+            <mat-option [value]=undefined>none</mat-option>
+            <mat-option *ngFor="let categories of brandCatList" [value]="categories.id" >
+              {{categories.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">Rating:
+          <mat-select [(ngModel)]="ratingStorage" name="Rating">
+            <mat-option [value]=undefined>none</mat-option>
+            <mat-option *ngFor="let ratings of ratings" [value]="ratings.valueOf()" >
+              {{ratings.valueOf()}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <ul class="filterButtonsUl">
+          <button mat-raised-button class="filterButtons" (click)="filter()">Filter</button>
+          <button mat-raised-button class="filterButtons" (click)="clearFilter()">Clear filter</button>
+        </ul>
+      </mat-drawer>
+      <mat-drawer-content>
+        <div>
+          <app-product-list [name]="currentName" #child></app-product-list>
+        </div>
+      </mat-drawer-content>
+    </mat-drawer-container>
   </div>
-  <app-header class="header" (emitter)="send($event)"></app-header>
-  <mat-drawer-container>
-    <mat-drawer #drawer mode="side">
-      <mat-label>Price:</mat-label>
-      <br>
-      <mat-slider min="0" max="1000" step="10" thumbLabel (input)="updateList($event)">
-      </mat-slider>
-      <mat-form-field appearance="outline">Main category:
-        <mat-select [(ngModel)]="categorySelector.mainCategoryID" name="Main Category">
-          <mat-option [value]=undefined>none</mat-option>
-          <mat-option *ngFor="let categories of mainCatList" [value]="categories.mainCategoryID" >
-            {{categories.name}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field appearance="outline">Sub category:
-        <mat-select [(ngModel)]="categorySelector.subCategoryID" name="SubCategory">
-          <mat-option [value]=undefined>none</mat-option>
-          <mat-option *ngFor="let categories of subCatList" [value]="categories.subCategoryID" >
-            {{categories.name}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field appearance="outline">Brand:
-        <mat-select [(ngModel)]="categorySelector.id" name="Brand">
-          <mat-option [value]=undefined>none</mat-option>
-          <mat-option *ngFor="let categories of brandCatList" [value]="categories.id" >
-            {{categories.name}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field appearance="outline">Rating:
-        <mat-select [(ngModel)]="ratingStorage" name="Rating">
-          <mat-option [value]=undefined>none</mat-option>
-          <mat-option *ngFor="let ratings of ratings" [value]="ratings.valueOf()" >
-            {{ratings.valueOf()}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <ul>
-      <button style="color: black" (click)="filter()">Filter</button>
-      <button style="color: black" (click)="clearFilter()">Clear filter</button>
-      </ul>
-    </mat-drawer>
-    <mat-drawer-content>
-      <div>
-        <app-product-list [name]="currentName" #child></app-product-list>
-      </div>
-    </mat-drawer-content>
-  </mat-drawer-container>
-  <app-footer class="footer"></app-footer>
+  <div style="flex-grow:1; background-color: #303030" ></div>
+  <footer>
+    <app-footer></app-footer>
+  </footer>
 </div>

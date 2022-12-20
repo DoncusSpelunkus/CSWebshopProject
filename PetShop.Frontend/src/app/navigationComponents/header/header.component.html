@@ -2,17 +2,16 @@
   <div class="nav">
     <ul>
       <a href=""><img class="leftImg" src="https://logoeps.com/wp-content/uploads/2014/07/33455-baidu-paw-logo-icon-vector-icon-vector-eps.png" alt=""></a>
-
       <li class="searchStuff">
         <div class="search">
           <input type="text" class="searchTerm" placeholder="What are you looking for?" *ngIf="isHomeRoute()" [(ngModel)]="name" placeholder="Search here.." (keyup)="emit(keyword.value);" #keyword>
-          <button type="submit" class="searchButton">
+          <button type="submit" class="searchButton" *ngIf="isHomeRoute()">
             <i class="fa fa-search"></i>
           </button>
         </div>
       </li>
-      <li class="rightImgLi"><a href="login"><img class="rightImg" src="https://cdn4.iconfinder.com/data/icons/man-user-human-person-avatar-business-profile/100/18A-1User-128.png" alt=""></a></li>
-      <li class="rightImgLi"><a href="cart"><img class="rightImg" src="https://images.emojiterra.com/google/noto-emoji/v2.034/512px/1f6d2.png" alt=""></a></li>
+      <li class="rightImgLi"  style="padding-top: 13px !important;"><a href="login"><img class="rightImg" src="https://cdn4.iconfinder.com/data/icons/man-user-human-person-avatar-business-profile/100/18A-1User-128.png" alt=""></a></li>
+      <li class="rightImgLi" style="padding-top: 10px !important;"><a href="cart"><img class="rightImg" src="https://images.emojiterra.com/google/noto-emoji/v2.034/512px/1f6d2.png" alt=""></a></li>
       </ul>
   </div>
 </div>
