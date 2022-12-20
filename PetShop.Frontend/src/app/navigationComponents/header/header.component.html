@@ -1,9 +1,20 @@
-<nav>
-  <a href=""><img src="https://logoeps.com/wp-content/uploads/2014/07/33455-baidu-paw-logo-icon-vector-icon-vector-eps.png" alt=""></a>
-  <input class="searchFilter" type="text" *ngIf="isHomeRoute()" [(ngModel)]="name" placeholder="Search here.." (keyup)="emit(keyword.value);" #keyword>
-  <ul>
-    <li><a href="login"><img src="https://cdn4.iconfinder.com/data/icons/man-user-human-person-avatar-business-profile/100/18A-1User-128.png" alt=""></a></li>
-    <li><a href="cart"><img src="https://images.emojiterra.com/google/noto-emoji/v2.034/512px/1f6d2.png" alt=""></a></li>
-    <a href=""><button mat-raised-button *ngIf="checkLocalStorage()" (click)="logOut()">Logout</button></a>
-  </ul>
-</nav>
+<div class="body">
+  <div class="nav">
+    <ul>
+      <a href=""><img class="leftImg" src="https://logoeps.com/wp-content/uploads/2014/07/33455-baidu-paw-logo-icon-vector-icon-vector-eps.png" alt=""></a>
+
+      <li class="searchStuff">
+        <div class="search">
+          <input type="text" class="searchTerm" placeholder="What are you looking for?" *ngIf="isHomeRoute()" [(ngModel)]="name" placeholder="Search here.." (keyup)="emit(keyword.value);" #keyword>
+          <button type="submit" class="searchButton">
+            <i class="fa fa-search"></i>
+          </button>
+        </div>
+      </li>
+      <li class="rightImgLi"><a href="login"><img class="rightImg" src="https://cdn4.iconfinder.com/data/icons/man-user-human-person-avatar-business-profile/100/18A-1User-128.png" alt=""></a></li>
+      <li class="rightImgLi"><a href="cart"><img class="rightImg" src="https://images.emojiterra.com/google/noto-emoji/v2.034/512px/1f6d2.png" alt=""></a></li>
+      </ul>
+  </div>
+</div>
+
+

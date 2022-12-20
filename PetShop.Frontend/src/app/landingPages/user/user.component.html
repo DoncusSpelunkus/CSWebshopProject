@@ -1,20 +1,20 @@
 <div class="wrapper">
-  <app-header></app-header>
-  <mat-tab-group mat-stretch-tabs class="content">
-    <mat-tab label="Personal information">
-      <h1>Personal information</h1>
-      <app-user-edit></app-user-edit>
-    </mat-tab>
-    <mat-tab label="Previous orders">
-      <h1>Previous orders</h1>
-      <div *ngFor="let o of orderProductList">
-        <mat-expansion-panel hideToggle>
+<app-header></app-header>
+<mat-tab-group mat-stretch-tabs class="content">
+  <mat-tab label="Personal information">
+    <h1>Personal information</h1>
+    <app-user-edit></app-user-edit>
+  </mat-tab>
+  <mat-tab label="Previous orders">
+    <h1>Previous orders</h1>
+    <div *ngFor="let o of orderProductList">
+      <mat-expansion-panel hideToggle>
         <mat-expansion-panel-header>
           <mat-panel-title>Order ID: {{o.uniqueId}}</mat-panel-title>
           <div>
-          <mat-panel-description>
-          {{o.time}}
-          </mat-panel-description>
+            <mat-panel-description>
+              {{o.time}}
+            </mat-panel-description>
           </div>
         </mat-expansion-panel-header>
         <div *ngFor="let p of o.listOfUniqueId">
@@ -24,13 +24,18 @@
           <p>Price: {{p.price}}</p>
           <p>Quantity: {{p.amount}}</p>
         </div>
-          <hr>
-        </mat-expansion-panel>
-      </div>
-    </mat-tab>
-    </mat-tab-group>
-  <app-footer></app-footer>
+        <hr>
+      </mat-expansion-panel>
+    </div>
+  </mat-tab>
+</mat-tab-group>
+<div style="flex-grow:1"></div>
+    <footer>
+      <app-footer></app-footer>
+    </footer>
 </div>
+
+
 
 
 

@@ -14,19 +14,9 @@ mat-expansion-panel{
   margin: 5px;
 }
 
-
-body {
-  height: 100%;
-  width: 100%;
-}
-
-.wrapper {
+.wrapper{
+  min-height: 120vh;
   display: flex;
   flex-direction: column;
-  min-height: 100%;
-  justify-content: space-between;
-}
-
-::ng-deep .content {
-  flex-grow: 1;
+  overflow: scroll !important;
 }
