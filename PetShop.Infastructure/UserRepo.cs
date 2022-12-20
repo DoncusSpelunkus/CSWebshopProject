@@ -27,19 +27,16 @@ public class UserRepo : IUserRepo
     }
 
     public User CreateUser(User user)
-    {   if(_dbcontext.UserTable.Any(u => u.Name.Equals(user.Name)))
-        {
-            throw new Exception("User already exists");
-        }
+    {   
         if (_dbcontext.UserTable.Any(u => u.Email.Equals(user.Email)))
         {
-            throw new Exception("Email already exists");
+            throw new Exception("User with this email already exists");
         }
         _dbcontext.UserTable.Add(user);
         _dbcontext.SaveChanges();
         return user;
     }
-   // method used for creating user in the database
+   
     public User UpdateUser(User user)
     {
         
