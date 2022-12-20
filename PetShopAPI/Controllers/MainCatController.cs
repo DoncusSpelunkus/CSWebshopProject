@@ -65,12 +65,10 @@ namespace PetShopApi.Controllers
         [Authorize]
         public ActionResult<MainCategory> CreateMainCategory(MainCatDTO dto)
         {
-            // checking if the token holds an admin
-            bool hasClaim = User.HasClaim(ClaimTypes.Role, "Admin");
             try
             {
                 // Ensure the user is authenticated
-                if (!User.Identity.IsAuthenticated)
+                if (!User.Identity.IsAuthenticated == User.HasClaim("type", "Admin"))
                     return Unauthorized();
                 else
                 {
@@ -95,12 +93,10 @@ namespace PetShopApi.Controllers
         public ActionResult<MainCategory> UpdateMainCategory([FromRoute] int mainCatID, [FromBody] MainCatDTO mainCategory)
         {
             
-            // checking if the token holds an admin
-            bool hasClaim = User.HasClaim(ClaimTypes.Role, "Admin");
             try
             {
                 // Ensure the user is authenticated
-                if (!User.Identity.IsAuthenticated)
+                if (!User.Identity.IsAuthenticated == User.HasClaim("type", "Admin"))
                     return Unauthorized();
                 else
                 {
@@ -122,12 +118,10 @@ namespace PetShopApi.Controllers
 
         public ActionResult<MainCategory> DeleteMainCategoryByID(int mainCatID)
         {
-            // checking if the token holds an admin
-            bool hasClaim = User.HasClaim(ClaimTypes.Role, "Admin");
             try
             {
                 // Ensure the user is authenticated
-                if (!User.Identity.IsAuthenticated)
+                if (!User.Identity.IsAuthenticated == User.HasClaim("type", "Admin"))
                     return Unauthorized();
                 else
                 {

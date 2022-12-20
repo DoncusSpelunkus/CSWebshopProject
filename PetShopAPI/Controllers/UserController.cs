@@ -28,12 +28,10 @@ public class UserController : ControllerBase
     [Authorize]
     public ActionResult<List<User>> GetAllUsers()
     {
-        // checking if the token holds an admin
-        bool hasClaim = User.HasClaim(ClaimTypes.Role, "Admin");
         try
         {
             // Ensure the user is authenticated
-            if (!User.Identity.IsAuthenticated)
+            if (!User.Identity.IsAuthenticated == User.HasClaim("type", "Admin"))
                 return Unauthorized();
             else
             {

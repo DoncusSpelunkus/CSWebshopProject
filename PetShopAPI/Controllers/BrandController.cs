@@ -59,12 +59,10 @@ namespace PetShopApi.Controllers{
         [Authorize]
         public ActionResult<Brand> CreateBrand(BrandDto dto)
         {
-            // checking if the token holds an admin
-            bool hasClaim = User.HasClaim(ClaimTypes.Role, "Admin");
             try
             {
                 // Ensure the user is authenticated
-                if (!User.Identity.IsAuthenticated)
+                if (!User.Identity.IsAuthenticated == User.HasClaim("type", "Admin"))
                     return Unauthorized();
                 else
                 {
@@ -87,12 +85,10 @@ namespace PetShopApi.Controllers{
         [Authorize]
         public ActionResult<MainCategory> UpdateBrand([FromRoute] int brandID, [FromBody] BrandDto brandDto)
         {
-            // checking if the token holds an admin
-            bool hasClaim = User.HasClaim(ClaimTypes.Role, "Admin");
             try
             {
                 // Ensure the user is authenticated
-                if (!User.Identity.IsAuthenticated)
+                if (!User.Identity.IsAuthenticated == User.HasClaim("type", "Admin"))
                     return Unauthorized();
                 else
                 {
@@ -113,12 +109,10 @@ namespace PetShopApi.Controllers{
         [Authorize]
         public ActionResult<Brand> DeleteBrandByID(int brandID)
         {
-            // checking if the token holds an admin
-            bool hasClaim = User.HasClaim(ClaimTypes.Role, "Admin");
             try
             {
                 // Ensure the user is authenticated
-                if (!User.Identity.IsAuthenticated)
+                if (!User.Identity.IsAuthenticated == User.HasClaim("type", "Admin"))
                     return Unauthorized();
                 else
                 {
