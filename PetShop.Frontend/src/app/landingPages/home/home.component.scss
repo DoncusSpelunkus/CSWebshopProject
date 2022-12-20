@@ -2,17 +2,30 @@
   position: fixed;
   bottom: 50px;
   right: 40px;
-  z-index: 2;
+  z-index: 4;
 }
 
 mat-drawer-container {
   z-index: 1;
 }
 mat-drawer{
+  position: absolute;
   padding-top: 10px;
   text-align: center;
-  width: 200px;
+  width: 220px;
+  height: 100%;
+  z-index: 1;
+
  }
+
+.filterButtonsUl{
+  padding-left: 0;
+}
+
+.filterButtons{
+  margin-right: 5px !important;
+  width: 100px;
+}
 
 input{
   margin: 5px;
@@ -22,3 +35,26 @@ mat-card-subtitle{
   margin: 0px;
 }
 
+.mat-drawer-container,
+.mat-drawer-content {
+  height: 100%;
+}
+
+app-footer{
+  z-index: 3;
+}
+
+::ng-deep .flex-wrapper {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  align-content: stretch;
+}
+
+
+.footer {
+  margin-top: auto;
+}

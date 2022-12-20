@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router'
-import {AdminState} from "../../../states/AdminState";
-import { CartService} from "../../../services/cart.service";
+import {PsuedoLogicAdmin} from "../../../states/PsuedoLogicAdmin";
+import { PseudoLogicCart } from "../../../states/PseudoLogicCart";
 import { Product} from "../../../Entities/Product";
 import {Category} from "../../../Entities/Category";
+import {CurrentSpecs} from "../../../Entities/CurrentSpecs";
 
 @Component({
   selector: 'app-product-detail',
@@ -15,24 +16,27 @@ export class ProductDetailComponent implements OnInit {
   MainCat: any = Category;
   SubCat: any = Category;
   Brand: any = Category;
+  rating: number = 0;
+  specList: CurrentSpecs[] = [];
 
-  constructor(private route: ActivatedRoute, private adminState: AdminState, public router: Router, private cartService: CartService) {
+  @ViewChild('child') child;
+
+  constructor(private route: ActivatedRoute, private psuedoLogicAdmin: PsuedoLogicAdmin, public router: Router, private pseudoLogicCart: PseudoLogicCart) {
 
   }
 
   async ngOnInit() {
     const id = Number(this.route.snapshot.paramMap.get(`id`))
-    this.product = await this.adminState.getProductById(id);
-    this.MainCat = await this.adminState.getCategoryById(this.product.mainCategory, "MainCat")
-    this.SubCat = await this.adminState.getCategoryById(this.product.subCategory, "SubCat")
-    this.Brand = await this.adminState.getCategoryById(this.product.brand, "Brand")
+    this.product = await this.psuedoLogicAdmin.getProductById(id);
+    this.MainCat = await this.psuedoLogicAdmin.getCategoryById(this.product.mainCategory, "MainCat")
+    this.SubCat = await this.psuedoLogicAdmin.getCategoryById(this.product.subCategory, "SubCat")
+    this.Brand = await this.psuedoLogicAdmin.getCategoryById(this.product.brand, "Brand")
+    this.child.setProductId(this.product.id)
+    this.specList = await this.psuedoLogicAdmin.getCurrentSpeclist(this.product.specsDescriptions)
   }
 
-  addToCart(product: any) {
-    if (!this.cartService.productInCart(product)){
-      this.cartService.addToCart(product);
-      this.product = [this.cartService.getProduct()];
-    }
-    window.alert('Your product has been added to the cart!');
+  async postOrder(id: number, price: number) {
+    await this.pseudoLogicCart.postOrder(id, price)
   }
+
 }

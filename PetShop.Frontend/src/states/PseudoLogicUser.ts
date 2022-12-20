@@ -1,12 +1,13 @@
 import {Injectable} from "@angular/core";
 import {User} from "../Entities/User";
 import {UserService} from "../services/UserService";
+import {RatingService} from "../services/RatingService";
 
 @Injectable({ providedIn: 'root' })
 
-export class UserState { // State class for data manipulation
+export class PseudoLogicUser {
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private ratingService: RatingService) {
   }
 
   async postUser(user: User){
@@ -23,21 +24,29 @@ export class UserState { // State class for data manipulation
   }
 
 
-  async putUser(user: User){
+  async putUser(user: User, password: string, anything: string){
     let dto = {
-      id: user.id,
-      name: user.fullName,
+      name: anything,
+      password: password,
+      type: 1,
       email: user.email,
       address: user.address,
       city: user.city,
       zip: user.zip,
       phone: user.phone,
     }
-    return await this.userService.putUser(dto);
+    return await this.userService.putUser(user.id, dto);
   }
 
   async deleteUserById(id: number){
     return this.userService.deleteUserById(id);
+  }
+
+  async giveRating(rating: number, id: number, productId: number){
+    let dto = {
+      ratingValue: rating
+    }
+    await this.ratingService.postRating(dto,id,productId)
   }
 
 }

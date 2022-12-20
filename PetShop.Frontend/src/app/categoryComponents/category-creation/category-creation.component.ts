@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {AdminState} from "../../../states/AdminState";
+import {PsuedoLogicAdmin} from "../../../states/PsuedoLogicAdmin";
 import {Category} from "../../../Entities/Category";
 
 @Component({
@@ -21,19 +21,20 @@ export class CategoryCreationComponent implements OnInit {
   @Output()
   change: EventEmitter<string> = new EventEmitter<string>();
 
-  constructor(private adminState: AdminState) { }
+  constructor(private psuedoLogicAdmin: PsuedoLogicAdmin) { }
 
 
   ngOnInit(): void {
   }
 
+  // commits the category change and emits a call to refresh the given category list
   async postCategory(path: string) {
-    await this.adminState.postCategory(this.category, path)
+    await this.psuedoLogicAdmin.postCategory(this.category, path)
     this.change.emit(path)
   }
 
   async deleteCategoryById(path: string) {
-    await this.adminState.deleteCategoryById(this.categoryDeleteId, path)
+    await this.psuedoLogicAdmin.deleteCategoryById(this.categoryDeleteId, path)
     this.change.emit(path)
   }
 }

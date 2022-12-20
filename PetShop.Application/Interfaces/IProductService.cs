@@ -9,15 +9,15 @@ namespace PetShop.Application.Interfaces
         
         public Product CreateProduct(ProdDTO dto);
 
-        public Product UpdateProduct(int productID, ProdDTO dto);
+        public Product UpdateProduct(int productId, ProdDTO dto);
         
-        public Product DeleteProduct(int productID);
+        public Product DeleteProduct(int productId);
 
-        public Product GetProductByID(int productID);
+        public Product GetProductById(int productId);
         
         public void RebuildDB();
-        public Rating AddRating(ratingDTO rating, int productID, Guid userId);
-        public Rating UpdateRating(ratingDTO ratingdto, int productId, Guid userId);
+        public Rating AddRating(ratingDTO rating, int productId, Guid userId);
+        public Rating UpdateRating(ratingDTO ratingDto, int productId, Guid userId);
     }
 }
 

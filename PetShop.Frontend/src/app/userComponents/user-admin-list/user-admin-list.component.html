@@ -1,0 +1,10 @@
+<mat-grid-list cols="5" rowHeight="150px" gutterSize="15px">
+  <mat-grid-tile  *ngFor="let s of userList" >
+    <mat-card style="margin: 20px;text-align: center">
+      <mat-card>Name: {{s.name}}</mat-card>
+      <mat-card *ngIf="s.type == 2">Type: Admin</mat-card>
+      <mat-card *ngIf="s.type == 1">Type: User</mat-card>
+      <button mat-raised-button (click)="userDelete(s.id)">Delete this user</button>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>

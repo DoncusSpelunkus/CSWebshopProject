@@ -1,6 +1,6 @@
-import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Product} from "../../../Entities/Product";
-import {SearchState} from "../../../states/SearchState";
+import {PseudoLogicSearch} from "../../../states/PseudoLogicSearch";
 import {Router} from "@angular/router";
 
 @Component({
@@ -15,7 +15,7 @@ export class HeaderComponent implements OnInit {
 
   @Output() emitter = new EventEmitter<string>();
 
-  constructor(private searchState: SearchState, private router: Router) { }
+  constructor(private searchState: PseudoLogicSearch, private router: Router) { }
 
   async ngOnInit() {
     this.products = await this.searchState.getProducts();
@@ -33,4 +33,12 @@ export class HeaderComponent implements OnInit {
     this.router.navigateByUrl("cart")
   }
 
+  checkLocalStorage(){
+    return !!localStorage.getItem('auth');
+
+  }
+
+  isHomeRoute(){
+    return this.router.url === '/';
+  }
 }

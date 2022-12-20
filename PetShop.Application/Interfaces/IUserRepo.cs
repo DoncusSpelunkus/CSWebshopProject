@@ -6,10 +6,10 @@ public interface IUserRepo
 {
     
     public List<User> GetAllUser();
-    public User GetUserByID(Guid id);
+    public User GetUserById(Guid id);
     public User CreateUser(User user);
     public User UpdateUser(User user);
     public User DeleteUser(Guid id);
     public User GetUserByEmail(string currentUserEmail);
-    public string GetUserID(string userId);
+    public string GetUserId(string userId);
 }

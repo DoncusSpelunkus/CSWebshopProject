@@ -1,3 +1,4 @@
+<div class="flex-wrapper">
 <app-header></app-header>
 <mat-card>
   <mat-card-subtitle><a routerLink="/">Home</a>/<a>{{MainCat.name}}</a>/<a>{{SubCat.name}}</a>/{{product.name}}</mat-card-subtitle>
@@ -22,19 +23,34 @@
         <p>{{SubCat.name}}</p>
         <h2>Brand:</h2>
         <p>{{Brand.name}}</p>
+        <h2>Rating:</h2>
+        <p data-placeholder="no rating given">{{product.averageRating}}</p>
+        <app-rating #child></app-rating>
       </mat-card-content>
     </section>
     <section class="long-info">
       <h2>Description:</h2>
       <p>{{product.description}}</p>
       <h2>Specifications:</h2>
-      <ul >
-        <li></li>
-      </ul>
+      <table>
+        <tr>
+          <th style="text-align: left">Specification:</th>
+          <th style="text-align: left">Description:</th>
+        </tr>
+        <tr *ngFor="let s of specList">
+          <td>{{s.specName}}</td>
+          <td>{{s.description}}</td>
+        </tr>
+      </table>
     </section>
   </article>
       <mat-card-actions>
-        <button mat-raised-button (click)="addToCart(product)">Add to cart</button>
+        <button mat-raised-button (click)="postOrder(product.id, product.price)">Add to cart</button>
       </mat-card-actions>
  </mat-card>
+  <div style="flex-grow:1; background-color: #424242"></div>
+  <div class="footer">
+    <app-footer></app-footer>
+  </div>
+</div>
 

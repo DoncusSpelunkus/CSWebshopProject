@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {LoginState} from "../../../states/LoginState";
-import {Router} from "@angular/router";
+import {PseudoLogicLogin} from "../../../states/PseudoLogicLogin";
 import {User} from "../../../Entities/User";
 
 @Component({
@@ -10,19 +9,18 @@ import {User} from "../../../Entities/User";
 })
 export class UserRegistrationComponent implements OnInit {
 
-  registerObj: any = {
-    password:'',
-    repeatPassword:''
-  }
+  password: string = ''
+  repeatPassword: string =''
+
   user: any = User;
 
-  constructor(private loginState: LoginState, private router: Router) { }
+  constructor(private loginState: PseudoLogicLogin) { }
 
   ngOnInit(): void {
   }
 
   async onRegister(){
-    await this.loginState.registerUser(this.user, this.registerObj.password, this.registerObj.repeatPassword)
+    await this.loginState.registerUser(this.user, this.password, this.repeatPassword)
   }
 
 }

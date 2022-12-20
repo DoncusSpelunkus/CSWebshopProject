@@ -18,7 +18,7 @@ public class UnitTest1
             ID = 1, Name = "mockFood1", Price = 10, Description = "very good product1", ImageUrl = "fakeURL1",
              MainCategoryObj = new MainCategory(), SubCategoryObj = new SubCategory(), Brand = new Brand()
         };
-        orderRepository.Setup(repo => repo.GetProductByID(id)).Returns(expected);
+        orderRepository.Setup(repo => repo.GetProductById(id)).Returns(expected);
         
         Product actual = new Product()
         {

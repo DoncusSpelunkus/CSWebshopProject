@@ -2,7 +2,6 @@ import axios from "axios";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {catchError} from "rxjs";
 import {Injectable} from "@angular/core";
-import {User} from "../Entities/User";
 
 export const customAxios = axios.create({
   baseURL: 'https://localhost:7143/User/',
@@ -20,38 +19,24 @@ export class LoginService{ // Class for crud requests from the /user/** route of
     customAxios.interceptors.response.use(
       response => {
         if(response.status == 201) {
-          this.matSnackbar.open("Great success", "x", {duration: 500})
+          this.matSnackbar.open("Great success", "x", {duration: 1000})
         }
         return response;
       }, rejected => {
         if(rejected.response.status>=400 && rejected.response.status <= 500) {
-          matSnackbar.open("Incorrect username or password", "x", {duration: 500});
+          matSnackbar.open(rejected.response.data, "x", {duration: 1000});
         }
         catchError(rejected);
       }
     )
   }
 
-  async onLoginCall(email: string, password: string){
-    let dto = {
-      email: email,
-      password: password
-    }
+  async onLoginCall(dto: any){
     let httpResponse = await customAxios.post<any>('login',dto);
     return httpResponse.data;
   }
 
-  async registerUser(user: User, password: string) {
-    let dto = {
-      name: user.fullName,
-      password: password,
-      email: user.email,
-      address: user.address,
-      city: user.city,
-      zip: user.zip,
-      phone: user.phone,
-      type: 1
-    }
+  async registerUser(dto: any) {
     let httpResponse = await customAxios.post<any>('register', dto);
     return httpResponse.status;
   }

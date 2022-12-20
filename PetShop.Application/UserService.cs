@@ -12,16 +12,19 @@ public class UserService : IUserService
     private readonly IUserRepo _UserRepository;
     private readonly IMapper _mapper;
     private IValidator<UserDTO> _UserDTOValidator;
+    private IValidator<UpdateUserDTO> _UpdateUserDTOValidator;
     private readonly Logic _logic;
    
 
-    public UserService(IUserRepo repository, IMapper mapper, IValidator<UserDTO> UserDtoValidator, Logic logic)
+    public UserService(IUserRepo repository, IMapper mapper, IValidator<UserDTO> UserDtoValidator, Logic logic, IValidator<UpdateUserDTO> updateUserDtoValidator)
     {
         _UserRepository = repository;
         _mapper = mapper;
         _UserDTOValidator = UserDtoValidator;
         _logic = logic;
+        _UpdateUserDTOValidator = updateUserDtoValidator;
     }
+   
 
     public List<User> GetAllUsers()
     {
@@ -45,10 +48,10 @@ public class UserService : IUserService
 
     }
 
-    public User UpdateUser(User user, UserDTO userDto)
+    public User UpdateUser(User user, UpdateUserDTO userDto)
     {   
         // Validate the UserDTO object
-        var validation = _UserDTOValidator.Validate(userDto);
+        var validation = _UpdateUserDTOValidator.Validate(userDto);
         if (!validation.IsValid)
         {
             throw new ValidationException(validation.ToString());
@@ -72,17 +75,17 @@ public class UserService : IUserService
     
 
 
-    public User DeleteUserById(Guid userID)
+    public User DeleteUserById(Guid userId)
     {
 
-        if (userID == null) throw new ValidationException("Id is invalid (Delete)");
-        return _UserRepository.DeleteUser(userID);
+        if (userId == null) throw new ValidationException("Id is invalid (Delete)");
+        return _UserRepository.DeleteUser(userId);
     }
 
-    public User GetUserByID(Guid userId)
+    public User GetUserById(Guid userId)
     {
         if (userId == null) throw new ValidationException("Id is invalid (Get)");
-        return _UserRepository.GetUserByID(userId);
+        return _UserRepository.GetUserById(userId);
     }
     
 

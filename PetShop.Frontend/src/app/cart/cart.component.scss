@@ -1,0 +1,46 @@
+img{
+  width: 25%;
+  length: 25%;
+  display: block;
+  padding: 5px;
+}
+
+#ScrollButton {
+  position: fixed;
+  bottom: 50px;
+  right: 40px;
+  z-index: 2;
+}
+
+mat-card{
+  text-align: center;
+}
+mat-card-header{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+img{
+  width: 50%;
+  length: 50%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 5px;
+}
+
+.flex-wrapper {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  align-content: stretch;
+}
+
+.footer {
+  margin-top: auto;
+}
+

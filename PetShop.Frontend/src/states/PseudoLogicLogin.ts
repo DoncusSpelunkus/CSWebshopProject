@@ -7,25 +7,45 @@ import {Router} from "@angular/router";
 
 @Injectable({ providedIn: 'root' })
 
-export class LoginState{
+export class PseudoLogicLogin {
 
   user: any;
 
   constructor(private loginService: LoginService, private matSnackbar: MatSnackBar, private router: Router) {
   }
 
-  async onLoginCall(email: string, password: string){
-    let data = await this.loginService.onLoginCall(email,password);
+  async onLoginCall(email: string, password: string){ // converts the login details to dto object and navigates the user after login
+    let dto = {
+      email: email,
+      password: password
+    }
+    let data = await this.loginService.onLoginCall(dto);
     localStorage.setItem('auth', data);
+    let thisRole = this.getTokenRole();
+    if(thisRole === "Admin"){
+      await this.router.navigateByUrl("admin")
+    }
+    else if (thisRole === "User"){
+      await this.router.navigateByUrl("user")
+    }
   }
 
   async registerUser(user: User, password: string, repeatPassword: string){
-    console.log(user.fullName)
     if(password != ''){
       if(password === repeatPassword){
-        let status = await this.loginService.registerUser(user,password)
+        let dto = {
+          name: user.fullName,
+          password: password,
+          email: user.email,
+          address: user.address,
+          city: user.city,
+          zip: user.zip,
+          phone: user.phone,
+          type: 1
+        }
+        let status = await this.loginService.registerUser(dto)
         if(status == 201){
-          await this.matSnackbar.open("Great success", 'x', {duration:500})
+          await this.matSnackbar.open("Great success", 'x', {duration:1000})
           await this.router.navigateByUrl('')
         }
       }
@@ -36,9 +56,8 @@ export class LoginState{
     this.matSnackbar.open("Password can not be empty")
   }
 
-  getTokenRole(){
+  getTokenRole(){ // gets the tokens user type
     let userProperties = localStorage.getItem('auth')
-    console.log(userProperties)
     if (userProperties != null) {
       let decodedToken = jwtDecode(userProperties) as User;
       if (decodedToken.type != null) {

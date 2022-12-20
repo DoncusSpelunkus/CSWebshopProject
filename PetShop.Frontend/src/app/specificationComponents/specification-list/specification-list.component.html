@@ -1,5 +1,9 @@
-<mat-card style="margin: 20px;text-align: center" *ngFor="let s of specificationList" >
-  <mat-card-title>Name: {{s.specName}}</mat-card-title>
-  <mat-card>Id: {{s.id}}</mat-card>
-  <button routerLink="/specification-update/{{s.id}}"> Edit Product </button>
-</mat-card>
+<mat-grid-list cols="5" rowHeight="150px" gutterSize="15px">
+  <mat-grid-tile  *ngFor="let s of specificationList" >
+    <mat-card style="margin: 20px;text-align: center">
+      <mat-card>Name: <br>{{s.specName}}</mat-card>
+      <mat-card>Id: {{s.id}}</mat-card>
+      <button routerLink="/specification-update/{{s.id}}"> Edit Product </button>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>

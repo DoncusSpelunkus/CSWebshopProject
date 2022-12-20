@@ -33,7 +33,7 @@ public class BrandService: IBrandService
     }
     
 
-    public Brand UpdateBrand(int brandID, BrandDto brandDto)
+    public Brand UpdateBrand(int brandId, BrandDto brandDto)
     {
         var validation = _dtoValidator.Validate(brandDto);
         if (!validation.IsValid)
@@ -42,21 +42,21 @@ public class BrandService: IBrandService
         }
 
         var brand = _mapper.Map<Brand>(brandDto);
-        brand.Id = brandID;
+        brand.Id = brandId;
         return _brandRepository.UpdateBrand(brand);
     }
 
-    public Brand DeleteBrand(int brandID)
+    public Brand DeleteBrand(int brandId)
     {
-        if (brandID == null)
+        if (brandId == null)
             throw new ValidationException("ID is invalid");
-        return _brandRepository.DeleteBrand(brandID);
+        return _brandRepository.DeleteBrand(brandId);
     }
 
-    public Brand GetBrandByID(int brandID)
+    public Brand GetBrandById(int brandId)
     {
-        if (brandID <= 0)
+        if (brandId <= 0)
             throw new ValidationException("ID is invalid");
-        return _brandRepository.GetBrandByID(brandID);
+        return _brandRepository.GetBrandById(brandId);
     }
 }

@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {SearchState} from "../../../states/SearchState";
+import {PseudoLogicSearch} from "../../../states/PseudoLogicSearch";
 import {Category} from "../../../Entities/Category";
 
 @Component({
@@ -19,20 +19,20 @@ export class HomeComponent implements OnInit {
   ratings: number[] = [1,2,3,4,5];
   @ViewChild('child') child;
 
-  constructor(private searchState: SearchState) { }
+  constructor(private pseudoLogicSearch: PseudoLogicSearch) { }
 
   async ngOnInit() {
-    this.mainCatList = await this.searchState.getCategories("MainCat")
-    this.subCatList = await this.searchState.getCategories("SubCat")
-    this.brandCatList = await this.searchState.getCategories("Brand")
+    this.mainCatList = await this.pseudoLogicSearch.getCategories("MainCat")
+    this.subCatList = await this.pseudoLogicSearch.getCategories("SubCat")
+    this.brandCatList = await this.pseudoLogicSearch.getCategories("Brand")
   }
 
   async send(keyword){
     this.currentName = keyword;
   }
 
-  filter(){
-    this.searchState.setCategorySelector(this.categorySelector, this.ratingStorage)
+  filter(){ // Sends the updated filters to the logic and calls the child to get the sorted list
+    this.pseudoLogicSearch.setCategorySelector(this.categorySelector, this.ratingStorage)
     this.child.catSort();
   }
 
@@ -43,7 +43,8 @@ export class HomeComponent implements OnInit {
 
 
   updateList(event){
-    this.searchState.setCurrentPrice(event.value)
+    this.pseudoLogicSearch.setCurrentPrice(event.value)
     this.child.priceSort();
   }
+
 }

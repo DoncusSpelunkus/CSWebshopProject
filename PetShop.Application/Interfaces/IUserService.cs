@@ -9,11 +9,11 @@ public interface IUserService
         
     public User CreateUsers(UserDTO userDto);
 
-    public User UpdateUser(User user, UserDTO userDto);
+    public User UpdateUser(User user, UpdateUserDTO userDto);
         
-    public User DeleteUserById(Guid userID);
+    public User DeleteUserById(Guid userId);
 
-    public User GetUserByID(Guid userId);
+    public User GetUserById(Guid userId);
  
     public User GetUserByEmail(string userEmail);
     

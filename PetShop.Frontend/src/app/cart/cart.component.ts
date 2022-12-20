@@ -1,55 +1,67 @@
 import { Component, OnInit } from '@angular/core';
-import {CartService} from "../../services/cart.service";
-import {Product} from "../../Entities/Product";
-import {ProductService} from "../../services/Product.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
+import {Order} from "../../Entities/Order";
+import { PseudoLogicCart} from "../../states/PseudoLogicCart";
+import jwtDecode from "jwt-decode";
+import {User} from "../../Entities/User";
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss']
 })
+
 export class CartComponent implements OnInit {
 
-  products: any[] = [];
-  productList: any;
-  subTotal!: any;
+  order: any = Order;
+  orderList: Order[] = [];
+  amount: number = 1;
 
-  constructor(private cartService: CartService, private productService: ProductService, private router: Router) { }
+  constructor(private Aroute: ActivatedRoute, private pseudoLogicCart: PseudoLogicCart) { }
 
   async ngOnInit() {
-    await this.productService.getProducts()
-    this.cartService.loadCart();
-    this.products = this.cartService.getProduct();
+    await this.getOrders();
   }
 
-  addToCart(product: any) {
-    if (!this.cartService.productInCart(product)) {
-      product.quantity = 1;
-      this.cartService.addToCart(product);
-      this.products = [...this.cartService.getProduct()];
-      this.subTotal = product.price;
+  async getOrders(){
+    let localToken = localStorage.getItem('auth');
+    if(localToken) {
+      let decodToken = jwtDecode(localToken) as User;
+      if (decodToken.id)
+      this.orderList = await this.pseudoLogicCart.getOrders(decodToken.id);
     }
   }
 
-  removeFromCart(product: any) {
-    this.cartService.removeProduct(product);
-    this.products = this.cartService.getProduct();
+  async putOrder(id, amount, price){
+    await this.pseudoLogicCart.putOrder(id, amount, price)
   }
 
-  get total() {
-    return this.products?.reduce(
-      (sum, product) => ({
-        quantity: 1,
-        price: sum.price + product.quantity * product.price,
-      }),
-      { quantity: 1, price: 0 }
-    ).price;
+  async deleteOrderByID(id, productId){
+    await this.pseudoLogicCart.deleteOrderByID(id, productId);
+    await this.getOrders();
   }
 
-  checkout() {
-    localStorage.setItem('cart_total', JSON.stringify(this.total));
-    this.router.navigate(['/payment']);
+  async placeOrder(){
+    await this.pseudoLogicCart.placeOrder();
+    await this.getOrders();
+  }
+
+  async changeAmount(id: number | undefined, price: number | undefined){ //Changes the amount on the cart element when input is changed
+    if(id && price)
+    if(this.amount >= 1){
+      await this.pseudoLogicCart.putOrder(id, this.amount, price)
+    }
+  }
+
+
+  async sendOrderMail(userEmail) { // Sends a request for a confirmation email to the users email
+    let localToken = localStorage.getItem('auth');
+    if(localToken) {
+      let decodToken = jwtDecode(localToken) as User;
+      if (decodToken.email)
+        await this.pseudoLogicCart.sendOrderMail(decodToken.email);
+    }
+    await this.pseudoLogicCart.sendOrderMail(userEmail)
   }
 
 }

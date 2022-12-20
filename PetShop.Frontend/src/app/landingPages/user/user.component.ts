@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import {PseudoLogicCart} from "../../../states/PseudoLogicCart";
+import {Order} from "../../../Entities/Order";
+import {ActivatedRoute} from "@angular/router";
+import jwtDecode from "jwt-decode";
+import {User} from "../../../Entities/User";
+import {Product} from "../../../Entities/Product";
+import {OrderProduct} from "../../../Entities/OrderProduct";
 
 @Component({
   selector: 'app-user',
@@ -7,9 +14,56 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserComponent implements OnInit {
 
-  constructor() { }
+  product: Product[] = [];
+  order: any = Order;
+  orderList: Order[] = [];
+  orderProduct: any = OrderProduct;
+  orderProductList: OrderProduct[] = [];
+  interMediateList: Order[] = [];
 
-  ngOnInit(): void {
+  constructor(private Aroute: ActivatedRoute, private pseudoLogicCart: PseudoLogicCart) { }
+
+  async ngOnInit() {
+    await this.orderSort();
   }
 
+  async getOrderById() {
+    let localToken = localStorage.getItem('auth');
+    if(localToken) {
+      let decodToken = jwtDecode(localToken) as User;
+      if (decodToken.id)
+        this.orderList = await this.pseudoLogicCart.getOrderById(decodToken.id);
+    }
+  }
+
+  async orderSort(){
+    try{
+    await this.getOrderById();
+    let orderProduct = new OrderProduct()
+    let number = this.orderList[0].orderId
+    let dateOfOrder: string | undefined;
+    this.orderList.forEach((o) => {
+      dateOfOrder = o.dateOfOrder?.split("T")[0];
+      let orderProduct = new OrderProduct()
+      if(o.orderId === number){
+        this.interMediateList.push(o)
+      }
+      if(o.orderId != number){
+        orderProduct.uniqueId = number;
+        orderProduct.listOfUniqueId = this.interMediateList
+        orderProduct.time = o.dateOfOrder?.split("T")[0];
+        this.orderProductList.push(orderProduct)
+        this.interMediateList = [];
+        this.interMediateList.push(o)
+        number = o.orderId;
+      }});
+      orderProduct.uniqueId = number;
+      orderProduct.listOfUniqueId = this.interMediateList
+      orderProduct.time = dateOfOrder;
+      this.orderProductList.push(orderProduct)
+      this.interMediateList = [];
+    }
+    catch (e){
+    }
+    }
 }

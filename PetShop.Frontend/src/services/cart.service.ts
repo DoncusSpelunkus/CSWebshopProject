@@ -1,5 +1,17 @@
 import { Injectable } from '@angular/core';
-import { Product } from "../Entities/Product";
+import { Order} from "../Entities/Order";
+import axios from "axios";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {catchError} from "rxjs";
+import jwtDecode from "jwt-decode";
+import {User} from "../Entities/User";
+
+export const customAxios = axios.create({
+  baseURL: 'https://localhost:7143/Order',
+  headers: {
+    Authorization: `Bearer ${localStorage.getItem('auth')}`
+  }
+})
 
 @Injectable({
   providedIn: 'root'
@@ -7,43 +19,63 @@ import { Product } from "../Entities/Product";
 
 export class CartService {
 
-  products: any[] = [];
-
-  constructor() {
+  constructor(private matSnackbar: MatSnackBar) {
+    customAxios.interceptors.response.use(
+      response => {
+        if(response.status == 201) {
+          this.matSnackbar.open("Great success", "x", {duration: 1000})
+        }
+        return response;
+      }, rejected => {
+        if(rejected.response.status>=400 && rejected.response.status <= 500) {
+          matSnackbar.open(rejected.response.data, "x", {duration: 1000});
+        }
+        catchError(rejected);
+      }
+    )
   }
 
-  getProduct() {
-    return this.products;
+  async getOrders(id: number){
+    let httpResponse = await customAxios.get<Order[]>('?userId=' + id);
+    return httpResponse.data;
   }
 
-  saveCart(): void {
-    localStorage.setItem('cart_items', JSON.stringify(this.products));
+  async getOrderById(id: number) {
+    let httpResponse = await customAxios.get<Order[]>('/OrderHistory?userId=' + id)
+    return httpResponse.data;
   }
 
-  addToCart(addedProduct: any) {
-    this.products.push(addedProduct);
-    this.saveCart();
-  }
-
-  loadCart(): void {
-    this.products = JSON.parse(localStorage.getItem('cart_items') as any) || [];
-  }
-
-  productInCart(product: any): boolean {
-    return this.products.findIndex((x: any) => x.id === product.id) > -1;
-  }
-
-  removeProduct(product: any) {
-    const index = this.products.findIndex((x: any) => x.id === product.id);
-
-    if (index > -1) {
-      this.products.splice(index, 1);
-      this.saveCart();
+  async postOrder(dto: any, id: number) {
+    let localToken = localStorage.getItem('auth');
+    if(localToken) {
+      let decodToken = jwtDecode(localToken) as User;
+      await customAxios.post<any>('/' + decodToken.id, dto)
     }
   }
 
-  clearProducts() {
-    localStorage.clear();
+  async putOrder(dto: any){
+    let localToken = localStorage.getItem('auth');
+    console.log(dto)
+    if(localToken) {
+      let decodToken = jwtDecode(localToken) as User;
+      await customAxios.put<any>('/' + decodToken.id, dto)
+    }
+  }
+
+  async deleteOrderByID(id: any, productId: any){
+    await customAxios.delete<Order>('/' + id + '?productId=' + productId)
+  }
+
+  async placeOrder() {
+    let localToken = localStorage.getItem('auth');
+    if(localToken) {
+      let decodToken = jwtDecode(localToken) as User;
+      await customAxios.post<any>('/OrderHistory,' + decodToken.id)
+    }
+  }
+
+  async sendOrderMail(userEmail: String) {
+    await customAxios.post<any>('/sendEmail?userEmail=' + userEmail)
   }
 
 }

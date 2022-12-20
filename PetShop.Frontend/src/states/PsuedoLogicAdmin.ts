@@ -6,10 +6,12 @@ import {SpecTemplates} from "../Entities/SpecTemplates";
 import {Injectable} from "@angular/core";
 import {CategoryService} from "../services/CategoryService";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {UserService} from "../services/UserService";
+import {User} from "../Entities/User";
 
 @Injectable({ providedIn: 'root' })
 
-export class AdminState { // State class for data manipulation
+export class PsuedoLogicAdmin {
 
   productsUnmodified: Product[] = [];
   newSpecList: CurrentSpecs[] = [];
@@ -18,8 +20,7 @@ export class AdminState { // State class for data manipulation
 
 
   constructor(private productService: ProductService, private specificationService: SpecificationService,
-              private categoryService: CategoryService, private matSnackbar: MatSnackBar) {
-
+              private categoryService: CategoryService, private matSnackbar: MatSnackBar, private userService: UserService) {
   }
 
   async postProduct(product: Product){
@@ -28,7 +29,7 @@ export class AdminState { // State class for data manipulation
       price: product.price,
       description: product.description,
       imageUrl: product.imageUrl,
-      rating: product.AverageRating,
+      rating: product.averageRating,
       specsDescriptions: product.specsDescriptions,
       mainCategoryID: product.mainCategoryID,
       subCategoryID: product.subCategoryID,
@@ -148,4 +149,37 @@ export class AdminState { // State class for data manipulation
     return this.categoryService.getCategoryById(id, path);
   }
 
+  async getUserList(){
+    return await this.userService.getUsers();
+  }
+
+  async deleteUserById(id: number){
+    await this.userService.deleteUserById(id)
+  }
+
+  async postUser(user: User, password: string){
+    let dto = {
+      name: user.fullName,
+      password: password,
+      email: user.email,
+      address: user.address,
+      city: user.city,
+      zip: user.zip,
+      phone: user.phone,
+      type: user.type
+    }
+    await this.userService.postUser(dto)
+  }
+
+  async getCurrentSpeclist(specList: CurrentSpecs[]){ // compares a list of spectemplates and current specs to get the specTemplate names
+    this.specNames = await this.specificationService.getSpecifications();
+    specList.forEach((spec) => {
+      this.specNames.find((specTemp) => {
+        if(spec.specsId === specTemp.id){
+          spec.specName = specTemp.specName;
+        }
+      })
+    });
+    return specList;
+  }
 }

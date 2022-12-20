@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {SpecTemplates} from "../../../Entities/SpecTemplates";
-import {AdminState} from "../../../states/AdminState";
+import {PsuedoLogicAdmin} from "../../../states/PsuedoLogicAdmin";
 
 @Component({
   selector: 'app-specification-update',
@@ -12,17 +12,17 @@ export class SpecificationUpdateComponent implements OnInit {
 
 specification: any;
 
-  constructor(private Aroute: ActivatedRoute, private adminState: AdminState, public route: Router) {
+  constructor(private Aroute: ActivatedRoute, private psuedoLogicAdmin: PsuedoLogicAdmin, public route: Router) {
     this.specification = SpecTemplates;
   }
 
   async ngOnInit() {
     const id = Number(this.Aroute.snapshot.paramMap.get('id'))
-    this.specification = await this.adminState.getSpecificationById(id);
+    this.specification = await this.psuedoLogicAdmin.getSpecificationById(id);
   }
 
   async updateSpec(){
-    let data = await this.adminState.putSpecification(this.specification);
+    let data = await this.psuedoLogicAdmin.putSpecification(this.specification);
     if(data != undefined){
       await this.route.navigateByUrl("admin")
     }

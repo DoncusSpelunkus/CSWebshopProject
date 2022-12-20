@@ -1,7 +1,6 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {CurrentSpecs} from "../../../Entities/CurrentSpecs";
+import {Component, OnInit} from '@angular/core';
 import {Category} from "../../../Entities/Category";
-import {AdminState} from "../../../states/AdminState";
+import {PsuedoLogicAdmin} from "../../../states/PsuedoLogicAdmin";
 
 @Component({
   selector: 'app-category-list',
@@ -14,7 +13,7 @@ export class CategoryListComponent implements OnInit {
   subCatList: Category[] = [];
   brandCatList: Category[] = [];
 
-  constructor(private adminState: AdminState) { }
+  constructor(private psuedoLogicAdmin: PsuedoLogicAdmin) { }
 
   ngOnInit(): void {
     this.updateCat("all")
@@ -22,18 +21,18 @@ export class CategoryListComponent implements OnInit {
 
   async updateCat(path: string){ // Receives a call from admin parent to update one or all lists
     if(path === "MainCat") {
-      this.mainCatList = await this.adminState.getCategories("MainCat");
+      this.mainCatList = await this.psuedoLogicAdmin.getCategories("MainCat");
     }
     if(path === "SubCat"){
-      this.subCatList = await this.adminState.getCategories("SubCat");
+      this.subCatList = await this.psuedoLogicAdmin.getCategories("SubCat");
     }
     if(path === "Brand"){
-      this.brandCatList = await this.adminState.getCategories("Brand");
+      this.brandCatList = await this.psuedoLogicAdmin.getCategories("Brand");
     }
     if(path === "all"){
-      this.mainCatList = await this.adminState.getCategories("MainCat");
-      this.subCatList = await this.adminState.getCategories("SubCat");
-      this.brandCatList = await this.adminState.getCategories("Brand");
+      this.mainCatList = await this.psuedoLogicAdmin.getCategories("MainCat");
+      this.subCatList = await this.psuedoLogicAdmin.getCategories("SubCat");
+      this.brandCatList = await this.psuedoLogicAdmin.getCategories("Brand");
     }
 
   }

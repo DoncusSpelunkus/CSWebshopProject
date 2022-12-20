@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {SpecTemplates} from "../../../Entities/SpecTemplates";
-import {AdminState} from "../../../states/AdminState";
+import {PsuedoLogicAdmin} from "../../../states/PsuedoLogicAdmin";
 
 @Component({
   selector: 'app-specification-list',
@@ -10,13 +10,17 @@ import {AdminState} from "../../../states/AdminState";
 export class SpecificationListComponent implements OnInit {
   specificationList: SpecTemplates[] = [];
 
-  constructor(private adminState: AdminState) {
+  constructor(private psuedoLogicAdmin: PsuedoLogicAdmin) {
 
   }
 s
   async ngOnInit() {
-    let specs = await this.adminState.getSpecifications();
-    this.specificationList = specs;
+    this.specificationList = await this.psuedoLogicAdmin.getSpecifications()
   }
+
+  async updateList(){
+    await this.ngOnInit()
+  }
+
 
 }

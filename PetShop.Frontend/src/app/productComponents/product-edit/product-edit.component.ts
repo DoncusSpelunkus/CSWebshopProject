@@ -4,7 +4,7 @@ import { Product } from "../../../Entities/Product";
 import { Router } from "@angular/router";
 import {SpecTemplates} from "../../../Entities/SpecTemplates";
 import {CurrentSpecs} from "../../../Entities/CurrentSpecs";
-import {AdminState} from "../../../states/AdminState";
+import {PsuedoLogicAdmin} from "../../../states/PsuedoLogicAdmin";
 import {Category} from "../../../Entities/Category";
 
 @Component({
@@ -28,23 +28,23 @@ export class ProductEditComponent implements OnInit { // This component tend to 
   @ViewChild('child') child;
 
 
-  constructor(private Aroute: ActivatedRoute, private adminState: AdminState, public route: Router) {
+  constructor(private Aroute: ActivatedRoute, private psuedoLogicAdmin: PsuedoLogicAdmin, public route: Router) {
   }
 
   async ngOnInit() {
     const id = Number(this.Aroute.snapshot.paramMap.get(`id`))
-    this.product = await this.adminState.getProductById(id);
-    this.specNames = await this.adminState.getSpecifications();
-    this.mainCatList = await this.adminState.getCategories("MainCat")
-    this.subCatList = await this.adminState.getCategories("SubCat")
-    this.brandCatList = await this.adminState.getCategories("Brand")
+    this.product = await this.psuedoLogicAdmin.getProductById(id);
+    this.specNames = await this.psuedoLogicAdmin.getSpecifications();
+    this.mainCatList = await this.psuedoLogicAdmin.getCategories("MainCat")
+    this.subCatList = await this.psuedoLogicAdmin.getCategories("SubCat")
+    this.brandCatList = await this.psuedoLogicAdmin.getCategories("Brand")
     this.specDesc = this.product.specsDescriptions;
-    this.specList = await this.adminState.makeCurrentSpecList(id)
+    this.specList = await this.psuedoLogicAdmin.makeCurrentSpecList(id)
     this.child.updateNow(this.specList)
   }
 
   async updateProduct(){
-    let httpResponse = await this.adminState.putProduct(this.product)
+    let httpResponse = await this.psuedoLogicAdmin.putProduct(this.product)
       if(httpResponse != undefined){
       await this.route.navigateByUrl("admin")
     }

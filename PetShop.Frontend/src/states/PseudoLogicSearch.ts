@@ -6,7 +6,7 @@ import {Category} from "../Entities/Category";
 
 @Injectable({ providedIn: 'root' })
 
-export class SearchState{
+export class PseudoLogicSearch {
 
   productsUnmodified: Product[] = [];
   productsModified: Product[] = [];
@@ -22,7 +22,7 @@ export class SearchState{
     return this.categoryService.getCategories(path);
   }
 
-  async getProducts(){
+  async getProducts(){ // sets both a list to store of ALL products and makes a duplicate for manipulation
     this.productsUnmodified = await this.productService.getProducts();
     this.productsModified = this.productsUnmodified;
     return this.productsUnmodified;
@@ -49,12 +49,12 @@ export class SearchState{
       this.productsModified = this.productsModified.filter(product => product.brandID === this.categorySelector.brandID)
     }
     if(this.categorySelector.rating != 0){
-      this.productsModified = this.productsModified.filter(product => product.AverageRating > this.ratingStorage)
+      this.productsModified = this.productsModified.filter(product => product.averageRating >= this.ratingStorage)
     }
     return this.productsModified;
   }
 
-  async priceSort(){
+  async priceSort(){ // sorts list by price
     this.priceModified = this.productsModified;
     return this.priceModified.filter(product => product.price > this.currentPrice)
   }

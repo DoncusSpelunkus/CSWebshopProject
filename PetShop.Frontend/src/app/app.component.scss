@@ -12,3 +12,11 @@ mat-sidenav{
 
 }
 
+::ng-deep .mat-card:not([class*=mat-elevation-z]){
+  box-shadow: none;
+}
+
+::ng-deep .mat-raised-button{
+  background-color: #a881af !important;
+}
+

@@ -20,12 +20,12 @@ export class SpecificationService { // Class for crud requests from the /specs r
     customAxios.interceptors.response.use(
       response => {
         if(response.status == 201) {
-          this.matSnackbar.open("Great success", "x", {duration: 500})
+          this.matSnackbar.open("Great success", "x", {duration: 1000})
         }
         return response;
       }, rejected => {
         if(rejected.response.status>=400 && rejected.response.status <= 500) {
-          matSnackbar.open(rejected.response.data, "x", {duration: 500});
+          matSnackbar.open(rejected.response.data, "x", {duration: 1000});
         }
         catchError(rejected);
       }

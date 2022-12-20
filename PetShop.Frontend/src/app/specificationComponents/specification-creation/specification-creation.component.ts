@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {SpecTemplates} from "../../../Entities/SpecTemplates";
-import {AdminState} from "../../../states/AdminState";
+import {PsuedoLogicAdmin} from "../../../states/PsuedoLogicAdmin";
 
 @Component({
   selector: 'app-specification-creation',
@@ -15,7 +15,7 @@ specificationDeletionId: number;
   @Output()
   change: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(private adminState: AdminState) {
+  constructor(private psuedoLogicAdmin: PsuedoLogicAdmin) {
     this.specification = new SpecTemplates;
     this.specificationDeletionId = 0;
   }
@@ -23,13 +23,13 @@ specificationDeletionId: number;
   ngOnInit(): void {
   }
 
-  postSpecification(){
-    this.adminState.postSpecification(this.specification);
+  async postSpecification(){
+    await this.psuedoLogicAdmin.postSpecification(this.specification);
     this.change.emit()
   }
 
-  deleteSpecification(){
-    this.adminState.deleteSpecificationById(this.specificationDeletionId);
+  async deleteSpecification(){
+    await this.psuedoLogicAdmin.deleteSpecificationById(this.specificationDeletionId);
     this.change.emit()
   }
 

@@ -10,3 +10,13 @@ h1{
   text-align: center;
 }
 
+mat-expansion-panel{
+  margin: 5px;
+}
+
+.wrapper{
+  min-height: 120vh;
+  display: flex;
+  flex-direction: column;
+  overflow: scroll !important;
+}

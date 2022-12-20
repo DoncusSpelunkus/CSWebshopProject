@@ -1,6 +1,6 @@
 <div style="text-align: center">
   <mat-form-field appearance="outline">Full name:
-    <input type="string" matInput [(ngModel)]="user.name">
+    <input type="string" matInput [(ngModel)]="anything">
   </mat-form-field>
   <br>
   <mat-form-field appearance="outline">Email:
@@ -19,6 +19,10 @@
     <input type="number" matInput [(ngModel)]="user.phone">
   </mat-form-field>
   <br>
-  <button mat-raised-button (click)="updateUser()">Update</button>
+  <mat-form-field appearance="outline">Confirm password:
+    <input type="password" matInput [(ngModel)]="user.password">
+  </mat-form-field>
+  <br>
+  <button mat-raised-button (click)="validatePassword(user.password)">Update</button>
 </div>
 

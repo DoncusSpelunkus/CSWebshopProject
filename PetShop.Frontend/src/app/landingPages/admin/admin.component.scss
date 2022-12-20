@@ -10,3 +10,18 @@ h1{
   text-align: center;
 }
 
+.flex-wrapper {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  align-content: stretch;
+  margin-bottom: 0 !important;
+}
+
+.footer {
+  margin-top: auto;
+}
+

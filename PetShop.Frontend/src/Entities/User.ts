@@ -1,5 +1,5 @@
 export class User { // template for the user token
-  id: number = 0;
+  id?: number;
   fullName: string = '';
   email: string = '';
   address: string = '';
@@ -7,4 +7,5 @@ export class User { // template for the user token
   zip: number = 0;
   phone: number = 0;
   type: string = '';
+  name?: string;
 }
