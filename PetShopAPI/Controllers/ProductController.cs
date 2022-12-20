@@ -63,13 +63,10 @@ namespace PetShopApi.Controllers
         [Authorize]
         public ActionResult<Product> CreateProduct(ProdDTO dto)
         {
-            
-            // checking if the token holds an admin
-            bool hasClaim = User.HasClaim(ClaimTypes.Role, "Admin");
             try
             {
                 // Ensure the user is authenticated
-                if (!User.Identity.IsAuthenticated)
+                if (!User.Identity.IsAuthenticated == User.HasClaim("type", "Admin"))
                     return Unauthorized();
                 else
                 {
@@ -92,12 +89,10 @@ namespace PetShopApi.Controllers
         [Authorize]
         public ActionResult<Product> UpdateProduct([FromRoute] int productID, [FromBody] ProdDTO dto)
         {
-            // checking if the token holds an admin
-            bool hasClaim = User.HasClaim(ClaimTypes.Role, "Admin");
             try
             {
                 // Ensure the user is authenticated
-                if (!User.Identity.IsAuthenticated)
+                if (!User.Identity.IsAuthenticated == User.HasClaim("type", "Admin"))
                     return Unauthorized();
                 else
                 {
@@ -118,12 +113,10 @@ namespace PetShopApi.Controllers
         [Authorize]
         public ActionResult<Product> DeleteProductByID(int productID)
         {
-            // checking if the token holds an admin
-            bool hasClaim = User.HasClaim(ClaimTypes.Role, "Admin");
             try
             {
                 // Ensure the user is authenticated
-                if (!User.Identity.IsAuthenticated)
+                if (!User.Identity.IsAuthenticated == User.HasClaim("type", "Admin"))
                     return Unauthorized();
                 else
                 {

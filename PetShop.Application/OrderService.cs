@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Factory.Application.PostProdDTO;
+using PetShop.Application.PostProdDTO;
 using FluentValidation;
 using PetShop.Application.Interfaces;
 using PetShop.Domain;

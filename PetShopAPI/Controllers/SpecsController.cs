@@ -58,12 +58,10 @@ namespace PetShopApi.Controllers
         [Authorize]
         public ActionResult<Specs> CreateSpecs(SpecDTO dto)
         {
-            // checking if the token holds an admin
-            bool hasClaim = User.HasClaim(ClaimTypes.Role, "Admin");
             try
             {
                 // Ensure the user is authenticated
-                if (!User.Identity.IsAuthenticated)
+                if (!User.Identity.IsAuthenticated == User.HasClaim("type", "Admin"))
                     return Unauthorized();
                 else
                 {
@@ -86,12 +84,10 @@ namespace PetShopApi.Controllers
         [Authorize]
         public ActionResult<Specs> UpdateSpecs([FromRoute] int specID, [FromBody] SpecDTO dto)
         {
-            // checking if the token holds an admin
-            bool hasClaim = User.HasClaim(ClaimTypes.Role, "Admin");
             try
             {
                 // Ensure the user is authenticated
-                if (!User.Identity.IsAuthenticated)
+                if (!User.Identity.IsAuthenticated == User.HasClaim("type", "Admin"))
                     return Unauthorized();
                 else
                 {
@@ -112,12 +108,10 @@ namespace PetShopApi.Controllers
         [Authorize]
         public ActionResult<Specs> DeleteSpecsById(int specID)
         {
-            // checking if the token holds an admin
-            bool hasClaim = User.HasClaim(ClaimTypes.Role, "Admin");
             try
             {
                 // Ensure the user is authenticated
-                if (!User.Identity.IsAuthenticated)
+                if (!User.Identity.IsAuthenticated == User.HasClaim("type", "Admin"))
                     return Unauthorized();
                 else
                 {

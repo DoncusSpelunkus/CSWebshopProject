@@ -1,4 +1,4 @@
-﻿using Factory.Application.PostProdDTO;
+﻿using PetShop.Application.PostProdDTO;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using PetShop.Application.Interfaces;
