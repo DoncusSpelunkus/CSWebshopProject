@@ -16,7 +16,7 @@
   float: left;
   width: 100px;
   length: 100px;
-  padding-top: 10px !important;
+  padding-top: 20px !important;
   padding-left: 10px;
 }
 
@@ -32,7 +32,6 @@ ul{
   margin-top: 0;
   margin-bottom: 0;
   padding-left: 0;
-  padding-bottom: 70px;
 }
 
 ul li{
@@ -53,6 +52,7 @@ ul li{
 .body{
   background: khaki;
   min-width:720px;
+  height: 135px;
 }
 
 
@@ -65,7 +65,7 @@ body{
 }
 
 .search {
-  width: 300px;
+  width: 250px;
   position: relative;
   display: flex;
 }
@@ -111,9 +111,9 @@ body{
   align-content: center;
   float: none !important;
   list-style-type: none;
-  padding-top: 50px !important;;
-  padding-bottom: 5px !important;
+  padding-top: 55px !important;;
   padding-left: 25px !important;
+  padding-bottom: 0px !important;
 
 }
 

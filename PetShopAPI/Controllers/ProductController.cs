@@ -142,21 +142,18 @@ namespace PetShopApi.Controllers
         
         [HttpGet]
         [Route("RebuildDB")]
-        [Authorize]
+      
         public void RebuildDB()
 
         {
             // checking if the token holds an admin
-            bool hasClaim = User.HasClaim(ClaimTypes.Role, "Admin");
+           
            
             
                 // Ensure the user is authenticated
-                if (!User.Identity.IsAuthenticated)
-                    Unauthorized();
-                else
-                {
+                
                     _productService.RebuildDB();
-                }
+               
             
         }
     }

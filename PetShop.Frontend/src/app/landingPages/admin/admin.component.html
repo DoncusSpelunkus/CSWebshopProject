@@ -1,4 +1,4 @@
-<div>
+<div class="flex-wrapper">
   <app-header></app-header>
   <mat-tab-group mat-stretch-tabs>
     <mat-tab label="Products">
@@ -25,7 +25,10 @@
       <app-user-admin-list #userList></app-user-admin-list>
     </mat-tab>
   </mat-tab-group>
-  <app-footer></app-footer>
+  <div style="flex-grow:1;"></div>
+  <div class="footer">
+    <app-footer></app-footer>
+  </div>
 </div>
 
 
