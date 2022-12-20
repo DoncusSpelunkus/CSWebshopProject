@@ -72,23 +72,33 @@ public class UserController : ControllerBase
             
             [HttpPost("login")]
             public async Task<ActionResult<string>> Login(UserLoginDTO userLogin)
-            {   
-                
-                var currentUser = _userService.GetUserByEmail(userLogin.Email.ToLower());
-                
-                if (currentUser.Email != userLogin.Email.ToLower())
+            {
+                try
                 {
-                    return BadRequest("Wrong password or Email.");
-                }
+                    var currentUser = _userService.GetUserByEmail(userLogin.Email.ToLower());
+                    if(currentUser == null)
+                        return BadRequest("Wrong password or Email.");
+                    if (currentUser.Email != userLogin.Email.ToLower())
+                    {
+                        return BadRequest("Wrong password or Email.");
+                    }
 
-                if (!_logic.ValidateHash(userLogin.Password, currentUser.HashPassword, currentUser.SaltPassword))
-                {
-                    return BadRequest("Wrong password or Email.");
+                    if (!_logic.ValidateHash(userLogin.Password, currentUser.HashPassword, currentUser.SaltPassword))
+                    {
+                        return BadRequest("Wrong password or Email.");
+                    }
+
+                    string token = _authentication.CreateToken(currentUser);
+                    return Ok(token);
                 }
-               
-                string token = _authentication.CreateToken(currentUser);
-                
-                return Ok(token);
+                catch (ValidationException e)
+                {
+                    return BadRequest(e.Message);
+                }
+                catch (Exception e)
+                {
+                    return StatusCode(500, e.Message);
+                }
             }
             
             
