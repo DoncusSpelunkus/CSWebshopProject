@@ -1,8 +1,5 @@
-﻿using Factory.Application.PostProdDTO;
-using FluentValidation;
+﻿using FluentValidation;
 using PetShop.Application.PostProdDTO;
-using PetShop.Domain;
-
 
 namespace PetShop.Application.Validators;
 public class ActualOrderValidator : AbstractValidator<OrderDTO>

@@ -1,7 +1,6 @@
 
 using System.Text;
 using AutoMapper;
-using Factory.Application.PostProdDTO;
 using PetShop.Application.PostProdDTO;
 using PetShop.Domain;
 using PetShop.Infastructure;
